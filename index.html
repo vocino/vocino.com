@@ -1,38 +1,23 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
- 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-	
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <title>Travis Vocino &hearts; Github</title>
+---
+layout: default
+---
 
-  <style type="text/css" media="screen">
+<div class="home">
 
-	html {
-		width: 100%;
-		height: 100%;
-	}
-	
-	body {
-		margin: 0;
-		padding: 0;
-		height: 100%;
-		width: 100%;
-		background: #0c1115 url(heart.png) 50% 50% no-repeat;
-	}
-	
-	p {
-		display:none;
-	}
-	
-  </style>
+  <h1 class="page-heading">Posts</h1>
 
-</head>
- 
-<body>
- 
-	<p>Travis Vocino &hearts; Github</p>
- 
-</body>
-</html>
+  <ul class="post-list">
+    {% for post in site.posts %}
+      <li>
+        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+
+        <h2>
+          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+        </h2>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
+
+</div>
