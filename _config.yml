@@ -1,12 +1,18 @@
 # Site settings
 title: Travis Vocino
 email: travis@vocino.com
+headline: I design products at Facebook and play video games.
 description: >
-  Travis Vocino is a product designer at Facebook by day and video gamer with Strats & Co. by night.
+  I design products at Facebook by day and build tools 
+  for gamers at Strats & Co by night. I write about startups,
+  product design, and video games.
 baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://travis.vocino.com" # the base hostname & protocol for your site
+url: "http://vocino.com" # the base hostname & protocol for your site
 twitter_username: vocino
 github_username:  vocino
+facebook_username: vocino
+twitch_username: vocino
 
 # Build settings
 markdown: kramdown
+permalink: /:title/
