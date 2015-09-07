@@ -97,9 +97,10 @@
 /**
  * Site footer
  */
- .site-footer {
-  border-top: 1px solid $grey-color-light;
+.site-footer {
+  border-top: 1px solid $grey-color-dark;
   padding: $spacing-unit 0;
+  color: $text-color-footer;
 }
 
 .footer-heading {
