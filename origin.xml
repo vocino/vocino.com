@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DistributionConfig xmlns="http://cloudfront.amazonaws.com/doc/2010-11-01/">
+ <CustomOrigin>
+   <DNSName>vocino.com</DNSName>
+   <OriginProtocolPolicy>http-only</OriginProtocolPolicy>
+ </CustomOrigin>
+ <Comment>Vocino.com Remote Origin</Comment>
+ <Enabled>true</Enabled>
+ <CallerReference>20110210135532</CallerReference>
+</DistributionConfig>
