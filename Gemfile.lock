@@ -22,12 +22,21 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     addressable (2.4.0)
+    aws-sdk (1.66.0)
+      aws-sdk-v1 (= 1.66.0)
+    aws-sdk-v1 (1.66.0)
+      json (~> 1.4)
+      nokogiri (>= 1.4.4)
     builder (3.2.2)
     coffee-script (2.4.1)
       coffee-script-source
       execjs
     coffee-script-source (1.10.0)
     colorator (0.1)
+    colored (1.2)
+    configure-s3-website (1.5.5)
+      deep_merge (= 1.0.0)
+    deep_merge (1.0.0)
     dotenv (2.1.0)
     dotenv-rails (2.1.0)
       dotenv (= 2.1.0)
@@ -39,8 +48,9 @@ GEM
     faraday (0.9.2)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.10)
+    filey-diff (2.0.0)
     gemoji (2.1.0)
-    github-pages (61)
+    github-pages (62)
       RedCloth (= 4.2.9)
       github-pages-health-check (= 1.1.0)
       jekyll (= 3.0.3)
@@ -86,7 +96,6 @@ GEM
       coffee-script (~> 2.2)
     jekyll-compose (0.4.1)
       jekyll (>= 2.5.0)
-    jekyll-crosspost-to-medium (0.1.9)
     jekyll-feed (0.4.0)
     jekyll-gist (1.4.0)
       octokit (~> 4.2)
@@ -120,6 +129,7 @@ GEM
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mercenary (0.3.5)
+    mime-types (1.25.1)
     mini_portile2 (2.0.0)
     minitest (5.8.4)
     multipart-post (2.0.0)
@@ -152,18 +162,30 @@ GEM
     rdiscount (2.1.8)
     redcarpet (3.3.3)
     rouge (1.10.1)
+    s3_website (1.7.6)
+      aws-sdk (~> 1)
+      configure-s3-website (= 1.5.5)
+      erubis (~> 2.7.0)
+      filey-diff (~> 2.0.0)
+      mime-types (~> 1)
+      simple-cloudfront-invalidator (~> 1)
+      thor (= 0.18.1)
+      zopfli (~> 0.0.3)
     safe_yaml (1.0.4)
     sass (3.4.21)
     sawyer (0.7.0)
       addressable (>= 2.3.5, < 2.5)
       faraday (~> 0.8, < 0.10)
+    simple-cloudfront-invalidator (1.1.0)
+      colored (= 1.2)
     terminal-table (1.5.2)
-    thor (0.19.1)
+    thor (0.18.1)
     thread_safe (0.3.5)
     typhoeus (0.8.0)
       ethon (>= 0.8.0)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
+    zopfli (0.0.4)
 
 PLATFORMS
   ruby
@@ -173,9 +195,9 @@ DEPENDENCIES
   github-pages
   jekyll-coffeescript
   jekyll-compose
-  jekyll-crosspost-to-medium
   jekyll-paginate
   jekyll-sitemap
+  s3_website
 
 BUNDLED WITH
    1.11.2

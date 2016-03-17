@@ -25,13 +25,13 @@ ajaxify_contact_form: false
 enable_mathjax:       false
 extended_fonts:       true
 
-# Crossposting to Medium
-jekyll-crosspost_to_medium:
-  enabled: true
-  cache: .jekyll-crosspost_to_medium
-  status: draft
-  license: all-rights-reserved
-  text: '<p><i>This article was originally written by <a href="https://vocino.com">Travis Vocino</a> on Vocino.com</i></p>'
+# # Crossposting to Medium
+# jekyll-crosspost_to_medium:
+#   enabled: false
+#   cache: .jekyll-crosspost_to_medium
+#   status: draft
+#   license: all-rights-reserved
+#   text: '<p><i>This article was originally written by <a href="https://vocino.com">Travis Vocino</a> on Vocino.com</i></p>'
 
 # Disqus post comments
 # (leave blank to disable Disqus)
@@ -119,6 +119,6 @@ gems:
   - jekyll-sitemap
   - jekyll-coffeescript
   - jekyll-compose
-  - jekyll-crosspost-to-medium
+  # - jekyll-crosspost-to-medium
 # https://github.com/jekyll/jekyll/issues/2938
-exclude: [vendor]
+exclude: [vendor, Gemfile, Gemfile.lock, Rakefile, s3_website.yml]
