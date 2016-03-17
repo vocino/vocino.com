@@ -2,6 +2,11 @@
 <html>
 {% include head.html %}
 <body class="site{% if site.animated %} animated fade-in-down{% endif %}">
+  <progress value="0">
+    <div class="progress-container">
+      <span class="progress-bar"></span>
+    </div>
+  </progress>
   {% if site.google_tag_manager %}
   <noscript><iframe src="//www.googletagmanager.com/ns.html?id={{ site.google_tag_manager }}"
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -33,5 +38,6 @@
   </div>
 
   {% include footer.html %}
+  <script src="/js/progress.js"></script>
 </body>
 </html>

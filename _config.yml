@@ -25,6 +25,14 @@ ajaxify_contact_form: false
 enable_mathjax:       false
 extended_fonts:       true
 
+# Crossposting to Medium
+jekyll-crosspost_to_medium:
+  enabled: true
+  cache: .jekyll-crosspost_to_medium
+  status: draft
+  license: all-rights-reserved
+  text: '<p><i>This article was originally written by <a href="https://vocino.com">Travis Vocino</a> on Vocino.com</i></p>'
+
 # Disqus post comments
 # (leave blank to disable Disqus)
 disqus_shortname:
@@ -33,16 +41,18 @@ disqus_shortname:
 # (leave blank to disable Facebook Comments, otherwise set it to true)
 facebook_comments:        true
 facebook_appid:           1638927919717985
-facebook_comments_number: 10
+facebook_comments_number: 20
 
 # Social icons
+twitter_username:   vocino
+facebook_username:  vocino
+instagram_username: vocino
+google_plus_id:     travisvocino
+steam_nickname:     vocino
 github_username:    vocino
 bitbucket_username: vocino
 stackoverflow_id:   vocino
-twitter_username:   vocino
 skype_username:
-steam_nickname:     vocino
-google_plus_id:     travisvocino
 linkedin_username:  vocino
 angellist_username: vocino
 medium_id:          vocino
@@ -100,12 +110,15 @@ text:
 markdown:     kramdown
 redcarpet:
   extensions: ['smart', 'tables', 'with_toc_data']
-permalink:    pretty
+permalink:    /:title/
 paginate:     4
 sass:
   compressed: true
 gems:
   - jekyll-paginate
   - jekyll-sitemap
+  - jekyll-coffeescript
+  - jekyll-compose
+  - jekyll-crosspost-to-medium
 # https://github.com/jekyll/jekyll/issues/2938
 exclude: [vendor]
