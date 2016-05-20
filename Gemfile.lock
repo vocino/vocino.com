@@ -90,8 +90,6 @@ GEM
       safe_yaml (~> 1.0)
     jekyll-coffeescript (1.0.1)
       coffee-script (~> 2.2)
-    jekyll-compose (0.4.1)
-      jekyll (>= 2.5.0)
     jekyll-feed (0.5.1)
     jekyll-gist (1.4.0)
       octokit (~> 4.2)
@@ -153,6 +151,7 @@ GEM
     rb-fsevent (0.9.7)
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
+    redcarpet (3.3.4)
     rouge (1.10.1)
     s3_website (1.7.6)
       aws-sdk (~> 1)
@@ -185,10 +184,10 @@ PLATFORMS
 DEPENDENCIES
   dotenv-rails
   github-pages
-  jekyll-coffeescript
-  jekyll-compose
+  jekyll
+  jekyll-gist
   jekyll-paginate
-  jekyll-sitemap
+  redcarpet
   s3_website
 
 BUNDLED WITH

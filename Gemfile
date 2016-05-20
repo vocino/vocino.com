@@ -8,9 +8,9 @@ gem 'dotenv-rails'
 gem 's3_website'
 
 group :jekyll_plugins do
+  gem 'jekyll'
   gem 'jekyll-paginate'
-  gem 'jekyll-sitemap'
-  gem 'jekyll-coffeescript'
-  gem 'jekyll-compose'
+  gem 'jekyll-gist'
+  gem 'redcarpet'
   # gem 'jekyll-crosspost-to-medium'
 end
