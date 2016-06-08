@@ -1,10 +1,10 @@
 # Site settings
-title:       Pixyll
-email:       your_email@example.com
-author:      John Otander
-description: "A simple, beautiful theme for Jekyll that emphasizes content rather than aesthetic fluff."
+title:       Vocino
+email:       travis@vocino.com
+author:      Travis Vocino
+description: "Builder of internet things, tech investor, compulsive devil's advocate, sacred cow tipper."
 baseurl:     ""
-url:         "http://pixyll.com"
+url:         "http://vocino.com"
 date_format: "%b %-d, %Y"
 
 # Google services
@@ -37,16 +37,16 @@ facebook_appid:
 facebook_comments_number: 10
 
 # Social icons
-github_username:
+github_username: vocino
 bitbucket_username:
-stackoverflow_id:
-twitter_username:
+stackoverflow_id: vocino
+twitter_username: vocino
 skype_username:
-steam_nickname:
-google_plus_id:
-linkedin_username:
-angellist_username:
-medium_id:
+steam_nickname: vocino
+google_plus_id: travisvocino
+linkedin_username: vocino
+angellist_username: vocino
+medium_id: vocino
 bitcoin_url:
 paypal_url:
 flattr_button:
@@ -94,7 +94,7 @@ text:
       sending:  'sending..'
       sent:     'Message sent!'
       error:    'Error!'
-  thanks: 'Thanks for contacting us. We will reply as soon as possible.'
+  thanks: 'Thanks for contacting me. I will reply as soon as possible.'
   og_locale: 'en_US'
 
 # Build settings
