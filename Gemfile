@@ -4,13 +4,3 @@ source 'https://rubygems.org'
 # maintaining a local Jekyll environment in sync with GitHub Pages
 # https://github.com/github/pages-gem
 gem 'github-pages'
-gem 'dotenv-rails'
-gem 's3_website'
-
-group :jekyll_plugins do
-  gem 'jekyll'
-  gem 'jekyll-paginate'
-  gem 'jekyll-gist'
-  gem 'redcarpet'
-  # gem 'jekyll-crosspost-to-medium'
-end
