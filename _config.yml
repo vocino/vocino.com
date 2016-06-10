@@ -15,6 +15,8 @@ google_analytics:
 google_tag_manager:
 # Bing services
 bing_verification:
+# Facebook page verification
+facebook_verification: 136894586716909
 
 # Optional features
 animated:             false

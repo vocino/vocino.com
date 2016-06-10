@@ -31,6 +31,9 @@
     {% endif %}
 
     <!-- Verifications -->
+    {% if site.facebook_verification %}
+      <meta property="fb:pages" content="{% site.facebook_verification %}" />
+    {% endif %}
     {% if site.google_verification %}
       <meta name="google-site-verification" content="{{ site.google_verification }}" />
     {% endif %}
