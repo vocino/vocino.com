@@ -32,9 +32,10 @@ disqus_shortname:
 
 # Facebook Comments plugin
 # (leave blank to disable Facebook Comments, otherwise set it to true)
-facebook_comments:
-facebook_appid:
+facebook_comments: true
+facebook_appid: 1638927919717985
 facebook_comments_number: 10
+facebook_quote: true
 
 # Social icons
 github_username: vocino
