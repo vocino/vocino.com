@@ -16,7 +16,8 @@ google_tag_manager:
 # Bing services
 bing_verification:
 # Facebook page verification
-facebook_verification: 136894586716909
+facebook_appid: 126493727772175 # Vocino.com
+facebook_pages: 136894586716909 # Vocinocom
 
 # Optional features
 animated:             false
@@ -35,7 +36,6 @@ disqus_shortname:
 # Facebook Comments plugin
 # (leave blank to disable Facebook Comments, otherwise set it to true)
 facebook_comments: true
-facebook_appid: 1638927919717985
 facebook_comments_number: 10
 facebook_quote: true
 
@@ -104,12 +104,12 @@ text:
 markdown:     kramdown
 redcarpet:
   extensions: ['smart', 'tables', 'with_toc_data']
-permalink:    pretty
-paginate:     4
+permalink:    /:title/
+paginate:     10
 sass:
   compressed: true
 gems:
   - jekyll-paginate
   - jekyll-sitemap
 # https://github.com/jekyll/jekyll/issues/2938
-exclude: [vendor]
+exclude: [vendor, CNAME, Gemfile, README, Rakefile]
