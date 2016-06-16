@@ -18,6 +18,7 @@ bing_verification:
 # Facebook page verification
 facebook_appid: 126493727772175 # Vocino.com
 facebook_pages: 136894586716909 # Vocinocom
+facebook_pixel: 1896251207268347 # Travis Vocino
 
 # Optional features
 animated:             false
