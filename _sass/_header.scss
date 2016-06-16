@@ -2,12 +2,13 @@
   padding-top: $space-1;
   padding-bottom: $space-2;
   border-bottom: 1px solid $lighter-gray;
+  text-transform: uppercase;
 }
 
 .site-header a {
   color: #333;
   font-size: $h3;
-  font-weight: 300;
+  font-weight: $base-font-weight;
   background-image: none;
 }
 
