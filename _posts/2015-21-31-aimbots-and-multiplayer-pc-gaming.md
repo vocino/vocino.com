@@ -1,8 +1,8 @@
 ---
 layout:     post
-title:      How I learned to love the aimbot and hate multiplayer PC gaming
+title:      Aimbots and Multiplayer Gaming
 date:       2015-12-31 12:31:19
-summary:    How I learned to love the aimbot and hate multiplayer PC gaming
+summary:    How I learned to love the aimbot and hate multiplayer PC gaming.
 categories: gaming
 ---
 
