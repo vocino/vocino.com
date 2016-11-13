@@ -1,3 +1,5 @@
+require 'susy'
+
 ###
 # Page options, layouts, aliases and proxies
 ###
@@ -18,6 +20,10 @@ page '/*.txt', layout: false
 
 # General configuration
 
+set :css_dir, 'stylesheets'
+set :js_dir, 'javascripts'
+set :images_dir, 'images'
+
 # Reload the browser automatically whenever files change
 configure :development do
   activate :livereload
@@ -36,9 +42,8 @@ end
 
 # Build-specific configuration
 configure :build do
-  # Minify CSS on build
-  # activate :minify_css
-
-  # Minify Javascript on build
-  # activate :minify_javascript
+  activate :directory_indexes
+  activate :relative_assets
+  activate :minify_css
+  activate :minify_javascript
 end

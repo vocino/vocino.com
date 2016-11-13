@@ -109,6 +109,8 @@ GEM
       ffi (>= 0.5.0)
     sass (3.4.22)
     servolux (0.12.0)
+    susy (2.2.12)
+      sass (>= 3.3.0, < 3.5)
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (2.0.5)
@@ -121,9 +123,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  middleman (>= 4.0.0)
-  middleman-compass (>= 4.0.0)
+  middleman
+  middleman-compass
   middleman-livereload
+  susy
   tzinfo-data
   wdm (~> 0.1.0)
 
