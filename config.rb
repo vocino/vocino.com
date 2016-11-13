@@ -1,5 +1,3 @@
-require 'susy'
-
 ###
 # Page options, layouts, aliases and proxies
 ###

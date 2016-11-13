@@ -12,6 +12,10 @@ gem 'tzinfo-data', platforms: [:mswin, :mingw, :jruby]
 gem 'middleman'
 gem 'middleman-livereload'
 gem 'middleman-compass'
-# gem 'middleman-aws-deploy'
 
-gem 'susy'
+gem 'bourbon'
+gem 'neat'
+
+group :development do
+  gem 'bitters'
+end
