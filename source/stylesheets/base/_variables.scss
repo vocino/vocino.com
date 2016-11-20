@@ -2,6 +2,8 @@
 $medium-screen: 600px;
 $large-screen: 900px;
 
+$desktop: new-breakpoint(min-width $medium-screen);
+
 // Typography
 $base-font-family: $font-stack-system;
 $heading-font-family: $base-font-family;
