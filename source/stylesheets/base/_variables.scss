@@ -2,7 +2,8 @@
 $medium-screen: 600px;
 $large-screen: 900px;
 
-$desktop: new-breakpoint(min-width $medium-screen);
+$mobile: new-breakpoint(min-width $medium-screen);
+$desktop: new-breakpoint(min-width $large-screen);
 
 // Typography
 $base-font-family: $font-stack-system;
@@ -26,6 +27,7 @@ $blue: #66ccff;
 $dark-gray: #333;
 $medium-gray: #999;
 $light-gray: #ddd;
+$bg-gray: #f0f0f0;
 
 // Font Colors
 $base-font-color: $dark-gray;
@@ -36,7 +38,7 @@ $base-border-color: $light-gray;
 $base-border: 1px solid $base-border-color;
 
 // Background Colors
-$base-background-color: #fff;
+$base-background-color: $bg-gray;
 $secondary-background-color: tint($base-border-color, 75%);
 
 // Forms

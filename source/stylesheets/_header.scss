@@ -1,23 +1,19 @@
 header.navigation {
   @include outer-container;
   hgroup.intro {
-    @include span-columns(12);
+    @include fill-parent();
     h1 { text-align: center; }
-
-    @include media($desktop) {
-      @include span-columns(6);
-      h1 { text-align: left; }
-    }
   }
   nav.cover {
-    @include span-columns(12);
+    @include fill-parent();
     li { text-align: center; }
+  }
+  border-bottom: 1px solid #eee;
 
-    @include media($desktop) {
+  @include media($mobile) {
+    hgroup.intro,
+    nav.cover {
       @include span-columns(6);
-      li { text-align: right; }
     }
   }
-
-  border-bottom: 1px solid #eee;
 }
