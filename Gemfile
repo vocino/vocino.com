@@ -20,4 +20,5 @@ group :jekyll_plugins do
   gem 'jekyll-feed'
   gem 'jekyll-paginate'
   gem 'jekyll-gist'
+  gem 's3_website'
 end

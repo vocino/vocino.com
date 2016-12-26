@@ -1,12 +1,18 @@
 # Permalinks
-permalink:           pretty
+permalink:           /:title/
 
 # Setup
-title:               Poole
-tagline:             The Jekyll Butler
-url:                 http://getpoole.com
+title:               Travis Vocino
+tagline:             "@Vocino"
+url:                 https://vocino.com
 paginate:            1
 baseurl:             ""
+
+# facebook
+fb:
+  appid:             126493727772175
+  pageid:            136894586716909
+  profileid:         100005856670993
 
 # Assets
 #
@@ -17,14 +23,14 @@ sass:
 
 # About/contact
 author:
-  name:              Mark Otto
-  url:               https://twitter.com/mdo
-  email:             markdotto@gmail.com
+  name:              Travis Vocino
+  url:               https://facebook.com/vocino
+  email:             travis@vocino.com
 
 # Custom vars
 version:             2.0.0
 github:
-  repo:              https://github.com/poole/poole
+  repo:              https://github.com/vocino/vocino.com
 
 # Gems
 gems:
