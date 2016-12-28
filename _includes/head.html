@@ -1,31 +1,10 @@
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% include partials/meta.html %}
 
-  <title>
-    {% if page.title == "Home" %}
-      {{ site.title }} &mdash; {{ site.tagline }}
-    {% else %}
-      {{ page.title }} &mdash; {{ site.title }}
-    {% endif %}
-  </title>
+  <link rel="stylesheet" href="{{ "/assets/css/styles.css" | prepend: site.baseurl | append: '?v=20161217'}}">
+  <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
+  <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feeds/rss.xml" | prepend: site.baseurl | prepend: site.url }}">
 
-  <link rel="stylesheet" href="{{ site.baseurl }}/styles.css">
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ site.baseurl }}/public/apple-touch-icon-precomposed.png">
-  <link rel="shortcut icon" href="{{ site.baseurl }}/public/favicon.ico">
-  <link rel="alternate" type="application/atom+xml" title="{{ site.title }}" href="{{ site.baseurl }}/atom.xml">
-
-  <link rel="canonical" href="https://vocino.com{{ page.url | replace:'index.html','' }}">
-
-  <meta property="fb:app_id"             content="{{ site.fb.appid }}">
-
-  <meta property="og:url"                content="https://vocino.com{{ page.url | replace:'index.html','' }}">
-  <meta property="og:title"              content="{{ page.title }}">
-  <!-- <meta property="og:description"        content="{{ page.excerpt }}"> -->
-  <meta property="og:image"              content="{{ page.image }}">
-
-  <meta property="og:type"               content="article">
-  <meta property="article:publisher"     content="{{ site.fb.pageid }}">
-  <meta property="article:author"        content="{{ site.fb.profileid }}">
+  {% include partials/facebook-pixel.html %}
 
 </head>

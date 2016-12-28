@@ -1,5 +1,6 @@
 # Permalinks
 permalink:           /:title/
+assetlink:           assets.vocino.com/
 
 # Setup
 title:               Travis Vocino
@@ -8,11 +9,14 @@ url:                 https://vocino.com
 paginate:            1
 baseurl:             ""
 
+excerpt_separator:   <!--more-->
+
 # facebook
 fb:
   appid:             126493727772175
   pageid:            136894586716909
   profileid:         100005856670993
+  pixelid:           1896251207268347
 
 # Assets
 #
@@ -20,6 +24,10 @@ fb:
 sass:
   sass_dir:          _sass
   style:            :compressed
+
+# Exclude from build
+exclude:
+  - node_modules
 
 # About/contact
 author:
