@@ -8,8 +8,6 @@ description:         "Product design nerd, indie game investor, compulsive devil
 url:                 https://vocino.com
 paginate:            1
 baseurl:             ""
-url:                 "https://vocino.com"
-
 excerpt_separator:   <!--more-->
 
 # facebook
@@ -33,9 +31,13 @@ exclude:
   - node_modules
 
 # About/contact
+publisher:
+  name:              Vocino.com
+  url:               https://facebook.com/vocinocom
+
 author:
   name:              Travis Vocino
-  url:               https://vocino.com
+  url:               https://facebook.com/vocino
   email:             travis@vocino.com
 
 # Custom vars
