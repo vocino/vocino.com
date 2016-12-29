@@ -30,7 +30,7 @@
 <meta property="article:publisher" content="{{ site.fb.pageid }}">
 <meta property="article:author" content="{{ site.fb.profileid }}">
 
-<meta property="og:image" content="{{ "/assets/images/cover.jpg" | prepend: site.url }}">
+<meta property="og:image" content="{% if page.cover %}{{ site.url }}/assets/{{ page.path | replace: '.md','' | replace: '_','' }}/cover.jpg{% else %}{{ '/assets/images/cover.jpg' | prepend: site.url }}{% endif %}">
 <meta property="og:title" content="{{ title }}">
 <meta property="og:description" content="{{ description | truncate: 200, '...' }}">
 <meta property="og:site_name" content="{{ site.title }}">

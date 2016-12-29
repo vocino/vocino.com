@@ -12,6 +12,14 @@
   }
 }
 
+.post-cover {
+  height: 360px;
+  background-color: black;
+  background-size: cover;
+  position: relative;
+  z-index: -1337;
+}
+
 // Blog post or page title
 .page-title,
 .post-title,
@@ -31,6 +39,12 @@
   color: #9a9a9a;
 }
 
+// Related posts
+.comments {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  margin-bottom: 2rem;
+}
 
 // Related posts
 .related {

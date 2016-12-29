@@ -7,8 +7,6 @@ excerpt: "In a matter of hours, the great United States of America will vote for
 
 ## In a matter of hours, the great United States of America will vote for our next president.
 
-{% include helpers/image.html name="cover.jpeg" caption="This is the cover." %}
-
 **I’m not worried.**
 
 My friends on the left tell me to panic because Trump is likely the most
@@ -44,8 +42,7 @@ Business will carry on.
 
 ### 2. Supreme Court Justices aren’t idiots.
 
-![](https://cdn-images-1.medium.com/max/1200/0*nzWIdMkwZotZGfq2.)
-<span class="figcaption_hack">Cartoon by David Sipress</span>
+{% include helpers/image.html name="02.jpg" caption="Cartoon by David Sipress" %}
 
 You can get to eyeshot of the Supreme Court with some bias but not without some
 deep understanding of the constitution and history.
@@ -76,8 +73,7 @@ fighting to keep things from changing too much in the direction you dislike.
 
 ### 4. Presidents have limited power, even if their party also controls Congress.
 
-![](https://cdn-images-1.medium.com/max/1200/0*q0uLu5TBYnbmBoO6.)
-<span class="figcaption_hack">Cartoon by Benjamin Schwartz</span>
+{% include helpers/image.html name="03.jpg" caption="Cartoon by Benjamin Schwartz" %}
 
 Above any political partisanship, I’m a believer in American democracy. Trust
 that we can head off horrible ideas proposed by the candidate you don’t like.

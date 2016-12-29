@@ -2,14 +2,20 @@
 layout: default
 ---
 
+{% capture coverPath %}{{ page.path | replace: '.md','' | replace: '_','' }}/cover.jpg{% endcapture %}
+
 <article class="post">
-  <h1 class="post-title">{{ page.title }}</h1>
-  <time datetime="{{ page.date | date_to_xmlschema }}" class="post-date">{{ page.date | date_to_string }}</time>
-  {{ content }}
+  <header class="post-cover" style="background-image: url('/assets/{{ coverPath }}')">
+    <h1 class="post-title container">{{ page.title }}</h1>
+    <time datetime="{{ page.date | date_to_xmlschema }}" class="post-date container">{{ page.date | date_to_string }}</time>
+  </header>
+  <div class="container">
+    {{ content }}
+  </div>
 </article>
 
 {% if page.comments != false %}
-<aside class="related">
-  <div class="fb-comments" data-href="{{ site.baseurl }}{{ post.url }}" data-numposts="5" width="100%"></div>
+<aside class="comments container">
+  <div class="fb-comments" data-href="{{ site.baseurl }}{{ post.url }}" data-numposts="10" width="100%"></div>
 </aside>
 {% endif %}
