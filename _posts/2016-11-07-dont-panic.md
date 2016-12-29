@@ -2,6 +2,7 @@
 layout: post
 title: Don't panic.
 cover: true
+excerpt: "In a matter of hours, the great United States of America will vote for our next president. I'm not worried."
 ---
 
 ## In a matter of hours, the great United States of America will vote for our next president.
@@ -9,9 +10,6 @@ cover: true
 {% include helpers/image.html name="cover.jpeg" caption="This is the cover." %}
 
 **I’m not worried.**
-
-![](https://cdn-images-1.medium.com/max/1600/0*Ev_gNvaxy8GYxK-N.)
-<span class="figcaption_hack">Cartoon by David Sipress</span>
 
 My friends on the left tell me to panic because Trump is likely the most
 unqualified person, in applicable knowledge and temperament, to ever be up for

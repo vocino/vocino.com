@@ -4,6 +4,7 @@ permalink:           /:title/
 # Setup
 title:               Travis Vocino
 tagline:             "@Vocino"
+description:         "Product design nerd, indie game investor, compulsive devil's advocate, sacred cow tipper."
 url:                 https://vocino.com
 paginate:            1
 baseurl:             ""
@@ -14,7 +15,9 @@ excerpt_separator:   <!--more-->
 # facebook
 fb:
   appid:             126493727772175
+  pagename:          vocinocom
   pageid:            136894586716909
+  username:          vocino
   profileid:         100005856670993
   pixelid:           1896251207268347
 
@@ -32,12 +35,13 @@ exclude:
 # About/contact
 author:
   name:              Travis Vocino
-  url:               https://facebook.com/vocino
+  url:               https://vocino.com
   email:             travis@vocino.com
 
 # Custom vars
 version:             2.0.0
 github:
+  username:          vocino
   repo:              https://github.com/vocino/vocino.com
 
 # Gems
