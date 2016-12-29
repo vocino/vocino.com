@@ -28,7 +28,10 @@ sass:
 
 # Exclude from build
 exclude:
+  - Gemfile
+  - Gemfile.lock
   - node_modules
+  - s3_website.yml
 
 # About/contact
 publisher:
