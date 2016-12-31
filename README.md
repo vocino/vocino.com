@@ -5,7 +5,7 @@ This is the source code for [Vocino.com](https://vocino.com)&mdash;my static and
 
 > Product design nerd, indie game investor, compulsive devil's advocate, sacred cow tipper.
 
-I go by the username `vocino` most places but the best place to reach me is on [Facebook](https://facebook.com/vocino). If you have questions about this site or the source here, feel free to his me up on Messenger.
+I go by the username `vocino` most places but the best place to reach me is on [Facebook](http://fb.me/vocino). If you have questions about this site or the source here, feel free to hit me up on [Messenger](http://m.me/vocino).
 
 ## Travis Elsewhere
 
