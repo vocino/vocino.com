@@ -25,6 +25,7 @@ error_document: error.html
 # ignore_on_server: that_folder_of_stuff_i_dont_keep_locally
 
 exclude_from_upload:
+  - Rakefile
   - Gemfile
   - Gemfile.lock
 

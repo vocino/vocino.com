@@ -1,5 +1,3 @@
-require 'dotenv'
-
 # Permalinks
 permalink:           /:title/
 
@@ -30,6 +28,8 @@ sass:
 
 # Exclude from build
 exclude:
+  - README.md
+  - Rakefile
   - Gemfile
   - Gemfile.lock
   - node_modules
@@ -54,6 +54,5 @@ github:
 
 # Gems
 gems:
-  - dotenv
   - jekyll-paginate
   - jekyll-gist
