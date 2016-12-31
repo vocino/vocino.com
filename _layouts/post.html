@@ -5,10 +5,14 @@ layout: default
 {% capture coverPath %}{{ page.path | replace: '.md','' | replace: '_','' }}/cover.jpg{% endcapture %}
 
 <article class="post">
-  <header class="post-cover" style="background-image: url('/assets/{{ coverPath }}')">
-    <h1 class="post-title container">{{ page.title }}</h1>
-    <time datetime="{{ page.date | date_to_xmlschema }}" class="post-date container">{{ page.date | date_to_string }}</time>
-  </header>
+  <hgroup class="post-cover" style="background-image: url('/assets/{{ coverPath }}')">
+    <div class="post-cover-bg container">
+      <header class="post-header">
+        <h1 class="post-title">{{ page.title }}</h1>
+        <small class="post-subtitle">{{ page.excerpt }}</small>
+      </header>
+    </div>
+  </hgroup>
   <div class="container">
     {{ content }}
   </div>

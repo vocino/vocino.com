@@ -14,17 +14,26 @@
 
 .post-cover {
   height: 360px;
-  background-color: black;
+  background-color: $gray-5;
   background-size: cover;
   position: relative;
   z-index: -1337;
+}
+
+.post-cover-bg {
+}
+
+.post-header {
+  position: absolute;
+  bottom: 0;
 }
 
 // Blog post or page title
 .page-title,
 .post-title,
 .post-title a {
-  color: #303030;
+  color: white;
+  background-color: rgba(black, 0.75);
 }
 .page-title,
 .post-title {

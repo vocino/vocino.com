@@ -1,13 +1,31 @@
 s3_bucket: vocino.com
 cloudfront_distribution_id: E1M6729AREITJM
+cloudfront_wildcard_invalidation: true
+cloudfront_invalidate_root: true
+cloudfront_distribution_config:
+  default_cache_behavior:
+    min_TTL: <%= 60 * 60 * 24 %>
+  aliases:
+    quantity: 1
+    items:
+      - vocino.com
+max_age:
+  "assets/posts/*": 6000
+  "*": 300
+gzip: true
+
+index_document: index.html
+error_document: error.html
+
+exclude_from_upload:
+  - Rakefile
+  - Gemfile
+  - Gemfile.lock
 
 # Below are examples of all the available configurations.
 # See README for more detailed info on each of them.
 
 # site: path-to-your-website
-
-index_document: index.html
-error_document: error.html
 
 # max_age:
 #   "assets/*": 6000
@@ -24,10 +42,7 @@ error_document: error.html
 
 # ignore_on_server: that_folder_of_stuff_i_dont_keep_locally
 
-exclude_from_upload:
-  - Rakefile
-  - Gemfile
-  - Gemfile.lock
+# cloudfront_wildcard_invalidation: true
 
 # s3_reduced_redundancy: true
 
@@ -43,7 +58,6 @@ exclude_from_upload:
 
 # cloudfront_invalidate_root: true
 
-cloudfront_wildcard_invalidation: true
 
 # concurrency_level: 5
 
