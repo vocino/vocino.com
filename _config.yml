@@ -31,6 +31,7 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - node_modules
+  - vendor
   - s3_website.yml
 
 # About/contact
