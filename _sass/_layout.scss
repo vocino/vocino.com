@@ -8,8 +8,23 @@
   padding-right: 1.5rem;
   margin-left:  auto;
   margin-right: auto;
+  &:after {
+    content:"";
+    display:block;
+    clear:both;
+  }
+}
+
+.leader {
+  background-size: cover;
 }
 
 footer {
   margin-bottom: 2rem;
+}
+
+.clearfix:after {
+  content:"";
+  display:block;
+  clear:both;
 }

@@ -12,28 +12,16 @@
   }
 }
 
-.post-cover {
-  height: 360px;
-  background-color: $gray-5;
-  background-size: cover;
-  position: relative;
-  z-index: -1337;
-}
-
-.post-cover-bg {
-}
-
-.post-header {
-  position: absolute;
-  bottom: 0;
-}
+// .post-header {
+//   margin-top: 4rem;
+//   margin-bottom: 4rem;
+// }
 
 // Blog post or page title
 .page-title,
 .post-title,
 .post-title a {
-  color: white;
-  background-color: rgba(black, 0.75);
+  // color: white;
 }
 .page-title,
 .post-title {
