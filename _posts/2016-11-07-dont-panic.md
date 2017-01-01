@@ -43,6 +43,8 @@ Business will carry on.
 You can get to eyeshot of the Supreme Court with some bias but not without some
 deep understanding of the constitution and history.
 
+{% include helpers/image.html name="cover.jpg" %}
+
 If you’re a Trump supporter, you may be hoping for anti-abortion justices. If
 you’re a Clinton supporter, you may be voting for pro-equality justices. In both
 cases, what should be on the table is reasoned interpretation of the

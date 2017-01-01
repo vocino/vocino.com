@@ -1,8 +1,19 @@
+.photoset,
+.videoset {
+  display: block;
+}
+
 figure {
   &.figure--image {
-
+    width: auto;
   }
   &.figure--video {
 
   }
+}
+
+figcaption {
+  font-size: 75%;
+  color: $gray-3;
+  text-align: center;
 }

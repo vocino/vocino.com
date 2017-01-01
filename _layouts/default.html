@@ -19,11 +19,15 @@
       </div>
     </progress>
 
+    <div class="leader" style="background-image: url('/assets/{{ page.path | replace: '.md','' | replace: '_','' }}/cover.jpg')">
+      {% include partials/masthead.html %}
+    </div>
+
     <main>
       {{ content }}
     </main>
 
-    <footer class="footer">
+    <footer class="footer container-wide">
       <small>
         &copy; <time datetime="{{ site.time | date_to_xmlschema }}">{{ site.time | date: '%Y' }}</time>. All rights reserved.
       </small>

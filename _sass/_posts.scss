@@ -7,8 +7,16 @@
 .post {
   margin-bottom: 4em;
 
+  h2, h3, h4, h5 {
+    @extend .container;
+  }
+
   li + li {
     margin-top: .25rem;
+  }
+
+  p {
+    @extend .container;
   }
 }
 

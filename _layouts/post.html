@@ -3,22 +3,15 @@ layout: default
 ---
 
 <article class="post">
-  <div class="leader" style="background-image: url('/assets/{{ page.path | replace: '.md','' | replace: '_','' }}/cover.jpg')">
-    {% include partials/masthead.html %}
-  </div>
   <header class="post-header container">
     <h1 class="post-title">{{ page.title }}</h1>
     <h3 class="post-subtitle">{{ page.excerpt }}</h3>
   </header>
-  <div class="container">
-    {{ content }}
-  </div>
+  {{ content }}
 </article>
 
-{% if page.comments != false %}
-<aside class="comments container">
-  <div class="fb-comments" data-href="{{ site.baseurl }}{{ post.url }}" data-numposts="10" width="100%"></div>
+<aside class="recommend container">
+  {% include partials/fb-recommend.html %}
 </aside>
-{% endif %}
 
 <div class="fb-quote"></div>

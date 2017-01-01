@@ -15,6 +15,21 @@
   // }
 }
 
+.container-wide {
+  max-width: 68rem;
+  padding-left:  1.5rem;
+  padding-right: 1.5rem;
+  margin-left:  auto;
+  margin-right: auto;
+}
+
+.container-full {
+  padding-left:  1.5rem;
+  padding-right: 1.5rem;
+  margin-left:  auto;
+  margin-right: auto;
+}
+
 .leader {
   background-size: cover;
 }
