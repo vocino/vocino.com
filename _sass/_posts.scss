@@ -12,10 +12,10 @@
   }
 }
 
-// .post-header {
-//   margin-top: 4rem;
-//   margin-bottom: 4rem;
-// }
+.post-header {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
 
 // Blog post or page title
 .page-title,
@@ -24,8 +24,18 @@
   // color: white;
 }
 .page-title,
-.post-title {
+.post-title,
+.post-subtitle {
   margin-top: 0;
+}
+
+.post-title {
+  font-weight: 800;
+  line-height: 1;
+}
+
+.post-subtitle {
+  font-weight: 200;
 }
 
 // Meta data line below post title

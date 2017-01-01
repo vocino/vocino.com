@@ -7,13 +7,12 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
   line-height: 1.25;
   color: #313131;
-  text-rendering: optimizeLegibility;
+  text-rendering: geometricPrecision;
 }
 
 h1 {
-  font-size: 4rem;
+  font-size: 3rem;
   font-family: $header-font-family;
-  text-transform: uppercase;
 }
 
 h2 {
@@ -35,6 +34,7 @@ p {
   margin-top: 0;
   margin-bottom: 1rem;
   font-weight: $root-font-weight;
+  text-rendering: optimizeLegibility;
 }
 
 strong {

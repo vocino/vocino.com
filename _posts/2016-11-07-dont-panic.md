@@ -1,13 +1,9 @@
 ---
 layout: post
-title: Don't panic.
+title: This is an exceptionally long title.
 cover: true
 excerpt: "In a matter of hours, the great United States of America will vote for our next president. I'm not worried."
 ---
-
-## In a matter of hours, the great United States of America will vote for our next president.
-
-**I’m not worried.**
 
 My friends on the left tell me to panic because Trump is likely the most
 unqualified person, in applicable knowledge and temperament, to ever be up for
