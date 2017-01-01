@@ -55,8 +55,7 @@ that you trust the system we’ve set up. A group of smart people can reason,
 debate, argue, and a just outcome will prevail at the supreme court level. You
 may not always agree with it.
 
-### 3. Regardless of who wins, there will be almost half the electorate who will be
-against anything they do.
+### 3. Regardless of who wins, there will be almost half the electorate who will be against anything they do.
 
 A lot of people see this as a negative — and it probably is if your person wins.
 Still, you can rest assured there will be an army lobbying, rallying, trending,
@@ -79,6 +78,8 @@ Above any political partisanship, I’m a believer in American democracy. Trust
 that we can head off horrible ideas proposed by the candidate you don’t like.
 The crazier the idea, the harder it is to get it implemented — and that’s a good
 thing.
+
+{% include helpers/facebook-video.html url="https://www.facebook.com/vocinogaming/videos/1409606109052682/" %}
 
 There’s a sentiment this year that we should be burning it all to the ground and
 rebuilding. I’m not really cool with that. We do pretty well, all things
