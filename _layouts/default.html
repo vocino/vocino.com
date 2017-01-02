@@ -4,14 +4,7 @@
   {% include head.html %}
 
   <body>
-    <div id="fb-root"></div>
-    <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId={{ site.fb.appid }}";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
+    {% include partials/fb-sdk.html %}
 
     <progress value="0" id="progressBar">
       <div class="progress-container">
@@ -27,12 +20,9 @@
       {{ content }}
     </main>
 
-    <footer class="footer container-wide">
-      <small>
-        &copy; <time datetime="{{ site.time | date_to_xmlschema }}">{{ site.time | date: '%Y' }}</time>. All rights reserved.
-      </small>
-    </footer>
-
+    <div class="footer">
+      {% include foot.html %}
+    </div>
     {% include scripts.html %}
   </body>
 </html>

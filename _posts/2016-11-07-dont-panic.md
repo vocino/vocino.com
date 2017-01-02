@@ -1,6 +1,6 @@
 ---
 layout: post
-title: This is an exceptionally long title.
+title: Don't Panic
 cover: true
 excerpt: "In a matter of hours, the great United States of America will vote for our next president. I'm not worried."
 ---
@@ -43,7 +43,7 @@ Business will carry on.
 You can get to eyeshot of the Supreme Court with some bias but not without some
 deep understanding of the constitution and history.
 
-{% include helpers/image.html name="cover.jpg" %}
+{% include helpers/image.html name="cover.jpg" wide="true" %}
 
 If you’re a Trump supporter, you may be hoping for anti-abortion justices. If
 you’re a Clinton supporter, you may be voting for pro-equality justices. In both
