@@ -5,24 +5,11 @@
 
   <body>
     {% include partials/fb-sdk.html %}
+    {% include partials/masthead.html %}
 
-    <progress value="0" id="progressBar">
-      <div class="progress-container">
-        <span class="progress-bar"></span>
-      </div>
-    </progress>
+    {{ content }}
 
-    <div class="leader" style="background-image: url('/assets/{{ page.path | replace: '.md','' | replace: '_','' }}/cover.jpg')">
-      {% include partials/masthead.html %}
-    </div>
-
-    <main>
-      {{ content }}
-    </main>
-
-    <div class="footer">
-      {% include foot.html %}
-    </div>
+    {% include foot.html %}
     {% include scripts.html %}
   </body>
 </html>
