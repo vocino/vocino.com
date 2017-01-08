@@ -18,9 +18,9 @@
 
 <title>
   {% if page.title %}
-    {{ page.title }} &#9660; {{ site.title }}
+    {{ page.title }} by {{ site.title }}
   {% else %}
-    {{ site.title }} &#9660; {{ site.description }}
+    {{ site.title }} &mdash; {{ site.description }}
   {% endif %}
 </title>
 <meta name="description" content="{{ description | truncate: 200, '...' }}">

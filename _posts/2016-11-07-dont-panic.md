@@ -43,8 +43,6 @@ Business will carry on.
 You can get to eyeshot of the Supreme Court with some bias but not without some
 deep understanding of the constitution and history.
 
-{% include helpers/image.html name="cover.jpg" wide="true" %}
-
 If you’re a Trump supporter, you may be hoping for anti-abortion justices. If
 you’re a Clinton supporter, you may be voting for pro-equality justices. In both
 cases, what should be on the table is reasoned interpretation of the
@@ -76,8 +74,6 @@ Above any political partisanship, I’m a believer in American democracy. Trust
 that we can head off horrible ideas proposed by the candidate you don’t like.
 The crazier the idea, the harder it is to get it implemented — and that’s a good
 thing.
-
-{% include helpers/facebook-video.html url="https://www.facebook.com/vocinogaming/videos/1409606109052682/" %}
 
 There’s a sentiment this year that we should be burning it all to the ground and
 rebuilding. I’m not really cool with that. We do pretty well, all things
