@@ -133,7 +133,7 @@ module.exports = function(grunt) {
       },
       dev: {
         src: '.tmp/css/style.css',
-        dest: '<%= config.dest %>/css/style.css'
+        dest: '<%= config.dest %>/assets/stylesheets/style.css'
       },
       prod: {
         src: '.tmp/concat/css/style.css'
