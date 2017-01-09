@@ -61,9 +61,6 @@ exclude_from_upload:
 
 # concurrency_level: 5
 
-redirects:
-  /dont-panic-2a7386906153: /dont-panic/
-
 # redirects:
 #   index.php: /
 #   about.php: about.html

@@ -1,0 +1,16 @@
+{
+  "name": "vocino.com",
+  "version": "1.0.0",
+  "homepage": "https://vocino.com",
+  "description": "Experiments by Travis Vocino",
+  "author": "Travis Vocino <travis@vocino.com>",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+  },
+  "devDependencies": {
+    "loadcss": "~0.1.8",
+    "OptimizedWebfontLoading": "git://github.com/bdadam/OptimizedWebfontLoading.git",
+    "breakpoint-sass": "https://github.com/at-import/breakpoint.git#^2.7.0"
+  }
+}
