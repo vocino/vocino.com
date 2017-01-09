@@ -47,9 +47,10 @@ module.exports = function(grunt) {
         bsFiles: {
           src : [
             '<%= config.dest %>/*.html',
-            '<%= config.dest %>/css/*.css',
-            '<%= config.dest %>/js/*.js',
-            '<%= config.source %>/img/**/*.{jpg,png,svg,gif}'
+            '<%= config.dest %>/assets/javascripts/*.css',
+            '<%= config.dest %>/assets/stylesheets/*.js',
+            '<%= config.source %>/assets/images/**/*.{jpg,png,svg,gif}',
+            '<%= config.source %>/assets/posts/**/*.{jpg,png,svg,gif}'
           ]
         },
         options: {
@@ -79,7 +80,6 @@ module.exports = function(grunt) {
         }
       }
     },
-
 
     // USEMIN SECTION
 
@@ -260,6 +260,10 @@ module.exports = function(grunt) {
       'jshint',
       'scsslint',
       'devUpdate'
+    ]);
+
+    grunt.registerTask('live', [
+      ''
     ]);
 
   };
