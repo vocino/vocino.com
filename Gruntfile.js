@@ -65,7 +65,7 @@ module.exports = function(grunt) {
     watch: {
       sass: {
         files: '<%= config.source %>/_scss/**/*.scss',
-        tasks: ['sass', 'postcss:dev', 'penthouse']
+        tasks: ['sass', 'postcss:dev']
       },
       jekyll: {
         files: ['Gruntfile.js', '<%= config.source %>/**/*.{html,md,js}'],
@@ -156,15 +156,15 @@ module.exports = function(grunt) {
       }
     },
 
-    penthouse: {
-      dist: {
-        outfile : '<%= config.source %>/_includes/critical.css',
-        css : '.tmp/css/style.css',
-        url : 'http://localhost:3000',
-        width : 1280,
-        height : 800
-      }
-    },
+    // penthouse: {
+    //   dist: {
+    //     outfile : '<%= config.source %>/_includes/critical.css',
+    //     css : '.tmp/css/style.css',
+    //     url : 'http://localhost:3000',
+    //     width : 1280,
+    //     height : 800
+    //   }
+    // },
 
 
     // HTML SECTION
