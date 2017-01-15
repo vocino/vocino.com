@@ -64,7 +64,7 @@ module.exports = function(grunt) {
 
     watch: {
       sass: {
-        files: '<%= config.source %>/_scss/**/*.scss',
+        files: '<%= config.source %>/_sass/**/*.scss',
         tasks: ['sass', 'postcss:dev']
       },
       jekyll: {
@@ -118,7 +118,7 @@ module.exports = function(grunt) {
       },
       dist: {
         files: {
-          '.tmp/css/style.css': '<%= config.source %>/_scss/style.scss'
+          '.tmp/css/master.css': '<%= config.source %>/_sass/master.scss'
         }
       }
     },
@@ -132,18 +132,18 @@ module.exports = function(grunt) {
         ]
       },
       dev: {
-        src: '.tmp/css/style.css',
-        dest: '<%= config.dest %>/assets/stylesheets/style.css'
+        src: '.tmp/css/vocino.css',
+        dest: '<%= config.dest %>/assets/stylesheets/vocino.css'
       },
       prod: {
-        src: '.tmp/concat/css/style.css'
+        src: '.tmp/concat/css/vocino.css'
       }
     },
 
     csscomb: {
       dist: {
         files: {
-          '.tmp/concat/css/style.css': '.tmp/concat/css/style.css'
+          '.tmp/concat/css/vocino.css': '.tmp/concat/css/vocino.css'
         }
       }
     },
@@ -159,7 +159,7 @@ module.exports = function(grunt) {
     // penthouse: {
     //   dist: {
     //     outfile : '<%= config.source %>/_includes/critical.css',
-    //     css : '.tmp/css/style.css',
+    //     css : '.tmp/css/vocino.css',
     //     url : 'http://localhost:3000',
     //     width : 1280,
     //     height : 800
@@ -195,7 +195,7 @@ module.exports = function(grunt) {
           deleteOriginals: true,
           // ignorePatterns: ['.png', '.jpg', '.ico'],
           baseDir: '<%= config.dest %>',
-          assets: ['css/*', 'js/*']
+          assets: ['assets/stylesheets/*', 'assets/javascripts/*']
         },
         src: ['<%= config.dest %>/**/*.html']
       }
@@ -210,7 +210,7 @@ module.exports = function(grunt) {
         colorizeOutput: true,
         config: '.scss-lint.yml',
       },
-      check: '<%= config.source %>/_scss/*.scss'
+      check: '<%= config.source %>/_sass/*.scss'
     },
 
     jshint: {
@@ -218,7 +218,7 @@ module.exports = function(grunt) {
         jshintrc: '.jshintrc',
         reporter: require('jshint-stylish')
       },
-      check: ['Gruntfile.js', '<%= config.source %>/js/*.js'],
+      check: ['Gruntfile.js', '<%= config.source %>/assets/javascripts/*.js'],
     },
 
     devUpdate: {
