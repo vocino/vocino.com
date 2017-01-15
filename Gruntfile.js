@@ -107,7 +107,7 @@ module.exports = function(grunt) {
 
     concat: { },
 
-    uglify: { },
+    // uglify: { },
 
 
     // STYLESHEET SECTION
@@ -249,7 +249,7 @@ module.exports = function(grunt) {
       'postcss:prod',
       'csscomb',
       'cssmin',
-      'uglify',
+      // 'uglify',
       'usemin',
       'cacheBust',
       'htmlmin'
