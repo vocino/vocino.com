@@ -9,9 +9,10 @@ title:               Travis Vocino
 tagline:             "@Vocino"
 description:         "Product design nerd, indie game investor, compulsive devil's advocate, sacred cow tipper."
 url:                 https://vocino.com
-paginate:            1
 baseurl:             ""
 excerpt_separator:   <!--more-->
+
+# paginate:            1
 
 # facebook
 fb:
