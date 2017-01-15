@@ -1,3 +1,6 @@
+require:
+  - susy
+
 # Permalinks
 permalink:           /:title/
 
@@ -22,11 +25,13 @@ fb:
 environment:        development
 source:             source
 destination:        build
+
 sass:
   sass_dir:          _sass
   style:            :compressed
 
-# Exclude from build
+include:
+  - _pages
 exclude:
   - README.md
   - Rakefile
@@ -56,3 +61,4 @@ github:
 gems:
   - jekyll-paginate
   - jekyll-gist
+  - susy
