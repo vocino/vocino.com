@@ -24,18 +24,4 @@
   {% endif %}
 </title>
 
-<!-- +++ CSS +++ -->
-{% if site.environment == 'production' %}
-<script>
-  {% include loadCSS.js %}
-  loadCSS("assets/stylesheets/vocino.css");
-</script>
-<noscript>
-{% endif %}
- <!-- build:css(source) /assets/stylesheets/vocino.css -->
-<link href="/assets/stylesheets/vocino.css" rel="stylesheet" type="text/css">
- <!-- endbuild -->
-{% if site.environment == 'production' %}
-</noscript>
-{% endif %}
-<link rel="manifest" href="/manifest.json">
+{% seo %}

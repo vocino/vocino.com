@@ -1,11 +1,21 @@
 <head>
-  {% include partials/typekit.html %}
   {% include partials/meta.html %}
 
-  <link rel="stylesheet" href="{{ "/assets/stylesheets/vocino.css" | prepend: site.baseurl | append: '?v=20161217'}}">
-  <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
-  <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feeds/rss.xml" | prepend: site.baseurl | prepend: site.url }}">
-  
+  <!-- +++ CSS +++ -->
+  {% if site.environment == 'production' %}
+  <script>
+    {% include loadCSS.js %}
+    loadCSS("assets/stylesheets/vocino.css");
+  </script>
+  <noscript>
+  {% endif %}
+   <!-- build:css(source) /assets/stylesheets/vocino.css -->
+  <link href="/assets/stylesheets/vocino.css" rel="stylesheet" type="text/css">
+   <!-- endbuild -->
+  {% if site.environment == 'production' %}
+  </noscript>
+  {% endif %}
+
   {% include partials/facebook-pixel.html %}
 
 </head>

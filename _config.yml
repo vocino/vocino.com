@@ -15,13 +15,29 @@ excerpt_separator:   <!--more-->
 # paginate:            1
 
 # facebook
-fb:
-  appid:             126493727772175
+facebook:
+  app_id:            126493727772175
+  publisher:         136894586716909
+  admins:            100005856670993
+  pixel_id:          1896251207268347
   pagename:          vocinocom
-  pageid:            136894586716909
   username:          vocino
-  profileid:         100005856670993
-  pixelid:           1896251207268347
+
+social:
+  name: Travis Vocino
+  links:
+    - https://twitter.com/vocino
+    - https://www.facebook.com/vocino
+    - https://www.linkedin.com/in/vocino
+    - https://plus.google.com/+travisvocino
+    - https://github.com/vocino
+    - https://keybase.io/vocino
+
+webmaster_verifications:
+  google:
+  bing:
+  alexa:
+  yandex:
 
 environment:        development
 source:             source
@@ -51,6 +67,7 @@ author:
   name:              Travis Vocino
   url:               https://facebook.com/vocino
   email:             travis@vocino.com
+  twitter:           Vocino
 
 # Custom vars
 version:             2.0.0
