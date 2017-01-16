@@ -46,9 +46,10 @@ module.exports = function(grunt) {
       dev: {
         bsFiles: {
           src : [
-            '<%= config.dest %>/*.html',
-            '<%= config.dest %>/assets/javascripts/*.css',
-            '<%= config.dest %>/assets/stylesheets/*.js',
+            // '.tmp/**/*',
+            '<%= config.dest %>/**/*.html',
+            '<%= config.dest %>/assets/stylesheets/*.css',
+            '<%= config.dest %>/assets/javascripts/*.js',
             '<%= config.source %>/assets/images/**/*.{jpg,png,svg,gif}',
             '<%= config.source %>/assets/posts/**/*.{jpg,png,svg,gif}'
           ]
