@@ -13,7 +13,6 @@ gem 'jekyll'
 gem 'rake'
 gem 'html-proofer'
 
-gem 'susy'
 gem 'scss_lint'
 
 # If you want to use GitHub Pages, remove the "gem "jekyll"" above and
