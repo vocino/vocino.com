@@ -9,7 +9,9 @@ layout: default
     <h1 class="post-title">{{ page.title }}</h1>
     {% if page.excerpt %}<h3 class="post-subtitle">{{ page.excerpt }}</h3>{% endif %}
   </header>
-  {{ content }}
+  <section class="row">
+    {{ content }}
+  </section>
 </article>
 
 <aside class="recommend container">

@@ -1,7 +1,26 @@
-<div class="footer">
-  <footer class="footer container-wide">
-    <small>
-      &copy; <time datetime="{{ site.time | date_to_xmlschema }}">{{ site.time | date: '%Y' }}</time>. All rights reserved.
-    </small>
-  </footer>
-</div>
+<footer class="page-footer">
+ <div class="container">
+   <div class="row">
+     <div class="col l6 offset-l2 s12">
+      <h5 class="white-text">O</h5>
+      <img src="/assets/images/vocino.jpg" alt="Travis Vocino" class="left-align circle">
+      <p class="grey-text text-lighten-4">Product design nerd, indie game investor, compulsive devil's advocate, sacred cow tipper.</p>
+     </div>
+     <div class="col l2 s12">
+       <h5 class="white-text">Elsewhere</h5>
+       <ul>
+         <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+         <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+         <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+         <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+       </ul>
+     </div>
+   </div>
+ </div>
+ <div class="footer-copyright">
+   <div class="container">
+     Copyright &copy; 2000-<time datetime="{{ site.time | date_to_xmlschema }}">{{ site.time | date: '%Y' }}</time> Travis Vocino
+     &middot; <a href="mailto:travis@vocino.com">Contact me</a>
+   </div>
+ </div>
+</footer>

@@ -1,0 +1,12 @@
+article.post {
+  @extend .container;
+
+  p {
+    // @extend .col, .s8, .offset-s2;
+  }
+
+}
+
+header.post-header {
+  @extend .row;
+}

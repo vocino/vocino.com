@@ -1,0 +1,29 @@
+.home {
+  background-color: black;
+  color: rgba(255,255,255,.8);
+  height: 100%;
+
+  .logo {
+    width: 100%;
+  }
+
+  .heading {
+    font-weight: 300;
+    text-transform: uppercase;
+    > span {
+      font-weight: 100;
+    }
+  }
+
+  .tagline {
+    font-size: $h4-fontsize;
+    font-weight: 300;
+    // color:
+  }
+
+}
+
+.home {
+  background: url('/assets/images/home-blue.jpg') no-repeat center center fixed;
+  background-size: cover;
+}

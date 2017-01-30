@@ -40,6 +40,8 @@ environment:        development
 source:             source
 destination:        build
 
+markdown:           kramdown
+
 sass:
   sass_dir:          _sass
   style:            :compressed
