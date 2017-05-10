@@ -2,6 +2,10 @@
 layout: default
 ---
 
-<main class="container">
-  {{ content }}
-</main>
+<body class="home">
+  {% include partials/fb-sdk.html %}
+  <main class="container">
+    {{ content }}
+  </main>
+  {% include scripts.html %}
+</body>

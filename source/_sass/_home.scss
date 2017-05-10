@@ -1,29 +1,36 @@
 .home {
-  background-color: black;
-  color: rgba(255,255,255,.8);
-  height: 100%;
+  // color: rgba(255,255,255,.8);
+  // background: url('/assets/images/home-blue.jpg') no-repeat center center fixed;
+  background-size: cover;
+  background-color: #111;
 
-  .logo {
-    // width: 100%;
+  .opening {
+    margin-top: $gutter-width*4;
   }
-
-  .heading {
-    font-weight: 300;
-    text-transform: uppercase;
-    > span {
-      font-weight: 100;
-    }
-  }
-
-  .tagline {
-    font-size: $h4-fontsize;
-    font-weight: 300;
-    // color:
-  }
-
 }
 
 .home {
-  background: url('/assets/images/home-blue.jpg') no-repeat center center fixed;
-  background-size: cover;
+  color: #eee;
+
+  h1.title-name {
+    font-weight: 800;
+    margin: 0;
+  }
+
+  p.tagline {
+    margin: 0;
+  }
+
+  .fb-follow {
+    margin-top: $gutter-width;
+  }
+
+  a {
+    color: white;
+    font-weight: 400;
+    border-bottom: 1px solid #3cf;
+    &:hover {
+      color: #3cf;
+    }
+  }
 }
