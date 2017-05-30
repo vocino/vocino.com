@@ -1,11 +1,21 @@
 {
   "name": "vocino.com",
-  "version": "1.0.0",
   "homepage": "https://vocino.com",
-  "description": "Experiments by Travis Vocino",
-  "author": "Travis Vocino <travis@vocino.com>",
+  "authors": [
+    "Travis Vocino <travis@vocino.com>"
+  ],
+  "description": "A technological terror constructed by Travis Vocino",
+  "main": "",
   "license": "MIT",
   "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
   "dependencies": {
-  },
+    "materialize": "^0.98.2"
+  }
 }

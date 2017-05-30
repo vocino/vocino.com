@@ -53,10 +53,14 @@ exclude:
   - Rakefile
   - Gemfile
   - Gemfile.lock
-  - node_modules
   - vendor
   - s3_website.yml
   - .travis.yml
+  - node_modules
+  - package.json
+  - bower.json
+  - bower_components
+  - Gruntfile.coffee
 
 # About/contact
 publisher:
