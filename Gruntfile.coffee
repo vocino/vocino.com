@@ -48,11 +48,11 @@ module.exports = (grunt) ->
         livereload: true
       source:
         files: [
-          "_drafts/**/*"
-          "_includes/**/*"
-          "_layouts/**/*"
-          "_posts/**/*"
-          "assets/**/*"
+          "source/_drafts/**/*"
+          "source/_includes/**/*"
+          "source/_layouts/**/*"
+          "source/_posts/**/*"
+          "source/assets/**/*"
           "_config.yml"
           "*.html"
           "*.md"
@@ -65,7 +65,7 @@ module.exports = (grunt) ->
       server:
         options:
           port: 4000
-          base: '_site'
+          base: 'build'
           livereload: true
 
   grunt.registerTask "build", [

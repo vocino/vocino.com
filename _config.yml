@@ -5,7 +5,7 @@ permalink:           /:title/
 title:               Travis Vocino
 tagline:             "@Vocino"
 description:         "Product design leader, indie game investor, compulsive devil's advocate, sacred cow tipper."
-url:                 https://vocino.com
+url:                 "https://vocino.com"
 baseurl:             ""
 excerpt_separator:   <!--more-->
 
@@ -53,7 +53,7 @@ exclude:
   - Rakefile
   - Gemfile
   - Gemfile.lock
-  - vendor
+  # - vendor
   - s3_website.yml
   - .travis.yml
   - node_modules

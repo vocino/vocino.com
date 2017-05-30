@@ -1,5 +1,5 @@
 article.post {
-  @extend .container;
+  // @extend .container;
 
   p {
     // @extend .col, .s8, .offset-s2;
@@ -8,5 +8,5 @@ article.post {
 }
 
 header.post-header {
-  @extend .row;
+  // @extend .row;
 }
