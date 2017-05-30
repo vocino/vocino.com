@@ -17,7 +17,7 @@ module.exports = (grunt) ->
           expand: true
           cwd: "bower_components/jquery/dist/"
           src: "jquery.min.js"
-          dest: "vendor/js/"
+          dest: "source/vendor/js/"
         }]
       materialize:
         files: [{
