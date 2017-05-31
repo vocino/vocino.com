@@ -1,7 +1,7 @@
 <head>
   {% include partials/meta.html %}
-  <link rel="stylesheet" href="/vendor/css/materialize.min.css">
-  <!-- <link href="/assets/stylesheets/vocino.css" rel="stylesheet" type="text/css"> -->
-  <script src="/vendor/js/jquery.min.js"></script>
+  <link href="/vendor/css/materialize.min.css" rel="stylesheet" >
+  <link href="{{ "/assets/css/vocino.css" | prepend: site.baseurl }}" type="text/css" rel="stylesheet">
+  <script src="{{ "/vendor/js/jquery.min.js" | prepend: site.baseurl }}" type="text/javascript"></script>
   {% include partials/facebook-pixel.html %}
 </head>

@@ -35,7 +35,7 @@ module.exports = (grunt) ->
         {
           expand: true
           cwd: "bower_components/materialize/dist/fonts/"
-          src: "roboto/"
+          src: "roboto/**/*"
           dest: "source/vendor/fonts/"
         }]
 
@@ -48,11 +48,7 @@ module.exports = (grunt) ->
         livereload: true
       source:
         files: [
-          "source/_drafts/**/*"
-          "source/_includes/**/*"
-          "source/_layouts/**/*"
-          "source/_posts/**/*"
-          "source/assets/**/*"
+          "source/**/*"
           "_config.yml"
           "*.html"
           "*.md"
