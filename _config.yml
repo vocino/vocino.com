@@ -20,6 +20,13 @@ facebook:
   pagename:          vocinocom
   username:          vocino
 
+# twitch
+twitch:
+  client_id:         4wq4ul96qpscqulfe8e34rbqhi4c6rg
+
+instagram:
+  access_token:      8405.d8cc0c4.2e236709f37e47a9b9fb6ae9fd63f8e3
+
 social:
   name: Travis Vocino
   links:

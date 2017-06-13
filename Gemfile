@@ -25,5 +25,6 @@ group :jekyll_plugins do
   gem 'jekyll-paginate'
   gem 'jekyll-gist'
   gem 'jekyll-seo-tag'
+  gem 'jekyll-coffeescript'
   gem 's3_website'
 end

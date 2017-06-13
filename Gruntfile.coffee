@@ -38,6 +38,13 @@ module.exports = (grunt) ->
           src: "roboto/**/*"
           dest: "source/vendor/fonts/"
         }]
+      spectragram:
+        files: [{
+          expand: true
+          cwd: "bower_components/jquery-spectragram/"
+          src: "spectragram.min.js"
+          dest: "source/vendor/js/"
+          }]
 
     exec:
       jekyll:
