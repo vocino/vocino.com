@@ -87,6 +87,6 @@ github:
   repo:              https://github.com/vocino/vocino.com
 
 # Gems
-gems:
+plugins:
   - jekyll-paginate
   - jekyll-gist
