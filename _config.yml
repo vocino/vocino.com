@@ -1,92 +1,41 @@
-# Permalinks
-permalink:           /:title/
-
 # Setup
-title:               Travis Vocino
-tagline:             "@Vocino"
-description:         "Product design leader, indie game investor, compulsive devil's advocate, sacred cow tipper."
-url:                 "https://vocino.com"
-baseurl:             ""
-excerpt_separator:   <!--more-->
-
-# paginate:            1
-
-# facebook
-facebook:
-  app_id:            126493727772175
-  publisher:         136894586716909
-  admins:            100005856670993
-  pixel_id:          1896251207268347
-  pagename:          vocinocom
-  username:          vocino
-
-# twitch
-twitch:
-  client_id:         4wq4ul96qpscqulfe8e34rbqhi4c6rg
-
-instagram:
-  access_token:      8405.d8cc0c4.2e236709f37e47a9b9fb6ae9fd63f8e3
-
-social:
-  name: Travis Vocino
-  links:
-    - https://twitter.com/vocino
-    - https://www.facebook.com/vocino
-    - https://www.linkedin.com/in/vocino
-    - https://plus.google.com/+travisvocino
-    - https://github.com/vocino
-    - https://keybase.io/vocino
-
-webmaster_verifications:
-  google:
-  bing:
-  alexa:
-  yandex:
-
-environment:        development
-source:             source
-destination:        build
-
-markdown:           kramdown
-
-sass:
-  sass_dir:          _sass
-  style:            :compressed
-
-include:
-  - _pages
-exclude:
-  - README.md
-  - Rakefile
-  - Gemfile
-  - Gemfile.lock
-  # - vendor
-  - s3_website.yml
-  - .travis.yml
-  - node_modules
-  - package.json
-  - bower.json
-  - bower_components
-  - Gruntfile.coffee
-
-# About/contact
-publisher:
-  name:              Vocino.com
-  url:               https://facebook.com/vocinocom
-
-author:
-  name:              Travis Vocino
-  url:               https://facebook.com/vocino
-  email:             travis@vocino.com
-  twitter:           Vocino
-
-# Custom vars
-version:             2.0.0
-github:
-  username:          vocino
-  repo:              https://github.com/vocino/vocino.com
+title: Poole
+tagline: The Jekyll Butler
+url: https://getpoole.com
+paginate: 1
+baseurl: ""
+permalink: pretty
 
 # Gems
 plugins:
-  - jekyll-paginate
   - jekyll-gist
+  - jekyll-paginate
+  - jekyll-seo-tag
+
+# Optimize Jekyll
+exclude:
+  - .editorconfig
+  - .git
+  - .jekyll-cache
+  - Gemfile
+  - Gemfile.lock
+  - LICENSE.md
+  - README.md
+
+sass:
+  sass_dir: _sass
+  style: :compressed
+
+# Options
+
+# Replace this value and uncomment to enable Google Analytics tracking
+# ga_analytics: UA-000000-0
+
+# Specify the author for blog posts
+author:
+  name: Mark Otto
+  url: https://twitter.com/mdo
+  email: markdotto@gmail.com
+
+# Custom vars
+version: 3.0.0
