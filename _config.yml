@@ -1,16 +1,13 @@
 # Setup
-title: Vocino
-tagline: Travis Vocino
+title: Vocino Labs
+tagline: Vocino Labs
 url: https://vocino.com
-paginate: 1
+paginate: false
 baseurl: ""
 permalink: pretty
 
 # Gems
-plugins:
-  - jekyll-gist
-  - jekyll-paginate
-  - jekyll-seo-tag
+# plugins:
 
 # Optimize Jekyll
 exclude:
