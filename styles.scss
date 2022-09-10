@@ -8,6 +8,8 @@
 
 html, body {
   background-color: #111;
+  background-image: url('/assets/background.jpg');
+  background-size: 100% 100%;
   height: 100%;
   overflow: hidden;
 }
@@ -23,7 +25,9 @@ html, body {
 
 .inside {
   color: white;
+  text-align: center ;
   img {
-    max-width: 100%;
+    max-width: 50%;
+    margin: 0 auto;
   }
 }
