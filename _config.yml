@@ -1,6 +1,6 @@
 # Setup
-title: Vocino Labs
-tagline: Vocino Labs
+title: Vocino
+tagline: Perfect blend of technology and magic.
 url: https://vocino.com
 paginate: false
 baseurl: ""
@@ -31,8 +31,8 @@ sass:
 # Specify the author for blog posts
 author:
   name: Travis Vocino
-  url: https://twitter.com/vocino
+  url: https://threads.net/@vocino
   email: travis@vocino.com
 
 # Custom vars
-version: 3.0.0
+# version: 3.0.0
