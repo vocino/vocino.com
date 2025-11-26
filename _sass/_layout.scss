@@ -1,0 +1,126 @@
+// Main container
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-unit * 2;
+}
+
+// Content wrapper
+.content {
+  text-align: center;
+  max-width: 600px;
+  width: 100%;
+}
+
+// Profile photo
+.profile-photo {
+  margin-bottom: $spacing-unit * 3;
+
+  img {
+    width: clamp(120px, 25vw, 180px);
+    height: clamp(120px, 25vw, 180px);
+    margin: 0 auto;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--accent-color);
+    box-shadow: 0 0 20px var(--accent-dim),
+                0 0 40px rgba(0, 204, 255, 0.1);
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 30px rgba(0, 204, 255, 0.4),
+                  0 0 60px rgba(0, 204, 255, 0.2);
+      border-color: var(--accent-hover);
+    }
+  }
+}
+
+// Logo
+.logo {
+  margin-bottom: $spacing-unit * 2;
+
+  img {
+    width: clamp(200px, 50vw, 400px);
+    height: auto;
+    margin: 0 auto;
+    filter: drop-shadow(0 0 20px rgba(0, 204, 255, 0.3));
+    transition: filter 0.3s ease;
+
+    &:hover {
+      filter: drop-shadow(0 0 30px rgba(0, 204, 255, 0.5));
+    }
+  }
+}
+
+// Typography
+.tagline {
+  font-size: clamp(1.125rem, 2vw, 1.5rem);
+  color: var(--text-secondary);
+  margin-bottom: $spacing-unit * 2;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+}
+
+// Social links
+.social-links {
+  display: flex;
+  gap: $spacing-unit * 1.5;
+  justify-content: center;
+  margin-top: $spacing-unit * 3;
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: var(--bg-tertiary);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+
+    &:hover,
+    &:focus {
+      background-color: var(--accent-dim);
+      border-color: var(--accent-color);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px var(--accent-dim);
+    }
+
+    svg {
+      width: 24px;
+      height: 24px;
+      color: var(--text-color);
+      transition: color 0.3s ease;
+    }
+
+    &:hover svg,
+    &:focus svg {
+      color: var(--accent-color);
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: $breakpoint-sm) {
+  .container {
+    padding: $spacing-unit;
+  }
+
+  .social-links {
+    gap: $spacing-unit;
+
+    a {
+      width: 40px;
+      height: 40px;
+
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+}

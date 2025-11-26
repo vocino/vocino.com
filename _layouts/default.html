@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark light">
+
+  {% seo %}
+
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  <link rel="icon" type="image/x-icon" href="{{ '/assets/favicon.ico' | relative_url }}">
+  <link rel="apple-touch-icon" href="{{ '/assets/apple-touch-icon.png' | relative_url }}">
+
+  <!-- Social links -->
+  <link rel="me" href="https://www.threads.net/@vocino">
+  <link rel="author" href="{{ site.url }}">
+  <meta name="fediverse:creator" content="@vocino@threads.net">
+</head>
+<body>
+  <main>
+    {{ content }}
+  </main>
+</body>
+</html>

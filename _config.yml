@@ -1,0 +1,45 @@
+# Site settings
+title: Vocino
+tagline: Perfect blend of technology and magic.
+description: Personal website of Travis Vocino
+url: https://vocino.com
+baseurl: ""
+
+# Author information
+author:
+  name: Travis Vocino
+  email: travis@vocino.com
+  url: https://threads.net/@vocino
+
+# Build settings
+markdown: kramdown
+permalink: pretty
+
+# GitHub Pages safe mode compatibility
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# SCSS/SASS
+sass:
+  sass_dir: _sass
+  style: compressed
+
+# Exclude from processing
+exclude:
+  - .git
+  - .gitignore
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - CLAUDE.md
+  - vendor/
+  - .bundle/
+  - .jekyll-cache/
+
+# Collections and defaults
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: "default"
