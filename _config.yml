@@ -37,9 +37,20 @@ exclude:
   - .bundle/
   - .jekyll-cache/
 
+# Collections
+collections:
+  projects:
+    output: true
+    permalink: /projects/:slug/
+
 # Collections and defaults
 defaults:
   - scope:
       path: ""
     values:
       layout: "default"
+  - scope:
+      path: ""
+      type: "projects"
+    values:
+      layout: "project"

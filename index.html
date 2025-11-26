@@ -3,15 +3,19 @@ layout: default
 title: Vocino - Perfect blend of technology and magic
 ---
 
+<!-- Fixed header with brand -->
+<header class="site-header">
+  <div class="site-brand">
+    <img src="{{ '/assets/images/vocino.svg' | relative_url }}" alt="Vocino" class="brand-logo" />
+  </div>
+</header>
+
+<!-- Main content -->
 <div class="container">
   <div class="content">
-    <div class="profile-photo">
-      <img src="{{ '/assets/images/travis.png' | relative_url }}" alt="Travis Vocino" />
-    </div>
-    <div class="logo">
-      <img src="{{ '/assets/images/vocino.svg' | relative_url }}" alt="{{ site.title }}" />
-    </div>
-    <p class="tagline">{{ site.tagline }}</p>
+    <h2 class="tagline">{{ site.tagline }}</h2>
+
+    <p class="bio">Travis Vocino, Maker. Nerd tchotchke collector. Chaotic good.</p>
 
     <nav class="social-links">
       <a href="https://instagram.com/vocino" rel="me" aria-label="Instagram" target="_blank">
@@ -27,5 +31,33 @@ title: Vocino - Perfect blend of technology and magic
         </svg>
       </a>
     </nav>
+
+    <!-- Projects Section -->
+    {% if site.projects.size > 0 %}
+    <section class="projects-section">
+      <h3 class="section-title">Projects</h3>
+      <div class="projects-list">
+        {% assign sorted_projects = site.projects | sort: 'order' %}
+        {% for project in sorted_projects %}
+          <a href="{{ project.url | relative_url }}" class="project-item">
+            <div class="project-item-header">
+              <h4 class="project-item-title">{{ project.title }}</h4>
+              {% if project.external_url %}
+              <span class="external-indicator">↗</span>
+              {% else %}
+              <span class="internal-indicator">→</span>
+              {% endif %}
+            </div>
+            {% if project.excerpt %}
+            <p class="project-item-excerpt">{{ project.excerpt }}</p>
+            {% endif %}
+            {% if project.category %}
+            <span class="project-category">{{ project.category }}</span>
+            {% endif %}
+          </a>
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
   </div>
 </div>

@@ -4,7 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a Jekyll-based static website for vocino.com - a modern, minimal personal landing page optimized for GitHub Pages. The site uses Jekyll's built-in SCSS processing with a modular architecture and focuses on a clean, centered design with a dark theme.
+This is a Jekyll-based static website for vocino.com - a modern, minimal personal landing page optimized for GitHub Pages. The site uses Jekyll's built-in SCSS processing with a modular architecture and focuses on a clean, left-aligned design with a dark theme and magazine-quality typography.
+
+The site includes a projects collection system for organizing evergreen content across categories like Gaming, AI, Web, and more.
 
 ## Development Commands
 
@@ -38,16 +40,22 @@ This site is configured to work with GitHub Pages. Simply push to the master bra
 ```
 .
 ├── _layouts/          # HTML templates
-│   └── default.html   # Main layout with SEO tags
+│   ├── default.html   # Main layout with SEO tags
+│   └── project.html   # Project detail page layout
+├── _projects/         # Project collection (evergreen content)
+│   ├── example-gaming-project.md
+│   ├── example-ai-project.md
+│   └── example-web-project.md
 ├── _sass/             # SCSS partials (imported by main stylesheet)
 │   ├── _variables.scss  # CSS custom properties, colors, typography
 │   ├── _base.scss       # Modern CSS reset and base styles
-│   └── _layout.scss     # Main layout styles
+│   └── _layout.scss     # Main layout styles + project styles
 ├── assets/
 │   └── css/
 │       └── style.scss   # Main stylesheet (compiles to style.css)
 ├── _config.yml        # Jekyll configuration
 ├── index.html         # Homepage
+├── projects.html      # Projects listing page
 └── Gemfile           # Ruby dependencies (github-pages gem)
 ```
 
@@ -63,11 +71,61 @@ The site uses a modular SCSS architecture:
 5. Dark theme with gradient text effects
 
 ### Layout Philosophy
-- **Centered design**: Flexbox-based vertical and horizontal centering
+- **Left-aligned design**: Editorial-style layout inspired by minimalist design
+- **Magazine typography**: Inter and Playfair Display with optical kerning and ligatures
 - **Responsive typography**: Using clamp() for fluid font sizing
-- **Minimal and modern**: Clean design with gradient accents
-- **Social integration**: Icon links with hover effects
+- **Minimal and modern**: Clean design with subtle gradient accents
+- **Social integration**: Icon links with gradient underline effects
 - **SEO-ready**: Uses jekyll-seo-tag plugin for meta tags
+
+### Projects Collection
+The site uses Jekyll Collections for organizing projects:
+- **Location**: `_projects/` directory
+- **Categories**: Gaming, AI, Web, or custom categories
+- **Format**: Markdown files with YAML front matter
+- **Features**:
+  - Category tags for organization
+  - Custom ordering with `order` field
+  - External URL redirects (link directly to external sites)
+  - Evergreen content (no dates required)
+  - Simple list-based layout
+  - Individual project pages with rich content support (for internal projects)
+
+#### Adding a New Project
+
+**Option 1: Internal Project (with full project page)**
+1. Create a new `.md` file in `_projects/`
+2. Add YAML front matter:
+   ```yaml
+   ---
+   title: "Project Title"
+   category: "Gaming" # or AI, Web, etc.
+   excerpt: "Short description for listing page"
+   order: 1 # Lower numbers appear first
+   links:
+     - title: "GitHub Repository"
+       url: "https://github.com/..."
+   ---
+   ```
+3. Write your project content in Markdown
+4. Project will appear on `/projects/` with a link to its detail page
+
+**Option 2: External Project (redirect to external URL)**
+1. Create a new `.md` file in `_projects/`
+2. Add YAML front matter with `external_url`:
+   ```yaml
+   ---
+   title: "External Project"
+   category: "Web"
+   excerpt: "Short description"
+   order: 2
+   external_url: "https://github.com/username/project"
+   ---
+   ```
+3. Project will appear on `/projects/` with an ↗ indicator
+4. Clicking the project will open a redirect page that automatically sends users to the external URL
+5. The redirect uses both meta refresh and JavaScript for compatibility
+6. The redirect page shows a fallback link if automatic redirect fails
 
 ### Configuration
 Key `_config.yml` settings:
@@ -76,6 +134,7 @@ Key `_config.yml` settings:
 - Markdown processor: `kramdown`
 - SCSS compilation with compressed output
 - Author metadata for SEO and social links
+- Collections: `projects` collection with individual pages enabled
 
 ## GitHub Pages Compatibility
 

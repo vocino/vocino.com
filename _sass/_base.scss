@@ -14,15 +14,19 @@ html {
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  -webkit-text-size-adjust: 100%;
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
 }
 
 body {
   font-family: $font-family-base;
   font-size: $font-size-base;
-  line-height: $line-height-base;
+  line-height: $line-height-relaxed;
   color: var(--text-color);
   background-color: var(--bg-color);
   min-height: 100vh;
+  font-weight: $font-weight-normal;
 }
 
 a {

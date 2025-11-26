@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% if page.external_url %}
+  <meta http-equiv="refresh" content="0; url={{ page.external_url }}">
+  <link rel="canonical" href="{{ page.external_url }}">
+  <title>Redirecting to {{ page.title }}</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      background: #0a0a0a;
+      color: #e0e0e0;
+    }
+    .redirect-message {
+      text-align: center;
+      padding: 2rem;
+    }
+    .redirect-message h1 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: #fff;
+    }
+    .redirect-message p {
+      color: #999;
+      margin-bottom: 1.5rem;
+    }
+    .redirect-message a {
+      color: #00ccff;
+      text-decoration: none;
+    }
+    .redirect-message a:hover {
+      text-decoration: underline;
+    }
+  </style>
+  <script>
+    window.location.href = "{{ page.external_url }}";
+  </script>
+  {% else %}
+  <meta name="color-scheme" content="dark light">
+  {% seo %}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  <link rel="icon" type="image/x-icon" href="{{ '/assets/favicon.ico' | relative_url }}">
+  <link rel="apple-touch-icon" href="{{ '/assets/apple-touch-icon.png' | relative_url }}">
+  <link rel="me" href="https://www.threads.net/@vocino">
+  <link rel="author" href="{{ site.url }}">
+  <meta name="fediverse:creator" content="@vocino@threads.net">
+  {% endif %}
+</head>
+<body>
+  {% if page.external_url %}
+  <div class="redirect-message">
+    <h1>Redirecting to {{ page.title }}...</h1>
+    <p>If you are not redirected automatically, <a href="{{ page.external_url }}">click here</a>.</p>
+  </div>
+  {% else %}
+  <div class="container">
+    <div class="content">
+      <article class="project">
+        <header class="project-header">
+          <a href="/" class="back-link">← Home</a>
+          <h1 class="project-title">{{ page.title }}</h1>
+          {% if page.subtitle %}
+          <p class="project-subtitle">{{ page.subtitle }}</p>
+          {% endif %}
+          {% if page.category %}
+          <span class="project-category">{{ page.category }}</span>
+          {% endif %}
+        </header>
+
+        <div class="project-content">
+          {{ content }}
+        </div>
+
+        {% if page.links %}
+        <footer class="project-links">
+          {% for link in page.links %}
+          <a href="{{ link.url }}" class="project-link" target="_blank" rel="noopener">
+            {{ link.title }} →
+          </a>
+          {% endfor %}
+        </footer>
+        {% endif %}
+      </article>
+    </div>
+  </div>
+  {% endif %}
+</body>
+</html>

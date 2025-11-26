@@ -1,126 +1,494 @@
-// Main container
+// Main container - minimal padding
 .container {
   min-height: 100vh;
+  padding: $spacing-unit * 8 $spacing-unit * 8;
+  max-width: 1200px;
+
+  @media (max-width: $breakpoint-md) {
+    padding: $spacing-unit * 6 $spacing-unit * 4;
+  }
+}
+
+// Fixed header with logo
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: $spacing-unit * 6;
+  z-index: 1000;
+
+  @media (max-width: $breakpoint-md) {
+    padding: $spacing-unit * 4;
+  }
+}
+
+// Logo/Brand - logo-based
+.site-brand {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: $spacing-unit * 2;
+  flex-direction: column;
+  gap: $spacing-unit;
+
+  .brand-logo {
+    width: 60px;
+    height: auto;
+    opacity: 0.95;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  .brand-tagline {
+    font-family: $font-family-sans;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-normal;
+    letter-spacing: $tracking-wider;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    margin: 0;
+  }
 }
 
-// Content wrapper
+// Content wrapper - left-aligned, minimal top positioning
 .content {
-  text-align: center;
-  max-width: 600px;
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  max-width: 960px;
+  padding-top: $spacing-unit * 12;
+  text-align: left;
 }
 
-// Profile photo
+// Profile photo - smaller, minimal with subtle gradient border
 .profile-photo {
-  margin-bottom: $spacing-unit * 3;
+  margin-bottom: $spacing-unit * 6;
 
   img {
-    width: clamp(120px, 25vw, 180px);
-    height: clamp(120px, 25vw, 180px);
-    margin: 0 auto;
+    width: 64px;
+    height: 64px;
     border-radius: 50%;
     object-fit: cover;
-    border: 3px solid var(--accent-color);
-    box-shadow: 0 0 20px var(--accent-dim),
-                0 0 40px rgba(0, 204, 255, 0.1);
+    border: 1px solid transparent;
+    background: linear-gradient(var(--bg-color), var(--bg-color)) padding-box,
+                linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(0, 204, 255, 0.3)) border-box;
     transition: all 0.3s ease;
+    opacity: 0.9;
 
     &:hover {
+      opacity: 1;
+      background: linear-gradient(var(--bg-color), var(--bg-color)) padding-box,
+                  linear-gradient(135deg, rgba(0, 204, 255, 0.5), rgba(0, 204, 255, 0.8)) border-box;
       transform: scale(1.05);
-      box-shadow: 0 0 30px rgba(0, 204, 255, 0.4),
-                  0 0 60px rgba(0, 204, 255, 0.2);
-      border-color: var(--accent-hover);
     }
   }
 }
 
-// Logo
-.logo {
-  margin-bottom: $spacing-unit * 2;
+// Main tagline - hero text with subtle gradient
+.tagline {
+  font-family: $font-family-serif;
+  font-size: clamp($font-size-xl, 5vw, 3.5rem);
+  font-weight: $font-weight-medium;
+  line-height: $line-height-tight;
+  letter-spacing: $tracking-tighter;
+  margin-bottom: $spacing-unit * 8;
+  max-width: 620px;
 
-  img {
-    width: clamp(200px, 50vw, 400px);
-    height: auto;
-    margin: 0 auto;
-    filter: drop-shadow(0 0 20px rgba(0, 204, 255, 0.3));
-    transition: filter 0.3s ease;
+  background: linear-gradient(
+    135deg,
+    var(--text-color) 0%,
+    var(--text-color) 60%,
+    rgba(0, 204, 255, 0.6) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+// Bio subtitle - minimal and refined
+.bio {
+  font-family: $font-family-sans;
+  font-size: $font-size-base;
+  font-weight: $font-weight-normal;
+  line-height: $line-height-relaxed;
+  letter-spacing: $tracking-normal;
+  color: var(--text-secondary);
+  margin-bottom: $spacing-unit * 8;
+  max-width: 480px;
+}
+
+// Main navigation
+.main-nav {
+  margin-bottom: $spacing-unit * 10;
+
+  .nav-link {
+    font-family: $font-family-sans;
+    font-size: $font-size-base;
+    font-weight: $font-weight-medium;
+    letter-spacing: $tracking-wide;
+    color: var(--text-color);
+    position: relative;
+    transition: color 0.2s ease;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, var(--accent-color), rgba(0, 204, 255, 0.3));
+      transform: scaleX(0);
+      transition: transform 0.2s ease;
+    }
 
     &:hover {
-      filter: drop-shadow(0 0 30px rgba(0, 204, 255, 0.5));
+      color: var(--accent-color);
+
+      &::after {
+        transform: scaleX(1);
+      }
     }
   }
 }
 
-// Typography
-.tagline {
-  font-size: clamp(1.125rem, 2vw, 1.5rem);
-  color: var(--text-secondary);
-  margin-bottom: $spacing-unit * 2;
-  font-weight: 300;
-  letter-spacing: 0.05em;
+// Section title
+.section-title {
+  font-family: $font-family-serif;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  line-height: $line-height-tight;
+  letter-spacing: $tracking-tight;
+  color: var(--text-color);
+  margin-bottom: $spacing-unit * 6;
 }
 
-// Social links
+// Projects section on homepage
+.projects-section {
+  margin-top: $spacing-unit * 16;
+  max-width: 100%;
+
+  .projects-list {
+    max-width: 100%;
+  }
+}
+
+// Social links - minimal with subtle gradient underline
 .social-links {
   display: flex;
-  gap: $spacing-unit * 1.5;
-  justify-content: center;
-  margin-top: $spacing-unit * 3;
+  gap: $spacing-unit * 3;
+  justify-content: flex-start;
+  align-items: center;
 
   a {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background-color: var(--bg-tertiary);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: all 0.3s ease;
+    color: var(--text-tertiary);
+    transition: all 0.2s ease;
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, var(--accent-color), rgba(0, 204, 255, 0.3));
+      transform: scaleX(0);
+      transition: transform 0.2s ease;
+    }
 
     &:hover,
     &:focus {
-      background-color: var(--accent-dim);
-      border-color: var(--accent-color);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px var(--accent-dim);
+      color: var(--text-color);
+
+      &::after {
+        transform: scaleX(1);
+      }
     }
 
     svg {
-      width: 24px;
-      height: 24px;
-      color: var(--text-color);
-      transition: color 0.3s ease;
+      width: 18px;
+      height: 18px;
+      transition: transform 0.2s ease;
     }
 
-    &:hover svg,
-    &:focus svg {
+    &:hover svg {
+      transform: translateY(-2px);
+    }
+  }
+}
+
+// Projects page styles
+.projects-header {
+  margin-bottom: $spacing-unit * 10;
+
+  .page-title {
+    font-family: $font-family-serif;
+    font-size: clamp($font-size-xl, 4vw, 3rem);
+    font-weight: $font-weight-semibold;
+    line-height: $line-height-tight;
+    letter-spacing: $tracking-tighter;
+    color: var(--text-color);
+    margin-bottom: $spacing-unit * 2;
+  }
+
+  .page-description {
+    font-size: $font-size-base;
+    color: var(--text-secondary);
+    max-width: 540px;
+  }
+}
+
+.projects-list {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-unit * 2;
+  margin-bottom: $spacing-unit * 10;
+  max-width: 720px;
+}
+
+.project-item {
+  padding: $spacing-unit * 4;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.02);
+    padding-left: $spacing-unit * 5;
+  }
+
+  .project-item-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $spacing-unit * 2;
+    margin-bottom: $spacing-unit * 2;
+  }
+
+  .project-item-title {
+    font-family: $font-family-serif;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    line-height: $line-height-snug;
+    color: var(--text-color);
+    margin: 0;
+  }
+
+  .external-indicator,
+  .internal-indicator {
+    font-size: $font-size-base;
+    color: var(--text-tertiary);
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  &:hover .external-indicator,
+  &:hover .internal-indicator {
+    color: var(--accent-color);
+    transform: translateX(4px);
+  }
+
+  .project-item-excerpt {
+    font-size: $font-size-sm;
+    line-height: $line-height-relaxed;
+    color: var(--text-secondary);
+    margin-bottom: $spacing-unit * 2;
+  }
+
+  .project-category {
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    letter-spacing: $tracking-wider;
+    text-transform: uppercase;
+    color: var(--accent-color);
+    display: inline-block;
+  }
+}
+
+// Individual project page styles
+.project {
+  max-width: 720px;
+
+  .back-link {
+    display: inline-block;
+    font-size: $font-size-sm;
+    color: var(--text-tertiary);
+    margin-bottom: $spacing-unit * 6;
+    transition: color 0.2s ease;
+
+    &:hover {
       color: var(--accent-color);
+    }
+  }
+
+  .project-header {
+    margin-bottom: $spacing-unit * 8;
+
+    .project-title {
+      font-family: $font-family-serif;
+      font-size: clamp($font-size-xl, 5vw, 3rem);
+      font-weight: $font-weight-semibold;
+      line-height: $line-height-tight;
+      letter-spacing: $tracking-tighter;
+      color: var(--text-color);
+      margin-bottom: $spacing-unit * 3;
+    }
+
+    .project-subtitle {
+      font-size: $font-size-md;
+      line-height: $line-height-relaxed;
+      color: var(--text-secondary);
+      margin-bottom: $spacing-unit * 3;
+    }
+
+    .project-category {
+      font-size: $font-size-xs;
+      font-weight: $font-weight-medium;
+      letter-spacing: $tracking-wider;
+      text-transform: uppercase;
+      color: var(--accent-color);
+      display: inline-block;
+    }
+  }
+
+  .project-content {
+    font-size: $font-size-base;
+    line-height: $line-height-loose;
+    color: var(--text-color);
+
+    p {
+      margin-bottom: $spacing-unit * 4;
+      color: var(--text-secondary);
+    }
+
+    h2, h3, h4 {
+      font-family: $font-family-serif;
+      color: var(--text-color);
+      margin-top: $spacing-unit * 8;
+      margin-bottom: $spacing-unit * 3;
+    }
+
+    h2 {
+      font-size: $font-size-xl;
+      font-weight: $font-weight-semibold;
+    }
+
+    h3 {
+      font-size: $font-size-lg;
+      font-weight: $font-weight-semibold;
+    }
+
+    ul, ol {
+      margin-bottom: $spacing-unit * 4;
+      padding-left: $spacing-unit * 5;
+      color: var(--text-secondary);
+    }
+
+    li {
+      margin-bottom: $spacing-unit * 2;
+    }
+
+    code {
+      font-family: $font-family-mono;
+      font-size: $font-size-sm;
+      background: var(--bg-secondary);
+      padding: 2px 6px;
+      border-radius: 3px;
+    }
+
+    pre {
+      background: var(--bg-secondary);
+      padding: $spacing-unit * 3;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin-bottom: $spacing-unit * 4;
+
+      code {
+        background: none;
+        padding: 0;
+      }
+    }
+  }
+
+  .project-links {
+    margin-top: $spacing-unit * 10;
+    padding-top: $spacing-unit * 8;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-unit * 3;
+
+    .project-link {
+      font-size: $font-size-base;
+      font-weight: $font-weight-medium;
+      color: var(--accent-color);
+      transition: all 0.2s ease;
+
+      &:hover {
+        color: var(--accent-hover);
+        transform: translateX(4px);
+      }
     }
   }
 }
 
 // Responsive adjustments
 @media (max-width: $breakpoint-sm) {
+  .site-header {
+    padding: $spacing-unit * 3;
+  }
+
   .container {
-    padding: $spacing-unit;
+    padding: $spacing-unit * 3;
+  }
+
+  .site-brand {
+    .brand-logo {
+      width: 50px;
+    }
+  }
+
+  .content {
+    padding-top: $spacing-unit * 8;
+  }
+
+  .tagline {
+    margin-bottom: $spacing-unit * 6;
+    font-size: clamp($font-size-lg, 7vw, $font-size-xl);
+  }
+
+  .bio {
+    margin-bottom: $spacing-unit * 8;
+    font-size: $font-size-sm;
+  }
+
+  .projects-section {
+    margin-top: $spacing-unit * 12;
+  }
+
+  .section-title {
+    font-size: $font-size-md;
+    margin-bottom: $spacing-unit * 4;
+  }
+
+  .projects-list {
+    gap: $spacing-unit * 3;
+  }
+
+  .project-item {
+    padding: $spacing-unit * 3;
   }
 
   .social-links {
-    gap: $spacing-unit;
+    gap: $spacing-unit * 2;
 
-    a {
-      width: 40px;
-      height: 40px;
-
-      svg {
-        width: 20px;
-        height: 20px;
-      }
+    a svg {
+      width: 16px;
+      height: 16px;
     }
   }
 }
