@@ -1,9 +1,13 @@
 # Site settings
 title: Vocino
 tagline: Perfect blend of technology and magic.
-description: From the desk of Travis Vocino
+description: Personal website of Travis Vocino - Maker, nerd tchotchke collector, and creative technologist. Perfect blend of technology and magic.
 url: https://vocino.com
 baseurl: ""
+twitter:
+  username: vocino
+  card: summary_large_image
+google_site_verification: ""
 
 # Author information
 author:

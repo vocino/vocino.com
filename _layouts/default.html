@@ -7,6 +7,27 @@
 
   {% seo %}
 
+  <!-- Canonical URL -->
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
+
+  <!-- Structured Data - Person/Profile -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Travis Vocino",
+    "url": "{{ site.url }}",
+    "sameAs": [
+      "https://www.threads.com/@vocino",
+      "https://instagram.com/vocino",
+      "https://github.com/vocino"
+    ],
+    "jobTitle": "Maker",
+    "description": "{{ site.description }}",
+    "email": "{{ site.author.email }}"
+  }
+  </script>
+
   <!-- Google Fonts - Magazine-quality typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
