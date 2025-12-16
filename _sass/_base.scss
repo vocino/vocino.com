@@ -17,6 +17,9 @@ html {
   text-rendering: optimizeLegibility;
   -webkit-text-size-adjust: 100%;
   font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
 }
 
 body {
@@ -29,6 +32,8 @@ body {
   font-weight: $font-weight-normal;
   position: relative;
   overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
   
   // Subtle animated background gradient
   &::before {
@@ -46,6 +51,12 @@ body {
     pointer-events: none;
     z-index: 0;
   }
+}
+
+main {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
 }
 
 @keyframes backgroundShift {
