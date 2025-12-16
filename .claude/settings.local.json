@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git ls-tree:*)"
+      "Bash(git ls-tree:*)",
+      "Bash(bundle exec jekyll serve:*)",
+      "WebFetch(domain:alistapart.com)"
     ],
     "deny": [],
     "ask": []

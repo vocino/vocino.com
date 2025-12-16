@@ -1,7 +1,7 @@
 # Site settings
 title: Vocino
 tagline: Perfect blend of technology and magic.
-description: Personal website of Travis Vocino
+description: From the desk of Travis Vocino
 url: https://vocino.com
 baseurl: ""
 
@@ -32,25 +32,13 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - README.md
-  - CLAUDE.md
   - vendor/
   - .bundle/
   - .jekyll-cache/
 
-# Collections
-collections:
-  projects:
-    output: true
-    permalink: /projects/:slug/
-
-# Collections and defaults
+# Defaults
 defaults:
   - scope:
       path: ""
     values:
       layout: "default"
-  - scope:
-      path: ""
-      type: "projects"
-    values:
-      layout: "project"
