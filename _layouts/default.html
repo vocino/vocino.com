@@ -7,6 +7,10 @@
 
   {% seo %}
 
+  {% if page.noindex %}
+  <meta name="robots" content="noindex, nofollow">
+  {% endif %}
+
   <!-- Canonical URL -->
   <link rel="canonical" href="{{ page.url | absolute_url }}">
 
