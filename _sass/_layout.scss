@@ -11,6 +11,7 @@
   max-width: 100%;
   overflow-x: hidden;
   box-sizing: border-box;
+  background-color: var(--bg);
 
   @media (max-width: $breakpoint-md) {
     padding: $spacing-unit * 4;
@@ -84,13 +85,13 @@
     height: auto;
     opacity: 0.95;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.1));
+    filter: drop-shadow(0 0 20px rgba(230, 237, 243, 0.1));
 
     &:hover {
       opacity: 1;
       // Geometric glow that follows the triangular V shape
-      filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.2)) 
-              drop-shadow(0 -4px 20px rgba(255, 255, 255, 0.15));
+      filter: drop-shadow(0 0 30px rgba(230, 237, 243, 0.2)) 
+              drop-shadow(0 -4px 20px rgba(230, 237, 243, 0.15));
       transform: scale(1.05);
     }
 
@@ -122,7 +123,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    color: var(--text-tertiary);
+    color: var(--text-muted);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     padding: $spacing-unit * 1.5;
@@ -148,14 +149,14 @@
       transform: translateX(-50%) scaleX(0);
       width: 60%;
       height: 2px;
-      background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+      background: linear-gradient(90deg, transparent, var(--brand), transparent);
       transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       border-radius: 2px;
     }
 
     &:hover,
     &:focus {
-      color: var(--text-color);
+      color: var(--text-primary);
       transform: translateY(-4px);
 
       &::before {
@@ -190,23 +191,23 @@
 .tagline {
   font-family: $font-family-serif;
   font-size: clamp($font-size-xl, 5vw, 3rem);
-  font-weight: $font-weight-semibold;
+  font-weight: $font-weight-normal; // Lighter weight for the tagline
   line-height: $line-height-snug;
   letter-spacing: $tracking-tight;
   margin-bottom: $spacing-unit * 4;
   margin-top: 0;
   position: relative;
-  color: var(--text-color);
+  color: var(--text-primary);
   
   // Subtle glow effect that pulses
-  filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.05));
+  filter: drop-shadow(0 0 30px rgba(230, 237, 243, 0.05));
   animation: subtleGlow 4s ease-in-out infinite;
   
   // Smooth transition on hover
   transition: filter 0.4s ease;
 
   &:hover {
-    filter: drop-shadow(0 0 40px rgba(255, 255, 255, 0.1));
+    filter: drop-shadow(0 0 40px rgba(230, 237, 243, 0.1));
   }
 
   @media (max-width: $breakpoint-sm) {
@@ -220,14 +221,14 @@
   position: relative;
   display: inline-block;
   font-family: $font-family-sans;
-  font-weight: $font-weight-semibold;
+  font-weight: $font-weight-bold; // Bolder weight to stand out
   letter-spacing: $tracking-wide;
-  color: var(--text-color);
+  color: var(--text-primary);
   background: linear-gradient(
     135deg,
-    var(--text-color) 0%,
-    rgba(255, 255, 255, 0.9) 50%,
-    var(--text-color) 100%
+    var(--text-primary) 0%,
+    rgba(230, 237, 243, 0.9) 50%,
+    var(--text-primary) 100%
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -339,30 +340,37 @@
   position: relative;
   display: inline-block;
   font-family: $font-family-serif;
-  font-weight: $font-weight-semibold;
+  font-weight: $font-weight-bold; // Bolder weight to stand out
   letter-spacing: $tracking-normal;
-  color: var(--text-color);
+  color: var(--text-primary); // Fallback color
   background: linear-gradient(
     135deg,
-    var(--text-color) 0%,
-    rgba(255, 255, 255, 0.8) 25%,
-    rgba(255, 255, 255, 1) 50%,
-    rgba(255, 255, 255, 0.8) 75%,
-    var(--text-secondary) 100%
+    #E6EDF3 0%,
+    #F5F8FA 25%,
+    #FEFEFE 50%,
+    #F5F8FA 75%,
+    #9BA7B4 100%
   );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
   background-size: 300% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
   animation: magicShimmer 3s ease-in-out infinite, magicFloat 4s ease-in-out infinite, magicGlow 2.5s ease-in-out infinite;
+  
+  // Fallback for browsers that don't support background-clip: text
+  @supports not (background-clip: text) {
+    -webkit-text-fill-color: var(--text-primary);
+    color: var(--text-primary);
+    background: none;
+  }
 }
 
 @keyframes subtleGlow {
   0%, 100% {
-    filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.05));
+    filter: drop-shadow(0 0 30px rgba(230, 237, 243, 0.05));
   }
   50% {
-    filter: drop-shadow(0 0 35px rgba(255, 255, 255, 0.08));
+    filter: drop-shadow(0 0 35px rgba(230, 237, 243, 0.08));
   }
 }
 
@@ -395,15 +403,15 @@
 
 @keyframes magicGlow {
   0%, 100% {
-    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3)) 
-            drop-shadow(0 0 20px rgba(255, 255, 255, 0.15))
-            drop-shadow(0 0 30px rgba(255, 255, 255, 0.1));
+    filter: drop-shadow(0 0 10px rgba(230, 237, 243, 0.3)) 
+            drop-shadow(0 0 20px rgba(230, 237, 243, 0.15))
+            drop-shadow(0 0 30px rgba(230, 237, 243, 0.1));
   }
   50% {
-    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.5)) 
-            drop-shadow(0 0 30px rgba(255, 255, 255, 0.25))
-            drop-shadow(0 0 45px rgba(255, 255, 255, 0.15))
-            drop-shadow(0 0 60px rgba(255, 255, 255, 0.1));
+    filter: drop-shadow(0 0 15px rgba(230, 237, 243, 0.5)) 
+            drop-shadow(0 0 30px rgba(230, 237, 243, 0.25))
+            drop-shadow(0 0 45px rgba(230, 237, 243, 0.15))
+            drop-shadow(0 0 60px rgba(230, 237, 243, 0.1));
   }
 }
 

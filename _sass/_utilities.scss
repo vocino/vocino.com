@@ -1,0 +1,51 @@
+// Utility Classes - Style Guide Based
+// These utilities make it easy to use style guide tokens in HTML
+
+// Background utilities
+.bg-primary { background-color: var(--bg); }
+.bg-surface-1 { background-color: var(--surface-1); }
+.bg-surface-2 { background-color: var(--surface-2); }
+.bg-selection { background-color: var(--selection); }
+
+// Text color utilities
+.text-primary { color: var(--text-primary); }
+.text-secondary { color: var(--text-secondary); }
+.text-muted { color: var(--text-muted); }
+.text-disabled { color: var(--text-disabled); }
+.text-brand { color: var(--brand); }
+.text-success { color: var(--success); }
+.text-warning { color: var(--warning); }
+.text-attention { color: var(--attention); }
+.text-danger { color: var(--danger); }
+
+// Border utilities
+.border { border: 1px solid var(--border); }
+.border-brand { border-color: var(--brand); }
+
+// Font family utilities
+.font-sans { font-family: $font-family-sans; }
+.font-serif { font-family: $font-family-serif; }
+.font-mono { font-family: $font-family-mono; }
+
+// Spacing utilities (using style guide scale: 4, 8, 12, 16, 24, 32, 48)
+.p-4 { padding: 4px; }
+.p-8 { padding: 8px; }
+.p-12 { padding: 12px; }
+.p-16 { padding: 16px; }
+.p-24 { padding: 24px; }
+.p-32 { padding: 32px; }
+.p-48 { padding: 48px; }
+
+.m-4 { margin: 4px; }
+.m-8 { margin: 8px; }
+.m-12 { margin: 12px; }
+.m-16 { margin: 16px; }
+.m-24 { margin: 24px; }
+.m-32 { margin: 32px; }
+.m-48 { margin: 48px; }
+
+// Border radius utilities (12px, 16px, 18px)
+.rounded-sm { border-radius: 12px; }
+.rounded-md { border-radius: 16px; }
+.rounded-lg { border-radius: 18px; }
+

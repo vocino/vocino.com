@@ -1,20 +1,55 @@
-// Color scheme - Vocino brand colors
+// ============================================
+// VOCINO UI STYLE GUIDE - Design Tokens
+// ============================================
+// All new pages and components should use these tokens.
+// Legacy variables are mapped below for backward compatibility.
+// See /style for the complete style guide documentation.
+// ============================================
+
 :root {
-  --bg-color: #000000;
-  --bg-secondary: #0a0a0a;
-  --bg-tertiary: #1a1a1a;
-  --text-color: #f5f5f5;
-  --text-secondary: #999999;
-  --text-tertiary: #666666;
-  --accent-color: #00CCFF;
-  --accent-hover: #33d9ff;
+  // Foundations (Surfaces)
+  --bg: #0F1419;
+  --surface-1: #161B22;
+  --surface-2: #1E242C;
+  --selection: #263040;
+  --border: #2B3440;
+
+  // Text
+  --text-primary: #E6EDF3;
+  --text-secondary: #9BA7B4;
+  --text-muted: #6B7785;
+  --text-disabled: #4B5563;
+
+  // Brand + Accents
+  --brand: #00CCFF;
+  --accent-blue: #4DA3FF;
+  --accent-purple: #9D7CFF;
+
+  // Semantic States
+  --success: #3DFA9A;
+  --warning: #E6E87A;
+  --attention: #FFB86B;
+  --danger: #FF5C5C;
+
+  // Gradients
+  --gradient-primary: linear-gradient(90deg, #00CCFF 0%, #4DA3FF 100%);
+
+  // Legacy variables (mapped to style guide tokens for backward compatibility)
+  --bg-color: var(--bg);
+  --bg-secondary: var(--surface-1);
+  --bg-tertiary: var(--surface-2);
+  --text-color: var(--text-primary);
+  --text-secondary: var(--text-secondary);
+  --text-tertiary: var(--text-muted);
+  --accent-color: var(--brand);
+  --accent-hover: var(--accent-blue);
   --accent-dim: rgba(0, 204, 255, 0.2);
 }
 
-// Typography - Magazine-quality font system
-$font-family-serif: "Playfair Display", "Georgia", "Times New Roman", serif;
-$font-family-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
-$font-family-mono: "SF Mono", "Monaco", "Inconsolata", "Fira Code", "Consolas", monospace;
+// Typography - Source font family
+$font-family-sans: "Source Sans 3", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+$font-family-serif: "Source Serif 4", "Georgia", "Times New Roman", serif;
+$font-family-mono: "Source Code Pro", "SF Mono", "Monaco", "Inconsolata", "Fira Code", "Consolas", monospace;
 $font-family-base: $font-family-sans;
 
 // Font sizes - refined scale
