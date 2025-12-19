@@ -182,13 +182,6 @@ GitHub:   https://github.com/vocino`;
     // Handle input
     terminalInput.addEventListener('keydown', handleKeyDown);
     terminalInput.addEventListener('input', handleInput);
-    
-    // Show welcome message on first interaction
-    terminalInput.addEventListener('focus', () => {
-      if (!isFocused && terminalOutput.children.length === 0) {
-        addOutputLine('Type "help" for available commands. Press Enter to focus terminal.', 'info');
-      }
-    });
   }
 
   // Handle keyboard input
