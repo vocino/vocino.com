@@ -1,0 +1,172 @@
+{% comment %}
+  Navigation bar for installments
+  
+  This include automatically:
+  - Finds all numbered installment directories (001, 002, etc.)
+  - Computes previous/next installment based on current page
+  - Handles root page (/) by finding the latest installment
+  - Shows/hides arrows based on availability
+  
+  Each installment can customize nav colors via CSS variables in local.css:
+  --nav-bg, --nav-border, --nav-arrow-color, --nav-number-color, etc.
+{% endcomment %}
+{% if page.dir == '/' or page.dir == '' %}
+  {% comment %}On root page, find latest installment{% endcomment %}
+  {% assign all_installments_temp = "" | split: "" %}
+  {% for p in site.pages %}
+    {% assign dir_clean = p.dir | remove_first: '/' | remove: '/' %}
+    {% assign dir_num = dir_clean | plus: 0 %}
+    {% if dir_clean.size == 3 and dir_num > 0 and dir_num < 1000 %}
+      {% assign all_installments_temp = all_installments_temp | push: p %}
+    {% endif %}
+  {% endfor %}
+  {% assign all_installments_temp = all_installments_temp | sort: "dir" | reverse %}
+  {% assign current_page_for_nav = all_installments_temp.first %}
+{% else %}
+  {% assign current_page_for_nav = page %}
+{% endif %}
+
+{% assign current_dir = current_page_for_nav.dir %}
+{% assign current_num_str = current_dir | remove: '/' | remove: '/' %}
+{% assign current_num = current_num_str | plus: 0 %}
+{% comment %}Collect all pages in numbered directories (001, 002, etc.){% endcomment %}
+{% assign all_installments = "" | split: "" %}
+{% for p in site.pages %}
+  {% assign dir_clean = p.dir | remove_first: '/' | remove: '/' %}
+  {% assign dir_num = dir_clean | plus: 0 %}
+  {% if dir_clean.size == 3 and dir_num > 0 and dir_num < 1000 %}
+    {% assign all_installments = all_installments | push: p %}
+  {% endif %}
+{% endfor %}
+{% assign all_installments = all_installments | sort: "dir" %}
+{% assign prev_page = nil %}
+{% assign next_page = nil %}
+
+{% for installment in all_installments %}
+  {% assign inst_num_str = installment.dir | remove: '/' | remove: '/' %}
+  {% assign inst_num = inst_num_str | plus: 0 %}
+  {% if inst_num == current_num %}
+    {% assign prev_index = forloop.index0 | minus: 1 %}
+    {% assign next_index = forloop.index0 | plus: 1 %}
+    {% if prev_index >= 0 %}
+      {% assign prev_page = all_installments[prev_index] %}
+    {% endif %}
+    {% if next_index < all_installments.size %}
+      {% assign next_page = all_installments[next_index] %}
+    {% endif %}
+    {% break %}
+  {% endif %}
+{% endfor %}
+
+<nav class="installment-nav" role="navigation" aria-label="Installment navigation">
+  <div class="installment-nav-inner">
+    {% if prev_page %}
+      <a href="{{ prev_page.url }}" class="nav-arrow nav-prev" aria-label="Previous installment">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+      </a>
+    {% else %}
+      <span class="nav-arrow nav-prev disabled" aria-hidden="true"></span>
+    {% endif %}
+    
+    <span class="installment-number">{{ current_num_str }}</span>
+    
+    {% if next_page %}
+      <a href="{{ next_page.url }}" class="nav-arrow nav-next" aria-label="Next installment">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+    {% else %}
+      <span class="nav-arrow nav-next disabled" aria-hidden="true"></span>
+    {% endif %}
+  </div>
+</nav>
+
+<style>
+.installment-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: var(--nav-bg, rgba(15, 20, 25, 0.8));
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--nav-border, rgba(43, 52, 64, 0.5));
+  padding: 0.5rem 0;
+}
+
+.installment-nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.nav-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  color: var(--nav-arrow-color, var(--text-muted));
+  transition: all 0.3s ease;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.nav-arrow:hover:not(.disabled) {
+  color: var(--nav-arrow-hover, var(--text-secondary));
+  background: var(--nav-arrow-bg, rgba(0, 204, 255, 0.1));
+  transform: scale(1.1);
+}
+
+.nav-arrow.disabled {
+  opacity: 0.2;
+  cursor: not-allowed;
+}
+
+.nav-arrow svg {
+  width: 14px;
+  height: 14px;
+}
+
+.installment-number {
+  font-family: var(--font-family-mono, "Source Code Pro", monospace);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--nav-number-color, var(--text-muted));
+  flex: 1;
+  text-align: center;
+  opacity: 0.7;
+}
+
+@media (max-width: 768px) {
+  .installment-nav {
+    padding: 0.375rem 0;
+  }
+  
+  .installment-nav-inner {
+    padding: 0 1rem;
+  }
+  
+  .nav-arrow {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .nav-arrow svg {
+    width: 12px;
+    height: 12px;
+  }
+  
+  .installment-number {
+    font-size: 0.625rem;
+  }
+}
+</style>

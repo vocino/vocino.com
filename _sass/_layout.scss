@@ -1,24 +1,28 @@
 // Centered content layout
 .centered-content {
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: $spacing-unit * 6;
+  padding-top: calc(#{$spacing-unit * 6} + 2.5rem);
   position: relative;
   z-index: 1;
   width: 100%;
   max-width: 100%;
   overflow-x: hidden;
+  overflow-y: hidden;
   box-sizing: border-box;
   background-color: var(--bg);
 
   @media (max-width: $breakpoint-md) {
     padding: $spacing-unit * 4;
+    padding-top: calc(#{$spacing-unit * 4} + 2.5rem);
   }
 
   @media (max-width: $breakpoint-sm) {
     padding: $spacing-unit * 3;
+    padding-top: calc(#{$spacing-unit * 3} + 2.5rem);
   }
 }
 

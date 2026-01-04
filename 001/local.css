@@ -1,0 +1,9 @@
+/* Installment 001 - Local CSS Variables for Nav Theming */
+:root {
+  --nav-bg: rgba(15, 20, 25, 0.8);
+  --nav-border: rgba(43, 52, 64, 0.5);
+  --nav-arrow-color: var(--text-secondary);
+  --nav-arrow-hover: var(--text-primary);
+  --nav-arrow-bg: rgba(0, 204, 255, 0.1);
+  --nav-number-color: var(--text-primary);
+}
