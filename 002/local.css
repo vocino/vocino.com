@@ -1,0 +1,560 @@
+/* Installment 002 - 2600-era Zine Cover / Hacker Splash Page */
+
+/* Enable vertical scrolling for this installment */
+html,
+body {
+  overflow-y: auto !important;
+  overflow-x: hidden;
+  height: auto !important;
+  min-height: 100vh;
+  background-color: var(--zine-bg) !important;
+}
+
+/* Hide global background gradient animation */
+body::before {
+  display: none !important;
+}
+
+main {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  height: auto !important;
+  min-height: 100vh;
+  padding-bottom: 2rem;
+  background-color: var(--zine-bg) !important;
+}
+
+/* Terminal/BBS Color Scheme - 90s Hacker Style */
+:root {
+  --zine-bg: #000000;
+  --zine-text: #00ff00;
+  --zine-accent: #00ffff;
+  --zine-muted: #00aa00;
+  --zine-border: #003300;
+  --zine-paper: rgba(255, 255, 255, 0.02);
+  --ansi-green: #00ff00;
+  --ansi-cyan: #00ffff;
+  --ansi-yellow: #ffff00;
+  --ansi-red: #ff0000;
+  
+  /* Nav theming */
+  --nav-bg: rgba(0, 0, 0, 0.95);
+  --nav-border: rgba(0, 51, 0, 0.8);
+  --nav-arrow-color: var(--zine-muted);
+  --nav-arrow-hover: var(--zine-text);
+  --nav-arrow-bg: rgba(0, 255, 0, 0.1);
+  --nav-number-color: var(--zine-text);
+}
+
+/* Base container */
+.zine-container {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  background: var(--zine-bg);
+  color: var(--zine-text);
+  font-family: "Source Code Pro", "SF Mono", "Monaco", "Consolas", monospace;
+  padding: 2rem 1rem;
+  overflow-x: hidden;
+  transform: rotate(0.2deg); /* Photocopy skew */
+  margin: 0;
+}
+
+/* Xerox texture overlay - More subtle for CRT effect */
+.xerox-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 1;
+  background-image: 
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 255, 0, 0.02) 2px,
+      rgba(0, 255, 0, 0.02) 4px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 255, 0, 0.015) 2px,
+      rgba(0, 255, 0, 0.015) 4px
+    );
+  opacity: 0.3;
+  mix-blend-mode: overlay;
+}
+
+/* System readout sidebar - ANSI box */
+.system-readout {
+  position: fixed;
+  top: 4rem;
+  right: 1rem;
+  z-index: 10;
+  font-family: "Source Code Pro", monospace;
+}
+
+.readout-box {
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid var(--zine-border);
+  padding: 0.5rem;
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+}
+
+.readout-header,
+.readout-footer {
+  color: var(--zine-text);
+  font-size: 0.6875rem;
+  line-height: 1.2;
+  text-shadow: 0 0 3px rgba(0, 255, 0, 0.6);
+}
+
+.readout-line {
+  font-size: 0.6875rem;
+  line-height: 1.6;
+  color: var(--zine-muted);
+  letter-spacing: 0.05em;
+  padding: 0.1rem 0;
+}
+
+.status-ok {
+  color: var(--ansi-green);
+  text-shadow: 0 0 5px rgba(0, 255, 0, 0.8);
+  font-weight: 600;
+}
+
+.status-off {
+  color: var(--ansi-red);
+  opacity: 0.8;
+}
+
+.signal-bar {
+  color: var(--ansi-green);
+  font-family: monospace;
+  text-shadow: 0 0 3px rgba(0, 255, 0, 0.6);
+}
+
+.ansi-green {
+  color: var(--ansi-green);
+  text-shadow: 0 0 5px rgba(0, 255, 0, 0.6);
+}
+
+.ansi-cyan {
+  color: var(--ansi-cyan);
+  text-shadow: 0 0 5px rgba(0, 255, 255, 0.6);
+}
+
+/* Main content */
+.zine-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+/* Masthead */
+.zine-masthead {
+  text-align: center;
+  margin-bottom: 2rem;
+  transform: translateX(-2px); /* Misregistration */
+}
+
+/* ANSI Box Drawing */
+.ansi-box {
+  margin: 1rem 0;
+  font-family: "Source Code Pro", monospace;
+}
+
+.ansi-top,
+.ansi-bottom {
+  color: var(--zine-text);
+  font-size: 0.875rem;
+  line-height: 1.2;
+  text-shadow: 0 0 5px rgba(0, 255, 0, 0.8);
+}
+
+.ansi-title {
+  color: var(--ansi-cyan);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.8), 0 0 20px rgba(0, 255, 255, 0.4);
+  font-family: "Source Code Pro", monospace;
+  padding: 0.25rem 0;
+}
+
+.ansi-box-small {
+  margin: 0.5rem 0;
+  font-family: "Source Code Pro", monospace;
+}
+
+.ansi-top-small,
+.ansi-bottom-small {
+  color: var(--zine-muted);
+  font-size: 0.75rem;
+  line-height: 1;
+}
+
+.dateline {
+  font-size: 0.6875rem;
+  color: var(--zine-muted);
+  letter-spacing: 0.05em;
+  font-family: "Source Code Pro", monospace;
+  margin: 0.5rem 0;
+}
+
+/* BBS Header with terminal prompt */
+.bbs-header {
+  margin: 1rem 0;
+  font-family: "Source Code Pro", monospace;
+  font-size: 0.875rem;
+}
+
+.bbs-prompt {
+  color: var(--ansi-green);
+  font-weight: 600;
+}
+
+.bbs-command {
+  color: var(--zine-text);
+}
+
+/* ASCII dividers */
+.ascii-divider {
+  text-align: center;
+  color: var(--zine-muted);
+  font-size: 0.75rem;
+  margin: 1.5rem 0;
+  opacity: 0.8;
+  font-family: "Source Code Pro", monospace;
+  letter-spacing: 0.02em;
+  text-shadow: 0 0 3px rgba(0, 170, 0, 0.5);
+}
+
+/* Hero section */
+.hero-section {
+  text-align: center;
+  margin: 3rem 0;
+  padding: 2rem 0;
+}
+
+.hero-name {
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--zine-text);
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  font-family: "Source Code Pro", monospace;
+  text-shadow: 0 0 15px rgba(0, 255, 0, 0.8), 0 0 30px rgba(0, 255, 0, 0.4);
+  line-height: 1.2;
+  /* Add subtle glitch effect */
+  animation: phosphorGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes phosphorGlow {
+  0% {
+    text-shadow: 0 0 15px rgba(0, 255, 0, 0.8), 0 0 30px rgba(0, 255, 0, 0.4);
+  }
+  100% {
+    text-shadow: 0 0 20px rgba(0, 255, 0, 0.9), 0 0 40px rgba(0, 255, 0, 0.5), 0 0 60px rgba(0, 255, 0, 0.2);
+  }
+}
+
+.hero-tagline {
+  font-size: 1.125rem;
+  color: var(--zine-muted);
+  letter-spacing: 0.05em;
+  font-family: "Source Code Pro", monospace;
+  font-style: normal;
+  line-height: 1.6;
+  text-shadow: 0 0 5px rgba(0, 170, 0, 0.6);
+}
+
+/* Blinking cursor - 90s terminal style */
+.blink-cursor {
+  display: inline-block;
+  width: 0.6em;
+  height: 1.1em;
+  background: var(--zine-text);
+  margin-left: 0.1em;
+  animation: blink 1s infinite;
+  vertical-align: baseline;
+  box-shadow: 0 0 5px var(--zine-text);
+}
+
+@keyframes blink {
+  0%, 50% { 
+    opacity: 1; 
+    box-shadow: 0 0 5px var(--zine-text), 0 0 10px var(--zine-text);
+  }
+  51%, 100% { 
+    opacity: 0.3; 
+    box-shadow: 0 0 2px var(--zine-text);
+  }
+}
+
+/* Terminal prompt style */
+.terminal-prompt {
+  font-family: "Source Code Pro", monospace;
+  color: var(--zine-text);
+  margin-top: 1rem;
+}
+
+/* Editorial section */
+.editorial-section {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  border-left: 2px solid var(--zine-border);
+  background: var(--zine-paper);
+}
+
+.label {
+  font-size: 0.75rem;
+  color: var(--ansi-cyan);
+  letter-spacing: 0.1em;
+  margin: 0.25rem 0;
+  font-family: "Source Code Pro", monospace;
+  font-weight: 600;
+  text-transform: uppercase;
+  text-shadow: 0 0 5px rgba(0, 255, 255, 0.6);
+}
+
+.editorial-text {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--zine-text);
+  font-family: "Source Code Pro", monospace;
+  text-shadow: 0 0 2px rgba(0, 255, 0, 0.3);
+}
+
+/* Contact section */
+.contact-section {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  border: 1px solid var(--zine-border);
+  background: var(--zine-paper);
+}
+
+.contact-list {
+  margin-top: 1rem;
+}
+
+.contact-item {
+  margin-bottom: 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.8;
+  font-family: "Source Code Pro", monospace;
+}
+
+.contact-label {
+  color: var(--zine-accent);
+  margin-right: 0.5rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.contact-link {
+  color: var(--zine-text);
+  text-decoration: none;
+  transition: all 0.2s;
+  text-shadow: 0 0 3px rgba(0, 255, 0, 0.4);
+}
+
+.contact-link:hover {
+  color: var(--ansi-cyan);
+  text-shadow: 0 0 8px rgba(0, 255, 255, 0.8), 0 0 15px rgba(0, 255, 255, 0.4);
+  text-decoration: underline;
+}
+
+.coming-soon {
+  color: var(--zine-muted);
+  opacity: 0.7;
+  font-style: italic;
+}
+
+/* Footer ephemera */
+.zine-footer {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--zine-border);
+  text-align: center;
+  font-size: 0.6875rem;
+  color: var(--zine-muted);
+  line-height: 1.8;
+  font-family: "Source Code Pro", monospace;
+  letter-spacing: 0.02em;
+}
+
+.ephemera-line {
+  margin-bottom: 0.25rem;
+  opacity: 0.8;
+}
+
+/* Decorative stamps */
+.stamp {
+  position: absolute;
+  font-size: 0.625rem;
+  font-weight: 700;
+  color: var(--zine-accent);
+  border: 2px solid var(--zine-accent);
+  padding: 0.25rem 0.5rem;
+  transform: rotate(-5deg);
+  font-family: "Source Code Pro", monospace;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: var(--zine-bg);
+  z-index: 5;
+  box-shadow: 0 0 10px rgba(0, 204, 255, 0.3);
+}
+
+.stamp-public {
+  top: 8rem;
+  right: 2rem;
+}
+
+.stamp-field {
+  bottom: 8rem;
+  left: 2rem;
+  transform: rotate(5deg);
+  border-color: var(--zine-text);
+  color: var(--zine-text);
+}
+
+/* Audio toggle */
+.audio-toggle {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  background: var(--zine-bg);
+  border: 1px solid var(--zine-border);
+  color: var(--zine-muted);
+  padding: 0.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+  z-index: 100;
+  transition: all 0.2s;
+  opacity: 0.5;
+}
+
+.audio-toggle:hover {
+  opacity: 1;
+  border-color: var(--zine-text);
+  color: var(--zine-text);
+}
+
+/* Photocopy artifacts */
+.zine-container::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 3;
+  background-image: 
+    /* Staple shadow */
+    radial-gradient(ellipse at 50% 10%, rgba(0, 0, 0, 0.3) 0%, transparent 15%),
+    radial-gradient(ellipse at 50% 90%, rgba(0, 0, 0, 0.3) 0%, transparent 15%),
+    /* Fold marks */
+    linear-gradient(to right, transparent 48%, rgba(0, 255, 65, 0.05) 49%, rgba(0, 255, 65, 0.05) 51%, transparent 52%);
+  opacity: 0.3;
+}
+
+/* Scanlines effect - Stronger CRT monitor effect */
+.zine-container::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 4;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 1px,
+    rgba(0, 0, 0, 0.15) 1px,
+    rgba(0, 0, 0, 0.15) 2px
+  );
+  opacity: 0.5;
+  /* Add phosphor glow effect */
+  box-shadow: inset 0 0 200px rgba(0, 255, 0, 0.03);
+}
+
+/* Add phosphor glow to text */
+.zine-content {
+  text-shadow: 0 0 2px rgba(0, 255, 0, 0.3);
+}
+
+.hero-name {
+  text-shadow: 0 0 15px rgba(0, 255, 0, 0.8), 0 0 30px rgba(0, 255, 0, 0.4) !important;
+}
+
+/* ANSI footer box */
+.ansi-footer-box {
+  margin: 1.5rem 0;
+  font-family: "Source Code Pro", monospace;
+}
+
+.ansi-footer-content {
+  color: var(--zine-text);
+  font-size: 0.75rem;
+  padding: 0.25rem 0;
+  text-shadow: 0 0 5px rgba(0, 255, 0, 0.6);
+  letter-spacing: 0.05em;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .zine-container {
+    padding: 1rem 0.5rem;
+  }
+  
+  .hero-name {
+    font-size: 2rem;
+  }
+  
+  .system-readout {
+    position: relative;
+    top: auto;
+    right: auto;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  
+  .stamp {
+    position: relative;
+    display: inline-block;
+    margin: 0.5rem;
+  }
+  
+  .stamp-public,
+  .stamp-field {
+    position: relative;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    left: auto;
+  }
+}
+
+/* Print/photocopy styling */
+@media print {
+  .zine-container {
+    background: white;
+    color: black;
+  }
+  
+  .xerox-overlay,
+  .zine-container::before,
+  .zine-container::after {
+    display: none;
+  }
+}

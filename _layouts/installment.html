@@ -24,6 +24,22 @@
 
   <!-- Installment-specific CSS (if exists) -->
   {% assign installment_dir = page.dir | remove_first: '/' | remove: '/' %}
+  {% comment %}If on root page, find latest installment{% endcomment %}
+  {% if installment_dir == '' or installment_dir == '/' %}
+    {% assign all_installments_temp = "" | split: "" %}
+    {% for p in site.pages %}
+      {% assign dir_clean = p.dir | remove_first: '/' | remove: '/' %}
+      {% assign dir_num = dir_clean | plus: 0 %}
+      {% if dir_clean.size == 3 and dir_num > 0 and dir_num < 1000 %}
+        {% assign all_installments_temp = all_installments_temp | push: p %}
+      {% endif %}
+    {% endfor %}
+    {% assign all_installments_temp = all_installments_temp | sort: "dir" | reverse %}
+    {% assign latest_installment_for_css = all_installments_temp.first %}
+    {% if latest_installment_for_css %}
+      {% assign installment_dir = latest_installment_for_css.dir | remove_first: '/' | remove: '/' %}
+    {% endif %}
+  {% endif %}
   {% assign local_css = installment_dir | prepend: '/' | append: '/local.css' %}
   {% for static_file in site.static_files %}
     {% if static_file.path == local_css %}
@@ -47,6 +63,7 @@
   </main>
 
   <!-- Installment-specific JS (if exists) -->
+  {% comment %}installment_dir is already set above for CSS, reuse it here{% endcomment %}
   {% assign local_js = installment_dir | prepend: '/' | append: '/local.js' %}
   {% assign terminal_js = installment_dir | prepend: '/' | append: '/assets/js/terminal.js' %}
   {% for static_file in site.static_files %}
