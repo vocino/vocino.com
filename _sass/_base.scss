@@ -18,10 +18,8 @@ html {
   -webkit-text-size-adjust: 100%;
   font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
   overflow-x: hidden;
-  overflow-y: hidden;
   width: 100%;
   max-width: 100%;
-  height: 100vh;
 }
 
 body {
@@ -30,11 +28,10 @@ body {
   line-height: $line-height-relaxed;
   color: var(--text-primary);
   background-color: var(--bg);
-  height: 100vh;
+  min-height: 100vh;
   font-weight: $font-weight-normal;
   position: relative;
   overflow-x: hidden;
-  overflow-y: hidden;
   width: 100%;
   max-width: 100%;
   
