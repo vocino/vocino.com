@@ -1,0 +1,112 @@
+// Modern CSS Reset
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  -webkit-text-size-adjust: 100%;
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+}
+
+body {
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  line-height: $line-height-relaxed;
+  color: var(--text-primary);
+  background-color: var(--bg);
+  min-height: 100vh;
+  font-weight: $font-weight-normal;
+  position: relative;
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+  
+  // Subtle animated background gradient (using style guide colors)
+  &::before {
+    content: '';
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: 
+      radial-gradient(circle at 20% 50%, rgba(0, 204, 255, 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(157, 124, 255, 0.02) 0%, transparent 50%),
+      radial-gradient(circle at 40% 20%, rgba(77, 163, 255, 0.01) 0%, transparent 50%);
+    animation: backgroundShift 20s ease-in-out infinite alternate;
+    pointer-events: none;
+    z-index: 0;
+  }
+}
+
+main {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+}
+
+@keyframes backgroundShift {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    transform: translate(-5%, -5%) scale(1.1);
+  }
+}
+
+a {
+  color: var(--brand);
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover,
+  &:focus {
+    color: var(--accent-blue);
+    text-decoration: underline;
+  }
+
+  &:focus {
+    outline: 2px solid var(--brand);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $font-family-sans;
+  line-height: 1.2;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+p {
+  margin-bottom: $spacing-unit;
+}

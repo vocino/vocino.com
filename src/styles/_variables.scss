@@ -1,0 +1,93 @@
+// ============================================
+// VOCINO UI STYLE GUIDE - Design Tokens
+// ============================================
+// All new pages and components should use these tokens.
+// Legacy variables are mapped below for backward compatibility.
+// See /style for the complete style guide documentation.
+// ============================================
+
+:root {
+  // Foundations (Surfaces)
+  --bg: #0F1419;
+  --surface-1: #161B22;
+  --surface-2: #1E242C;
+  --selection: #263040;
+  --border: #2B3440;
+
+  // Text
+  --text-primary: #E6EDF3;
+  --text-secondary: #9BA7B4;
+  --text-muted: #6B7785;
+  --text-disabled: #4B5563;
+
+  // Brand + Accents
+  --brand: #00CCFF;
+  --accent-blue: #4DA3FF;
+  --accent-purple: #9D7CFF;
+
+  // Semantic States
+  --success: #3DFA9A;
+  --warning: #E6E87A;
+  --attention: #FFB86B;
+  --danger: #FF5C5C;
+
+  // Gradients
+  --gradient-primary: linear-gradient(90deg, #00CCFF 0%, #4DA3FF 100%);
+
+  // Legacy variables (mapped to style guide tokens for backward compatibility)
+  --bg-color: var(--bg);
+  --bg-secondary: var(--surface-1);
+  --bg-tertiary: var(--surface-2);
+  --text-color: var(--text-primary);
+  --text-secondary: var(--text-secondary);
+  --text-tertiary: var(--text-muted);
+  --accent-color: var(--brand);
+  --accent-hover: var(--accent-blue);
+  --accent-dim: rgba(0, 204, 255, 0.2);
+}
+
+// Typography - Source font family
+$font-family-sans: "Source Sans 3", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+$font-family-serif: "Source Serif 4", "Georgia", "Times New Roman", serif;
+$font-family-mono: "Source Code Pro", "SF Mono", "Monaco", "Inconsolata", "Fira Code", "Consolas", monospace;
+$font-family-base: $font-family-sans;
+
+// Font sizes - refined scale
+$font-size-xs: 0.8125rem;   // 13px
+$font-size-sm: 0.9375rem;   // 15px
+$font-size-base: 1.125rem;  // 18px
+$font-size-md: 1.25rem;     // 20px
+$font-size-lg: 1.5rem;      // 24px
+$font-size-xl: 2.25rem;     // 36px
+$font-size-2xl: 2.625rem;   // 42px
+
+// Line heights - generous for readability
+$line-height-tight: 1.3;
+$line-height-snug: 1.4;
+$line-height-normal: 1.5;
+$line-height-relaxed: 1.6;
+$line-height-loose: 1.7;
+
+// Letter spacing
+$tracking-tighter: -0.02em;
+$tracking-tight: -0.01em;
+$tracking-normal: 0;
+$tracking-wide: 0.025em;
+$tracking-wider: 0.05em;
+$tracking-widest: 0.1em;
+
+// Font weights
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+// Spacing - refined minimal scale
+$spacing-unit: 0.5rem;  // 8px base unit
+
+// Breakpoints
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
