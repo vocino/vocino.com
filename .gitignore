@@ -31,3 +31,8 @@ Thumbs.db
 *.swp
 *.swo
 *~
+
+# Astro
+.astro/
+dist/
+.wrangler/
