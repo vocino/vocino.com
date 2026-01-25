@@ -1,5 +1,6 @@
 ---
 import SEO from '../components/SEO.astro';
+import '../styles/main.scss';
 
 interface Props {
   title?: string;
@@ -18,8 +19,6 @@ const { title, description, noindex } = Astro.props;
   <meta name="color-scheme" content="dark light" />
   
   <SEO title={title} description={description} noindex={noindex} />
-  
-  <link rel="stylesheet" href="/src/styles/main.scss" />
 </head>
 <body>
   <main style="position: relative; z-index: 1;">
