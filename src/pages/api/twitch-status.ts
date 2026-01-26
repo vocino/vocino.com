@@ -1,60 +1,59 @@
 import type { APIRoute } from 'astro';
 
 export const GET: APIRoute = async ({ request, locals }) => {
-  // Access Cloudflare runtime environment through locals
-  const runtime = locals.runtime as {
-    env: {
-      TWITCH_CLIENT_ID: string;
-      TWITCH_CLIENT_SECRET: string;
-      TWITCH_USERNAME?: string;
-    };
-    caches: {
-      default: Cache;
-    };
-    waitUntil: (promise: Promise<any>) => void;
-  } | undefined;
-  
-  if (!runtime) {
-    return new Response(
-      JSON.stringify({ online: false, error: 'Runtime not available' }),
-      {
-        status: 500,
-        headers: { 
-          'Content-Type': 'application/json',
-          'Cache-Control': 'public, max-age=30',
-        },
-      }
-    );
-  }
-  
-  // Get environment variables
-  const clientId = runtime.env.TWITCH_CLIENT_ID;
-  const clientSecret = runtime.env.TWITCH_CLIENT_SECRET;
-  const username = runtime.env.TWITCH_USERNAME || 'vocino';
-  
-  if (!clientId || !clientSecret) {
-    return new Response(
-      JSON.stringify({ online: false, error: 'Twitch API credentials not configured' }),
-      {
-        status: 500,
-        headers: { 
-          'Content-Type': 'application/json',
-          'Cache-Control': 'public, max-age=30',
-        },
-      }
-    );
-  }
-  
-  // Check cache first (Cloudflare Cache API)
-  const cacheKey = new Request(`https://vocino.com/api/twitch-status-${username}`, request);
-  const cache = runtime.caches.default;
-  const cachedResponse = await cache.match(cacheKey);
-  
-  if (cachedResponse) {
-    return cachedResponse;
-  }
-  
   try {
+    // Access Cloudflare runtime environment through locals
+    // @ts-ignore - Cloudflare runtime types
+    const runtime = locals.runtime;
+    
+    if (!runtime || !runtime.env) {
+      return new Response(
+        JSON.stringify({ 
+          online: false, 
+          error: 'Runtime not available',
+          debug: { hasRuntime: !!runtime, hasEnv: !!(runtime?.env) }
+        }),
+        {
+          status: 500,
+          headers: { 
+            'Content-Type': 'application/json',
+            'Cache-Control': 'public, max-age=30',
+          },
+        }
+      );
+    }
+    
+    // Get environment variables
+    const clientId = runtime.env.TWITCH_CLIENT_ID;
+    const clientSecret = runtime.env.TWITCH_CLIENT_SECRET;
+    const username = runtime.env.TWITCH_USERNAME || 'vocino';
+    
+    if (!clientId || !clientSecret) {
+      return new Response(
+        JSON.stringify({ 
+          online: false, 
+          error: 'Twitch API credentials not configured',
+          debug: { hasClientId: !!clientId, hasClientSecret: !!clientSecret }
+        }),
+        {
+          status: 500,
+          headers: { 
+            'Content-Type': 'application/json',
+            'Cache-Control': 'public, max-age=30',
+          },
+        }
+      );
+    }
+    
+    // Check cache first (Cloudflare Cache API)
+    const cacheKey = new Request(`https://vocino.com/api/twitch-status-${username}`, request);
+    const cache = caches.default;
+    const cachedResponse = await cache.match(cacheKey);
+    
+    if (cachedResponse) {
+      return cachedResponse;
+    }
+    
     // Get OAuth token
     const tokenResponse = await fetch('https://id.twitch.tv/oauth2/token', {
       method: 'POST',
@@ -67,7 +66,8 @@ export const GET: APIRoute = async ({ request, locals }) => {
     });
     
     if (!tokenResponse.ok) {
-      throw new Error('Failed to get OAuth token');
+      const errorText = await tokenResponse.text();
+      throw new Error(`Failed to get OAuth token: ${tokenResponse.status} ${errorText}`);
     }
     
     const tokenData = await tokenResponse.json();
@@ -85,7 +85,8 @@ export const GET: APIRoute = async ({ request, locals }) => {
     );
     
     if (!userResponse.ok) {
-      throw new Error('Failed to get user info');
+      const errorText = await userResponse.text();
+      throw new Error(`Failed to get user info: ${userResponse.status} ${errorText}`);
     }
     
     const userData = await userResponse.json();
@@ -101,7 +102,9 @@ export const GET: APIRoute = async ({ request, locals }) => {
           },
         }
       );
-      runtime.waitUntil(cache.put(cacheKey, response.clone()));
+      if (runtime.waitUntil) {
+        runtime.waitUntil(cache.put(cacheKey, response.clone()));
+      }
       return response;
     }
     
@@ -117,7 +120,8 @@ export const GET: APIRoute = async ({ request, locals }) => {
     );
     
     if (!streamResponse.ok) {
-      throw new Error('Failed to get stream status');
+      const errorText = await streamResponse.text();
+      throw new Error(`Failed to get stream status: ${streamResponse.status} ${errorText}`);
     }
     
     const streamData = await streamResponse.json();
@@ -138,13 +142,20 @@ export const GET: APIRoute = async ({ request, locals }) => {
     });
     
     // Cache the response
-    runtime.waitUntil(cache.put(cacheKey, response.clone()));
+    if (runtime.waitUntil) {
+      runtime.waitUntil(cache.put(cacheKey, response.clone()));
+    }
     
     return response;
   } catch (error) {
     console.error('Twitch API error:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     return new Response(
-      JSON.stringify({ online: false, error: 'Failed to fetch Twitch status' }),
+      JSON.stringify({ 
+        online: false, 
+        error: 'Failed to fetch Twitch status',
+        details: errorMessage
+      }),
       {
         status: 500,
         headers: {
