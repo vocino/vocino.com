@@ -21,6 +21,9 @@ Thumbs.db
 # Plans and documentation
 .plans/
 
+# Git worktrees
+.worktrees/
+
 # Astro
 .astro/
 dist/
