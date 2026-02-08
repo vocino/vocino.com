@@ -1,5 +1,5 @@
-@import "variables";
-@import "base";
-@import "layout";
-@import "utilities";
-@import "style-guide";
+@use "variables" as *;
+@use "base";
+@use "layout";
+@use "utilities";
+@use "style-guide";
