@@ -1,0 +1,28 @@
+---
+import SEO from '../components/SEO.astro';
+import '../styles/main.scss';
+
+interface Props {
+  title?: string;
+  description?: string;
+  noindex?: boolean;
+}
+
+const { title, description, noindex } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="dark light" />
+  
+  <SEO title={title} description={description} noindex={noindex} />
+</head>
+<body>
+  <main style="position: relative; z-index: 1;">
+    <slot />
+  </main>
+</body>
+</html>

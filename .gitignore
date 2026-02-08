@@ -1,17 +1,3 @@
-# Jekyll
-_site/
-.sass-cache/
-.jekyll-cache/
-.jekyll-metadata
-
-# Bundler
-.bundle/
-vendor/
-
-# Ruby
-*.gem
-.ruby-version
-
 # Logs
 *.log
 
@@ -31,3 +17,8 @@ Thumbs.db
 *.swp
 *.swo
 *~
+
+# Astro
+.astro/
+dist/
+.wrangler/

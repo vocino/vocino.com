@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteBrand from '../components/SiteBrand.astro';
+import SocialLinks from '../components/SocialLinks.astro';
+import Terminal from '../components/Terminal.astro';
+---
+
+<BaseLayout
+  title="Vocino - Perfect blend of technology and magic"
+  description="Personal website of Travis Vocino - Maker, nerd tchotchke collector, and creative technologist. Perfect blend of technology and magic."
+>
+  <Terminal />
+  
+  <div class="centered-content">
+    <div class="content-wrapper">
+      <SiteBrand />
+      
+      <h1 class="tagline">Perfect blend of <span class="word-tech">technology</span>&nbsp;and&nbsp;<span class="word-magic">magic</span>.</h1>
+      
+      <p class="bio">From the desk of Travis&nbsp;Vocino. Maker. Nerd tchotchke&nbsp;collector. Chaotic&nbsp;good.</p>
+      
+      <SocialLinks />
+    </div>
+  </div>
+</BaseLayout>
