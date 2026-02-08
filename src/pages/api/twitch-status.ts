@@ -2,31 +2,15 @@ import type { APIRoute } from 'astro';
 
 export const GET: APIRoute = async ({ request, locals }) => {
   try {
-    // Access Cloudflare runtime environment through locals
+    // Access environment variables from Cloudflare runtime (production) or import.meta.env (local dev)
     // @ts-ignore - Cloudflare runtime types
     const runtime = locals.runtime;
-    
-    if (!runtime || !runtime.env) {
-      return new Response(
-        JSON.stringify({ 
-          online: false, 
-          error: 'Runtime not available',
-          debug: { hasRuntime: !!runtime, hasEnv: !!(runtime?.env) }
-        }),
-        {
-          status: 500,
-          headers: { 
-            'Content-Type': 'application/json',
-            'Cache-Control': 'public, max-age=30',
-          },
-        }
-      );
-    }
-    
-    // Get environment variables
-    const clientId = runtime.env.TWITCH_CLIENT_ID;
-    const clientSecret = runtime.env.TWITCH_CLIENT_SECRET;
-    const username = runtime.env.TWITCH_USERNAME || 'vocino';
+    const isProduction = runtime && runtime.env;
+
+    // Get environment variables - fallback to import.meta.env for local development
+    const clientId = isProduction ? runtime.env.TWITCH_CLIENT_ID : import.meta.env.TWITCH_CLIENT_ID;
+    const clientSecret = isProduction ? runtime.env.TWITCH_CLIENT_SECRET : import.meta.env.TWITCH_CLIENT_SECRET;
+    const username = (isProduction ? runtime.env.TWITCH_USERNAME : import.meta.env.TWITCH_USERNAME) || 'vocino';
     
     if (!clientId || !clientSecret) {
       return new Response(
@@ -45,13 +29,19 @@ export const GET: APIRoute = async ({ request, locals }) => {
       );
     }
     
-    // Check cache first (Cloudflare Cache API)
-    const cacheKey = new Request(`https://vocino.com/api/twitch-status-${username}`, request);
-    const cache = caches.default;
-    const cachedResponse = await cache.match(cacheKey);
-    
-    if (cachedResponse) {
-      return cachedResponse;
+    // Check cache first (Cloudflare Cache API) - only in production
+    let cachedResponse = null;
+    let cache = null;
+    let cacheKey = null;
+
+    if (isProduction && typeof caches !== 'undefined') {
+      cacheKey = new Request(`https://vocino.com/api/twitch-status-${username}`, request);
+      cache = caches.default;
+      cachedResponse = await cache.match(cacheKey);
+
+      if (cachedResponse) {
+        return cachedResponse;
+      }
     }
     
     // Get OAuth token
@@ -102,7 +92,7 @@ export const GET: APIRoute = async ({ request, locals }) => {
           },
         }
       );
-      if (runtime.waitUntil) {
+      if (isProduction && runtime.waitUntil && cache && cacheKey) {
         runtime.waitUntil(cache.put(cacheKey, response.clone()));
       }
       return response;
@@ -140,12 +130,12 @@ export const GET: APIRoute = async ({ request, locals }) => {
         'Cache-Control': 'public, max-age=60',
       },
     });
-    
-    // Cache the response
-    if (runtime.waitUntil) {
+
+    // Cache the response (production only)
+    if (isProduction && runtime.waitUntil && cache && cacheKey) {
       runtime.waitUntil(cache.put(cacheKey, response.clone()));
     }
-    
+
     return response;
   } catch (error) {
     console.error('Twitch API error:', error);

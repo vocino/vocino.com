@@ -39,7 +39,6 @@ src/
 │   ├── SEO.astro       # Meta tags and SEO handling
 │   ├── SiteBrand.astro # Site logo/branding
 │   ├── SocialLinks.astro
-│   ├── Terminal.astro  # Interactive terminal easter egg
 │   └── TwitchStatus.astro # Live streaming status indicator
 ├── layouts/
 │   └── BaseLayout.astro # Main HTML layout, imports main.scss
@@ -56,8 +55,7 @@ src/
 │   └── _utilities.scss
 public/
 └── assets/
-    └── js/
-        └── terminal.js # Terminal easter egg JavaScript
+    └── images/         # Static images
 ```
 
 ### Key Architectural Patterns

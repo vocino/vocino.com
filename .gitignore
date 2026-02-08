@@ -18,7 +18,11 @@ Thumbs.db
 *.swo
 *~
 
+# Plans and documentation
+.plans/
+
 # Astro
 .astro/
 dist/
 .wrangler/
+.env

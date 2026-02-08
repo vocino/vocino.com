@@ -1,30 +1,28 @@
 ---
 ---
 
-<div id="twitch-status" class="twitch-status">
-  <a
-    href="https://twitch.tv/vocino"
-    rel="me"
-    aria-label="Twitch"
-    target="_blank"
-    class="twitch-link"
-  >
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/>
-    </svg>
-    <span class="twitch-status-indicator" id="twitch-indicator"></span>
-  </a>
-</div>
+<a
+  href="https://twitch.tv/vocino"
+  rel="me"
+  aria-label="Twitch"
+  target="_blank"
+  id="twitch-status-link"
+>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/>
+  </svg>
+  <span class="twitch-status-indicator" id="twitch-indicator"></span>
+</a>
 
 <script>
   async function fetchTwitchStatus() {
     try {
       const response = await fetch('/api/twitch-status');
       const data = await response.json();
-      
+
       const indicator = document.getElementById('twitch-indicator');
-      const link = document.querySelector('.twitch-link');
-      
+      const link = document.getElementById('twitch-status-link');
+
       if (data.online) {
         indicator?.classList.add('online');
         const statusText = data.title || data.game || 'Streaming';
@@ -39,49 +37,37 @@
       console.error('Failed to fetch Twitch status:', error);
     }
   }
-  
+
   // Fetch on load
   fetchTwitchStatus();
-  
+
   // Poll every 60 seconds
   setInterval(fetchTwitchStatus, 60000);
 </script>
 
 <style>
-  .twitch-status {
-    display: inline-block;
-  }
-  
-  .twitch-link {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    color: var(--text-muted);
-    transition: color 0.2s;
-  }
-  
-  .twitch-link:hover {
-    color: var(--accent-blue);
-  }
-  
+  /* Twitch status indicator - positioned on the SVG */
   .twitch-status-indicator {
     position: absolute;
-    top: -2px;
-    right: -2px;
-    width: 8px;
-    height: 8px;
+    top: 2px;
+    right: 2px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
-    background: var(--text-muted);
-    border: 2px solid var(--bg);
-    transition: background 0.2s;
+    background: transparent;
+    border: 1px solid var(--bg);
+    transition: all 0.3s ease;
+    opacity: 0;
+    pointer-events: none;
   }
-  
+
   .twitch-status-indicator.online {
+    opacity: 1;
     background: var(--success);
-    box-shadow: 0 0 8px var(--success);
+    box-shadow: 0 0 6px var(--success);
     animation: pulse 2s ease-in-out infinite;
   }
-  
+
   @keyframes pulse {
     0%, 100% {
       opacity: 1;
@@ -89,7 +75,7 @@
     }
     50% {
       opacity: 0.8;
-      transform: scale(1.1);
+      transform: scale(1.15);
     }
   }
 </style>
