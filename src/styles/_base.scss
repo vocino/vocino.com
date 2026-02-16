@@ -37,19 +37,24 @@ body {
   width: 100%;
   max-width: 100%;
   
-  // Subtle animated background gradient (using style guide colors)
+  // Halftone dot grid + subtle color washes
   &::before {
     content: '';
     position: fixed;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+      radial-gradient(circle, rgba(230, 237, 243, var(--dot-opacity)) var(--dot-size), transparent var(--dot-size)),
       radial-gradient(circle at 20% 50%, rgba(0, 204, 255, 0.03) 0%, transparent 50%),
       radial-gradient(circle at 80% 80%, rgba(157, 124, 255, 0.02) 0%, transparent 50%),
       radial-gradient(circle at 40% 20%, rgba(77, 163, 255, 0.01) 0%, transparent 50%);
-    animation: backgroundShift 20s ease-in-out infinite alternate;
+    background-size:
+      var(--dot-spacing) var(--dot-spacing),
+      100% 100%,
+      100% 100%,
+      100% 100%;
     pointer-events: none;
     z-index: 0;
   }
@@ -59,15 +64,6 @@ main {
   overflow-x: hidden;
   width: 100%;
   max-width: 100%;
-}
-
-@keyframes backgroundShift {
-  0% {
-    transform: translate(0, 0) scale(1);
-  }
-  100% {
-    transform: translate(-5%, -5%) scale(1.1);
-  }
 }
 
 a {

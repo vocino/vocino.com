@@ -115,6 +115,26 @@
   align-items: center;
   justify-content: center;
   margin-top: $spacing-unit * 6;
+  position: relative;
+  padding-top: $spacing-unit * 4;
+
+  // Block divider above social links
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 4px;
+    background-image: repeating-linear-gradient(
+      90deg,
+      var(--border) 0,
+      var(--border) 4px,
+      transparent 4px,
+      transparent 7px
+    );
+  }
 
   @media (max-width: $breakpoint-sm) {
     gap: $spacing-unit * 3;
@@ -428,7 +448,7 @@
   margin-bottom: 0;
   opacity: 0.9;
   transition: opacity 0.3s ease;
-  
+
   // Prevent orphans and improve text flow
   orphans: 2;
   widows: 2;
@@ -437,6 +457,23 @@
   -webkit-hyphens: auto;
   -ms-hyphens: auto;
   max-width: 100%;
+
+  // Terminal prefix
+  &::before {
+    content: '> ';
+    font-family: $font-family-mono;
+    color: var(--text-muted);
+    opacity: 0.5;
+  }
+
+  // Blinking cursor
+  &::after {
+    content: '_';
+    font-family: $font-family-mono;
+    color: var(--brand);
+    animation: cursorBlink 1s step-end infinite;
+    margin-left: 2px;
+  }
 
   &:hover {
     opacity: 1;

@@ -1,0 +1,104 @@
+@use "variables" as *;
+
+// ============================================
+// HACKER AESTHETIC - Terminal-inspired patterns
+// ============================================
+// Reusable utility classes for the hacker/terminal
+// aesthetic. Apply these to elements as needed.
+// ============================================
+
+// Display heading - wide-tracked uppercase mono
+.display-mono {
+  font-family: $font-family-mono;
+  font-weight: $font-weight-semibold;
+  text-transform: uppercase;
+  letter-spacing: $display-tracking;
+  color: var(--text-primary);
+  text-shadow: 0 0 20px rgba(0, 204, 255, 0.15);
+}
+
+// Mono label - small metadata text
+.label-mono {
+  font-family: $font-family-mono;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-normal;
+  text-transform: uppercase;
+  letter-spacing: $label-tracking;
+  color: var(--text-muted);
+}
+
+// Block divider - pixelated horizontal rule
+.divider-block {
+  display: flex;
+  justify-content: center;
+
+  &::before {
+    content: '';
+    display: block;
+    width: 100%;
+    max-width: 200px;
+    height: var(--block-size);
+    background-image: repeating-linear-gradient(
+      90deg,
+      var(--border) 0,
+      var(--border) var(--block-size),
+      transparent var(--block-size),
+      transparent calc(var(--block-size) + var(--block-gap))
+    );
+  }
+}
+
+// Block accent - short brand-colored block bar
+.accent-block {
+  display: block;
+  width: calc((var(--block-size) + var(--block-gap)) * 6);
+  height: var(--block-size);
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--brand) 0,
+    var(--brand) var(--block-size),
+    transparent var(--block-size),
+    transparent calc(var(--block-size) + var(--block-gap))
+  );
+}
+
+// Terminal prefix - adds "> " before text
+.terminal-prefix {
+  &::before {
+    content: '> ';
+    font-family: $font-family-mono;
+    color: var(--text-muted);
+    font-weight: $font-weight-normal;
+    opacity: 0.6;
+  }
+}
+
+// Cursor blink - appends blinking "_" after text
+.cursor-blink {
+  &::after {
+    content: '_';
+    font-family: $font-family-mono;
+    color: var(--brand);
+    animation: cursorBlink var(--cursor-speed) step-end infinite;
+    margin-left: 2px;
+  }
+}
+
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+// Status block - tiny pulsing square indicator
+.status-block {
+  display: inline-block;
+  width: var(--block-size);
+  height: var(--block-size);
+  background-color: var(--success);
+  animation: statusPulse 2s ease-in-out infinite;
+}
+
+@keyframes statusPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}

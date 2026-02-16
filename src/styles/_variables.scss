@@ -34,6 +34,14 @@
   // Gradients
   --gradient-primary: linear-gradient(90deg, #00CCFF 0%, #4DA3FF 100%);
 
+  // Hacker aesthetic tokens
+  --dot-size: 1px;
+  --dot-spacing: 16px;
+  --dot-opacity: 0.04;
+  --block-size: 4px;
+  --block-gap: 3px;
+  --cursor-speed: 1s;
+
   // Legacy variables (mapped to style guide tokens for backward compatibility)
   --bg-color: var(--bg);
   --bg-secondary: var(--surface-1);
@@ -85,6 +93,10 @@ $font-weight-bold: 700;
 
 // Spacing - refined minimal scale
 $spacing-unit: 0.5rem;  // 8px base unit
+
+// Hacker aesthetic
+$display-tracking: 0.15em;
+$label-tracking: 0.1em;
 
 // Breakpoints
 $breakpoint-sm: 576px;
