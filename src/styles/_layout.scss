@@ -13,7 +13,7 @@
   max-width: 100%;
   overflow-x: hidden;
   box-sizing: border-box;
-  background-color: var(--bg);
+  background-color: transparent;
 
   @media (max-width: $breakpoint-md) {
     padding: $spacing-unit * 4;
@@ -34,7 +34,23 @@
   text-align: center;
   box-sizing: border-box;
   padding: 0;
-  
+  position: relative;
+
+  // Soft backing gradient for text legibility over micrographic texture
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -80px -120px;
+    background: radial-gradient(
+      ellipse at 50% 50%,
+      rgba(15, 20, 25, 0.65) 0%,
+      rgba(15, 20, 25, 0.3) 55%,
+      transparent 100%
+    );
+    pointer-events: none;
+    z-index: -1;
+  }
+
   // Staggered fade-in animation
   > * {
     animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) backwards;

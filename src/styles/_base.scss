@@ -58,6 +58,37 @@ body {
     pointer-events: none;
     z-index: 0;
   }
+
+  // Micrographic tiling pattern layer
+  &::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/assets/images/micro-pattern.svg');
+    background-repeat: repeat;
+    background-size: 160px 160px;
+    opacity: var(--micro-opacity);
+    pointer-events: none;
+    z-index: 0;
+    // Radial mask: nearly invisible at center (behind content), fully visible at edges
+    mask-image: radial-gradient(
+      ellipse 70% 65% at 50% 50%,
+      rgba(0, 0, 0, 0.15) 0%,
+      rgba(0, 0, 0, 0.45) 40%,
+      rgba(0, 0, 0, 0.85) 70%,
+      rgba(0, 0, 0, 1) 100%
+    );
+    -webkit-mask-image: radial-gradient(
+      ellipse 70% 65% at 50% 50%,
+      rgba(0, 0, 0, 0.15) 0%,
+      rgba(0, 0, 0, 0.45) 40%,
+      rgba(0, 0, 0, 0.85) 70%,
+      rgba(0, 0, 0, 1) 100%
+    );
+  }
 }
 
 main {
