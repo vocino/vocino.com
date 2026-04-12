@@ -71,7 +71,7 @@
     animation-delay: 0.2s;
   }
 
-  .bio {
+  .home-about {
     animation-delay: 0.3s;
   }
 
@@ -230,6 +230,42 @@
       transform: translateY(-2px) scale(1.1);
       filter: drop-shadow(0 2px 8px rgba(0, 204, 255, 0.3));
     }
+  }
+}
+
+// Homepage — single about paragraph (matches body; link is the only accent)
+.home-about {
+  font-family: $font-family-sans;
+  font-size: $font-size-base;
+  font-weight: $font-weight-normal;
+  line-height: $line-height-loose;
+  letter-spacing: $tracking-wide;
+  color: var(--text-secondary);
+  margin: 0 0 ($spacing-unit * 5);
+  max-width: 100%;
+  text-wrap: pretty;
+
+  a {
+    color: var(--brand);
+    font-weight: $font-weight-medium;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+      text-decoration: underline;
+      text-underline-offset: 0.15em;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--brand);
+      outline-offset: 2px;
+      border-radius: 2px;
+    }
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    font-size: $font-size-sm;
+    margin-bottom: $spacing-unit * 4;
   }
 }
 
@@ -458,55 +494,6 @@
             drop-shadow(0 0 30px rgba(230, 237, 243, 0.25))
             drop-shadow(0 0 45px rgba(230, 237, 243, 0.15))
             drop-shadow(0 0 60px rgba(230, 237, 243, 0.1));
-  }
-}
-
-// Bio subtitle - minimal and refined
-.bio {
-  font-family: $font-family-sans;
-  font-size: $font-size-base;
-  font-weight: $font-weight-normal;
-  line-height: $line-height-loose;
-  letter-spacing: $tracking-wide;
-  color: var(--text-secondary);
-  margin-bottom: 0;
-  opacity: 0.9;
-  transition: opacity 0.3s ease;
-
-  // Prevent orphans and improve text flow
-  orphans: 2;
-  widows: 2;
-  text-wrap: pretty;
-  hyphens: auto;
-  -webkit-hyphens: auto;
-  -ms-hyphens: auto;
-  max-width: 100%;
-
-  // Terminal prefix
-  &::before {
-    content: '> ';
-    font-family: $font-family-mono;
-    color: var(--text-muted);
-    opacity: 0.5;
-  }
-
-  // Blinking cursor
-  &::after {
-    content: '_';
-    font-family: $font-family-mono;
-    color: var(--brand);
-    animation: cursorBlink 1s step-end infinite;
-    margin-left: 2px;
-  }
-
-  &:hover {
-    opacity: 1;
-  }
-
-  @media (max-width: $breakpoint-sm) {
-    font-size: $font-size-sm;
-    orphans: 1;
-    widows: 1;
   }
 }
 
