@@ -1,12 +1,13 @@
 @use "variables" as *;
 
-// Centered content layout
-.centered-content {
+// Homepage — left-aligned column (editorial / joshpigford-style)
+.home-layout {
   min-height: 100vh;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: $spacing-unit * 6;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: ($spacing-unit * 10) ($spacing-unit * 8) ($spacing-unit * 8);
   position: relative;
   z-index: 1;
   width: 100%;
@@ -16,42 +17,64 @@
   background-color: var(--bg);
 
   @media (max-width: $breakpoint-md) {
-    padding: $spacing-unit * 4;
+    padding: ($spacing-unit * 8) ($spacing-unit * 6) ($spacing-unit * 6);
   }
 
   @media (max-width: $breakpoint-sm) {
-    padding: $spacing-unit * 3;
+    padding: ($spacing-unit * 6) ($spacing-unit * 4) ($spacing-unit * 5);
   }
 }
 
-// Content wrapper - centered
-.content-wrapper {
+// Logo (left) + copy column (right) — joshpigford-style hero row
+.home-hero {
   width: 100%;
-  max-width: 600px;
+  max-width: min(52rem, 100%);
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: $spacing-unit * 7;
+  box-sizing: border-box;
+
+  @media (max-width: $breakpoint-md) {
+    flex-direction: column;
+    gap: $spacing-unit * 5;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    gap: $spacing-unit * 4;
+  }
+}
+
+.home-hero__brand {
+  flex: 0 0 auto;
+  animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.1s backwards;
+
+  .site-brand {
+    margin-bottom: 0;
+  }
+}
+
+.home-hero__content {
+  flex: 1 1 auto;
+  min-width: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  box-sizing: border-box;
-  padding: 0;
-  
-  // Staggered fade-in animation
+  align-items: flex-start;
+  text-align: left;
+
   > * {
     animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) backwards;
   }
-  
-  .site-brand {
-    animation-delay: 0.1s;
-  }
-  
+
   .tagline {
     animation-delay: 0.2s;
   }
-  
+
   .bio {
     animation-delay: 0.3s;
   }
-  
+
   .social-links {
     animation-delay: 0.4s;
   }
@@ -107,13 +130,14 @@
   }
 }
 
-// Social links - horizontal, centered
+// Social links — horizontal row, left-aligned with content
 .social-links {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   gap: $spacing-unit * 4;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   margin-top: $spacing-unit * 6;
   position: relative;
   padding-top: $spacing-unit * 4;
@@ -123,8 +147,8 @@
     content: '';
     position: absolute;
     top: 0;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 0;
+    transform: none;
     width: 120px;
     height: 4px;
     background-image: repeating-linear-gradient(
