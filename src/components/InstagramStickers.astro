@@ -1,0 +1,194 @@
+---
+---
+
+<section class="home-stickers" id="home-stickers" hidden aria-label="Logo sticker photos from Instagram">
+  <h2 class="home-stickers__heading">In the wild</h2>
+  <p class="home-stickers__lede">Sticker slaps on Instagram — tagged <span class="home-stickers__tag">#vocino</span>.</p>
+  <ul class="home-stickers__grid" id="instagram-stickers-grid"></ul>
+</section>
+
+<script>
+  /** @param {string | null} iso */
+  function formatDate(iso) {
+    if (!iso) return null;
+    try {
+      const d = new Date(iso);
+      if (Number.isNaN(d.getTime())) return null;
+      return d.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+    } catch {
+      return null;
+    }
+  }
+
+  async function loadStickers() {
+    const section = document.getElementById('home-stickers');
+    const grid = document.getElementById('instagram-stickers-grid');
+    if (!section || !grid) return;
+
+    try {
+      const response = await fetch('/api/instagram-stickers');
+      const data = await response.json();
+
+      const stickers = data.stickers || [];
+      if (!data.configured || stickers.length === 0) {
+        section.remove();
+        return;
+      }
+
+      grid.replaceChildren();
+
+      for (const s of stickers) {
+        const li = document.createElement('li');
+        li.className = 'home-stickers__item';
+
+        const link = document.createElement('a');
+        link.className = 'home-stickers__card';
+        link.href = s.permalink;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.setAttribute('aria-label', 'View post on Instagram');
+
+        const img = document.createElement('img');
+        img.className = 'home-stickers__img';
+        img.src = s.imageUrl;
+        img.alt = '';
+        img.loading = 'lazy';
+        img.decoding = 'async';
+        img.referrerPolicy = 'no-referrer';
+        img.width = 640;
+        img.height = 640;
+
+        const meta = document.createElement('div');
+        meta.className = 'home-stickers__meta';
+
+        const loc = document.createElement('p');
+        loc.className = 'home-stickers__location';
+        const dateStr = formatDate(s.timestamp);
+        if (s.location) {
+          loc.textContent = dateStr ? `${s.location} · ${dateStr}` : s.location;
+        } else if (dateStr) {
+          loc.textContent = dateStr;
+        } else {
+          loc.textContent = 'Instagram';
+        }
+
+        meta.appendChild(loc);
+        link.appendChild(img);
+        link.appendChild(meta);
+        li.appendChild(link);
+        grid.appendChild(li);
+      }
+
+      section.hidden = false;
+    } catch (e) {
+      console.error('Instagram stickers:', e);
+      section.remove();
+    }
+  }
+
+  loadStickers();
+</script>
+
+<style>
+  .home-stickers {
+    width: 100%;
+    max-width: min(52rem, 100%);
+    margin-top: 5rem;
+    padding-top: 4rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .home-stickers__heading {
+    font-family: 'Source Sans 3', system-ui, sans-serif;
+    font-size: 1.125rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--text-primary);
+    margin: 0 0 0.35rem;
+  }
+
+  .home-stickers__lede {
+    font-family: 'Source Sans 3', system-ui, sans-serif;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+    margin: 0 0 2.5rem;
+    max-width: 36rem;
+  }
+
+  .home-stickers__tag {
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  .home-stickers__grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .home-stickers__item {
+    margin: 0;
+  }
+
+  .home-stickers__card {
+    display: block;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--surface-1);
+    text-decoration: none;
+    color: inherit;
+    transition:
+      border-color 0.25s ease,
+      box-shadow 0.25s ease,
+      transform 0.2s ease;
+  }
+
+  .home-stickers__card:hover,
+  .home-stickers__card:focus-visible {
+    border-color: var(--brand);
+    box-shadow: 0 0 0 1px rgba(0, 204, 255, 0.2);
+    outline: none;
+  }
+
+  .home-stickers__card:focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 2px;
+  }
+
+  .home-stickers__img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    vertical-align: middle;
+  }
+
+  .home-stickers__meta {
+    padding: 1rem 1.25rem;
+  }
+
+  .home-stickers__location {
+    margin: 0;
+    font-family: 'Source Sans 3', system-ui, sans-serif;
+    font-size: 0.8125rem;
+    line-height: 1.35;
+    color: var(--text-secondary);
+  }
+
+  @media (max-width: 576px) {
+    .home-stickers {
+      margin-top: 4rem;
+      padding-top: 3rem;
+    }
+
+    .home-stickers__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+  }
+</style>
