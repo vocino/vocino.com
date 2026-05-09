@@ -20,8 +20,8 @@ const { title, description, noindex } = Astro.props;
   
   <SEO title={title} description={description} noindex={noindex} />
 </head>
-<body>
-  <main style="position: relative; z-index: 1;">
+<body class="site-root">
+  <main class="site-main">
     <slot />
   </main>
 </body>

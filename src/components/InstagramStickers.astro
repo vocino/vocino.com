@@ -2,23 +2,16 @@
 ---
 
 <section class="home-stickers" id="home-stickers" hidden aria-label="Logo sticker photos from Instagram">
-  <h2 class="home-stickers__heading">In the wild</h2>
-  <p class="home-stickers__lede">Sticker slaps on Instagram — tagged <span class="home-stickers__tag">#vocino</span>.</p>
+  <h2 class="home-stickers__heading heading-bracket">In the wild</h2>
+  <p class="home-stickers__lede">
+    <span class="label-telemetry">field_feed</span>
+    Sticker slaps on Instagram — tagged <span class="home-stickers__tag">#vocino</span>.
+  </p>
   <ul class="home-stickers__grid" id="instagram-stickers-grid"></ul>
 </section>
 
 <script>
-  /** @param {string | null} iso */
-  function formatDate(iso) {
-    if (!iso) return null;
-    try {
-      const d = new Date(iso);
-      if (Number.isNaN(d.getTime())) return null;
-      return d.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
-    } catch {
-      return null;
-    }
-  }
+  import { formatIsoDate } from '../lib/formatIsoDate';
 
   async function loadStickers() {
     const section = document.getElementById('home-stickers');
@@ -63,7 +56,7 @@
 
         const loc = document.createElement('p');
         loc.className = 'home-stickers__location';
-        const dateStr = formatDate(s.timestamp);
+        const dateStr = formatIsoDate(s.timestamp);
         if (s.location) {
           loc.textContent = dateStr ? `${s.location} · ${dateStr}` : s.location;
         } else if (dateStr) {
@@ -96,6 +89,7 @@
     margin-top: 5rem;
     padding-top: 4rem;
     border-top: 1px solid var(--border);
+    box-shadow: inset 0 1px 0 0 rgba(0, 204, 255, 0.08);
   }
 
   .home-stickers__heading {
@@ -107,6 +101,15 @@
     margin: 0 0 0.35rem;
   }
 
+  .home-stickers__heading.heading-bracket {
+    font-family: 'Source Code Pro', ui-monospace, monospace;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+  }
+
   .home-stickers__lede {
     font-family: 'Source Sans 3', system-ui, sans-serif;
     font-size: 0.9375rem;
@@ -114,6 +117,12 @@
     color: var(--text-secondary);
     margin: 0 0 2.5rem;
     max-width: 36rem;
+  }
+
+  .home-stickers__lede .label-telemetry {
+    display: block;
+    margin-bottom: 0.35rem;
+    font-size: 0.75rem;
   }
 
   .home-stickers__tag {
@@ -135,10 +144,11 @@
   }
 
   .home-stickers__card {
+    position: relative;
     display: block;
     border-radius: 8px;
     overflow: hidden;
-    border: 1px solid var(--border);
+    border: 1px solid var(--cyber-frame-dim);
     background: var(--surface-1);
     text-decoration: none;
     color: inherit;
@@ -150,14 +160,17 @@
 
   .home-stickers__card:hover,
   .home-stickers__card:focus-visible {
-    border-color: var(--brand);
-    box-shadow: 0 0 0 1px rgba(0, 204, 255, 0.2);
+    border-color: rgba(0, 204, 255, 0.45);
+    box-shadow: var(--cyber-glow-soft);
     outline: none;
+    transform: translateY(-2px);
   }
 
-  .home-stickers__card:focus-visible {
-    outline: 2px solid var(--brand);
-    outline-offset: 2px;
+  @media (prefers-reduced-motion: reduce) {
+    .home-stickers__card:hover,
+    .home-stickers__card:focus-visible {
+      transform: none;
+    }
   }
 
   .home-stickers__img {
@@ -170,14 +183,23 @@
 
   .home-stickers__meta {
     padding: 1rem 1.25rem;
+    border-top: 1px solid rgba(43, 52, 64, 0.95);
+    background: linear-gradient(180deg, rgba(22, 27, 34, 0.98), var(--surface-1));
   }
 
   .home-stickers__location {
     margin: 0;
-    font-family: 'Source Sans 3', system-ui, sans-serif;
-    font-size: 0.8125rem;
-    line-height: 1.35;
-    color: var(--text-secondary);
+    font-family: 'Source Code Pro', ui-monospace, monospace;
+    font-size: 0.75rem;
+    line-height: 1.4;
+    letter-spacing: 0.02em;
+    color: var(--text-muted);
+  }
+
+  .home-stickers__location::before {
+    content: '◇ ';
+    color: var(--accent-yellow);
+    opacity: 0.75;
   }
 
   @media (max-width: 576px) {

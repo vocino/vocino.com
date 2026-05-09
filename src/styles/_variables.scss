@@ -42,6 +42,29 @@
   --block-gap: 3px;
   --cursor-speed: 1s;
 
+  // Cyberpunk extension (subtle — layers on brand; does not replace core palette)
+  --accent-yellow: #E0E040;
+  --accent-yellow-dim: rgba(224, 224, 64, 0.12);
+  --cyber-chroma-cyan: rgba(0, 255, 255, 0.35);
+  --cyber-chroma-magenta: rgba(255, 0, 128, 0.25);
+  --cyber-glow-brand: 0 0 24px rgba(0, 204, 255, 0.22);
+  --cyber-glow-brand-strong: 0 0 40px rgba(0, 204, 255, 0.35);
+  --cyber-glow-soft: 0 0 20px rgba(77, 163, 255, 0.12);
+  --cyber-frame: rgba(0, 204, 255, 0.35);
+  --cyber-frame-dim: rgba(43, 52, 64, 0.9);
+  --cyber-edge-highlight: linear-gradient(
+    135deg,
+    rgba(0, 204, 255, 0.15) 0%,
+    transparent 40%,
+    transparent 60%,
+    rgba(157, 124, 255, 0.08) 100%
+  );
+  --scanline-opacity: 0.035;
+  --scanline-size: 2px;
+  --hud-corner-size: 10px;
+  --hud-corner-thickness: 1px;
+  --boot-duration: 1.1s;
+
   // Legacy variables (mapped to style guide tokens for backward compatibility)
   --bg-color: var(--bg);
   --bg-secondary: var(--surface-1);

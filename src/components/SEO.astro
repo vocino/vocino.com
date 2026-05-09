@@ -41,7 +41,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 <meta name="twitter:image" content={new URL('/assets/images/og-image.png', Astro.site)} />
 
 <!-- Structured Data - Person/Profile -->
-<script type="application/ld+json" set:html={JSON.stringify({
+<script is:inline type="application/ld+json" set:html={JSON.stringify({
   "@context": "https://schema.org",
   "@type": "Person",
   "name": "Travis Vocino",

@@ -2,6 +2,7 @@
 ---
 
 <a
+  class="social-links__link twitch-status-link"
   href="https://twitch.tv/vocino"
   rel="me"
   aria-label="Twitch"
@@ -46,17 +47,24 @@
 </script>
 
 <style>
-  /* Twitch status indicator - positioned on the SVG */
+  .twitch-status-link {
+    position: relative;
+  }
+
+  /* Live telemetry dot — sits on icon corner */
   .twitch-status-indicator {
     position: absolute;
-    top: 2px;
-    right: 2px;
-    width: 6px;
-    height: 6px;
+    top: 3px;
+    right: 3px;
+    width: 7px;
+    height: 7px;
     border-radius: 50%;
     background: transparent;
     border: 1px solid var(--bg);
-    transition: all 0.3s ease;
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
     opacity: 0;
     pointer-events: none;
   }
@@ -64,18 +72,30 @@
   .twitch-status-indicator.online {
     opacity: 1;
     background: var(--success);
-    box-shadow: 0 0 6px var(--success);
-    animation: pulse 2s ease-in-out infinite;
+    border-color: rgba(15, 20, 25, 0.95);
+    box-shadow:
+      0 0 0 1px rgba(61, 250, 154, 0.35),
+      0 0 10px rgba(61, 250, 154, 0.65),
+      0 0 18px rgba(61, 250, 154, 0.25);
+    animation: twitchLivePulse 2s ease-in-out infinite;
   }
 
-  @keyframes pulse {
-    0%, 100% {
+  @keyframes twitchLivePulse {
+    0%,
+    100% {
       opacity: 1;
       transform: scale(1);
     }
+
     50% {
-      opacity: 0.8;
-      transform: scale(1.15);
+      opacity: 0.88;
+      transform: scale(1.12);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .twitch-status-indicator.online {
+      animation: none;
     }
   }
 </style>

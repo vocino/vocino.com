@@ -17,6 +17,137 @@
   text-shadow: 0 0 20px rgba(0, 204, 255, 0.15);
 }
 
+// HUD frame — L-shaped corners (use on a positioned container)
+.hud-corners {
+  position: relative;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: var(--hud-corner-size);
+    height: var(--hud-corner-size);
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.85;
+    transition: opacity 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  &::before {
+    top: 0;
+    left: 0;
+    border-top: var(--hud-corner-thickness) solid var(--cyber-frame);
+    border-left: var(--hud-corner-thickness) solid var(--cyber-frame);
+  }
+
+  &::after {
+    bottom: 0;
+    right: 0;
+    border-bottom: var(--hud-corner-thickness) solid var(--cyber-frame);
+    border-right: var(--hud-corner-thickness) solid var(--cyber-frame);
+  }
+}
+
+.hud-corners--glow:hover::before,
+.hud-corners--glow:hover::after,
+.hud-corners--glow:focus-within::before,
+.hud-corners--glow:focus-within::after {
+  opacity: 1;
+  box-shadow: var(--cyber-glow-soft);
+}
+
+// Tiny telemetry / rail label (mono, uppercase)
+.label-telemetry {
+  font-family: $font-family-mono;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-normal;
+  letter-spacing: $label-tracking;
+  text-transform: uppercase;
+  color: var(--text-muted);
+
+  &::before {
+    content: '// ';
+    color: var(--accent-yellow);
+    opacity: 0.7;
+  }
+}
+
+// Section rail — vertical accent line + optional title row
+.telemetry-rail {
+  display: flex;
+  align-items: stretch;
+  gap: $spacing-unit * 2;
+  margin-bottom: $spacing-unit * 3;
+
+  &::before {
+    content: '';
+    flex: 0 0 2px;
+    background: linear-gradient(
+      180deg,
+      var(--brand) 0%,
+      rgba(0, 204, 255, 0.15) 100%
+    );
+    border-radius: 1px;
+  }
+}
+
+// Bracketed heading — cyber UI chrome
+.heading-bracket {
+  font-family: $font-family-mono;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  letter-spacing: $label-tracking;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+
+  &::before {
+    content: '[ ';
+    color: var(--brand);
+    font-weight: $font-weight-normal;
+  }
+
+  &::after {
+    content: ' ]';
+    color: var(--brand);
+    font-weight: $font-weight-normal;
+  }
+}
+
+// Restrained chromatic glitch on hover/focus (for inline links or icons)
+.glitch-hover {
+  position: relative;
+  transition: transform 0.2s ease, filter 0.2s ease;
+
+  @media (prefers-reduced-motion: no-preference) {
+    &:hover,
+    &:focus-visible {
+      animation: glitchNudge 0.45s ease-out 1;
+    }
+  }
+}
+
+@keyframes glitchNudge {
+  0%,
+  100% {
+    transform: translate(0, 0);
+    filter: none;
+  }
+
+  25% {
+    transform: translate(-0.5px, 0.5px);
+    filter: drop-shadow(0.5px 0 0 var(--cyber-chroma-cyan)) drop-shadow(-0.5px 0 0 var(--cyber-chroma-magenta));
+  }
+
+  50% {
+    transform: translate(0.5px, -0.5px);
+    filter: drop-shadow(-0.5px 0 0 var(--cyber-chroma-magenta)) drop-shadow(0.5px 0 0 var(--cyber-chroma-cyan));
+  }
+
+  75% {
+    transform: translate(-0.5px, -0.5px);
+  }
+}
+
 // Mono label - small metadata text
 .label-mono {
   font-family: $font-family-mono;
@@ -84,6 +215,13 @@
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .cursor-blink::after {
+    animation: none;
+    opacity: 1;
+  }
+}
+
 @keyframes cursorBlink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
@@ -96,6 +234,12 @@
   height: var(--block-size);
   background-color: var(--success);
   animation: statusPulse 2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .status-block {
+    animation: none;
+  }
 }
 
 @keyframes statusPulse {
