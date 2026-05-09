@@ -13,9 +13,10 @@
   --stamp-red: #FF5C5C;
   --on-air-yellow: #E0E040;
   --spec-rule: 1px;
-  --spec-gap: clamp(4px, 0.6vmin, 10px);
-  --spec-pad-x: clamp(8px, 1.2vmin, 18px);
-  --spec-pad-y: clamp(6px, 1vmin, 14px);
+  --spec-gap: clamp(10px, 1.8vmin, 26px);
+  --spec-pad-x: clamp(12px, 2vmin, 28px);
+  --spec-pad-y: clamp(10px, 1.6vmin, 20px);
+  --spec-border: rgba(230, 237, 243, 0.16);
   --spec-label-size: clamp(0.55rem, 1.15vmin, 0.78rem);
   --spec-body-size: clamp(0.62rem, 1.35vmin, 0.95rem);
   --spec-data-size: clamp(0.7rem, 1.55vmin, 1.05rem);
@@ -193,9 +194,8 @@ body[data-page="spec"] {
   min-width: 0;
   min-height: 0;
   overflow: hidden;
-  background: rgba(15, 20, 25, 0.55);
-  border: var(--spec-rule) solid var(--ink);
-  // Spec-sheet ink should look crisp, not glowing.
+  background: transparent;
+  border: var(--spec-rule) solid var(--spec-border);
 }
 
 .spec-module__head {
@@ -203,8 +203,8 @@ body[data-page="spec"] {
   align-items: center;
   justify-content: space-between;
   gap: 0.5rem;
-  padding: calc(var(--spec-pad-y) * 0.55) var(--spec-pad-x);
-  border-bottom: var(--spec-rule) solid var(--ink);
+  padding: calc(var(--spec-pad-y) * 0.6) var(--spec-pad-x);
+  border-bottom: var(--spec-rule) solid rgba(230, 237, 243, 0.35);
   font-family: $font-family-mono;
   font-size: var(--spec-label-size);
   font-weight: 600;
