@@ -1,0 +1,115 @@
+---
+---
+
+<section class="spec-module" data-spec="tagline" aria-label="Warranty Statement">
+  <header class="spec-module__head">
+    <span class="spec-module__head-label">Warranty Statement</span>
+    <span class="spec-module__head-id">03/12</span>
+  </header>
+  <div class="spec-module__body tag-body">
+    <p class="tag-eyebrow">
+      <span class="tag-eyebrow__sym">▸</span>
+      Vocino Industries · General Issue
+    </p>
+    <h1 class="tag-hero">
+      Perfect blend of <span class="tag-tech">technology</span><br />
+      &amp; <span class="tag-magic">magic</span><span class="tag-period">.</span>
+    </h1>
+    <p class="tag-fine">
+      I build stuff at Meta. Nerd tchotchke collector. Chaotic good.
+      From the desk of Travis Vocino — find me elsewhere
+      <a href="https://threads.com/vocino" rel="me" target="_blank">@vocino</a>.
+    </p>
+    <div class="tag-meta">
+      <span class="tag-meta__cell"><span class="tag-meta__k">REV.</span> C</span>
+      <span class="tag-meta__cell"><span class="tag-meta__k">ISSUE</span> 2026</span>
+      <span class="tag-meta__cell"><span class="tag-meta__k">SPEC.</span> TV-001</span>
+      <span class="tag-meta__cell"><span class="tag-meta__k">LIC.</span> Make / Ship</span>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  .tag-body {
+    justify-content: space-between;
+    gap: clamp(6px, 1.4vmin, 18px);
+  }
+
+  .tag-eyebrow {
+    margin: 0;
+    font-family: "Source Code Pro", monospace;
+    font-size: var(--spec-label-size);
+    letter-spacing: var(--spec-tracking);
+    text-transform: uppercase;
+    color: var(--ink-dim);
+  }
+  .tag-eyebrow__sym {
+    color: var(--brand);
+    margin-right: 0.4em;
+  }
+
+  .tag-hero {
+    margin: 0;
+    font-family: "Source Serif 4", "Georgia", serif;
+    font-weight: 400;
+    font-size: var(--spec-hero-size);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+  .tag-tech {
+    font-style: italic;
+    font-weight: 300;
+  }
+  .tag-magic {
+    color: var(--stamp-red);
+    font-style: italic;
+    position: relative;
+    padding-right: 0.05em;
+  }
+  .tag-period { color: var(--brand); }
+
+  .tag-fine {
+    margin: 0;
+    font-family: "Source Sans 3", sans-serif;
+    font-size: var(--spec-body-size);
+    line-height: 1.45;
+    color: var(--ink-dim);
+    max-width: 56ch;
+    text-wrap: pretty;
+
+    a {
+      color: var(--ink);
+      border-bottom: 1px solid var(--ink-faint);
+      &:hover, &:focus-visible {
+        color: var(--brand);
+        border-color: var(--brand);
+      }
+    }
+  }
+
+  .tag-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: clamp(8px, 2vmin, 24px) clamp(12px, 2.6vmin, 32px);
+    border-top: 1px solid var(--ink-faint);
+    padding-top: clamp(6px, 1vmin, 12px);
+    margin-top: auto;
+    font-family: "Source Code Pro", monospace;
+    font-size: var(--spec-label-size);
+    text-transform: uppercase;
+    letter-spacing: var(--spec-tracking);
+    color: var(--ink);
+  }
+  .tag-meta__k {
+    color: var(--ink-dim);
+    margin-right: 0.5em;
+    font-weight: 500;
+  }
+
+  // Tighter at small sizes
+  @media (max-width: 640px) {
+    .tag-meta { gap: 6px 14px; }
+  }
+</style>

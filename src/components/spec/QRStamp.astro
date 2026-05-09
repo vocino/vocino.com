@@ -1,0 +1,80 @@
+---
+import SpecModule from "./SpecModule.astro";
+---
+
+<SpecModule label="QR · Threads" index={9} area="qr">
+  <a class="qr" href="https://threads.com/vocino" rel="me" target="_blank" aria-label="QR code linking to threads.com/vocino">
+    <div class="qr__frame">
+      <span class="qr__crop qr__crop--tl" aria-hidden="true"></span>
+      <span class="qr__crop qr__crop--tr" aria-hidden="true"></span>
+      <span class="qr__crop qr__crop--bl" aria-hidden="true"></span>
+      <span class="qr__crop qr__crop--br" aria-hidden="true"></span>
+      <img src="/assets/images/qr-threads.svg" alt="" loading="lazy" decoding="async" />
+    </div>
+    <span class="qr__cap">→ THREADS.COM/VOCINO</span>
+  </a>
+</SpecModule>
+
+<style lang="scss">
+  .qr {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(3px, 0.7vmin, 8px);
+    height: 100%;
+    width: 100%;
+    text-decoration: none;
+    border: 0;
+    color: var(--ink);
+  }
+  .qr__frame {
+    position: relative;
+    flex: 1 1 auto;
+    aspect-ratio: 1;
+    max-width: 100%;
+    max-height: 100%;
+    padding: clamp(3px, 0.8vmin, 8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    min-height: 0;
+  }
+  .qr__frame img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    image-rendering: pixelated;
+  }
+  .qr__crop {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border: 1px solid var(--brand);
+  }
+  .qr__crop--tl { top: 0; left: 0; border-right: 0; border-bottom: 0; }
+  .qr__crop--tr { top: 0; right: 0; border-left: 0; border-bottom: 0; }
+  .qr__crop--bl { bottom: 0; left: 0; border-right: 0; border-top: 0; }
+  .qr__crop--br { bottom: 0; right: 0; border-left: 0; border-top: 0; }
+
+  .qr__cap {
+    font-family: "Source Code Pro", monospace;
+    font-size: var(--spec-label-size);
+    text-transform: uppercase;
+    letter-spacing: var(--spec-tracking);
+    color: var(--ink-dim);
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+  }
+
+  .qr:hover, .qr:focus-visible {
+    outline: none;
+    .qr__cap { color: var(--brand); }
+    .qr__crop { border-color: var(--brand); }
+  }
+</style>

@@ -6,9 +6,10 @@ interface Props {
   title?: string;
   description?: string;
   noindex?: boolean;
+  page?: string;
 }
 
-const { title, description, noindex } = Astro.props;
+const { title, description, noindex, page } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -20,7 +21,7 @@ const { title, description, noindex } = Astro.props;
   
   <SEO title={title} description={description} noindex={noindex} />
 </head>
-<body class="site-root">
+<body class="site-root" data-page={page}>
   <main class="site-main">
     <slot />
   </main>

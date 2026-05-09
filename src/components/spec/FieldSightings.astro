@@ -1,0 +1,160 @@
+---
+import SpecModule from "./SpecModule.astro";
+---
+
+<SpecModule label="Field Sightings · Log" index={12} area="sightings">
+  <div class="site" id="site-root" hidden>
+    <ul class="site__list" id="site-list" aria-label="#vocino sticker log"></ul>
+    <p class="site__foot">
+      <span class="site__k">SRC</span><span class="site__v">IG · #VOCINO</span>
+    </p>
+  </div>
+  <div class="site__empty" id="site-empty">
+    <p class="site__cap">No field sightings logged.</p>
+    <p class="site__hint">Tag <span class="site__hash">#vocino</span> in the wild.</p>
+  </div>
+</SpecModule>
+
+<script>
+  import { formatIsoDate } from "../../lib/formatIsoDate";
+
+  type Sticker = {
+    permalink: string;
+    imageUrl?: string;
+    timestamp?: string;
+    location?: string;
+  };
+
+  async function load() {
+    const root = document.getElementById("site-root");
+    const empty = document.getElementById("site-empty");
+    const list = document.getElementById("site-list");
+    if (!root || !list || !empty) return;
+
+    try {
+      const r = await fetch("/api/instagram-stickers");
+      if (!r.ok) return;
+      const d = (await r.json()) as { configured?: boolean; stickers?: Sticker[] };
+      const items = d.stickers || [];
+      if (!d.configured || items.length === 0) return;
+
+      list.replaceChildren();
+      for (const s of items.slice(0, 8)) {
+        const li = document.createElement("li");
+        li.className = "site__row";
+
+        const a = document.createElement("a");
+        a.href = s.permalink;
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        a.className = "site__link";
+
+        const date = document.createElement("span");
+        date.className = "site__date";
+        date.textContent = formatIsoDate(s.timestamp) || "----";
+
+        const dot = document.createElement("span");
+        dot.className = "site__sep";
+        dot.textContent = "·";
+
+        const loc = document.createElement("span");
+        loc.className = "site__loc";
+        loc.textContent = (s.location || "Unknown").toUpperCase();
+
+        const sym = document.createElement("span");
+        sym.className = "site__sym";
+        sym.textContent = "▣";
+
+        a.append(date, dot, loc, sym);
+        li.appendChild(a);
+        list.appendChild(li);
+      }
+      empty.hidden = true;
+      root.hidden = false;
+    } catch {}
+  }
+
+  load();
+</script>
+
+<style lang="scss">
+  .site {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(3px, 0.7vmin, 8px);
+    min-width: 0;
+  }
+  .site__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex: 1 1 auto;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1px, 0.3vmin, 3px);
+    min-height: 0;
+  }
+  .site__row {
+    border-bottom: 1px dotted var(--ink-faint);
+    padding-bottom: clamp(1px, 0.3vmin, 3px);
+    &:last-child { border-bottom: 0; }
+  }
+  .site__link {
+    display: grid;
+    grid-template-columns: auto auto minmax(0, 1fr) auto;
+    gap: clamp(4px, 0.9vmin, 10px);
+    align-items: baseline;
+    text-decoration: none;
+    border: 0;
+    color: var(--ink);
+    font-family: "Source Code Pro", monospace;
+    font-size: var(--spec-body-size);
+    letter-spacing: 0.04em;
+    min-width: 0;
+  }
+  .site__date { color: var(--ink-dim); font-variant-numeric: tabular-nums; }
+  .site__sep { color: var(--ink-faint); }
+  .site__loc {
+    color: var(--ink);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
+  }
+  .site__sym { color: var(--brand); }
+  .site__link:hover, .site__link:focus-visible {
+    outline: none;
+    .site__loc { color: var(--brand); }
+  }
+
+  .site__foot {
+    margin: 0;
+    padding-top: clamp(2px, 0.5vmin, 6px);
+    border-top: 1px solid var(--ink-faint);
+    font-family: "Source Code Pro", monospace;
+    font-size: var(--spec-label-size);
+    text-transform: uppercase;
+    letter-spacing: var(--spec-tracking);
+    color: var(--ink);
+  }
+  .site__k { color: var(--ink-dim); margin-right: 0.5em; }
+
+  .site__empty {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: clamp(2px, 0.5vmin, 6px);
+    color: var(--ink-dim);
+    font-family: "Source Code Pro", monospace;
+    font-size: var(--spec-label-size);
+    text-transform: uppercase;
+    letter-spacing: var(--spec-tracking);
+    text-align: left;
+  }
+  .site__cap { margin: 0; }
+  .site__hint { margin: 0; color: var(--ink); }
+  .site__hash { color: var(--brand); }
+</style>

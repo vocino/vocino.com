@@ -1,0 +1,342 @@
+@use "variables" as *;
+
+// ============================================
+// MICRO-GRAPHIC SPEC-SHEET REDESIGN
+// Industrial-label aesthetic, dark theme.
+// Activated only when <body data-page="spec">.
+// ============================================
+
+:root {
+  --ink: #E6EDF3;
+  --ink-dim: rgba(230, 237, 243, 0.55);
+  --ink-faint: rgba(230, 237, 243, 0.18);
+  --stamp-red: #FF5C5C;
+  --on-air-yellow: #E0E040;
+  --spec-rule: 1px;
+  --spec-gap: clamp(10px, 1.8vmin, 26px);
+  --spec-pad-x: clamp(12px, 2vmin, 28px);
+  --spec-pad-y: clamp(10px, 1.6vmin, 20px);
+  --spec-border: rgba(230, 237, 243, 0.16);
+  --spec-label-size: clamp(0.55rem, 1.15vmin, 0.78rem);
+  --spec-body-size: clamp(0.62rem, 1.35vmin, 0.95rem);
+  --spec-data-size: clamp(0.7rem, 1.55vmin, 1.05rem);
+  --spec-hero-size: clamp(1.6rem, 5.4vmin, 4.6rem);
+  --spec-dot-step: clamp(12px, 1.6vmin, 22px);
+  --spec-tracking: 0.12em;
+}
+
+// Page-scoped reset — only when this page is active.
+html:has(body[data-page="spec"]),
+body[data-page="spec"] {
+  height: 100svh;
+  width: 100svw;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+body[data-page="spec"] {
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(rgba(155, 167, 180, 0.18) 1px, transparent 1px);
+  background-size: var(--spec-dot-step) var(--spec-dot-step);
+  background-position: 0 0;
+  color: var(--ink);
+  font-family: $font-family-sans;
+
+  // Strip prior cyberpunk overlays — keep dot grid only.
+  &::before,
+  &::after {
+    display: none !important;
+    content: none !important;
+  }
+
+  .site-main {
+    height: 100svh;
+    width: 100svw;
+    margin: 0;
+    padding: 0;
+    max-width: none;
+  }
+}
+
+// ============================================
+// SPEC GRID — viewport-filling layout
+// ============================================
+.spec-grid {
+  position: relative;
+  display: grid;
+  width: 100svw;
+  height: 100svh;
+  padding: var(--spec-pad-x);
+  gap: var(--spec-gap);
+  box-sizing: border-box;
+
+  // Default (desktop landscape): 12 cols × 8 rows
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-rows: repeat(8, minmax(0, 1fr));
+  grid-template-areas:
+    "id   id   id   id   tag  tag  tag  tag  tag  tag  tag  tag"
+    "id   id   id   id   tag  tag  tag  tag  tag  tag  tag  tag"
+    "id   id   id   id   tag  tag  tag  tag  tag  tag  tag  tag"
+    "bcst bcst bcst chnl chnl chnl dim  dim  dim  cap  cap  cap"
+    "bcst bcst bcst chnl chnl chnl dim  dim  dim  cap  cap  cap"
+    "flow flow flow flow flow flow flow flow flow site site site"
+    "flow flow flow flow flow flow flow flow flow site site site"
+    "bar  bar  bar  bar  bar  hand hand hand hand hand qr   qr";
+}
+
+// Module → grid-area mapping
+[data-spec="identity"]    { grid-area: id; }
+[data-spec="tagline"]     { grid-area: tag; }
+[data-spec="broadcast"]   { grid-area: bcst; }
+[data-spec="channels"]    { grid-area: chnl; }
+[data-spec="dimensions"]  { grid-area: dim; }
+[data-spec="capabilities"]{ grid-area: cap; }
+[data-spec="flow"]        { grid-area: flow; }
+[data-spec="sightings"]   { grid-area: site; }
+[data-spec="barcode"]     { grid-area: bar; }
+[data-spec="handling"]    { grid-area: hand; }
+[data-spec="qr"]          { grid-area: qr; }
+
+// Stamp overlays the identity plate corner — absolutely positioned
+[data-spec="stamp"] {
+  position: absolute;
+  top: clamp(8px, 2.4vmin, 28px);
+  left: clamp(8px, 2.4vmin, 28px);
+  width: clamp(64px, 11vmin, 130px);
+  height: clamp(64px, 11vmin, 130px);
+  z-index: 5;
+  pointer-events: none;
+}
+
+// ============================================
+// ULTRAWIDE (≥1800w & aspect ≥2)
+// Same template; M3 and M11 expand visually.
+// ============================================
+@media (min-width: 1800px) and (min-aspect-ratio: 2/1) {
+  .spec-grid {
+    grid-template-rows: repeat(6, minmax(0, 1fr));
+    grid-template-areas:
+      "id   id   id   tag  tag  tag  tag  tag  tag  tag  tag  tag"
+      "id   id   id   tag  tag  tag  tag  tag  tag  tag  tag  tag"
+      "bcst bcst chnl chnl dim  dim  cap  cap  flow flow flow flow"
+      "bcst bcst chnl chnl dim  dim  cap  cap  flow flow flow flow"
+      "bar  bar  bar  bar  hand hand hand hand hand hand qr   site"
+      "bar  bar  bar  bar  hand hand hand hand hand hand qr   site";
+  }
+}
+
+// ============================================
+// PORTRAIT — phones, narrow tablets (aspect <1)
+// 6 cols × 12 rows, vertical shipping-label stack.
+// ============================================
+@media (max-aspect-ratio: 1/1) {
+  .spec-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-rows: repeat(14, minmax(0, 1fr));
+    grid-template-areas:
+      "id   id   id   id   id   id"
+      "id   id   id   id   id   id"
+      "tag  tag  tag  tag  tag  tag"
+      "tag  tag  tag  tag  tag  tag"
+      "bcst bcst bcst chnl chnl chnl"
+      "bcst bcst bcst chnl chnl chnl"
+      "flow flow flow flow flow flow"
+      "flow flow flow flow flow flow"
+      "cap  cap  cap  dim  dim  dim"
+      "cap  cap  cap  dim  dim  dim"
+      "site site site site site site"
+      "site site site site site site"
+      "bar  bar  bar  bar  qr   qr"
+      "hand hand hand hand hand hand";
+  }
+}
+
+// ============================================
+// SHORT LANDSCAPE (height < 620 & aspect ≥1.3)
+// Drop tier-3 modules to keep tier-1/2 legible.
+// ============================================
+@media (max-height: 620px) and (min-aspect-ratio: 13/10) {
+  .spec-grid {
+    grid-template-rows: repeat(5, minmax(0, 1fr));
+    grid-template-areas:
+      "id   id   id   id   tag  tag  tag  tag  tag  tag  tag  tag"
+      "id   id   id   id   tag  tag  tag  tag  tag  tag  tag  tag"
+      "id   id   id   id   tag  tag  tag  tag  tag  tag  tag  tag"
+      "bcst bcst bcst chnl chnl chnl flow flow flow site site site"
+      "bcst bcst bcst chnl chnl chnl flow flow flow site site site";
+  }
+  [data-spec="dimensions"],
+  [data-spec="capabilities"],
+  [data-spec="barcode"],
+  [data-spec="handling"],
+  [data-spec="qr"] { display: none; }
+}
+
+// ============================================
+// VERY SMALL (≤360w OR ≤480h portrait)
+// Drop tier-3 even in portrait.
+// ============================================
+@media (max-width: 360px), (max-height: 480px) and (max-aspect-ratio: 1/1) {
+  [data-spec="dimensions"],
+  [data-spec="handling"],
+  [data-spec="barcode"] { display: none; }
+}
+
+// ============================================
+// SPEC MODULE — bordered block primitive
+// ============================================
+.spec-module {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  background: transparent;
+  border: var(--spec-rule) solid var(--spec-border);
+}
+
+.spec-module__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: calc(var(--spec-pad-y) * 0.6) var(--spec-pad-x);
+  border-bottom: var(--spec-rule) solid rgba(230, 237, 243, 0.35);
+  font-family: $font-family-mono;
+  font-size: var(--spec-label-size);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--spec-tracking);
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 0 0 auto;
+}
+
+.spec-module__head-id {
+  color: var(--ink-dim);
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+}
+
+.spec-module__body {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+  padding: var(--spec-pad-y) var(--spec-pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2px, 0.6vmin, 8px);
+  overflow: hidden;
+}
+
+// ============================================
+// COMMON SPEC TYPOGRAPHY
+// ============================================
+.spec-label {
+  font-family: $font-family-mono;
+  font-size: var(--spec-label-size);
+  text-transform: uppercase;
+  letter-spacing: var(--spec-tracking);
+  color: var(--ink-dim);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.spec-value {
+  font-family: $font-family-sans;
+  font-size: var(--spec-data-size);
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.spec-mono {
+  font-family: $font-family-mono;
+  font-size: var(--spec-body-size);
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.spec-row {
+  display: grid;
+  grid-template-columns: minmax(0, max-content) minmax(0, 1fr);
+  gap: clamp(6px, 1.2vmin, 14px);
+  align-items: baseline;
+  min-width: 0;
+}
+
+// Dotted leader between label and value (classic spec-sheet device).
+.spec-row--leader {
+  align-items: end;
+  & > .spec-label { position: relative; }
+  & > .spec-value {
+    position: relative;
+    text-align: right;
+  }
+  &::before {
+    content: "";
+    grid-column: 1 / 3;
+    grid-row: 1;
+    align-self: end;
+    border-bottom: 1px dotted var(--ink-faint);
+    margin-bottom: 0.2em;
+    height: 0;
+    z-index: 0;
+  }
+  & > * { z-index: 1; background: transparent; }
+}
+
+// Cross-hair / corner ticks decoration available on any block.
+.spec-corners::before,
+.spec-corners::after,
+.spec-corners > .spec-corners__bl,
+.spec-corners > .spec-corners__br {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border: 1px solid var(--ink);
+  pointer-events: none;
+}
+.spec-corners::before { top: -1px; left: -1px; border-right: 0; border-bottom: 0; }
+.spec-corners::after  { top: -1px; right: -1px; border-left: 0; border-bottom: 0; }
+.spec-corners > .spec-corners__bl { bottom: -1px; left: -1px; border-right: 0; border-top: 0; }
+.spec-corners > .spec-corners__br { bottom: -1px; right: -1px; border-left: 0; border-top: 0; }
+
+// ============================================
+// LINKS within spec modules
+// ============================================
+.spec-module a {
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--ink-faint);
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.spec-module a:hover,
+.spec-module a:focus-visible {
+  color: var(--brand);
+  border-color: var(--brand);
+  outline: none;
+}
+
+// ============================================
+// SOFT FADE-IN — single subtle FX
+// ============================================
+@keyframes spec-fade-in {
+  from { opacity: 0; transform: translateY(2px); }
+  to   { opacity: 1; transform: none; }
+}
+body[data-page="spec"] .spec-module {
+  animation: spec-fade-in 0.5s ease-out both;
+}
+@media (prefers-reduced-motion: reduce) {
+  body[data-page="spec"] .spec-module { animation: none; }
+}

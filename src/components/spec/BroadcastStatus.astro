@@ -1,0 +1,170 @@
+---
+import SpecModule from "./SpecModule.astro";
+---
+
+<SpecModule label="Broadcast Status" index={5} area="broadcast">
+  <a class="bcst" href="https://twitch.tv/vocino" rel="me" target="_blank" id="bcst-link" aria-label="Twitch — currently off air">
+    <div class="bcst__row">
+      <span class="bcst__dot" id="bcst-dot" aria-hidden="true"></span>
+      <span class="bcst__state" id="bcst-state">OFF AIR</span>
+      <span class="bcst__chip" id="bcst-chip" hidden>ON AIR</span>
+    </div>
+    <div class="bcst__title" id="bcst-title">Channel idle · standby</div>
+    <div class="bcst__meta">
+      <span class="bcst__k">FREQ</span>
+      <span class="bcst__v">twitch.tv/vocino</span>
+    </div>
+    <div class="bcst__waves" aria-hidden="true">
+      <svg viewBox="0 0 100 14" preserveAspectRatio="none">
+        <path d="M0,7 Q5,1 10,7 T20,7 T30,7 T40,7 T50,7 T60,7 T70,7 T80,7 T90,7 T100,7"
+              stroke="currentColor" stroke-width="0.8" fill="none" />
+      </svg>
+    </div>
+  </a>
+</SpecModule>
+
+<script>
+  type Status = { online?: boolean; game?: string; title?: string };
+
+  const link = document.getElementById("bcst-link");
+  const dot = document.getElementById("bcst-dot");
+  const state = document.getElementById("bcst-state");
+  const chip = document.getElementById("bcst-chip");
+  const title = document.getElementById("bcst-title");
+
+  async function refresh() {
+    try {
+      const r = await fetch("/api/twitch-status");
+      if (!r.ok) return;
+      const d: Status = await r.json();
+
+      if (d.online) {
+        link?.classList.add("is-live");
+        dot?.classList.add("is-live");
+        if (state) state.textContent = "TRANSMITTING";
+        if (chip) chip.hidden = false;
+        if (title) title.textContent = d.title || d.game || "Live now";
+        link?.setAttribute("aria-label", `Twitch — live: ${d.title || d.game || "now"}`);
+      } else {
+        link?.classList.remove("is-live");
+        dot?.classList.remove("is-live");
+        if (state) state.textContent = "OFF AIR";
+        if (chip) chip.hidden = true;
+        if (title) title.textContent = "Channel idle · standby";
+        link?.setAttribute("aria-label", "Twitch — off air");
+      }
+    } catch {}
+  }
+
+  refresh();
+  setInterval(refresh, 60_000);
+</script>
+
+<style lang="scss">
+  .bcst {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(4px, 1vmin, 10px);
+    text-decoration: none;
+    color: var(--ink);
+    border: 0;
+    height: 100%;
+    min-width: 0;
+  }
+
+  .bcst__row {
+    display: flex;
+    align-items: center;
+    gap: clamp(6px, 1.2vmin, 12px);
+    min-width: 0;
+  }
+
+  .bcst__dot {
+    width: clamp(8px, 1.6vmin, 14px);
+    height: clamp(8px, 1.6vmin, 14px);
+    border: 1px solid var(--ink);
+    background: transparent;
+    border-radius: 50%;
+    flex: 0 0 auto;
+  }
+  .bcst__dot.is-live {
+    background: var(--brand);
+    border-color: var(--brand);
+    box-shadow:
+      0 0 0 1px rgba(0, 204, 255, 0.4),
+      0 0 12px rgba(0, 204, 255, 0.55);
+    animation: bcstPulse 1.6s ease-in-out infinite;
+  }
+  @keyframes bcstPulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50%      { transform: scale(1.18); opacity: 0.85; }
+  }
+
+  .bcst__state {
+    font-family: "Source Code Pro", monospace;
+    font-size: var(--spec-data-size);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--ink);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .bcst__chip {
+    margin-left: auto;
+    padding: 2px 6px;
+    background: var(--on-air-yellow);
+    color: #0F1419;
+    font-family: "Source Code Pro", monospace;
+    font-size: var(--spec-label-size);
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    border: 1px solid var(--on-air-yellow);
+    flex: 0 0 auto;
+  }
+
+  .bcst__title {
+    font-family: "Source Sans 3", sans-serif;
+    font-size: var(--spec-body-size);
+    color: var(--ink-dim);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
+  }
+
+  .bcst__meta {
+    display: flex;
+    gap: clamp(6px, 1.2vmin, 12px);
+    font-family: "Source Code Pro", monospace;
+    font-size: var(--spec-label-size);
+    text-transform: uppercase;
+    letter-spacing: var(--spec-tracking);
+    color: var(--ink);
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .bcst__k { color: var(--ink-dim); }
+
+  .bcst__waves {
+    margin-top: auto;
+    color: var(--ink-faint);
+    height: clamp(10px, 1.8vmin, 18px);
+  }
+  .bcst__waves svg {
+    width: 100%;
+    height: 100%;
+  }
+  .bcst.is-live .bcst__waves { color: var(--brand); }
+
+  .bcst:hover, .bcst:focus-visible {
+    outline: none;
+    .bcst__state { color: var(--brand); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bcst__dot.is-live { animation: none; }
+  }
+</style>

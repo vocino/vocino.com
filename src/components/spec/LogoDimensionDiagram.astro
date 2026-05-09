@@ -1,0 +1,113 @@
+---
+import SpecModule from "./SpecModule.astro";
+---
+
+<SpecModule label="Logo · Dimension Callout" index={2} area="dimensions">
+  <div class="dim">
+    <svg
+      class="dim__svg"
+      viewBox="0 0 240 200"
+      role="img"
+      aria-label="Vocino logo dimension callout"
+      preserveAspectRatio="xMidYMid meet"
+    >
+      <!-- extension lines -->
+      <g stroke="currentColor" stroke-width="0.6" fill="none" opacity="0.55">
+        <line x1="60" y1="40" x2="20" y2="40" />
+        <line x1="60" y1="172" x2="20" y2="172" />
+        <line x1="60" y1="40" x2="60" y2="20" />
+        <line x1="180" y1="40" x2="180" y2="20" />
+      </g>
+
+      <!-- vertical dimension (height) -->
+      <g stroke="currentColor" stroke-width="0.6" fill="none">
+        <line x1="28" y1="40" x2="28" y2="172" />
+        <polygon points="28,40 25,46 31,46" fill="currentColor" />
+        <polygon points="28,172 25,166 31,166" fill="currentColor" />
+      </g>
+      <text x="22" y="108" class="dim__num dim__num--rot" text-anchor="middle">56.0</text>
+
+      <!-- horizontal dimension (width) -->
+      <g stroke="currentColor" stroke-width="0.6" fill="none">
+        <line x1="60" y1="28" x2="180" y2="28" />
+        <polygon points="60,28 66,25 66,31" fill="currentColor" />
+        <polygon points="180,28 174,25 174,31" fill="currentColor" />
+      </g>
+      <text x="120" y="22" class="dim__num" text-anchor="middle">64.0</text>
+
+      <!-- Triangle (Vocino mark) -->
+      <g class="dim__mark">
+        <polygon points="60,40 180,40 120,172" fill="var(--brand)" />
+        <polygon points="100,40 140,40 120,67" fill="#0F1419" />
+      </g>
+
+      <!-- center axis -->
+      <line x1="120" y1="20" x2="120" y2="184" stroke="currentColor" stroke-width="0.4" stroke-dasharray="2 3" opacity="0.5" />
+
+      <!-- angle callout -->
+      <path d="M 120 40 L 132 52" stroke="currentColor" stroke-width="0.6" fill="none" />
+      <text x="138" y="56" class="dim__num">∠ 60°</text>
+
+      <!-- stroke callout -->
+      <line x1="180" y1="40" x2="208" y2="60" stroke="currentColor" stroke-width="0.6" />
+      <text x="212" y="62" class="dim__num">STK 4.0</text>
+
+      <!-- corner ticks at logo -->
+      <g fill="var(--brand)">
+        <circle cx="60" cy="40" r="1.6" />
+        <circle cx="180" cy="40" r="1.6" />
+        <circle cx="120" cy="172" r="1.6" />
+      </g>
+    </svg>
+
+    <div class="dim__legend">
+      <span><span class="dim__k">REF</span>VOC.MARK</span>
+      <span><span class="dim__k">UNIT</span>mm @ 1×</span>
+    </div>
+  </div>
+</SpecModule>
+
+<style lang="scss">
+  .dim {
+    height: 100%;
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) auto;
+    gap: clamp(4px, 0.8vmin, 10px);
+    min-width: 0;
+  }
+
+  .dim__svg {
+    width: 100%;
+    height: 100%;
+    color: var(--ink);
+    overflow: visible;
+  }
+
+  .dim__num {
+    font-family: "Source Code Pro", monospace;
+    font-size: 9px;
+    fill: var(--ink);
+    letter-spacing: 0.06em;
+  }
+  .dim__num--rot {
+    transform-origin: 22px 108px;
+    transform: rotate(-90deg);
+  }
+
+  .dim__legend {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.8em;
+    font-family: "Source Code Pro", monospace;
+    font-size: var(--spec-label-size);
+    text-transform: uppercase;
+    letter-spacing: var(--spec-tracking);
+    color: var(--ink);
+    border-top: 1px solid var(--ink-faint);
+    padding-top: clamp(2px, 0.6vmin, 8px);
+  }
+  .dim__k {
+    color: var(--ink-dim);
+    margin-right: 0.5em;
+  }
+</style>

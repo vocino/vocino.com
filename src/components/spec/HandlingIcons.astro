@@ -1,0 +1,96 @@
+---
+import SpecModule from "./SpecModule.astro";
+---
+
+<SpecModule label="Handling · Pictograms" index={11} area="handling">
+  <div class="hand">
+    <figure class="hand__cell">
+      <svg viewBox="0 0 32 32" class="hand__icon" aria-hidden="true">
+        <!-- Wine glass (fragile) -->
+        <path d="M9 4 H23 L21 13 Q21 18 16 18 Q11 18 11 13 Z" stroke="currentColor" stroke-width="1.4" fill="none" />
+        <line x1="16" y1="18" x2="16" y2="26" stroke="currentColor" stroke-width="1.4" />
+        <line x1="10" y1="27" x2="22" y2="27" stroke="currentColor" stroke-width="1.4" />
+        <path d="M13 8 L19 12" stroke="currentColor" stroke-width="0.8" />
+      </svg>
+      <figcaption>Handle with care</figcaption>
+    </figure>
+
+    <figure class="hand__cell">
+      <svg viewBox="0 0 32 32" class="hand__icon" aria-hidden="true">
+        <!-- Sparkle / magic -->
+        <path d="M16 4 L18 14 L28 16 L18 18 L16 28 L14 18 L4 16 L14 14 Z" fill="currentColor" />
+        <circle cx="7" cy="7" r="1.4" fill="currentColor" />
+        <circle cx="25" cy="25" r="1.4" fill="currentColor" />
+      </svg>
+      <figcaption>Contains magic</figcaption>
+    </figure>
+
+    <figure class="hand__cell">
+      <svg viewBox="0 0 32 32" class="hand__icon" aria-hidden="true">
+        <!-- Up arrows -->
+        <path d="M11 26 L11 12 M7 16 L11 12 L15 16" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="square" />
+        <path d="M21 26 L21 12 M17 16 L21 12 L25 16" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="square" />
+        <line x1="4" y1="29" x2="28" y2="29" stroke="currentColor" stroke-width="0.6" />
+      </svg>
+      <figcaption>This side up</figcaption>
+    </figure>
+
+    <figure class="hand__cell">
+      <svg viewBox="0 0 32 32" class="hand__icon" aria-hidden="true">
+        <!-- Crescent moon — do not feed after midnight -->
+        <path d="M22 6 a12 12 0 1 0 4 19 a10 10 0 1 1 -4 -19 Z" fill="currentColor" />
+        <circle cx="9" cy="14" r="1" fill="#0F1419" />
+        <circle cx="13" cy="20" r="0.8" fill="#0F1419" />
+      </svg>
+      <figcaption>Don't feed past midnight</figcaption>
+    </figure>
+  </div>
+</SpecModule>
+
+<style lang="scss">
+  .hand {
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(4px, 1vmin, 12px);
+    align-items: stretch;
+    min-width: 0;
+  }
+
+  .hand__cell {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(2px, 0.6vmin, 6px);
+    padding: clamp(2px, 0.6vmin, 6px);
+    border: 1px solid var(--ink-faint);
+    color: var(--stamp-red);
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .hand__icon {
+    width: clamp(20px, 4vmin, 40px);
+    height: clamp(20px, 4vmin, 40px);
+    flex: 0 0 auto;
+  }
+
+  figcaption {
+    font-family: "Source Code Pro", monospace;
+    font-size: clamp(0.5rem, 1vmin, 0.7rem);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink);
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+
+  @media (max-width: 720px) {
+    .hand { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(0, 1fr)); }
+  }
+</style>

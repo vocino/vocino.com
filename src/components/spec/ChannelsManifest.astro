@@ -1,0 +1,92 @@
+---
+import SpecModule from "./SpecModule.astro";
+
+const channels = [
+  { ch: "01", proto: "INSTA", handle: "@vocino", href: "https://instagram.com/vocino" },
+  { ch: "02", proto: "THRDS", handle: "@vocino", href: "https://threads.com/vocino" },
+  { ch: "03", proto: "GITHB", handle: "@vocino", href: "https://github.com/vocino" },
+  { ch: "04", proto: "TWTCH", handle: "@vocino", href: "https://twitch.tv/vocino" },
+  { ch: "05", proto: "SMTP",  handle: "travis@vocino.com", href: "mailto:travis@vocino.com" },
+];
+---
+
+<SpecModule label="I/O Channels · Manifest" index={6} area="channels">
+  <ol class="chnl">
+    {channels.map((c) => (
+      <li class="chnl__row">
+        <a class="chnl__link" href={c.href} rel="me" target={c.href.startsWith("mailto") ? "_self" : "_blank"}>
+          <span class="chnl__ch">CH.{c.ch}</span>
+          <span class="chnl__proto">{c.proto}</span>
+          <span class="chnl__sep">·</span>
+          <span class="chnl__handle">{c.handle}</span>
+          <span class="chnl__arrow" aria-hidden="true">→</span>
+        </a>
+      </li>
+    ))}
+  </ol>
+</SpecModule>
+
+<style lang="scss">
+  .chnl {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(2px, 0.5vmin, 6px);
+    height: 100%;
+    justify-content: space-between;
+    min-width: 0;
+  }
+  .chnl__row {
+    margin: 0;
+    border-bottom: 1px dotted var(--ink-faint);
+    padding-bottom: clamp(2px, 0.4vmin, 5px);
+    min-width: 0;
+    &:last-child { border-bottom: 0; }
+  }
+  .chnl__link {
+    display: grid;
+    grid-template-columns: auto auto auto minmax(0, 1fr) auto;
+    align-items: baseline;
+    gap: clamp(4px, 0.9vmin, 10px);
+    text-decoration: none;
+    border: 0;
+    color: var(--ink);
+    font-family: "Source Code Pro", monospace;
+    font-size: var(--spec-body-size);
+    letter-spacing: 0.04em;
+    min-width: 0;
+    transition: color 0.15s ease;
+  }
+  .chnl__ch {
+    color: var(--ink-dim);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+  }
+  .chnl__proto {
+    color: var(--ink);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .chnl__sep { color: var(--ink-faint); }
+  .chnl__handle {
+    color: var(--ink-dim);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
+  }
+  .chnl__arrow {
+    color: var(--ink-faint);
+    transition: transform 0.15s ease, color 0.15s ease;
+  }
+  .chnl__link:hover,
+  .chnl__link:focus-visible {
+    color: var(--brand);
+    outline: none;
+    .chnl__handle { color: var(--brand); }
+    .chnl__arrow { color: var(--brand); transform: translateX(3px); }
+  }
+</style>
