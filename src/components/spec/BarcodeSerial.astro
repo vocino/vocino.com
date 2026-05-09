@@ -1,0 +1,93 @@
+---
+import SpecModule from "./SpecModule.astro";
+
+// Deterministic barcode pattern derived from "VOCINO" — visually authentic, not scannable.
+// Generates a sequence of bar widths (1–4) using char codes to build a stable pattern.
+const seed = "VOCINO-INDUSTRIES-2026";
+const widths: number[] = [];
+let acc = 0;
+for (let i = 0; i < seed.length; i++) {
+  acc = (acc * 31 + seed.charCodeAt(i)) % 997;
+  widths.push((acc % 4) + 1);
+  widths.push(((acc >> 3) % 3) + 1);
+  widths.push(((acc >> 6) % 4) + 1);
+}
+// Build alternating bar/space pattern
+const pattern: { w: number; on: boolean }[] = [];
+let on = true;
+let totalUnits = 0;
+for (const w of widths) {
+  pattern.push({ w, on });
+  totalUnits += w;
+  on = !on;
+}
+const VIEW_W = totalUnits;
+
+const today = new Date();
+const yyyymmdd =
+  today.getUTCFullYear().toString() +
+  String(today.getUTCMonth() + 1).padStart(2, "0") +
+  String(today.getUTCDate()).padStart(2, "0");
+const serial = `VOC-${yyyymmdd}-0077`;
+---
+
+<SpecModule label="Barcode · Serial" index={8} area="barcode">
+  <div class="bar">
+    <svg
+      class="bar__svg"
+      viewBox={`0 0 ${VIEW_W} 40`}
+      preserveAspectRatio="none"
+      role="img"
+      aria-label="Decorative barcode encoding VOCINO"
+    >
+      {(() => {
+        let x = 0;
+        return pattern.map((p) => {
+          const rect = p.on ? <rect x={x} y={0} width={p.w} height={40} fill="currentColor" /> : null;
+          x += p.w;
+          return rect;
+        });
+      })()}
+    </svg>
+    <div class="bar__row">
+      <span class="bar__sn"><span class="bar__k">S/N</span>{serial}</span>
+      <span class="bar__lot"><span class="bar__k">LOT</span>2026·05</span>
+    </div>
+  </div>
+</SpecModule>
+
+<style lang="scss">
+  .bar {
+    height: 100%;
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) auto;
+    gap: clamp(3px, 0.7vmin, 8px);
+    min-width: 0;
+  }
+  .bar__svg {
+    width: 100%;
+    height: 100%;
+    color: var(--ink);
+    display: block;
+  }
+  .bar__row {
+    display: flex;
+    justify-content: space-between;
+    gap: clamp(8px, 1.6vmin, 18px);
+    font-family: "Source Code Pro", monospace;
+    font-size: var(--spec-label-size);
+    text-transform: uppercase;
+    letter-spacing: var(--spec-tracking);
+    color: var(--ink);
+    border-top: 1px solid var(--ink-faint);
+    padding-top: clamp(2px, 0.5vmin, 6px);
+  }
+  .bar__sn {
+    border-bottom: 2px solid var(--stamp-red);
+    padding-bottom: 1px;
+  }
+  .bar__k {
+    color: var(--ink-dim);
+    margin-right: 0.5em;
+  }
+</style>

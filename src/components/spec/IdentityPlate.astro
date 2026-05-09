@@ -1,0 +1,134 @@
+---
+import SpecModule from "./SpecModule.astro";
+---
+
+<SpecModule label="Identity Plate" index={1} area="identity">
+  <div class="ident">
+    <figure class="ident__photo" aria-hidden="true">
+      <img src="/assets/images/travis.png" alt="" loading="eager" decoding="async" />
+      <figcaption class="ident__photo-cap">SPEC.PHOTO</figcaption>
+    </figure>
+    <dl class="ident__data">
+      <div class="ident__row">
+        <dt>Model</dt><dd>Travis Vocino</dd>
+      </div>
+      <div class="ident__row">
+        <dt>Class</dt><dd>Human · Builder</dd>
+      </div>
+      <div class="ident__row">
+        <dt>Mfg.</dt><dd>1984 · PNW</dd>
+      </div>
+      <div class="ident__row">
+        <dt>Role</dt><dd>Maker · Meta</dd>
+      </div>
+      <div class="ident__row">
+        <dt>Mode</dt><dd>Chaotic Good</dd>
+      </div>
+    </dl>
+  </div>
+</SpecModule>
+
+<style lang="scss">
+  .ident {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+    gap: clamp(8px, 1.4vmin, 18px);
+    height: 100%;
+    align-items: stretch;
+    min-width: 0;
+  }
+
+  .ident__photo {
+    margin: 0;
+    position: relative;
+    border: 1px solid var(--ink);
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    background: #000;
+    min-width: 0;
+    align-self: start;
+    max-height: 100%;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(1) contrast(1.4) brightness(0.95);
+      mix-blend-mode: screen;
+      opacity: 0.92;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(0, 204, 255, 0.18) 0%,
+        rgba(0, 204, 255, 0.05) 100%
+      );
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+  }
+
+  .ident__photo-cap {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 2px 4px;
+    font-family: var(--font-mono, "Source Code Pro", monospace);
+    font-size: clamp(0.45rem, 0.95vmin, 0.65rem);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+    background: rgba(15, 20, 25, 0.85);
+    border-top: 1px solid var(--ink);
+    text-align: center;
+  }
+
+  .ident__data {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: clamp(2px, 0.5vmin, 6px);
+    min-width: 0;
+  }
+
+  .ident__row {
+    display: grid;
+    grid-template-columns: minmax(0, max-content) minmax(0, 1fr);
+    gap: clamp(6px, 1.1vmin, 14px);
+    align-items: baseline;
+    border-bottom: 1px dotted var(--ink-faint);
+    padding-bottom: clamp(2px, 0.5vmin, 6px);
+    min-width: 0;
+
+    &:last-child { border-bottom: 0; }
+
+    dt {
+      font-family: "Source Code Pro", monospace;
+      font-size: var(--spec-label-size);
+      letter-spacing: var(--spec-tracking);
+      text-transform: uppercase;
+      color: var(--ink-dim);
+      font-weight: 500;
+      margin: 0;
+    }
+    dd {
+      margin: 0;
+      font-family: "Source Sans 3", sans-serif;
+      font-size: var(--spec-data-size);
+      font-weight: 600;
+      color: var(--ink);
+      letter-spacing: -0.005em;
+      text-align: right;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      min-width: 0;
+    }
+  }
+</style>

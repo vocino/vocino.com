@@ -1,32 +1,37 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import SiteBrand from '../components/SiteBrand.astro';
-import SocialLinks from '../components/SocialLinks.astro';
-import InstagramStickers from '../components/InstagramStickers.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SpecGrid from "../components/spec/SpecGrid.astro";
+import IdentityPlate from "../components/spec/IdentityPlate.astro";
+import Tagline from "../components/spec/Tagline.astro";
+import LogoDimensionDiagram from "../components/spec/LogoDimensionDiagram.astro";
+import IOFlowDiagram from "../components/spec/IOFlowDiagram.astro";
+import BroadcastStatus from "../components/spec/BroadcastStatus.astro";
+import ChannelsManifest from "../components/spec/ChannelsManifest.astro";
+import Capabilities from "../components/spec/Capabilities.astro";
+import BarcodeSerial from "../components/spec/BarcodeSerial.astro";
+import QRStamp from "../components/spec/QRStamp.astro";
+import CertificationStamp from "../components/spec/CertificationStamp.astro";
+import HandlingIcons from "../components/spec/HandlingIcons.astro";
+import FieldSightings from "../components/spec/FieldSightings.astro";
 ---
 
 <BaseLayout
-  title="Vocino - Perfect blend of technology and magic"
-  description="Travis Vocino — I build stuff at Meta. Nerd tchotchke collector. Chaotic good. Perfect blend of technology and magic."
+  page="spec"
+  title="Vocino — Perfect blend of technology and magic"
+  description="Travis Vocino · I build stuff at Meta. Nerd tchotchke collector. Chaotic good. Perfect blend of technology and magic."
 >
-  
-  <div class="home-layout">
-    <div class="home-hero">
-      <div class="home-hero__brand">
-        <SiteBrand />
-      </div>
-      <div class="home-hero__content">
-        <h1 class="tagline">Perfect blend of <span class="word-tech">technology</span>&nbsp;and&nbsp;<span class="word-magic">magic</span>.</h1>
-
-        <p class="home-about">
-          I build stuff at Meta. Nerd tchotchke collector. Chaotic good. From the desk of Travis&nbsp;Vocino — find me elsewhere
-          <a href="https://threads.com/vocino" rel="me" target="_blank">@vocino</a>.
-        </p>
-
-        <SocialLinks />
-      </div>
-    </div>
-
-    <InstagramStickers />
-  </div>
+  <SpecGrid>
+    <IdentityPlate />
+    <Tagline />
+    <LogoDimensionDiagram />
+    <IOFlowDiagram />
+    <BroadcastStatus />
+    <ChannelsManifest />
+    <Capabilities />
+    <BarcodeSerial />
+    <QRStamp />
+    <HandlingIcons />
+    <FieldSightings />
+    <CertificationStamp />
+  </SpecGrid>
 </BaseLayout>

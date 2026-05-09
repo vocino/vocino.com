@@ -1,0 +1,26 @@
+---
+interface Props {
+  label: string;
+  index: number;
+  total?: number;
+  area: string;
+  class?: string;
+}
+
+const { label, index, total = 12, area, class: extraClass = "" } = Astro.props;
+const id = `${String(index).padStart(2, "0")}/${String(total).padStart(2, "0")}`;
+---
+
+<section
+  class:list={["spec-module", extraClass]}
+  data-spec={area}
+  aria-label={label}
+>
+  <header class="spec-module__head">
+    <span class="spec-module__head-label">{label}</span>
+    <span class="spec-module__head-id">{id}</span>
+  </header>
+  <div class="spec-module__body">
+    <slot />
+  </div>
+</section>

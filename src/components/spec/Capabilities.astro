@@ -1,0 +1,73 @@
+---
+import SpecModule from "./SpecModule.astro";
+
+const items = [
+  "Builds @ Meta",
+  "Collects nerd tchotchke",
+  "Chaotic good",
+  "Ships",
+  "Debugs dreams",
+];
+---
+
+<SpecModule label="Certified Capabilities" index={7} area="capabilities">
+  <ul class="cap">
+    {items.map((t) => (
+      <li class="cap__row">
+        <svg class="cap__tick" viewBox="0 0 12 12" aria-hidden="true">
+          <path d="M2 6 L5 9 L10 3" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="square" />
+        </svg>
+        <span class="cap__txt">{t}</span>
+      </li>
+    ))}
+  </ul>
+  <p class="cap__cert">CERT. №&nbsp;TV-001 · ISSUED&nbsp;BY&nbsp;V/I</p>
+</SpecModule>
+
+<style lang="scss">
+  .cap {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(2px, 0.5vmin, 6px);
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  .cap__row {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: clamp(6px, 1.2vmin, 12px);
+    align-items: center;
+    font-family: "Source Sans 3", sans-serif;
+    font-size: var(--spec-data-size);
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    min-width: 0;
+  }
+  .cap__tick {
+    width: clamp(10px, 1.4vmin, 14px);
+    height: clamp(10px, 1.4vmin, 14px);
+    color: var(--brand);
+    flex: 0 0 auto;
+  }
+  .cap__txt {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
+  }
+  .cap__cert {
+    margin: clamp(4px, 0.8vmin, 10px) 0 0;
+    padding-top: clamp(4px, 0.8vmin, 10px);
+    border-top: 1px solid var(--ink-faint);
+    font-family: "Source Code Pro", monospace;
+    font-size: var(--spec-label-size);
+    text-transform: uppercase;
+    letter-spacing: var(--spec-tracking);
+    color: var(--ink-dim);
+  }
+</style>
