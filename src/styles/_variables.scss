@@ -59,6 +59,11 @@
     transparent 60%,
     rgba(157, 124, 255, 0.08) 100%
   );
+  --cyber-vignette: radial-gradient(
+    ellipse 90% 70% at 50% 50%,
+    transparent 55%,
+    rgba(0, 0, 0, 0.45) 100%
+  );
   --scanline-opacity: 0.035;
   --scanline-size: 2px;
   --hud-corner-size: 10px;

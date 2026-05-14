@@ -64,7 +64,7 @@ body {
   width: 100%;
   max-width: 100%;
   
-  // Halftone dot grid + city-tech radial washes + edge vignette
+  // Vignette + halftone dot grid + slow-drifting radial washes
   &::before {
     content: '';
     position: fixed;
@@ -73,21 +73,29 @@ body {
     width: 100%;
     height: 100%;
     background:
-      var(--cyber-edge-highlight),
+      var(--cyber-vignette),
       radial-gradient(circle, rgba(230, 237, 243, var(--dot-opacity)) var(--dot-size), transparent var(--dot-size)),
-      radial-gradient(circle at 18% 45%, rgba(0, 204, 255, 0.045) 0%, transparent 52%),
-      radial-gradient(circle at 82% 78%, rgba(157, 124, 255, 0.04) 0%, transparent 48%),
-      radial-gradient(circle at 50% 100%, rgba(77, 163, 255, 0.03) 0%, transparent 45%),
-      radial-gradient(ellipse 120% 80% at 50% 0%, rgba(224, 224, 64, 0.02) 0%, transparent 55%);
+      radial-gradient(circle at 30% 50%, rgba(0, 204, 255, 0.025) 0%, transparent 52%),
+      radial-gradient(circle at 70% 60%, rgba(157, 124, 255, 0.022) 0%, transparent 48%),
+      radial-gradient(circle at 50% 100%, rgba(77, 163, 255, 0.018) 0%, transparent 45%),
+      radial-gradient(ellipse 120% 80% at 50% 0%, rgba(224, 224, 64, 0.012) 0%, transparent 55%);
     background-size:
       100% 100%,
       var(--dot-spacing) var(--dot-spacing),
-      100% 100%,
-      100% 100%,
-      100% 100%,
-      100% 100%;
+      140% 140%,
+      140% 140%,
+      140% 140%,
+      140% 140%;
+    background-position:
+      center center,
+      0 0,
+      0% 50%,
+      100% 50%,
+      50% 100%,
+      50% 0%;
     pointer-events: none;
     z-index: 0;
+    animation: ambientDrift 24s ease-in-out infinite alternate;
   }
 
   // CRT-style scanlines (very low opacity)
@@ -111,7 +119,32 @@ body {
   }
 }
 
+@keyframes ambientDrift {
+  from {
+    background-position:
+      center center,
+      0 0,
+      0% 50%,
+      100% 50%,
+      50% 100%,
+      50% 0%;
+  }
+  to {
+    background-position:
+      center center,
+      0 0,
+      6% 46%,
+      94% 54%,
+      52% 96%,
+      48% 4%;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  body::before {
+    animation: none !important;
+  }
+
   body::after {
     opacity: 0.35;
   }

@@ -2,31 +2,21 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SiteBrand from '../components/SiteBrand.astro';
 import SocialLinks from '../components/SocialLinks.astro';
-import InstagramStickers from '../components/InstagramStickers.astro';
 ---
 
 <BaseLayout
   title="Vocino - Perfect blend of technology and magic"
   description="Travis Vocino — I build stuff at Meta. Nerd tchotchke collector. Chaotic good. Perfect blend of technology and magic."
 >
-  
-  <div class="home-layout">
-    <div class="home-hero">
-      <div class="home-hero__brand">
-        <SiteBrand />
-      </div>
-      <div class="home-hero__content">
-        <h1 class="tagline">Perfect blend of <span class="word-tech">technology</span>&nbsp;and&nbsp;<span class="word-magic">magic</span>.</h1>
+  <div class="centered-content">
+    <div class="content-wrapper">
+      <SiteBrand />
 
-        <p class="home-about">
-          I build stuff at Meta. Nerd tchotchke collector. Chaotic good. From the desk of Travis&nbsp;Vocino — find me elsewhere
-          <a href="https://threads.com/vocino" rel="me" target="_blank">@vocino</a>.
-        </p>
+      <h1 class="tagline">Perfect blend of <span class="word-tech">technology</span>&nbsp;and&nbsp;<span class="word-magic">magic</span>.</h1>
 
-        <SocialLinks />
-      </div>
+      <p class="bio">From the desk of Travis&nbsp;Vocino. Maker. Nerd tchotchke&nbsp;collector. Chaotic&nbsp;good.</p>
+
+      <SocialLinks />
     </div>
-
-    <InstagramStickers />
   </div>
 </BaseLayout>
