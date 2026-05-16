@@ -1,0 +1,24 @@
+---
+import type { CheckItem } from '../../data/bg3/types';
+
+interface Props {
+  items: CheckItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<ul class="checklist">
+  {items.map((item) => (
+    <li>
+      <label class="check">
+        <input type="checkbox" data-check-id={item.id} />
+        <span>
+          <span class="check-label">{item.label}</span>
+          {item.tag && <span class={`tag tag-${item.tag}`}>{item.tag}</span>}
+          {item.note && <small>{item.note}</small>}
+        </span>
+      </label>
+    </li>
+  ))}
+</ul>
