@@ -1,5 +1,6 @@
 ---
 import SEO from '../components/SEO.astro';
+import GlobalHamburgerMenu from '../components/GlobalHamburgerMenu.astro';
 import '../styles/main.scss';
 
 interface Props {
@@ -21,6 +22,9 @@ const { title, description, noindex } = Astro.props;
   <SEO title={title} description={description} noindex={noindex} />
 </head>
 <body class="site-root">
+  <div class="site-chrome">
+    <GlobalHamburgerMenu />
+  </div>
   <main class="site-main">
     <slot />
   </main>

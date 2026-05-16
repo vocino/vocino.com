@@ -1,0 +1,973 @@
+---
+import GlobalHamburgerMenu from "../components/GlobalHamburgerMenu.astro";
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BG3 Necromancer Guide</title>
+  <meta
+    name="description"
+    content="Mobile-first second-screen companion for a Baldur's Gate 3 necromancer run."
+  />
+  <style>
+    :root {
+      --bg: #0b0b0c;
+      --surface: #121216;
+      --surface-2: #18181d;
+      --text: #e8e8e8;
+      --muted: #9b9ba3;
+      --accent: #8b5cf6;
+      --accent-soft: #2a1d45;
+      --border: #262630;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, "Helvetica Neue", Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.45;
+    }
+
+    body {
+      min-height: 100vh;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 12px 12px 88px;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      font-size: 20px;
+      line-height: 1.25;
+      letter-spacing: 0.01em;
+    }
+
+    h1 {
+      margin-bottom: 8px;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    .intro {
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .controls {
+      display: flex;
+      gap: 8px;
+      margin: 0 0 12px;
+    }
+
+    .button {
+      min-height: 44px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--surface);
+      color: var(--text);
+      padding: 0 14px;
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .button:hover,
+    .button:focus-visible {
+      border-color: var(--accent);
+      outline: none;
+    }
+
+    .panel {
+      display: none;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .panel[aria-hidden="false"] {
+      display: flex;
+    }
+
+    details {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--surface);
+      overflow: hidden;
+    }
+
+    summary {
+      list-style: none;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      padding: 10px 14px;
+      cursor: pointer;
+      font-weight: 600;
+      position: relative;
+      gap: 8px;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary::after {
+      content: "+";
+      margin-left: auto;
+      color: var(--accent);
+      font-size: 20px;
+      line-height: 1;
+    }
+
+    details[open] > summary::after {
+      content: "-";
+    }
+
+    .section-body {
+      padding: 0 14px 12px;
+      border-top: 1px solid var(--border);
+      background: var(--surface-2);
+    }
+
+    .section-body p + p,
+    .section-body ul + p {
+      margin-top: 8px;
+    }
+
+    .checklist {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .checklist li + li {
+      border-top: 1px solid rgba(139, 92, 246, 0.17);
+    }
+
+    .check {
+      min-height: 44px;
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 0;
+      cursor: pointer;
+    }
+
+    .check input {
+      width: 22px;
+      height: 22px;
+      accent-color: var(--accent);
+      margin: 0;
+    }
+
+    .check small {
+      color: var(--muted);
+      display: block;
+      margin-top: 2px;
+    }
+
+    .pill-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .pill {
+      min-height: 44px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      padding: 0 14px;
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .pill[aria-pressed="true"] {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+      color: #f3ecff;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    .badge {
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .tabbar {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-top: 1px solid var(--border);
+      background: rgba(11, 11, 12, 0.97);
+      backdrop-filter: blur(10px);
+    }
+
+    .tabbar-inner {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .tab {
+      min-height: 44px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      font: inherit;
+      font-size: 0.82rem;
+      cursor: pointer;
+      padding: 0 4px;
+    }
+
+    .tab[aria-selected="true"] {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      color: #f3ecff;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+  </style>
+</head>
+<body class="site-root">
+  <div class="site-chrome">
+    <GlobalHamburgerMenu />
+  </div>
+  <main class="app">
+    <h1>BG3 Necromancer Guide</h1>
+    <p class="intro">Mobile-first second-screen companion. Everything is collapsed by default.</p>
+
+    <div class="controls">
+      <button id="show-setup-button" class="button hidden" type="button">Show Setup Tab</button>
+      <button id="reset-button" class="button" type="button">Reset Checks</button>
+    </div>
+
+    <section id="now-panel" class="panel" data-tab-panel="now" aria-hidden="false">
+      <details data-section-id="now-act-selector">
+        <summary>Spot Check</summary>
+        <div class="section-body">
+          <p class="muted">Act selector</p>
+          <div class="pill-row" role="radiogroup" aria-label="Act selector">
+            <button type="button" class="pill" data-act="act1" aria-pressed="true">Act 1</button>
+            <button type="button" class="pill" data-act="act2" aria-pressed="false">Act 2</button>
+            <button type="button" class="pill" data-act="act3" aria-pressed="false">Act 3</button>
+          </div>
+        </div>
+      </details>
+
+      <details data-section-id="now-dont-leave">
+        <summary>Don't Leave Act Without</summary>
+        <div class="section-body">
+          <ul id="act1-list" class="checklist" data-act-list="act1">
+            <li>
+              <label class="check">
+                <input type="checkbox" data-check-id="act1-staff" />
+                <span>Staff of Cherished Necromancy (Arcane Tower)</span>
+              </label>
+            </li>
+            <li>
+              <label class="check">
+                <input type="checkbox" data-check-id="act1-thay" />
+                <span>Necromancy of Thay + Dark Amethyst</span>
+              </label>
+            </li>
+            <li>
+              <label class="check">
+                <input type="checkbox" data-check-id="act1-animate-dead" />
+                <span>Learn Animate Dead</span>
+              </label>
+            </li>
+            <li>
+              <label class="check">
+                <input type="checkbox" data-check-id="act1-recruits" />
+                <span>Recruit Shadowheart / Lae'zel / Karlach</span>
+              </label>
+            </li>
+          </ul>
+
+          <ul id="act2-list" class="checklist hidden" data-act-list="act2">
+            <li>
+              <label class="check">
+                <input type="checkbox" data-check-id="act2-circle-bones" />
+                <span>Circle of Bones</span>
+              </label>
+            </li>
+            <li>
+              <label class="check">
+                <input type="checkbox" data-check-id="act2-crypt-ring" />
+                <span>Crypt Lord Ring</span>
+              </label>
+            </li>
+            <li>
+              <label class="check">
+                <input type="checkbox" data-check-id="act2-balthazar" />
+                <span>Side with Balthazar</span>
+              </label>
+            </li>
+            <li>
+              <label class="check">
+                <input type="checkbox" data-check-id="act2-create-undead" />
+                <span>Get Create Undead</span>
+              </label>
+            </li>
+          </ul>
+
+          <ul id="act3-list" class="checklist hidden" data-act-list="act3">
+            <li>
+              <label class="check">
+                <input type="checkbox" data-check-id="act3-mystic-carrion" />
+                <span>Mystic Carrion quest</span>
+              </label>
+            </li>
+            <li>
+              <label class="check">
+                <input type="checkbox" data-check-id="act3-circle-death" />
+                <span>Circle of Death scribed</span>
+              </label>
+            </li>
+          </ul>
+        </div>
+      </details>
+
+      <details data-section-id="now-before-rest">
+        <summary>Before Long Rest</summary>
+        <div class="section-body">
+          <ul class="checklist">
+            <li>
+              <label class="check">
+                <input type="checkbox" data-check-id="rest-animate-dead" />
+                <span>Recast Animate Dead</span>
+              </label>
+            </li>
+            <li>
+              <label class="check">
+                <input type="checkbox" data-check-id="rest-speak-dead" />
+                <span>Speak with Dead</span>
+              </label>
+            </li>
+            <li>
+              <label class="check">
+                <input type="checkbox" data-check-id="rest-shadowheart" />
+                <span>Talk to Shadowheart</span>
+              </label>
+            </li>
+          </ul>
+        </div>
+      </details>
+
+      <details data-section-id="now-after-level">
+        <summary>After Level Up</summary>
+        <div class="section-body">
+          <ul class="checklist">
+            <li>
+              <label class="check">
+                <input type="checkbox" data-check-id="levelup-learn-spells" />
+                <span>Learn spells</span>
+              </label>
+            </li>
+            <li>
+              <label class="check">
+                <input type="checkbox" data-check-id="levelup-scribe" />
+                <span>Scribe scrolls</span>
+              </label>
+            </li>
+            <li>
+              <label class="check">
+                <input type="checkbox" data-check-id="levelup-gear" />
+                <span>Update gear</span>
+              </label>
+            </li>
+          </ul>
+        </div>
+      </details>
+
+      <details data-section-id="now-before-leaving">
+        <summary>Before Leaving Area</summary>
+        <div class="section-body">
+          <ul class="checklist">
+            <li>
+              <label class="check">
+                <input type="checkbox" data-check-id="leave-check-gear" />
+                <span>Check key gear</span>
+              </label>
+            </li>
+          </ul>
+        </div>
+      </details>
+    </section>
+
+    <section id="levels-panel" class="panel" data-tab-panel="levels" aria-hidden="true">
+      <details data-section-id="levels-overview">
+        <summary>Level Path 1-12</summary>
+        <div class="section-body">
+          <p class="muted">Tap each row to expand details.</p>
+        </div>
+      </details>
+
+      <details data-section-id="level-1">
+        <summary><span class="row"><span>L1</span><span class="badge">Wizard start</span></span></summary>
+        <div class="section-body">
+          <p>Core setup from character creation in Setup tab.</p>
+        </div>
+      </details>
+      <details data-section-id="level-2">
+        <summary><span class="row"><span>L2</span><span class="badge">Subclass spike</span></span></summary>
+        <div class="section-body">
+          <p>Necromancy Savant, Grim Harvest.</p>
+          <p>Learn Blindness, Ray of Enfeeblement.</p>
+        </div>
+      </details>
+      <details data-section-id="level-3">
+        <summary><span class="row"><span>L3</span><span class="badge">Mobility/control</span></span></summary>
+        <div class="section-body">
+          <p>Learn Misty Step, Phantasmal Force.</p>
+        </div>
+      </details>
+      <details data-section-id="level-4">
+        <summary><span class="row"><span>L4</span><span class="badge">Feat</span></span></summary>
+        <div class="section-body">
+          <p>Feat: War Caster.</p>
+          <p>Learn Mirror Image, Web.</p>
+        </div>
+      </details>
+      <details data-section-id="level-5">
+        <summary><span class="row"><span>L5</span><span class="badge">Undead online</span></span></summary>
+        <div class="section-body">
+          <p>Learn Animate Dead, Bestow Curse.</p>
+        </div>
+      </details>
+      <details data-section-id="level-6">
+        <summary><span class="row"><span>L6</span><span class="badge">Necromancer identity</span></span></summary>
+        <div class="section-body">
+          <p>Undead Thralls.</p>
+          <p>Learn Vampiric Touch, Feign Death.</p>
+        </div>
+      </details>
+      <details data-section-id="level-7">
+        <summary><span class="row"><span>L7</span><span class="badge">Pressure tools</span></span></summary>
+        <div class="section-body">
+          <p>Learn Blight, Fear.</p>
+        </div>
+      </details>
+      <details data-section-id="level-8">
+        <summary><span class="row"><span>L8</span><span class="badge">Stats + utility</span></span></summary>
+        <div class="section-body">
+          <p>+2 INT.</p>
+          <p>Learn Counterspell, Dimension Door.</p>
+        </div>
+      </details>
+      <details data-section-id="level-9">
+        <summary><span class="row"><span>L9</span><span class="badge">High-level control</span></span></summary>
+        <div class="section-body">
+          <p>Learn Cloudkill, Hold Monster.</p>
+        </div>
+      </details>
+      <details data-section-id="level-10">
+        <summary><span class="row"><span>L10</span><span class="badge">Undeath resilience</span></span></summary>
+        <div class="section-body">
+          <p>Inured to Undeath.</p>
+          <p>Learn Circle of Death, Create Undead.</p>
+        </div>
+      </details>
+      <details data-section-id="level-11">
+        <summary><span class="row"><span>L11</span><span class="badge">Damage/control mix</span></span></summary>
+        <div class="section-body">
+          <p>Learn Disintegrate, Eyebite.</p>
+        </div>
+      </details>
+      <details data-section-id="level-12">
+        <summary><span class="row"><span>L12</span><span class="badge">Capstone prep</span></span></summary>
+        <div class="section-body">
+          <p>+2 INT.</p>
+          <p>Learn Globe of Invulnerability, Otto's Irresistible Dance.</p>
+        </div>
+      </details>
+    </section>
+
+    <section id="gear-panel" class="panel" data-tab-panel="gear" aria-hidden="true">
+      <details data-section-id="gear-act1">
+        <summary>Act 1</summary>
+        <div class="section-body">
+          <ul class="checklist">
+            <li>
+              <label class="check">
+                <input type="checkbox" data-check-id="gear-staff-cherished" />
+                <span>Staff of Cherished Necromancy <small>Arcane Tower - Act 1</small></span>
+              </label>
+            </li>
+          </ul>
+        </div>
+      </details>
+
+      <details data-section-id="gear-act2">
+        <summary>Act 2</summary>
+        <div class="section-body">
+          <ul class="checklist">
+            <li>
+              <label class="check">
+                <input type="checkbox" data-check-id="gear-circle-bones" />
+                <span>Circle of Bones <small>Last Light Inn - Act 2</small></span>
+              </label>
+            </li>
+            <li>
+              <label class="check">
+                <input type="checkbox" data-check-id="gear-crypt-lord-ring" />
+                <span>Crypt Lord Ring <small>Reithwin Mausoleum - Act 2</small></span>
+              </label>
+            </li>
+            <li>
+              <label class="check">
+                <input type="checkbox" data-check-id="gear-spellcrux" />
+                <span>Spellcrux Amulet <small>Act 2</small></span>
+              </label>
+            </li>
+          </ul>
+        </div>
+      </details>
+
+      <details data-section-id="gear-act3">
+        <summary>Act 3</summary>
+        <div class="section-body">
+          <ul class="checklist">
+            <li>
+              <label class="check">
+                <input type="checkbox" data-check-id="gear-night-walkers" />
+                <span>Disintegrating Night Walkers <small>Act 3</small></span>
+              </label>
+            </li>
+          </ul>
+        </div>
+      </details>
+    </section>
+
+    <section id="coven-panel" class="panel" data-tab-panel="coven" aria-hidden="true">
+      <details data-section-id="coven-shadowheart">
+        <summary>Shadowheart</summary>
+        <div class="section-body">
+          <p>Trickery Cleric of Shar.</p>
+          <p>Role: healer/dark priestess. Bring for Shar temple.</p>
+          <p>Respec to Toll the Dead + Inflict Wounds.</p>
+          <p>Approval +5 for Thay book.</p>
+        </div>
+      </details>
+      <details data-section-id="coven-laezel">
+        <summary>Lae'zel</summary>
+        <div class="section-body">
+          <p>Battle Master Fighter.</p>
+          <p>Role: frontline tank. Bring to protect while raising.</p>
+        </div>
+      </details>
+      <details data-section-id="coven-karlach">
+        <summary>Karlach</summary>
+        <div class="section-body">
+          <p>Berserker Barbarian.</p>
+          <p>Role: damage + corpse carrier.</p>
+          <p>Approval -5 for raising in town.</p>
+        </div>
+      </details>
+      <details data-section-id="coven-minthara">
+        <summary>Minthara</summary>
+        <div class="section-body">
+          <p>Oathbreaker Paladin Act 3 swap.</p>
+          <p>Perfect fallen matriarch.</p>
+        </div>
+      </details>
+      <details data-section-id="coven-jaheira">
+        <summary>Jaheira</summary>
+        <div class="section-body">
+          <p>Circle of Spores Druid Act 3 swap.</p>
+          <p>Fungal decay synergy.</p>
+        </div>
+      </details>
+
+      <details data-section-id="coven-lore-rules">
+        <summary>Lore Rules</summary>
+        <div class="section-body">
+          <ul class="checklist">
+            <li>
+              <label class="check">
+                <input type="checkbox" data-check-id="lore-speak-dead" />
+                <span>Always Speak with Dead before looting</span>
+              </label>
+            </li>
+            <li>
+              <label class="check">
+                <input type="checkbox" data-check-id="lore-name-thralls" />
+                <span>Name thralls, keep 2 active</span>
+              </label>
+            </li>
+            <li>
+              <label class="check">
+                <input type="checkbox" data-check-id="lore-thay-whispers" />
+                <span>Read Necromancy of Thay 3 times and accept whispers</span>
+              </label>
+            </li>
+            <li>
+              <label class="check">
+                <input type="checkbox" data-check-id="lore-balthazar" />
+                <span>Side with Balthazar in Gauntlet of Shar</span>
+              </label>
+            </li>
+            <li>
+              <label class="check">
+                <input type="checkbox" data-check-id="lore-mystic-carrion" />
+                <span>Complete Mystic Carrion quest</span>
+              </label>
+            </li>
+          </ul>
+        </div>
+      </details>
+    </section>
+
+    <section id="setup-panel" class="panel" data-tab-panel="setup" aria-hidden="true">
+      <details data-section-id="setup-character">
+        <summary>Character Creation Click by Click</summary>
+        <div class="section-body">
+          <ul class="checklist">
+            <li>
+              <label class="check">
+                <input type="checkbox" data-check-id="setup-origin" />
+                <span>Origin: Custom</span>
+              </label>
+            </li>
+            <li>
+              <label class="check">
+                <input type="checkbox" data-check-id="setup-race" />
+                <span>Race: Human</span>
+              </label>
+            </li>
+            <li>
+              <label class="check">
+                <input type="checkbox" data-check-id="setup-class" />
+                <span>Class: Wizard</span>
+              </label>
+            </li>
+            <li>
+              <label class="check">
+                <input type="checkbox" data-check-id="setup-background" />
+                <span>Background: Sage -> Skills Arcana, History</span>
+              </label>
+            </li>
+          </ul>
+        </div>
+      </details>
+
+      <details data-section-id="setup-abilities">
+        <summary>Ability Points 27/27</summary>
+        <div class="section-body">
+          <ul class="checklist">
+            <li><label class="check"><input type="checkbox" data-check-id="abi-str" /><span>Strength 8</span></label></li>
+            <li><label class="check"><input type="checkbox" data-check-id="abi-dex" /><span>Dexterity 13</span></label></li>
+            <li><label class="check"><input type="checkbox" data-check-id="abi-con" /><span>Constitution 14</span></label></li>
+            <li><label class="check"><input type="checkbox" data-check-id="abi-int" /><span>Intelligence 15 +2 bonus = 17</span></label></li>
+            <li><label class="check"><input type="checkbox" data-check-id="abi-wis" /><span>Wisdom 10</span></label></li>
+            <li><label class="check"><input type="checkbox" data-check-id="abi-cha" /><span>Charisma 12 +1 bonus = 13</span></label></li>
+          </ul>
+        </div>
+      </details>
+
+      <details data-section-id="setup-skills">
+        <summary>Skill Proficiencies</summary>
+        <div class="section-body">
+          <ul class="checklist">
+            <li><label class="check"><input type="checkbox" data-check-id="skill-arcana-history" /><span>Arcana, History (Sage)</span></label></li>
+            <li><label class="check"><input type="checkbox" data-check-id="skill-investigation" /><span>Investigation (Human Versatility)</span></label></li>
+            <li><label class="check"><input type="checkbox" data-check-id="skill-religion-insight" /><span>Religion, Insight (Wizard)</span></label></li>
+            <li><label class="check"><input type="checkbox" data-check-id="skill-swap-insight" /><span>Note: swap Insight -> Intimidation for more fear flavor</span></label></li>
+          </ul>
+        </div>
+      </details>
+
+      <details data-section-id="setup-cantrips">
+        <summary>Cantrips 3/3</summary>
+        <div class="section-body">
+          <ul class="checklist">
+            <li><label class="check"><input type="checkbox" data-check-id="cantrip-bone-chill" /><span>Bone Chill</span></label></li>
+            <li><label class="check"><input type="checkbox" data-check-id="cantrip-toll-dead" /><span>Toll the Dead</span></label></li>
+            <li><label class="check"><input type="checkbox" data-check-id="cantrip-mage-hand" /><span>Mage Hand</span></label></li>
+          </ul>
+        </div>
+      </details>
+
+      <details data-section-id="setup-spells">
+        <summary>Spells 6/6</summary>
+        <div class="section-body">
+          <ul class="checklist">
+            <li><label class="check"><input type="checkbox" data-check-id="spell-false-life" /><span>False Life</span></label></li>
+            <li><label class="check"><input type="checkbox" data-check-id="spell-ray-sickness" /><span>Ray of Sickness</span></label></li>
+            <li><label class="check"><input type="checkbox" data-check-id="spell-familiar" /><span>Find Familiar</span></label></li>
+            <li><label class="check"><input type="checkbox" data-check-id="spell-shield" /><span>Shield</span></label></li>
+            <li><label class="check"><input type="checkbox" data-check-id="spell-mage-armour" /><span>Mage Armour</span></label></li>
+            <li><label class="check"><input type="checkbox" data-check-id="spell-sleep" /><span>Sleep</span></label></li>
+          </ul>
+        </div>
+      </details>
+
+      <details data-section-id="setup-complete-section">
+        <summary>Setup Completion</summary>
+        <div class="section-body">
+          <label class="check">
+            <input id="setup-complete-check" type="checkbox" data-check-id="setup-complete" />
+            <span>Mark setup complete and hide Setup tab</span>
+          </label>
+        </div>
+      </details>
+    </section>
+  </main>
+
+  <nav class="tabbar" aria-label="Guide tabs">
+    <div class="tabbar-inner">
+      <button class="tab" type="button" data-tab="now" aria-selected="true">Now</button>
+      <button class="tab" type="button" data-tab="levels" aria-selected="false">Levels</button>
+      <button class="tab" type="button" data-tab="gear" aria-selected="false">Gear</button>
+      <button class="tab" type="button" data-tab="coven" aria-selected="false">Coven</button>
+      <button class="tab" type="button" data-tab="setup" aria-selected="false">Setup</button>
+    </div>
+  </nav>
+
+  <script is:inline>
+    (() => {
+      const storageKey = "bg3-necro-guide-v1";
+      const defaultState = {
+        activeTab: "now",
+        act: "act1",
+        checks: {},
+        openSections: {},
+        setupHidden: false
+      };
+
+      const loadState = () => {
+        try {
+          const raw = localStorage.getItem(storageKey);
+          if (!raw) return { ...defaultState };
+          const parsed = JSON.parse(raw);
+          return {
+            ...defaultState,
+            ...parsed,
+            checks: parsed.checks || {},
+            openSections: parsed.openSections || {}
+          };
+        } catch (_error) {
+          return { ...defaultState };
+        }
+      };
+
+      const state = loadState();
+
+      const saveState = () => {
+        localStorage.setItem(storageKey, JSON.stringify(state));
+      };
+
+      const tabButtons = Array.from(document.querySelectorAll("[data-tab]"));
+      const panels = Array.from(document.querySelectorAll("[data-tab-panel]"));
+      const sectionDetails = Array.from(document.querySelectorAll("details[data-section-id]"));
+      const setupTabButton = document.querySelector('[data-tab="setup"]');
+      const showSetupButton = document.getElementById("show-setup-button");
+      const setupCompleteCheck = document.getElementById("setup-complete-check");
+      const knownTabs = new Set(["now", "levels", "gear", "coven", "setup"]);
+
+      const applyTab = () => {
+        if (state.setupHidden && state.activeTab === "setup") {
+          state.activeTab = "now";
+        }
+        tabButtons.forEach((button) => {
+          const selected = button.dataset.tab === state.activeTab;
+          button.setAttribute("aria-selected", selected ? "true" : "false");
+        });
+        panels.forEach((panel) => {
+          const selected = panel.dataset.tabPanel === state.activeTab;
+          panel.setAttribute("aria-hidden", selected ? "false" : "true");
+        });
+      };
+
+      const applyAct = () => {
+        document.querySelectorAll("[data-act]").forEach((button) => {
+          const pressed = button.dataset.act === state.act;
+          button.setAttribute("aria-pressed", pressed ? "true" : "false");
+        });
+        document.querySelectorAll("[data-act-list]").forEach((list) => {
+          const matches = list.dataset.actList === state.act;
+          list.classList.toggle("hidden", !matches);
+        });
+      };
+
+      const applySetupVisibility = () => {
+        if (!setupTabButton || !showSetupButton || !setupCompleteCheck) return;
+        setupTabButton.classList.toggle("hidden", state.setupHidden);
+        showSetupButton.classList.toggle("hidden", !state.setupHidden);
+        setupCompleteCheck.checked = Boolean(state.checks["setup-complete"]);
+        if (state.setupHidden && state.activeTab === "setup") {
+          state.activeTab = "now";
+        }
+      };
+
+      const resolveTabFromTarget = (target) => {
+        if (!target) return null;
+        if (knownTabs.has(target)) return target;
+        if (target.startsWith("level-")) return "levels";
+        if (target.startsWith("gear-")) return "gear";
+        if (target.startsWith("coven-") || target.startsWith("lore-")) return "coven";
+        if (
+          target.startsWith("setup-") ||
+          target.startsWith("abi-") ||
+          target.startsWith("skill-") ||
+          target.startsWith("cantrip-") ||
+          target.startsWith("spell-")
+        ) {
+          return "setup";
+        }
+        if (
+          target.startsWith("now-") ||
+          target.startsWith("act") ||
+          target.startsWith("rest-") ||
+          target.startsWith("levelup-") ||
+          target.startsWith("leave-")
+        ) {
+          return "now";
+        }
+        return null;
+      };
+
+      const applyHashRoute = () => {
+        const target = window.location.hash.replace(/^#/, "").trim();
+        if (!target) return;
+
+        const tab = resolveTabFromTarget(target);
+        if (tab) {
+          if (tab === "setup") {
+            state.setupHidden = false;
+            state.checks["setup-complete"] = false;
+          }
+          state.activeTab = tab;
+        }
+
+        const section = document.getElementById(target);
+        if (section instanceof HTMLDetailsElement) {
+          section.open = true;
+          state.openSections[target] = true;
+        }
+
+        applySetupVisibility();
+        applyTab();
+        saveState();
+      };
+
+      tabButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const tab = button.dataset.tab;
+          if (!tab) return;
+          state.activeTab = tab;
+          applyTab();
+          window.history.replaceState(null, "", `#${tab}`);
+          saveState();
+        });
+      });
+
+      document.querySelectorAll("[data-act]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const act = button.dataset.act;
+          if (!act) return;
+          state.act = act;
+          applyAct();
+          saveState();
+        });
+      });
+
+      document.querySelectorAll("[data-check-id]").forEach((checkbox) => {
+        const key = checkbox.dataset.checkId;
+        if (!key) return;
+        checkbox.checked = Boolean(state.checks[key]);
+        checkbox.addEventListener("change", () => {
+          state.checks[key] = checkbox.checked;
+          if (key === "setup-complete") {
+            state.setupHidden = checkbox.checked;
+            applySetupVisibility();
+            applyTab();
+          }
+          saveState();
+        });
+      });
+
+      sectionDetails.forEach((detail) => {
+        const key = detail.dataset.sectionId;
+        if (!key) return;
+        if (!detail.id) {
+          detail.id = key;
+        }
+        detail.open = Boolean(state.openSections[key]);
+        detail.addEventListener("toggle", () => {
+          state.openSections[key] = detail.open;
+          saveState();
+        });
+      });
+
+      showSetupButton?.addEventListener("click", () => {
+        state.setupHidden = false;
+        state.checks["setup-complete"] = false;
+        if (setupCompleteCheck) setupCompleteCheck.checked = false;
+        state.activeTab = "setup";
+        applySetupVisibility();
+        applyTab();
+        window.history.replaceState(null, "", "#setup");
+        saveState();
+      });
+
+      document.getElementById("reset-button")?.addEventListener("click", () => {
+        const shouldReset = window.confirm("Reset all checkboxes and section states?");
+        if (!shouldReset) return;
+        state.checks = {};
+        state.openSections = {};
+        state.setupHidden = false;
+        state.activeTab = "now";
+        state.act = "act1";
+        localStorage.removeItem(storageKey);
+        window.location.reload();
+      });
+
+      applySetupVisibility();
+      applyAct();
+      applyTab();
+      applyHashRoute();
+      window.addEventListener("hashchange", applyHashRoute);
+      saveState();
+    })();
+  </script>
+</body>
+</html>
