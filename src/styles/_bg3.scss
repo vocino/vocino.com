@@ -8,12 +8,9 @@
 // (--bg, --surface-*, --border, --text-*) and
 // global fonts. Overrides only the accent layer.
 //
-// This file is the reference implementation of
-// the "game guides (mini-sites)" pattern.
-// To add a new guide, see CLAUDE.md →
-// "Game guides (mini-sites)" — clone this file,
-// rename .bg3-* → .<game>-*, and rebind the
-// --section-accent-* block at the section root.
+// One-page layout: sticky TOC nav, flat section
+// cards, anchor jumps. No tabs, no per-section
+// collapsibles — the page is the table.
 // ============================================
 
 .bg3-section {
@@ -25,10 +22,10 @@
   --section-frame: rgba(91, 232, 92, 0.32);
   --section-glow: 0 0 24px rgba(91, 232, 92, 0.22);
 
-  // Multiclass chip palette — used by .bg3-class-chip.
-  --class-cleric: #E0E040;     // sun-warm yellow (radiant)
-  --class-wizard: #4DA3FF;     // arcane blue
-  --class-druid:  #5BE85C;     // green, mirrors section accent
+  // Multiclass chip palette
+  --class-cleric: #E0E040;
+  --class-wizard: #4DA3FF;
+  --class-druid:  #5BE85C;
 
   position: relative;
   z-index: 1;
@@ -37,21 +34,20 @@
 
   .bg3-app {
     width: 100%;
-    max-width: 520px;
+    max-width: 640px;
     margin: 0 auto;
-    padding:
-      $spacing-unit * 2
-      $spacing-unit * 2
-      calc(#{$spacing-unit * 12} + env(safe-area-inset-bottom));
+    padding: $spacing-unit * 2;
 
     @media (min-width: $breakpoint-md) {
-      max-width: 640px;
+      max-width: 800px;
       padding-top: $spacing-unit * 6;
+      padding-bottom: $spacing-unit * 6;
     }
   }
 
+  // ---- Header ----
   .bg3-header {
-    margin-bottom: $spacing-unit * 3;
+    margin-bottom: $spacing-unit * 2;
   }
 
   .bg3-eyebrow {
@@ -87,7 +83,7 @@
     font-size: $font-size-sm;
     color: var(--text-secondary);
     margin: 0 0 $spacing-unit * 2;
-    max-width: 46ch;
+    max-width: 56ch;
   }
 
   .bg3-accent-bar {
@@ -104,388 +100,7 @@
     );
   }
 
-  .bg3-controls {
-    display: flex;
-    gap: $spacing-unit;
-    margin: 0 0 $spacing-unit * 2;
-  }
-
-  .bg3-button {
-    min-height: 44px;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    background: var(--surface-1);
-    color: var(--text-primary);
-    padding: 0 $spacing-unit * 2;
-    font-family: $font-family-mono;
-    font-size: $font-size-xs;
-    text-transform: uppercase;
-    letter-spacing: $label-tracking;
-    cursor: pointer;
-    transition:
-      border-color 0.25s ease,
-      color 0.25s ease,
-      box-shadow 0.25s ease,
-      background 0.25s ease;
-
-    &:hover,
-    &:focus-visible {
-      border-color: var(--section-accent);
-      color: var(--section-accent-bright);
-      box-shadow: var(--section-glow);
-      outline: none;
-    }
-  }
-
-  .bg3-panel {
-    display: none;
-    flex-direction: column;
-    gap: $spacing-unit * 1.5;
-    margin-top: $spacing-unit * 1.5;
-
-    &[aria-hidden="false"] {
-      display: flex;
-    }
-  }
-
-  .bg3-details {
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    background: var(--surface-1);
-    overflow: hidden;
-    transition: border-color 0.25s ease, box-shadow 0.25s ease;
-
-    &[open] {
-      border-color: var(--section-frame);
-    }
-
-    &[open]:focus-within {
-      box-shadow: var(--section-glow);
-    }
-  }
-
-  .bg3-summary {
-    list-style: none;
-    min-height: 48px;
-    display: flex;
-    align-items: center;
-    padding: 12px 14px;
-    cursor: pointer;
-    font-family: $font-family-sans;
-    font-weight: $font-weight-semibold;
-    font-size: $font-size-sm;
-    color: var(--text-primary);
-    position: relative;
-    gap: $spacing-unit;
-    letter-spacing: $tracking-wide;
-
-    &::-webkit-details-marker {
-      display: none;
-    }
-
-    &::after {
-      content: '+';
-      margin-left: auto;
-      color: var(--section-accent);
-      font-family: $font-family-mono;
-      font-size: 18px;
-      line-height: 1;
-    }
-  }
-
-  .bg3-details[open] > .bg3-summary::after {
-    content: '−';
-  }
-
-  .bg3-summary-title {
-    flex: 1 1 auto;
-    min-width: 0;
-  }
-
-  .bg3-count {
-    color: var(--text-muted);
-    font-family: $font-family-mono;
-    font-size: $font-size-xs;
-    font-weight: $font-weight-normal;
-    letter-spacing: $label-tracking;
-    white-space: nowrap;
-    margin-left: $spacing-unit;
-
-    &[data-complete="true"] {
-      color: var(--section-accent-bright);
-    }
-  }
-
-  .bg3-body {
-    padding: 0 14px 12px;
-    border-top: 1px solid var(--border);
-    background: var(--surface-2);
-  }
-
-  .bg3-intro {
-    color: var(--text-secondary);
-    font-size: $font-size-sm;
-    margin: 10px 0 4px;
-  }
-
-  // Checklist primitives — scoped to .bg3-section, names kept short for the data layer.
-  .checklist {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  .checklist li + li {
-    border-top: 1px solid var(--border);
-  }
-
-  .check {
-    min-height: 44px;
-    display: grid;
-    grid-template-columns: 26px 1fr;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 0;
-    cursor: pointer;
-    font-size: $font-size-sm;
-    line-height: $line-height-snug;
-    color: var(--text-primary);
-
-    input[type="checkbox"] {
-      width: 20px;
-      height: 20px;
-      accent-color: var(--section-accent);
-      margin: 0;
-    }
-
-    small {
-      display: block;
-      margin-top: 2px;
-      color: var(--text-muted);
-      font-size: $font-size-xs;
-    }
-  }
-
-  .check-label {
-    display: inline;
-  }
-
-  // Pills (act selector)
-  .pill-row {
-    display: flex;
-    gap: $spacing-unit;
-    flex-wrap: wrap;
-    margin-top: $spacing-unit;
-  }
-
-  .pill {
-    min-height: 40px;
-    border-radius: 999px;
-    border: 1px solid var(--border);
-    background: var(--surface-1);
-    color: var(--text-secondary);
-    padding: 0 $spacing-unit * 2;
-    font-family: $font-family-mono;
-    font-size: $font-size-xs;
-    text-transform: uppercase;
-    letter-spacing: $label-tracking;
-    cursor: pointer;
-    transition:
-      background 0.25s ease,
-      border-color 0.25s ease,
-      color 0.25s ease;
-
-    &[aria-pressed="true"] {
-      background: var(--section-accent-dim);
-      border-color: var(--section-accent);
-      color: var(--section-accent-bright);
-    }
-
-    &:hover,
-    &:focus-visible {
-      border-color: var(--section-accent);
-      color: var(--section-accent-bright);
-      outline: none;
-    }
-  }
-
-  // Tag pills — lore / combat / both / lore-fit-*
-  .tag,
-  .lore-fit {
-    display: inline-block;
-    vertical-align: baseline;
-    margin-left: $spacing-unit;
-    padding: 1px $spacing-unit;
-    border-radius: 999px;
-    font-family: $font-family-mono;
-    font-size: 0.7rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    line-height: 1.6;
-    white-space: nowrap;
-  }
-
-  .tag-lore,
-  .lore-fit-high {
-    background: var(--section-accent-dim);
-    color: var(--section-accent-bright);
-  }
-
-  .tag-combat,
-  .lore-fit-hostile {
-    background: rgba(255, 92, 92, 0.14);
-    color: #FFB7A4;
-  }
-
-  .tag-both,
-  .lore-fit-medium {
-    background: rgba(77, 163, 255, 0.14);
-    color: var(--accent-blue);
-  }
-
-  .lore-fit-low {
-    background: var(--surface-2);
-    color: var(--text-muted);
-    border: 1px solid var(--border);
-  }
-
-  // Build picker — global row between header and panels
-  .bg3-build-picker {
-    margin-top: 0;
-    padding: $spacing-unit * 1.5 0;
-    margin-bottom: $spacing-unit * 2;
-    border-bottom: 1px solid var(--section-frame);
-  }
-
-  // Coven tab build hub
-  .bg3-build-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: $spacing-unit * 2;
-    margin-bottom: $spacing-unit * 2;
-
-    @media (min-width: $breakpoint-md) {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  .bg3-build-card {
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    background: var(--surface-1);
-    padding: $spacing-unit * 2;
-    display: flex;
-    flex-direction: column;
-    gap: $spacing-unit;
-    transition: border-color 0.25s ease, box-shadow 0.25s ease;
-
-    &:hover {
-      border-color: var(--section-frame);
-      box-shadow: var(--section-glow);
-    }
-
-    .bg3-build-card-header {
-      display: flex;
-      align-items: center;
-      gap: $spacing-unit;
-    }
-
-    .bg3-build-card-name {
-      font-family: $font-family-mono;
-      font-size: $font-size-sm;
-      font-weight: $font-weight-semibold;
-      letter-spacing: $label-tracking;
-      text-transform: uppercase;
-      color: var(--text-primary);
-      margin: 0;
-      flex: 1 1 auto;
-
-      &::before { content: '[ '; color: var(--section-accent); }
-      &::after  { content: ' ]'; color: var(--section-accent); }
-    }
-
-    .bg3-build-card-class {
-      font-family: $font-family-mono;
-      font-size: $font-size-xs;
-      color: var(--section-accent);
-      letter-spacing: $label-tracking;
-      margin: 0;
-    }
-
-    .bg3-build-card-role {
-      font-family: $font-family-mono;
-      font-size: $font-size-xs;
-      color: var(--text-muted);
-      letter-spacing: $label-tracking;
-      text-transform: uppercase;
-      margin: 0;
-    }
-
-    .bg3-build-card-summary {
-      font-size: $font-size-sm;
-      color: var(--text-secondary);
-      margin: 0;
-      line-height: $line-height-snug;
-    }
-
-    .bg3-build-card-link {
-      font-family: $font-family-mono;
-      font-size: $font-size-xs;
-      color: var(--section-accent);
-      text-decoration: none;
-      letter-spacing: $label-tracking;
-      margin-top: auto;
-      padding-top: $spacing-unit;
-      border-top: 1px solid var(--border);
-
-      &:hover,
-      &:focus-visible {
-        color: var(--section-accent-bright);
-        text-decoration: none;
-      }
-    }
-  }
-
-  // Empty-state placeholder for builds with no content yet
-  .build-placeholder {
-    text-align: center;
-    padding: $spacing-unit * 4;
-    color: var(--text-muted);
-    font-family: $font-family-mono;
-    font-size: $font-size-xs;
-    text-transform: uppercase;
-    letter-spacing: $label-tracking;
-    border: 1px dashed var(--border);
-    border-radius: 10px;
-  }
-
-  // Companions
-  .companion-meta {
-    color: var(--text-secondary);
-    font-family: $font-family-mono;
-    font-size: $font-size-xs;
-    text-transform: uppercase;
-    letter-spacing: $label-tracking;
-    margin: $spacing-unit 0;
-  }
-
-  .companion-notes {
-    margin: 0;
-    padding-left: 1.1rem;
-    font-size: $font-size-sm;
-    color: var(--text-primary);
-    line-height: $line-height-snug;
-
-    li + li {
-      margin-top: 4px;
-    }
-
-    li::marker {
-      color: var(--section-accent);
-    }
-  }
-
-  // ---- Build at-a-glance card (page header) ----
+  // ---- Build at-a-glance card ----
   .bg3-glance {
     display: grid;
     grid-template-columns: 1fr;
@@ -509,7 +124,7 @@
   }
 
   .bg3-glance-label {
-    flex: 0 0 auto;
+    flex: 0 0 56px;
     font-family: $font-family-mono;
     font-size: $font-size-xs;
     text-transform: uppercase;
@@ -554,7 +169,7 @@
     }
   }
 
-  // ---- Triangle of Death — pinned combat reference ----
+  // ---- Triangle of Death pinned reference ----
   .bg3-triangle {
     margin: 0 0 $spacing-unit * 2;
     padding: $spacing-unit * 1.5;
@@ -629,11 +244,182 @@
     color: var(--section-accent-bright);
   }
 
-  // ---- Class chips on level summaries ----
+  // ---- Sticky TOC nav ----
+  .bg3-toc {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    gap: $spacing-unit;
+    overflow-x: auto;
+    overflow-y: hidden;
+    margin: 0 -#{$spacing-unit * 2} $spacing-unit * 3;
+    padding: $spacing-unit $spacing-unit * 2;
+    background: rgba(15, 20, 25, 0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--section-frame);
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar { display: none; }
+  }
+
+  .bg3-toc-link {
+    flex: 0 0 auto;
+    min-height: 36px;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 $spacing-unit * 1.5;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--surface-1);
+    color: var(--text-secondary);
+    font-family: $font-family-mono;
+    font-size: $font-size-xs;
+    text-transform: uppercase;
+    letter-spacing: $label-tracking;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+
+    &:hover,
+    &:focus-visible {
+      border-color: var(--section-accent);
+      color: var(--section-accent-bright);
+      outline: none;
+    }
+  }
+
+  // ---- Page sections ----
+  .bg3-page-section {
+    margin: 0 0 $spacing-unit * 5;
+    scroll-margin-top: 70px; // clears the sticky TOC on anchor jump
+  }
+
+  .bg3-h2 {
+    font-family: $font-family-mono;
+    font-size: $font-size-md;
+    font-weight: $font-weight-semibold;
+    text-transform: uppercase;
+    letter-spacing: $display-tracking;
+    color: var(--section-accent-bright);
+    margin: 0 0 $spacing-unit * 2;
+    padding-bottom: $spacing-unit;
+    border-bottom: 1px solid var(--section-frame);
+
+    &::before {
+      content: '## ';
+      color: var(--section-accent);
+      opacity: 0.7;
+    }
+  }
+
+  .bg3-h4 {
+    font-family: $font-family-mono;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    text-transform: uppercase;
+    letter-spacing: $label-tracking;
+    color: var(--section-accent);
+    margin: $spacing-unit * 2 0 $spacing-unit;
+
+    &:first-child { margin-top: 0; }
+  }
+
+  // ---- Cards ----
+  .bg3-card {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface-1);
+    padding: $spacing-unit * 1.5;
+    margin: 0 0 $spacing-unit * 1.5;
+  }
+
+  .bg3-card-title {
+    font-family: $font-family-sans;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    letter-spacing: $tracking-wide;
+    color: var(--text-primary);
+    margin: 0 0 $spacing-unit;
+  }
+
+  .bg3-card-header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-unit;
+    margin-bottom: $spacing-unit;
+
+    .bg3-card-title { margin: 0; flex: 1 1 auto; min-width: 0; }
+  }
+
+  // Level cards — flat, with class chip + milestone halo
+  .bg3-level-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-unit * 1.5;
+
+    @media (min-width: $breakpoint-md) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .bg3-level-card { margin: 0; }
+
+  .bg3-card--milestone {
+    border-color: var(--section-frame);
+    background:
+      linear-gradient(180deg, var(--section-accent-soft) 0, transparent 60%),
+      var(--surface-1);
+    position: relative;
+
+    .bg3-card-title {
+      color: var(--section-accent-bright);
+    }
+
+    &::before {
+      content: '★';
+      position: absolute;
+      top: 8px;
+      right: 12px;
+      color: var(--section-accent);
+      font-size: 11px;
+      opacity: 0.65;
+      pointer-events: none;
+    }
+  }
+
+  // Gear grid — 1 col phone, 3 col desktop
+  .bg3-gear-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-unit * 1.5;
+
+    @media (min-width: $breakpoint-md) {
+      grid-template-columns: repeat(3, 1fr);
+      align-items: start;
+    }
+  }
+
+  .bg3-gear-card { margin: 0; }
+
+  // Act stack inside Don't Leave Act Without
+  .bg3-act-stack {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-unit * 1.5;
+
+    @media (min-width: $breakpoint-md) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .bg3-act-block {
+    min-width: 0;
+  }
+
+  // ---- Class chip ----
   .bg3-class-chip {
     display: inline-block;
-    margin-left: auto;
-    margin-right: $spacing-unit;
     padding: 2px 8px;
     border-radius: 999px;
     font-family: $font-family-mono;
@@ -649,132 +435,208 @@
     &[data-class="druid"]  { color: var(--class-druid);  }
   }
 
-  // Push the +/- glyph past the chip
-  .bg3-details:has(.bg3-class-chip) > .bg3-summary {
-    .bg3-summary-title { flex: 0 1 auto; }
-    .bg3-count { margin-right: $spacing-unit; }
+  // ---- Intro text inside cards ----
+  .bg3-intro {
+    color: var(--text-secondary);
+    font-size: $font-size-sm;
+    margin: 0 0 $spacing-unit;
+    line-height: $line-height-snug;
   }
 
-  // ---- Milestone halo on key levels ----
-  .bg3-details--milestone {
-    border-color: var(--section-frame);
-    background:
-      linear-gradient(
-        180deg,
-        var(--section-accent-soft) 0,
-        transparent 60%
-      ),
-      var(--surface-1);
+  // ---- Checklist primitives ----
+  .checklist {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
 
-    > .bg3-summary {
-      .bg3-summary-title {
-        color: var(--section-accent-bright);
-      }
+  .checklist li + li {
+    border-top: 1px solid var(--border);
+  }
+
+  .check {
+    min-height: 40px;
+    display: grid;
+    grid-template-columns: 26px 1fr;
+    align-items: start;
+    gap: 10px;
+    padding: 8px 0;
+    cursor: pointer;
+    font-size: $font-size-sm;
+    line-height: $line-height-snug;
+    color: var(--text-primary);
+
+    input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      margin-top: 1px;
+      accent-color: var(--section-accent);
     }
 
-    &::before {
-      content: '★';
-      position: absolute;
-      top: 8px;
-      right: -4px;
+    small {
+      display: block;
+      margin-top: 2px;
+      color: var(--text-muted);
+      font-size: $font-size-xs;
+    }
+  }
+
+  .check-label {
+    display: inline;
+  }
+
+  // ---- Tag pills ----
+  .tag,
+  .lore-fit {
+    display: inline-block;
+    vertical-align: baseline;
+    margin-left: $spacing-unit;
+    padding: 1px $spacing-unit;
+    border-radius: 999px;
+    font-family: $font-family-mono;
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1.6;
+    white-space: nowrap;
+  }
+
+  .tag-lore,
+  .lore-fit-high {
+    background: var(--section-accent-dim);
+    color: var(--section-accent-bright);
+  }
+
+  .tag-combat,
+  .lore-fit-hostile {
+    background: rgba(255, 92, 92, 0.14);
+    color: #FFB7A4;
+  }
+
+  .tag-both,
+  .lore-fit-medium {
+    background: rgba(77, 163, 255, 0.14);
+    color: var(--accent-blue);
+  }
+
+  .lore-fit-low {
+    background: var(--surface-2);
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+  }
+
+  // ---- Coven companion build grid ----
+  .bg3-build-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-unit * 1.5;
+    margin-top: $spacing-unit * 1.5;
+
+    @media (min-width: $breakpoint-md) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .bg3-build-card {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface-1);
+    padding: $spacing-unit * 1.5;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-unit * 0.5;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+
+    &:hover {
+      border-color: var(--section-frame);
+      box-shadow: var(--section-glow);
+    }
+
+    .bg3-build-card-header {
+      display: flex;
+      align-items: center;
+      gap: $spacing-unit;
+    }
+
+    .bg3-build-card-name {
+      font-family: $font-family-mono;
+      font-size: $font-size-sm;
+      font-weight: $font-weight-semibold;
+      letter-spacing: $label-tracking;
+      text-transform: uppercase;
+      color: var(--text-primary);
+      margin: 0;
+      flex: 1 1 auto;
+
+      &::before { content: '[ '; color: var(--section-accent); }
+      &::after  { content: ' ]'; color: var(--section-accent); }
+    }
+
+    .bg3-build-card-class {
+      font-family: $font-family-mono;
+      font-size: $font-size-xs;
       color: var(--section-accent);
-      font-size: 10px;
-      opacity: 0.65;
-      pointer-events: none;
+      letter-spacing: $label-tracking;
+      margin: 0;
     }
 
-    position: relative;
+    .bg3-build-card-role {
+      font-family: $font-family-mono;
+      font-size: $font-size-xs;
+      color: var(--text-muted);
+      letter-spacing: $label-tracking;
+      text-transform: uppercase;
+      margin: 0;
+    }
+
+    .bg3-build-card-summary {
+      font-size: $font-size-sm;
+      color: var(--text-secondary);
+      margin: $spacing-unit 0 0;
+      line-height: $line-height-snug;
+    }
+  }
+
+  .companion-meta {
+    color: var(--text-secondary);
+    font-family: $font-family-mono;
+    font-size: $font-size-xs;
+    text-transform: uppercase;
+    letter-spacing: $label-tracking;
+    margin: $spacing-unit 0 0;
+  }
+
+  // ---- Footer ----
+  .bg3-footer-controls {
+    margin: $spacing-unit * 4 0 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .bg3-button {
+    min-height: 44px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface-1);
+    color: var(--text-primary);
+    padding: 0 $spacing-unit * 2;
+    font-family: $font-family-mono;
+    font-size: $font-size-xs;
+    text-transform: uppercase;
+    letter-spacing: $label-tracking;
+    cursor: pointer;
+    transition: border-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+
+    &:hover,
+    &:focus-visible {
+      border-color: var(--section-accent);
+      color: var(--section-accent-bright);
+      box-shadow: var(--section-glow);
+      outline: none;
+    }
   }
 
   .hidden {
     display: none !important;
   }
-}
-
-// Fixed bottom tabbar — lives outside .bg3-section visually
-// but inherits the section accent via CSS variables on .bg3-tabbar.
-.bg3-section ~ .bg3-tabbar,
-.bg3-tabbar {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 20;
-  border-top: 1px solid var(--border);
-  background: rgba(15, 20, 25, 0.92);
-  backdrop-filter: blur(10px);
-
-  // Re-declare so the tabbar can sit at the body root and still pick up the accent.
-  --section-accent: #5BE85C;
-  --section-accent-bright: #9CFFA0;
-  --section-accent-dim: rgba(91, 232, 92, 0.18);
-  --section-glow: 0 0 18px rgba(91, 232, 92, 0.22);
-
-  // Offset from the persistent sidebar on desktop
-  @media (min-width: $breakpoint-md) {
-    left: var(--sb-expanded, 240px);
-    transition: left 0.22s ease;
-  }
-}
-
-html[data-sidebar-collapsed='true'] {
-  @media (min-width: $breakpoint-md) {
-    .bg3-section ~ .bg3-tabbar,
-    .bg3-tabbar {
-      left: var(--sb-collapsed, 60px);
-    }
-  }
-}
-
-.bg3-tabbar-inner {
-  max-width: 520px;
-  margin: 0 auto;
-  padding:
-    $spacing-unit
-    calc(#{$spacing-unit * 1.5})
-    calc(#{$spacing-unit} + env(safe-area-inset-bottom));
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: $spacing-unit;
-
-  @media (min-width: $breakpoint-md) {
-    max-width: 640px;
-  }
-}
-
-.bg3-tab {
-  min-height: 44px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  background: var(--surface-1);
-  color: var(--text-secondary);
-  font-family: $font-family-mono;
-  font-size: $font-size-xs;
-  text-transform: uppercase;
-  letter-spacing: $label-tracking;
-  cursor: pointer;
-  padding: 0 4px;
-  transition:
-    background 0.25s ease,
-    border-color 0.25s ease,
-    color 0.25s ease,
-    box-shadow 0.25s ease;
-
-  &[aria-selected="true"] {
-    background: var(--section-accent-dim);
-    border-color: var(--section-accent);
-    color: var(--section-accent-bright);
-    box-shadow: var(--section-glow);
-  }
-
-  &:hover,
-  &:focus-visible {
-    border-color: var(--section-accent);
-    color: var(--section-accent-bright);
-    outline: none;
-  }
-}
-
-.bg3-tab.hidden {
-  display: none !important;
 }
