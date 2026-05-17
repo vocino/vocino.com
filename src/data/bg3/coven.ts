@@ -4,36 +4,36 @@ export const coreParty: CheckSection = {
   id: 'coven-core-party',
   title: 'Party Roles',
   intro:
-    'Recommended field team for this run. Respec companions at Withers to match — open their build cards for level plans when ready.',
+    'Female companions, retooled to back the Deathreaper. Respec at Withers as needed — open each build card for the L1-L12 plan.',
   items: [
     {
       id: 'core-shadowheart',
-      label: 'Shadowheart — Aid, Spirit Guardians, healing',
-      note: '+5 approval for opening the Thay book.',
+      label: 'Shadowheart — second healer + radiant support',
+      note: 'You own necrotic; Shart covers Spirit Guardians (radiant) and Healing Word. +5 approval for opening the Thay book.',
       tag: 'lore'
     },
     {
       id: 'core-laezel',
-      label: 'Lae\'zel — frontline, Githyanki mobility',
-      note: '−5 approval for thralls in dialogue scenes.',
+      label: "Lae'zel — frontline, Githyanki mobility",
+      note: 'Holds enemies in your Spirit Guardians aura. Misty Step pressure on back-line targets.',
       tag: 'combat'
     },
     {
       id: 'core-karlach',
       label: 'Karlach — throw build, damage sponge',
-      note: '−5 approval for raising corpses in town.',
+      note: 'Draws aggro off the dual-crossbow stance. Throw build keeps her relevant at range.',
       tag: 'combat'
     },
     {
       id: 'core-minthara',
-      label: 'Minthara (optional) — Oathbreaker Paladin 7 / Necromancy Wizard 5',
-      note: '+5 approval for ruthless necromancy choices. Recruit at Grove or Moonrise.',
+      label: 'Minthara (optional) — Oathbreaker Paladin / Necromancy Wizard',
+      note: 'Aura of Hate stacks with your Divine Strike. +5 approval for ruthless necromancy choices.',
       tag: 'both'
     },
     {
       id: 'core-jaheira',
       label: 'Jaheira (swap-in) — Circle of Spores Druid',
-      note: 'Nature control if you want a fifth — moral foil to Thay scholarship.',
+      note: 'If you want a second Spores caster — moral foil to your Kelemvor / Myrkul frame.',
       tag: 'lore'
     }
   ]
@@ -43,16 +43,16 @@ export const loreRules: CheckSection = {
   id: 'coven-lore-rules',
   title: 'Scholar Stance',
   intro:
-    'Play necromancy as study, not cruelty. Permit temporary animation for protection and research, then release thralls. Oppose permanent forced undeath. The Thay book is a primary source; Danse Macabre from the Tharchiate Codex is the culmination of your thesis.',
+    'Play necromancy as study, not cruelty. You serve Kelemvor (or Myrkul) — death is a domain to catalogue, not an army to recruit. Spirit Guardians and Divine Strike do the work that thralls would, without the war crimes.',
   items: [
     {
       id: 'lore-scholar-frame',
-      label: 'Frame Tav as Thay-adjacent scholar — catalogue death, do not worship it',
+      label: 'Frame Tav as a scholar of mortality — catalogue death, do not worship it',
       tag: 'lore'
     },
     {
-      id: 'lore-release-thralls',
-      label: 'Animate for protection and research, then release thralls',
+      id: 'lore-no-armies',
+      label: 'No undead armies — Reaper twins your cantrips so you do not need bodies',
       tag: 'lore'
     },
     {
@@ -60,17 +60,35 @@ export const loreRules: CheckSection = {
       label: 'Use Speak with Dead as an interview tool before looting crypts and tombs',
       tag: 'lore'
     },
-    { id: 'lore-thay-read', label: 'Read Necromancy of Thay in Act 1; keep the book as a primary source through Act 2', tag: 'lore' },
-    { id: 'lore-danse', label: 'Permanent Danse Macabre via Tharchiate Codex — the culmination of your thesis', tag: 'lore' },
-    { id: 'lore-savant-scribe', label: 'Scribe necromancy scrolls at Savant cost (25 gp per spell level)' },
-    { id: 'lore-name-thralls', label: 'Name your thralls; catalogue them like specimens' },
-    { id: 'lore-balthazar-kill', label: 'Kill Balthazar for Circle of Bones — do not side with him', tag: 'both' },
+    {
+      id: 'lore-thay-optional',
+      label: 'Necromancy of Thay → Tharchiate Codex: free Danse Macabre for the rare bodies-night',
+      tag: 'lore'
+    },
+    {
+      id: 'lore-savant-scribe',
+      label: 'After Wizard 2: scribe necromancy scrolls at Savant cost (25 gp per spell level)',
+      tag: 'lore'
+    },
+    {
+      id: 'lore-balthazar-kill',
+      label: 'Kill Balthazar — do not side with him',
+      tag: 'lore'
+    },
+    {
+      id: 'lore-nightsong-free',
+      label: 'Free Nightsong — oppose permanent forced undeath',
+      tag: 'lore'
+    },
     {
       id: 'lore-mystic-carrion',
-      label: 'Mystic Carrion: complete his errand, destroy the four jars, then kill him',
-      tag: 'both'
+      label: 'Mystic Carrion: complete the errand, destroy the jars, then kill him',
+      tag: 'lore'
     },
-    { id: 'lore-nightsong-free', label: 'Free Nightsong — oppose permanent forced undeath', tag: 'lore' },
-    { id: 'lore-refuse-illithid', label: 'Refuse illithid tadpole powers — your path is mortal necromancy', tag: 'lore' }
+    {
+      id: 'lore-refuse-illithid',
+      label: 'Refuse illithid tadpole powers — your path is mortal necromancy',
+      tag: 'lore'
+    }
   ]
 };

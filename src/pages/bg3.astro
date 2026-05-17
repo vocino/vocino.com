@@ -9,26 +9,61 @@ import {
   afterLevelUp,
   beforeLeaving,
   thayReading,
-  approvalGates
+  approvalGates,
+  triangleOfDeath
 } from "../data/bg3/now";
 import { coreParty, loreRules } from "../data/bg3/coven";
 import { builds } from "../data/bg3/builds/index";
 
 const covenBuilds = builds.filter((b) => b.id !== "pc-necromancer");
+const pcBuild = builds.find((b) => b.id === "pc-necromancer");
+const glance = pcBuild?.glance;
 ---
 
 <BaseLayout
-  title="BG3 Patch 8 Necromancer Guide — Vocino"
-  description="Patch 8 second-screen companion: Human Wizard Necromancer, Thayvian scholar. Pure Wizard 12 or optional Death Domain dip after level 6."
+  title="BG3 Patch 8 Deathreaper Guide — Vocino"
+  description="Patch 8 second-screen companion: Human Death Domain Cleric who dual-wields hand crossbows. 8 Cleric / 2 Necromancy Wizard / 2 Spore Druid. No undead armies."
 >
   <section class="bg3-section">
     <div class="bg3-app">
       <header class="bg3-header">
         <span class="bg3-eyebrow">guide · baldur's gate 3</span>
-        <h1 class="bg3-title">Necromancer Guide</h1>
+        <h1 class="bg3-title">Deathreaper Guide</h1>
         <span class="bg3-accent-bar" aria-hidden="true"></span>
-        <p class="bg3-subtitle">Patch 8 · Human Wizard Necromancy · Thayvian scholar who catalogues death. Pure Wizard 12, or Wizard 11 / Death Cleric 1 after L6. Phone first.</p>
+        <p class="bg3-subtitle">Patch 8 · Human Death Domain Cleric · Triangle of Death cantrips, dual hand crossbows, no undead armies. Phone first.</p>
       </header>
+
+      {glance && (
+        <aside id="pc-glance" class="bg3-glance" aria-label="Build at a glance">
+          <div class="bg3-glance-row">
+            <span class="bg3-glance-label">Split</span>
+            <span class="bg3-glance-value bg3-glance-split">
+              {glance.split.split('/').map((seg, i) => (
+                <>
+                  <span
+                    class="bg3-glance-segment"
+                    data-count={seg.trim()}
+                    style={`--class-color: var(--class-${(glance.classes[i] || '').toLowerCase()})`}
+                  >{glance.classes[i]}</span>
+                  {i < glance.classes.length - 1 && <span class="bg3-glance-sep">·</span>}
+                </>
+              ))}
+            </span>
+          </div>
+          <div class="bg3-glance-row">
+            <span class="bg3-glance-label">Stat</span>
+            <span class="bg3-glance-value"><strong>{glance.dominantStat}</strong></span>
+          </div>
+          <div class="bg3-glance-row">
+            <span class="bg3-glance-label">Role</span>
+            <span class="bg3-glance-value">{pcBuild!.role}</span>
+          </div>
+          <div class="bg3-glance-row">
+            <span class="bg3-glance-label">Feats</span>
+            <span class="bg3-glance-value">{glance.feats.join(' · ')}</span>
+          </div>
+        </aside>
+      )}
 
       <div class="bg3-controls">
         <button id="show-setup-button" class="bg3-button hidden" type="button">Show Setup</button>
@@ -49,6 +84,19 @@ const covenBuilds = builds.filter((b) => b.id !== "pc-necromancer");
 
       <!-- NOW — shared across all builds -->
       <section id="now-panel" class="bg3-panel" data-tab-panel="now" aria-hidden="false">
+        <aside id={triangleOfDeath.id} class="bg3-triangle" aria-label={triangleOfDeath.title}>
+          <h2 class="bg3-triangle-title">{triangleOfDeath.title}</h2>
+          {triangleOfDeath.intro && <p class="bg3-triangle-intro">{triangleOfDeath.intro}</p>}
+          <div class="bg3-triangle-rows">
+            {triangleOfDeath.rows.map((row) => (
+              <div class="bg3-triangle-row">
+                <span class="bg3-triangle-stat">{row.stat}</span>
+                <span class="bg3-triangle-cantrip">{row.cantrip}</span>
+              </div>
+            ))}
+          </div>
+        </aside>
+
         <details class="bg3-details" data-section-id="now-act-selector" data-no-count>
           <summary class="bg3-summary"><span class="bg3-summary-title">Spot Check</span></summary>
           <div class="bg3-body">
@@ -135,8 +183,16 @@ const covenBuilds = builds.filter((b) => b.id !== "pc-necromancer");
           <div data-build-list={build.id} class={build.id !== "pc-necromancer" ? "hidden" : ""}>
             {build.levels.length > 0
               ? build.levels.map((level) => (
-                <details class="bg3-details" data-section-id={`${build.shortId}-${level.id}`}>
-                  <summary class="bg3-summary"><span class="bg3-summary-title">{level.title}</span></summary>
+                <details
+                  class:list={["bg3-details", level.milestone && "bg3-details--milestone"]}
+                  data-section-id={`${build.shortId}-${level.id}`}
+                >
+                  <summary class="bg3-summary">
+                    <span class="bg3-summary-title">{level.title}</span>
+                    {level.levelClass && (
+                      <span class="bg3-class-chip" data-class={level.levelClass}>{level.levelClass}</span>
+                    )}
+                  </summary>
                   <div class="bg3-body">
                     {level.intro && <p class="bg3-intro">{level.intro}</p>}
                     <BG3Checklist items={level.items} idPrefix={build.shortId} />
