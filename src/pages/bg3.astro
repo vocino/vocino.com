@@ -15,9 +15,18 @@ import {
 import { coreParty, loreRules } from "../data/bg3/coven";
 import { builds } from "../data/bg3/builds/index";
 
+const pcBuild = builds.find((b) => b.id === "pc-necromancer")!;
+const glance = pcBuild.glance;
 const covenBuilds = builds.filter((b) => b.id !== "pc-necromancer");
-const pcBuild = builds.find((b) => b.id === "pc-necromancer");
-const glance = pcBuild?.glance;
+
+const sections = [
+  { id: "setup",  label: "Setup" },
+  { id: "levels", label: "Levels" },
+  { id: "gear",   label: "Gear" },
+  { id: "quests", label: "Quests & Lore" },
+  { id: "combat", label: "Combat & Rest" },
+  { id: "coven",  label: "Coven" }
+];
 ---
 
 <BaseLayout
@@ -30,11 +39,11 @@ const glance = pcBuild?.glance;
         <span class="bg3-eyebrow">guide · baldur's gate 3</span>
         <h1 class="bg3-title">Deathreaper Guide</h1>
         <span class="bg3-accent-bar" aria-hidden="true"></span>
-        <p class="bg3-subtitle">Patch 8 · Human Death Domain Cleric · Triangle of Death cantrips, dual hand crossbows, no undead armies. Phone first.</p>
+        <p class="bg3-subtitle">Patch 8 · Human Death Domain Cleric · Triangle of Death cantrips, dual hand crossbows, no undead armies.</p>
       </header>
 
       {glance && (
-        <aside id="pc-glance" class="bg3-glance" aria-label="Build at a glance">
+        <aside class="bg3-glance" aria-label="Build at a glance">
           <div class="bg3-glance-row">
             <span class="bg3-glance-label">Split</span>
             <span class="bg3-glance-value bg3-glance-split">
@@ -56,7 +65,7 @@ const glance = pcBuild?.glance;
           </div>
           <div class="bg3-glance-row">
             <span class="bg3-glance-label">Role</span>
-            <span class="bg3-glance-value">{pcBuild!.role}</span>
+            <span class="bg3-glance-value">{pcBuild.role}</span>
           </div>
           <div class="bg3-glance-row">
             <span class="bg3-glance-label">Feats</span>
@@ -65,596 +74,208 @@ const glance = pcBuild?.glance;
         </aside>
       )}
 
-      <div class="bg3-controls">
-        <button id="show-setup-button" class="bg3-button hidden" type="button">Show Setup</button>
-        <button id="reset-button" class="bg3-button" type="button">Reset</button>
-      </div>
-
-      <div class="bg3-build-picker pill-row" role="radiogroup" aria-label="Active build">
-        {builds.map((build) => (
-          <button
-            type="button"
-            class="pill"
-            data-build={build.id}
-            data-build-short={build.shortId}
-            aria-pressed={build.id === "pc-necromancer" ? "true" : "false"}
-          >{build.pcLabel ?? build.name}</button>
-        ))}
-      </div>
-
-      <!-- NOW — shared across all builds -->
-      <section id="now-panel" class="bg3-panel" data-tab-panel="now" aria-hidden="false">
-        <aside id={triangleOfDeath.id} class="bg3-triangle" aria-label={triangleOfDeath.title}>
-          <h2 class="bg3-triangle-title">{triangleOfDeath.title}</h2>
-          {triangleOfDeath.intro && <p class="bg3-triangle-intro">{triangleOfDeath.intro}</p>}
-          <div class="bg3-triangle-rows">
-            {triangleOfDeath.rows.map((row) => (
-              <div class="bg3-triangle-row">
-                <span class="bg3-triangle-stat">{row.stat}</span>
-                <span class="bg3-triangle-cantrip">{row.cantrip}</span>
-              </div>
-            ))}
-          </div>
-        </aside>
-
-        <details class="bg3-details" data-section-id="now-act-selector" data-no-count>
-          <summary class="bg3-summary"><span class="bg3-summary-title">Spot Check</span></summary>
-          <div class="bg3-body">
-            <p class="bg3-intro">Act selector</p>
-            <div class="pill-row" role="radiogroup" aria-label="Act selector">
-              <button type="button" class="pill" data-act="act1" aria-pressed="true">Act 1</button>
-              <button type="button" class="pill" data-act="act2" aria-pressed="false">Act 2</button>
-              <button type="button" class="pill" data-act="act3" aria-pressed="false">Act 3</button>
+      <aside id={triangleOfDeath.id} class="bg3-triangle" aria-label={triangleOfDeath.title}>
+        <h2 class="bg3-triangle-title">{triangleOfDeath.title}</h2>
+        {triangleOfDeath.intro && <p class="bg3-triangle-intro">{triangleOfDeath.intro}</p>}
+        <div class="bg3-triangle-rows">
+          {triangleOfDeath.rows.map((row) => (
+            <div class="bg3-triangle-row">
+              <span class="bg3-triangle-stat">{row.stat}</span>
+              <span class="bg3-triangle-cantrip">{row.cantrip}</span>
             </div>
-          </div>
-        </details>
+          ))}
+        </div>
+      </aside>
 
-        <details class="bg3-details" data-section-id="now-dont-leave">
-          <summary class="bg3-summary"><span class="bg3-summary-title">Don't Leave Act Without</span></summary>
-          <div class="bg3-body">
-            <div data-act-list="act1">
+      <nav class="bg3-toc" aria-label="Jump to section">
+        {sections.map((s) => (
+          <a class="bg3-toc-link" href={`#${s.id}`}>{s.label}</a>
+        ))}
+      </nav>
+
+      <section id="setup" class="bg3-page-section">
+        <h2 class="bg3-h2">Character Creation</h2>
+        {pcBuild.setup
+          .filter((section) => section.id !== "setup-complete-section")
+          .map((section) => (
+            <article class="bg3-card">
+              <h3 class="bg3-card-title">{section.title}</h3>
+              {section.intro && <p class="bg3-intro">{section.intro}</p>}
+              <BG3Checklist items={section.items} idPrefix={pcBuild.shortId} />
+            </article>
+          ))}
+      </section>
+
+      <section id="levels" class="bg3-page-section">
+        <h2 class="bg3-h2">Level Progression</h2>
+        <div class="bg3-level-grid">
+          {pcBuild.levels.map((level) => (
+            <article class:list={["bg3-card bg3-level-card", level.milestone && "bg3-card--milestone"]}>
+              <header class="bg3-card-header">
+                <h3 class="bg3-card-title">{level.title}</h3>
+                {level.levelClass && (
+                  <span class="bg3-class-chip" data-class={level.levelClass}>{level.levelClass}</span>
+                )}
+              </header>
+              {level.intro && <p class="bg3-intro">{level.intro}</p>}
+              <BG3Checklist items={level.items} idPrefix={pcBuild.shortId} />
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section id="gear" class="bg3-page-section">
+        <h2 class="bg3-h2">Gear by Act</h2>
+        <div class="bg3-gear-grid">
+          {pcBuild.gear.map((section) => (
+            <article class="bg3-card bg3-gear-card">
+              <h3 class="bg3-card-title">{section.title}</h3>
+              <BG3Checklist items={section.items} idPrefix={pcBuild.shortId} />
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section id="quests" class="bg3-page-section">
+        <h2 class="bg3-h2">Quests & Lore</h2>
+        <article class="bg3-card">
+          <h3 class="bg3-card-title">{criticalQuests.title}</h3>
+          {criticalQuests.intro && <p class="bg3-intro">{criticalQuests.intro}</p>}
+          <BG3Checklist items={criticalQuests.items} />
+        </article>
+        <article class="bg3-card">
+          <h3 class="bg3-card-title">{loreRules.title}</h3>
+          {loreRules.intro && <p class="bg3-intro">{loreRules.intro}</p>}
+          <BG3Checklist items={loreRules.items} />
+        </article>
+        <article class="bg3-card">
+          <h3 class="bg3-card-title">{thayReading.title}</h3>
+          {thayReading.intro && <p class="bg3-intro">{thayReading.intro}</p>}
+          <BG3Checklist items={thayReading.items} />
+        </article>
+      </section>
+
+      <section id="combat" class="bg3-page-section">
+        <h2 class="bg3-h2">Combat & Rest</h2>
+        <article class="bg3-card">
+          <h3 class="bg3-card-title">{combatLoop.title}</h3>
+          {combatLoop.intro && <p class="bg3-intro">{combatLoop.intro}</p>}
+          <BG3Checklist items={combatLoop.items} />
+        </article>
+        <article class="bg3-card">
+          <h3 class="bg3-card-title">Don't Leave Act Without</h3>
+          <div class="bg3-act-stack">
+            <div class="bg3-act-block">
+              <h4 class="bg3-h4">Act 1</h4>
               <BG3Checklist items={dontLeaveByAct.act1} />
             </div>
-            <div data-act-list="act2" class="hidden">
+            <div class="bg3-act-block">
+              <h4 class="bg3-h4">Act 2</h4>
               <BG3Checklist items={dontLeaveByAct.act2} />
             </div>
-            <div data-act-list="act3" class="hidden">
+            <div class="bg3-act-block">
+              <h4 class="bg3-h4">Act 3</h4>
               <BG3Checklist items={dontLeaveByAct.act3} />
             </div>
           </div>
-        </details>
-
-        <details class="bg3-details" data-section-id={criticalQuests.id}>
-          <summary class="bg3-summary"><span class="bg3-summary-title">{criticalQuests.title}</span></summary>
-          <div class="bg3-body">
-            {criticalQuests.intro && <p class="bg3-intro">{criticalQuests.intro}</p>}
-            <BG3Checklist items={criticalQuests.items} />
-          </div>
-        </details>
-
-        <details class="bg3-details" data-section-id={combatLoop.id}>
-          <summary class="bg3-summary"><span class="bg3-summary-title">{combatLoop.title}</span></summary>
-          <div class="bg3-body">
-            {combatLoop.intro && <p class="bg3-intro">{combatLoop.intro}</p>}
-            <BG3Checklist items={combatLoop.items} />
-          </div>
-        </details>
-
-        <details class="bg3-details" data-section-id={beforeLongRest.id}>
-          <summary class="bg3-summary"><span class="bg3-summary-title">{beforeLongRest.title}</span></summary>
-          <div class="bg3-body">
-            <BG3Checklist items={beforeLongRest.items} />
-          </div>
-        </details>
-
-        <details class="bg3-details" data-section-id={thayReading.id}>
-          <summary class="bg3-summary"><span class="bg3-summary-title">{thayReading.title}</span></summary>
-          <div class="bg3-body">
-            {thayReading.intro && <p class="bg3-intro">{thayReading.intro}</p>}
-            <BG3Checklist items={thayReading.items} />
-          </div>
-        </details>
-
-        <details class="bg3-details" data-section-id={approvalGates.id}>
-          <summary class="bg3-summary"><span class="bg3-summary-title">{approvalGates.title}</span></summary>
-          <div class="bg3-body">
-            <BG3Checklist items={approvalGates.items} />
-          </div>
-        </details>
-
-        <details class="bg3-details" data-section-id={afterLevelUp.id}>
-          <summary class="bg3-summary"><span class="bg3-summary-title">{afterLevelUp.title}</span></summary>
-          <div class="bg3-body">
-            <BG3Checklist items={afterLevelUp.items} />
-          </div>
-        </details>
-
-        <details class="bg3-details" data-section-id={beforeLeaving.id}>
-          <summary class="bg3-summary"><span class="bg3-summary-title">{beforeLeaving.title}</span></summary>
-          <div class="bg3-body">
-            <BG3Checklist items={beforeLeaving.items} />
-          </div>
-        </details>
+        </article>
+        <article class="bg3-card">
+          <h3 class="bg3-card-title">{beforeLongRest.title}</h3>
+          <BG3Checklist items={beforeLongRest.items} />
+        </article>
+        <article class="bg3-card">
+          <h3 class="bg3-card-title">{beforeLeaving.title}</h3>
+          <BG3Checklist items={beforeLeaving.items} />
+        </article>
+        <article class="bg3-card">
+          <h3 class="bg3-card-title">{afterLevelUp.title}</h3>
+          <BG3Checklist items={afterLevelUp.items} />
+        </article>
+        <article class="bg3-card">
+          <h3 class="bg3-card-title">{approvalGates.title}</h3>
+          <BG3Checklist items={approvalGates.items} />
+        </article>
       </section>
 
-      <!-- LEVELS — per build -->
-      <section id="levels-panel" class="bg3-panel" data-tab-panel="levels" aria-hidden="true">
-        {builds.map((build) => (
-          <div data-build-list={build.id} class={build.id !== "pc-necromancer" ? "hidden" : ""}>
-            {build.levels.length > 0
-              ? build.levels.map((level) => (
-                <details
-                  class:list={["bg3-details", level.milestone && "bg3-details--milestone"]}
-                  data-section-id={`${build.shortId}-${level.id}`}
-                >
-                  <summary class="bg3-summary">
-                    <span class="bg3-summary-title">{level.title}</span>
-                    {level.levelClass && (
-                      <span class="bg3-class-chip" data-class={level.levelClass}>{level.levelClass}</span>
-                    )}
-                  </summary>
-                  <div class="bg3-body">
-                    {level.intro && <p class="bg3-intro">{level.intro}</p>}
-                    <BG3Checklist items={level.items} idPrefix={build.shortId} />
-                  </div>
-                </details>
-              ))
-              : <p class="build-placeholder">Level guide coming soon.</p>
-            }
-          </div>
-        ))}
-      </section>
-
-      <!-- GEAR — per build -->
-      <section id="gear-panel" class="bg3-panel" data-tab-panel="gear" aria-hidden="true">
-        {builds.map((build) => (
-          <div data-build-list={build.id} class={build.id !== "pc-necromancer" ? "hidden" : ""}>
-            {build.gear.length > 0
-              ? build.gear.map((section) => (
-                <details class="bg3-details" data-section-id={`${build.shortId}-${section.id}`} data-no-count>
-                  <summary class="bg3-summary"><span class="bg3-summary-title">{section.title}</span></summary>
-                  <div class="bg3-body">
-                    <BG3Checklist items={section.items} idPrefix={build.shortId} />
-                  </div>
-                </details>
-              ))
-              : <p class="build-placeholder">Gear guide coming soon.</p>
-            }
-          </div>
-        ))}
-      </section>
-
-      <!-- COVEN — build hub (5 companions) + lore rules -->
-      <section id="coven-panel" class="bg3-panel" data-tab-panel="coven" aria-hidden="true">
-        <details class="bg3-details" data-section-id={coreParty.id} data-no-count>
-          <summary class="bg3-summary"><span class="bg3-summary-title">{coreParty.title}</span></summary>
-          <div class="bg3-body">
-            {coreParty.intro && <p class="bg3-intro">{coreParty.intro}</p>}
-            <BG3Checklist items={coreParty.items} />
-          </div>
-        </details>
-
+      <section id="coven" class="bg3-page-section">
+        <h2 class="bg3-h2">Coven</h2>
+        <article class="bg3-card">
+          <h3 class="bg3-card-title">{coreParty.title}</h3>
+          {coreParty.intro && <p class="bg3-intro">{coreParty.intro}</p>}
+          <BG3Checklist items={coreParty.items} />
+        </article>
         <div class="bg3-build-grid">
           {covenBuilds.map((build) => (
             <article class="bg3-build-card">
               <div class="bg3-build-card-header">
-                <h2 class="bg3-build-card-name">{build.name}</h2>
+                <h3 class="bg3-build-card-name">{build.name}</h3>
                 {build.loreFit && <span class={`lore-fit lore-fit-${build.loreFit}`}>{build.loreFit}</span>}
               </div>
               <p class="bg3-build-card-class">{build.className}</p>
               <p class="bg3-build-card-role">{build.role}</p>
               <p class="bg3-build-card-summary">{build.summary}</p>
               {build.recruit && <p class="companion-meta">{build.recruit}</p>}
-              <a class="bg3-build-card-link" href={`#build-${build.shortId}`}>Open build →</a>
             </article>
           ))}
         </div>
-
-        <details class="bg3-details" data-section-id={loreRules.id} data-no-count>
-          <summary class="bg3-summary"><span class="bg3-summary-title">{loreRules.title}</span></summary>
-          <div class="bg3-body">
-            {loreRules.intro && <p class="bg3-intro">{loreRules.intro}</p>}
-            <BG3Checklist items={loreRules.items} />
-          </div>
-        </details>
       </section>
 
-      <!-- SETUP — per build -->
-      <section id="setup-panel" class="bg3-panel" data-tab-panel="setup" aria-hidden="true">
-        {builds.map((build) => (
-          <div data-build-list={build.id} class={build.id !== "pc-necromancer" ? "hidden" : ""}>
-            {build.setup.length > 0
-              ? build.setup.map((section) => (
-                <details class="bg3-details" data-section-id={`${build.shortId}-${section.id}`} data-no-count>
-                  <summary class="bg3-summary"><span class="bg3-summary-title">{section.title}</span></summary>
-                  <div class="bg3-body">
-                    {section.intro && <p class="bg3-intro">{section.intro}</p>}
-                    <BG3Checklist items={section.items} idPrefix={build.shortId} />
-                  </div>
-                </details>
-              ))
-              : <p class="build-placeholder">Setup guide coming soon.</p>
-            }
-          </div>
-        ))}
-      </section>
+      <div class="bg3-footer-controls">
+        <button id="reset-button" class="bg3-button" type="button">Reset checkboxes</button>
+      </div>
     </div>
   </section>
 
-  <nav class="bg3-tabbar" aria-label="Guide tabs">
-    <div class="bg3-tabbar-inner">
-      <button class="bg3-tab" type="button" data-tab="now" aria-selected="true">Now</button>
-      <button class="bg3-tab" type="button" data-tab="levels" aria-selected="false">Levels</button>
-      <button class="bg3-tab" type="button" data-tab="gear" aria-selected="false">Gear</button>
-      <button class="bg3-tab" type="button" data-tab="coven" aria-selected="false">Coven</button>
-      <button class="bg3-tab" type="button" data-tab="setup" aria-selected="false">Setup</button>
-    </div>
-  </nav>
-
   <script is:inline>
     (() => {
-      const storageKey = "bg3-necro-guide-v4";
-      const legacyKeyV3 = "bg3-necro-guide-v3";
-      const legacyKeyV2 = "bg3-necro-guide-v2";
-      const legacyKeyV1 = "bg3-necro-guide-v1";
+      const storageKey = "bg3-deathreaper-guide-v5";
+      const legacyKeys = ["bg3-necro-guide-v4", "bg3-necro-guide-v3", "bg3-necro-guide-v2", "bg3-necro-guide-v1"];
 
-      const defaultState = {
-        activeTab: "now",
-        act: "act1",
-        build: "pc-necromancer",
-        checks: {},
-        openSections: {},
-        setupHiddenByBuild: {}
-      };
-
-      const buildPrefixes = ["pc-", "shart-", "karlach-", "laezel-", "jaheira-", "minthara-"];
-      const sharedSectionPrefixes = ["now-", "coven-", "lore-"];
-
-      const isAlreadyPrefixed = (key) => buildPrefixes.some((p) => key.startsWith(p));
-      const isSharedSection = (key) => sharedSectionPrefixes.some((p) => key.startsWith(p));
-
-      const migrateV2 = (raw) => {
-        try {
-          const parsed = JSON.parse(raw);
-          const newChecks = {};
-          Object.entries(parsed.checks || {}).forEach(([key, val]) => {
-            newChecks[isAlreadyPrefixed(key) ? key : `pc-${key}`] = val;
-          });
-          const newOpenSections = {};
-          Object.entries(parsed.openSections || {}).forEach(([key, val]) => {
-            newOpenSections[isSharedSection(key) || isAlreadyPrefixed(key) ? key : `pc-${key}`] = val;
-          });
-          return {
-            ...defaultState,
-            activeTab: parsed.activeTab || "now",
-            act: parsed.act || "act1",
-            checks: newChecks,
-            openSections: newOpenSections,
-            setupHiddenByBuild: { "pc-necromancer": Boolean(parsed.setupHidden) }
-          };
-        } catch (_e) {
-          return { ...defaultState };
-        }
-      };
-
-      try { localStorage.removeItem(legacyKeyV1); } catch (_e) {}
-
-      const migrateV3 = (raw) => {
-        try {
-          const parsed = JSON.parse(raw);
-          return {
-            ...defaultState,
-            activeTab: parsed.activeTab || "now",
-            act: parsed.act || "act1",
-            build: parsed.build || "pc-necromancer",
-            checks: {},
-            openSections: {},
-            setupHiddenByBuild: parsed.setupHiddenByBuild || {}
-          };
-        } catch (_e) {
-          return { ...defaultState };
-        }
-      };
-
+      // Migrate v1–v4 → v5 by carrying over only the `checks` map.
       try {
-        const rawV3 = localStorage.getItem(legacyKeyV3);
-        if (rawV3 && !localStorage.getItem(storageKey)) {
-          localStorage.setItem(storageKey, JSON.stringify(migrateV3(rawV3)));
-          localStorage.removeItem(legacyKeyV3);
+        if (!localStorage.getItem(storageKey)) {
+          for (const k of legacyKeys) {
+            const raw = localStorage.getItem(k);
+            if (!raw) continue;
+            const old = JSON.parse(raw);
+            localStorage.setItem(storageKey, JSON.stringify({ checks: old.checks || {} }));
+            break;
+          }
         }
-      } catch (_e) {}
-
-      try {
-        const rawV2 = localStorage.getItem(legacyKeyV2);
-        if (rawV2 && !localStorage.getItem(storageKey)) {
-          localStorage.setItem(storageKey, JSON.stringify(migrateV2(rawV2)));
-          localStorage.removeItem(legacyKeyV2);
+        for (const k of legacyKeys) {
+          try { localStorage.removeItem(k); } catch (_e) {}
         }
       } catch (_e) {}
 
       const loadState = () => {
         try {
           const raw = localStorage.getItem(storageKey);
-          if (!raw) return { ...defaultState };
+          if (!raw) return { checks: {} };
           const parsed = JSON.parse(raw);
-          return {
-            ...defaultState,
-            ...parsed,
-            checks: parsed.checks || {},
-            openSections: parsed.openSections || {},
-            setupHiddenByBuild: parsed.setupHiddenByBuild || {}
-          };
+          return { checks: parsed.checks || {} };
         } catch (_e) {
-          return { ...defaultState };
+          return { checks: {} };
         }
       };
 
       const state = loadState();
-      const saveState = () => localStorage.setItem(storageKey, JSON.stringify(state));
+      const save = () => localStorage.setItem(storageKey, JSON.stringify(state));
 
-      const tabButtons = Array.from(document.querySelectorAll("[data-tab]"));
-      const panels = Array.from(document.querySelectorAll("[data-tab-panel]"));
-      const sectionDetails = Array.from(document.querySelectorAll("details[data-section-id]"));
-      const buildPills = Array.from(document.querySelectorAll("[data-build]"));
-      const setupTabButton = document.querySelector('[data-tab="setup"]');
-      const showSetupButton = document.getElementById("show-setup-button");
-      const knownTabs = new Set(["now", "levels", "gear", "coven", "setup"]);
-
-      // Build lookup maps derived from the DOM
-      const buildIdToShortId = {};
-      const shortIdToBuildId = {};
-      buildPills.forEach((pill) => {
-        const id = pill.dataset.build;
-        const short = pill.dataset.buildShort;
-        if (id && short) {
-          buildIdToShortId[id] = short;
-          shortIdToBuildId[short] = id;
-        }
-      });
-
-      const counterPanels = new Set(["now", "levels"]);
-      const counterSections = sectionDetails.filter((detail) => {
-        if (detail.dataset.noCount !== undefined) return false;
-        const panel = detail.closest("[data-tab-panel]");
-        return panel instanceof HTMLElement && counterPanels.has(panel.dataset.tabPanel || "");
-      });
-
-      counterSections.forEach((detail) => {
-        const summary = detail.querySelector("summary");
-        if (!summary || summary.querySelector(".bg3-count")) return;
-        const count = document.createElement("span");
-        count.className = "bg3-count";
-        summary.appendChild(count);
-      });
-
-      const refreshCounts = () => {
-        counterSections.forEach((detail) => {
-          const buildBlock = detail.closest("[data-build-list]");
-          const count = detail.querySelector(".bg3-count");
-          if (buildBlock && buildBlock.classList.contains("hidden")) {
-            if (count) { count.textContent = ""; delete count.dataset.complete; }
-            return;
-          }
-          const total = detail.querySelectorAll('input[type="checkbox"]').length;
-          const done = detail.querySelectorAll('input[type="checkbox"]:checked').length;
-          if (!count || total === 0) return;
-          count.textContent = `${done} / ${total}`;
-          count.dataset.complete = done === total ? "true" : "false";
-        });
-      };
-
-      const applySetupVisibility = () => {
-        if (!setupTabButton || !showSetupButton) return;
-        const hidden = Boolean(state.setupHiddenByBuild[state.build]);
-        setupTabButton.classList.toggle("hidden", hidden);
-        showSetupButton.classList.toggle("hidden", !hidden);
-        if (hidden && state.activeTab === "setup") {
-          state.activeTab = "now";
-        }
-      };
-
-      const applyTab = () => {
-        tabButtons.forEach((button) => {
-          button.setAttribute("aria-selected", button.dataset.tab === state.activeTab ? "true" : "false");
-        });
-        panels.forEach((panel) => {
-          panel.setAttribute("aria-hidden", panel.dataset.tabPanel === state.activeTab ? "false" : "true");
-        });
-      };
-
-      const applyAct = () => {
-        document.querySelectorAll("[data-act]").forEach((button) => {
-          button.setAttribute("aria-pressed", button.dataset.act === state.act ? "true" : "false");
-        });
-        document.querySelectorAll("[data-act-list]").forEach((list) => {
-          list.classList.toggle("hidden", list.dataset.actList !== state.act);
-        });
-      };
-
-      const applyBuild = () => {
-        buildPills.forEach((pill) => {
-          pill.setAttribute("aria-pressed", pill.dataset.build === state.build ? "true" : "false");
-        });
-        document.querySelectorAll("[data-build-list]").forEach((block) => {
-          block.classList.toggle("hidden", block.dataset.buildList !== state.build);
-        });
-        applySetupVisibility();
-        refreshCounts();
-      };
-
-      const clearSetupComplete = () => {
-        const shortId = buildIdToShortId[state.build];
-        if (!shortId) return;
-        const key = `${shortId}-setup-complete`;
-        state.checks[key] = false;
-        state.setupHiddenByBuild[state.build] = false;
-        const cb = document.querySelector(`[data-check-id="${key}"]`);
-        if (cb instanceof HTMLInputElement) cb.checked = false;
-      };
-
-      const resolveTabFromTarget = (target) => {
-        if (!target) return null;
-        if (knownTabs.has(target)) return target;
-
-        // #build-<shortId> — switches build, lands on Levels
-        if (target.startsWith("build-")) {
-          const shortId = target.slice(6);
-          const buildId = shortIdToBuildId[shortId];
-          if (buildId) { state.build = buildId; return "levels"; }
-        }
-
-        // #<shortId>-level-N or #<shortId>-lN-… — switches build, Levels tab
-        for (const [shortId, buildId] of Object.entries(shortIdToBuildId)) {
-          if (target.startsWith(`${shortId}-level-`) || new RegExp(`^${shortId}-l\\d+-`).test(target)) {
-            state.build = buildId; return "levels";
-          }
-          if (target.startsWith(`${shortId}-gear-`)) { state.build = buildId; return "gear"; }
-          if (
-            target.startsWith(`${shortId}-setup-`) ||
-            target.startsWith(`${shortId}-abi-`) ||
-            target.startsWith(`${shortId}-skill-`) ||
-            target.startsWith(`${shortId}-cantrip-`) ||
-            target.startsWith(`${shortId}-spell-`)
-          ) { state.build = buildId; return "setup"; }
-        }
-
-        // Backward-compatible (no build switch — routes to current build's tab)
-        if (target.startsWith("level-") || /^l\d+-/.test(target)) return "levels";
-        if (target.startsWith("gear-")) return "gear";
-        if (target.startsWith("coven-") || target.startsWith("lore-")) return "coven";
-        if (
-          target.startsWith("setup-") || target.startsWith("abi-") ||
-          target.startsWith("skill-") || target.startsWith("cantrip-") ||
-          target.startsWith("spell-")
-        ) return "setup";
-        if (
-          target.startsWith("now-") || target.startsWith("act") ||
-          target.startsWith("rest-") || target.startsWith("levelup-") ||
-          target.startsWith("leave-") || target.startsWith("thay-") ||
-          target.startsWith("approval-") ||
-          target.startsWith("quest-") ||
-          target.startsWith("combat-")
-        ) return "now";
-
-        return null;
-      };
-
-      const applyHashRoute = () => {
-        const target = window.location.hash.replace(/^#/, "").trim();
-        if (!target) return;
-
-        const tab = resolveTabFromTarget(target);
-        if (tab) {
-          if (tab === "setup") clearSetupComplete();
-          state.activeTab = tab;
-        }
-
-        const section = document.getElementById(target);
-        if (section instanceof HTMLDetailsElement) {
-          section.open = true;
-          state.openSections[target] = true;
-        }
-
-        applyBuild();
-        applySetupVisibility();
-        applyTab();
-        saveState();
-      };
-
-      // — Event handlers —
-
-      tabButtons.forEach((button) => {
-        button.addEventListener("click", () => {
-          const tab = button.dataset.tab;
-          if (!tab) return;
-          state.activeTab = tab;
-          applyTab();
-          window.history.replaceState(null, "", `#${tab}`);
-          saveState();
-        });
-      });
-
-      document.querySelectorAll("[data-act]").forEach((button) => {
-        button.addEventListener("click", () => {
-          const act = button.dataset.act;
-          if (!act) return;
-          state.act = act;
-          applyAct();
-          saveState();
-        });
-      });
-
-      buildPills.forEach((pill) => {
-        pill.addEventListener("click", () => {
-          const buildId = pill.dataset.build;
-          if (!buildId) return;
-          state.build = buildId;
-          applyBuild();
-          const shortId = buildIdToShortId[buildId];
-          if (shortId) window.history.replaceState(null, "", `#build-${shortId}`);
-          saveState();
-        });
-      });
-
-      document.querySelectorAll("[data-check-id]").forEach((checkbox) => {
-        const key = checkbox.dataset.checkId;
+      document.querySelectorAll("[data-check-id]").forEach((cb) => {
+        const key = cb.dataset.checkId;
         if (!key) return;
-        checkbox.checked = Boolean(state.checks[key]);
-        checkbox.addEventListener("change", () => {
-          state.checks[key] = checkbox.checked;
-          const shortId = buildIdToShortId[state.build];
-          if (shortId && key === `${shortId}-setup-complete`) {
-            state.setupHiddenByBuild[state.build] = checkbox.checked;
-            applySetupVisibility();
-            applyTab();
-          }
-          refreshCounts();
-          saveState();
+        cb.checked = Boolean(state.checks[key]);
+        cb.addEventListener("change", () => {
+          state.checks[key] = cb.checked;
+          save();
         });
-      });
-
-      sectionDetails.forEach((detail) => {
-        const key = detail.dataset.sectionId;
-        if (!key) return;
-        if (!detail.id) detail.id = key;
-        detail.open = Boolean(state.openSections[key]);
-        detail.addEventListener("toggle", () => {
-          state.openSections[key] = detail.open;
-          saveState();
-        });
-      });
-
-      showSetupButton?.addEventListener("click", () => {
-        clearSetupComplete();
-        state.activeTab = "setup";
-        applyBuild();
-        applySetupVisibility();
-        applyTab();
-        refreshCounts();
-        window.history.replaceState(null, "", "#setup");
-        saveState();
       });
 
       document.getElementById("reset-button")?.addEventListener("click", () => {
-        if (!window.confirm("Reset all checkboxes and section states?")) return;
-        state.checks = {};
-        state.openSections = {};
-        state.setupHiddenByBuild = {};
-        state.activeTab = "now";
-        state.act = "act1";
-        state.build = "pc-necromancer";
+        if (!window.confirm("Reset all checkboxes?")) return;
         localStorage.removeItem(storageKey);
         window.location.reload();
       });
-
-      // — Initialize —
-      applyAct();
-      applyBuild();
-      applyTab();
-      applyHashRoute();
-      refreshCounts();
-      window.addEventListener("hashchange", applyHashRoute);
-      saveState();
     })();
   </script>
 </BaseLayout>
