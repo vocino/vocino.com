@@ -131,7 +131,7 @@ Routes like `/bg3` are self-contained second-screen companions for a game playth
 | Presentation (SCSS)  | `src/styles/_<game>.scss`, scoped to `.<game>-section` | Yes |
 | Markup + behavior    | `src/pages/<game>.astro` + inline `<script is:inline>` | Yes |
 
-**Section-accent token convention.** The `.<game>-section` root binds a small set of CSS custom properties. Every UI primitive inside the section (tabs, buttons, checkbox accent, details borders, count badges, glow, lore tag pills) consumes these vars. To retone an entire guide, override the variables at the section root — nothing else needs to change.
+**Section-accent token convention.** The `.<game>-section` root binds a small set of CSS custom properties. Every UI primitive inside the section (tabs, buttons, checkbox accent, details borders, count badges, glow, lore tag pills, **and the Vocino V brand mark**) consumes these vars. To retone an entire guide, override the variables at the section root — nothing else needs to change. The `SiteBrand` component inlines the SVG with `fill="currentColor"` and reads `color: var(--section-accent, var(--brand))`, so dropping `<SiteBrand class="site-brand--mark" />` inside a section automatically tints the V to that section's accent (cyan on home, violet on /bg3, etc.).
 
 ```scss
 .bg3-section {
@@ -155,6 +155,7 @@ Routes like `/bg3` are self-contained second-screen companions for a game playth
 4. Clone `src/pages/bg3.astro` → `src/pages/wow.astro`. The page must:
    - Wrap content in `<BaseLayout>` (do **not** write a custom `<html>/<body>`).
    - Wrap all content in `<section class="wow-section">` so the accent vars cascade.
+   - Drop a `<SiteBrand class="site-brand--mark" />` at the top of the section header — it auto-tints to the section accent.
    - Render `BG3Checklist`-equivalent components against the new data.
    - Mount the fixed tabbar `<nav class="wow-tabbar">` at the BaseLayout slot root (not inside `.wow-section`).
    - Use a fresh `localStorage` key (e.g. `wow-guide-v1`) and a fresh set of tab/hash-prefix names.

@@ -1,6 +1,26 @@
 ---
+interface Props {
+  /** Extra class names — e.g. `site-brand--mark` for the small chrome variant. */
+  class?: string;
+  /** Accessible label for the link. */
+  ariaLabel?: string;
+}
+
+const { class: className, ariaLabel = "Vocino — return home" } = Astro.props;
+
+const linkClass = ["site-brand", className].filter(Boolean).join(" ");
 ---
 
-<a href="/" class="site-brand">
-  <img src="/assets/images/vocino.svg" alt="Vocino" class="brand-logo" />
+<a href="/" class={linkClass} aria-label={ariaLabel}>
+  <svg
+    class="brand-logo"
+    viewBox="0 0 250 216"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <path d="M125 215.909L0 0L250 2.17954e-05L125 215.909Z" fill="currentColor" />
+    <path d="M125 71.9697L83.3334 0L166.667 7.26513e-06L125 71.9697Z" fill="var(--bg, #0F1419)" />
+  </svg>
 </a>

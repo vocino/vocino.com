@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteBrand from "../components/SiteBrand.astro";
 import BG3Checklist from "../components/bg3/BG3Checklist.astro";
 import {
   dontLeaveByAct,
@@ -22,6 +23,7 @@ import { setupSections } from "../data/bg3/setup";
   <section class="bg3-section">
     <div class="bg3-app">
       <header class="bg3-header">
+        <SiteBrand class="site-brand--mark" />
         <span class="bg3-eyebrow">guide · baldur’s gate 3</span>
         <h1 class="bg3-title">Necromancer Guide</h1>
         <span class="bg3-accent-bar" aria-hidden="true"></span>

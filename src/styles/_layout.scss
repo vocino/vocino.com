@@ -75,10 +75,17 @@
 }
 
 // Logo/Brand
+//
+// The SVG outer V uses `fill="currentColor"`, so the link's `color` drives
+// the logo color. By inheriting through `--section-accent`, the V re-tints
+// to whatever section it's rendered inside (cyan on home, violet in
+// .bg3-section, etc.). The inner notch uses var(--bg) to match the page
+// background.
 .site-brand {
   display: block;
   margin-bottom: $spacing-unit * 6;
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  color: var(--section-accent, var(--brand));
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s ease;
 
   @media (max-width: $breakpoint-sm) {
     margin-bottom: $spacing-unit * 4;
@@ -86,6 +93,7 @@
 
   &:hover {
     transform: translateY(-2px);
+    color: var(--section-accent-bright, var(--accent-blue));
   }
 
   .brand-logo {
@@ -112,6 +120,38 @@
     @media (max-width: $breakpoint-sm) {
       width: 60px;
     }
+  }
+}
+
+// Smaller chrome variant — used in section headers (e.g. /bg3) as a
+// "you are in a section of vocino.com" mark. Inherits section accent via
+// CSS variables; no special handling needed per-section.
+.site-brand--mark {
+  display: inline-flex;
+  align-items: center;
+  margin: 0 0 $spacing-unit * 2;
+  line-height: 0;
+
+  .brand-logo {
+    width: 28px;
+    height: auto;
+    opacity: 0.9;
+    filter: none;
+
+    @media (max-width: $breakpoint-md) {
+      width: 28px;
+    }
+
+    @media (max-width: $breakpoint-sm) {
+      width: 26px;
+    }
+  }
+
+  &:hover .brand-logo,
+  &:focus-visible .brand-logo {
+    opacity: 1;
+    filter: drop-shadow(0 0 10px currentColor);
+    transform: none;
   }
 }
 
