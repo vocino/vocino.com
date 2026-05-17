@@ -35,9 +35,6 @@
   --gradient-primary: linear-gradient(90deg, #00CCFF 0%, #4DA3FF 100%);
 
   // Hacker aesthetic tokens
-  --dot-size: 1px;
-  --dot-spacing: 16px;
-  --dot-opacity: 0.04;
   --block-size: 4px;
   --block-gap: 3px;
   --cursor-speed: 1s;
@@ -59,17 +56,8 @@
     transparent 60%,
     rgba(157, 124, 255, 0.08) 100%
   );
-  --cyber-vignette: radial-gradient(
-    ellipse 90% 70% at 50% 50%,
-    transparent 55%,
-    rgba(0, 0, 0, 0.45) 100%
-  );
-  --scanline-opacity: 0.035;
-  --scanline-size: 2px;
   --hud-corner-size: 10px;
   --hud-corner-thickness: 1px;
-  --boot-duration: 1.1s;
-
   // Legacy variables (mapped to style guide tokens for backward compatibility)
   --bg-color: var(--bg);
   --bg-secondary: var(--surface-1);
