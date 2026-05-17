@@ -145,24 +145,29 @@ export const combatLoop: CheckSection = {
   items: [
     {
       id: 'combat-aid',
-      label: 'Cast Aid at 3rd level before Long Rest, then Animate Dead',
-      note: 'Undead inherit the max HP increase.',
+      label: 'Pre-fight: Aid at 3rd level, then Animate Dead',
+      note: 'Thralls inherit Aid max HP for 24 hours.',
       tag: 'combat'
     },
     {
       id: 'combat-skeletons',
-      label: 'Skeletons (bows) in open fights; zombies in tight corridors',
+      label: 'Positioning: skeletons (bows) in open fights, zombies in tight corridors for tanking',
       tag: 'combat'
     },
     {
       id: 'combat-grim-harvest',
-      label: 'Finish low-HP enemies with Bone Chill for Grim Harvest healing',
+      label: 'Execute: finish low-HP enemies with Bone Chill to trigger Grim Harvest healing',
       tag: 'combat'
     },
     {
       id: 'combat-life-essence',
-      label: 'Staff of Cherished Necromancy: cantrip kill → free Blight or Circle of Death via Life Essence',
+      label: 'Staff combo: Staff of Cherished Necromancy cantrip kill → Life Essence → free Blight or Circle of Death',
       tag: 'both'
+    },
+    {
+      id: 'combat-concentration',
+      label: 'Concentration: Hold Person or Slow for control. Drop it for summons if you need bodies.',
+      tag: 'combat'
     }
   ]
 };
@@ -208,10 +213,11 @@ export const beforeLeaving: CheckSection = {
   id: 'now-before-leaving',
   title: 'Before Leaving Area',
   items: [
-    { id: 'leave-loot', label: 'Sweep crates, urns, hidden walls' },
+    { id: 'leave-loot', label: 'Sweep crates, urns, hidden walls for scrolls and gold' },
     { id: 'leave-speak-dead', label: 'Speak with Dead on nameable corpses', tag: 'lore' },
     { id: 'leave-vendors', label: 'Buy necromancy scrolls and reagents' },
-    { id: 'leave-camp-stash', label: 'Send heavies to camp stash' }
+    { id: 'leave-camp-stash', label: 'Send heavy armour and camp supplies to camp stash' },
+    { id: 'leave-gold', label: 'Check gold for scribing', tag: 'lore' }
   ]
 };
 
