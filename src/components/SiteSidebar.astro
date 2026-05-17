@@ -1,0 +1,278 @@
+---
+import { siteNav } from '../data/site-nav';
+
+const pathname = Astro.url.pathname;
+
+const currentHref = (() => {
+  for (const link of siteNav.gaming) {
+    if (pathname.startsWith(link.href)) return link.href;
+  }
+  return pathname === '/' ? '/' : null;
+})();
+
+const externalRel = (...tokens: (string | undefined)[]) =>
+  tokens.filter(Boolean).join(' ');
+---
+
+<aside class="site-sidebar" data-sidebar data-collapsed="true" data-mobile-open="false">
+  <!-- Mobile hamburger trigger -->
+  <button
+    class="sb-trigger"
+    data-sb-trigger
+    type="button"
+    aria-expanded="false"
+    aria-controls="sidebar-panel"
+    aria-label="Open navigation menu"
+  >
+    <span class="sb-bars" aria-hidden="true"></span>
+  </button>
+
+  <!-- Mobile backdrop -->
+  <button
+    class="sb-backdrop"
+    data-sb-backdrop
+    type="button"
+    aria-label="Close navigation menu"
+  ></button>
+
+  <!-- Sidebar panel -->
+  <nav id="sidebar-panel" class="sb-panel" aria-label="Site navigation" data-sb-panel>
+    <!-- Header -->
+    <div class="sb-header">
+      <a href="/" class="sb-brand" data-sb-brand aria-label="Expand sidebar">
+        <span class="sb-icon-rail">
+          <svg class="sb-brand-logo" viewBox="0 0 250 216" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+            <path d="M125 215.909L0 0L250 2.17954e-05L125 215.909Z" fill="currentColor"/>
+            <path d="M125 71.9697L83.3334 0L166.667 7.26513e-06L125 71.9697Z" fill="var(--bg, #0F1419)"/>
+          </svg>
+          <svg class="sb-brand-expand" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+            <path d="M10.707 3.293a1 1 0 010 1.414L7.414 8l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"/>
+          </svg>
+        </span>
+      </a>
+
+      <button
+        class="sb-collapse"
+        data-sb-collapse
+        type="button"
+        aria-label="Collapse sidebar"
+      >
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+          <path d="M10.707 3.293a1 1 0 010 1.414L7.414 8l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Social links — vertical list; labels reveal on expand, icons stay fixed -->
+    <ul class="sb-social">
+      {siteNav.elsewhere.map((item) => (
+        <li>
+        <a
+          class="sb-social-link"
+          href={item.href}
+          rel={externalRel(item.rel, 'noopener', 'noreferrer')}
+          target="_blank"
+          aria-label={`${item.label} (opens in new tab)`}
+        >
+          <span class="sb-icon-rail" aria-hidden="true">
+          {item.icon === 'instagram' && (
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+            </svg>
+          )}
+          {item.icon === 'threads' && (
+            <svg width="20" height="20" viewBox="0 0 192 192" fill="currentColor" aria-hidden="true">
+              <path d="M141.537 88.9883C140.71 88.5919 139.87 88.2104 139.019 87.8451C137.537 60.5382 122.616 44.905 97.5619 44.745C97.4484 44.7443 97.3355 44.7443 97.222 44.7443C82.2364 44.7443 69.7731 51.1409 62.102 62.7807L75.881 72.2328C81.6116 63.5383 90.6052 61.6848 97.2286 61.6848C97.3051 61.6848 97.3819 61.6848 97.4576 61.6855C105.707 61.7381 111.932 64.1366 115.961 68.814C118.893 72.2193 120.854 76.925 121.825 82.8638C114.511 81.6207 106.601 81.2385 98.145 81.7233C74.3247 83.0954 59.0111 96.9879 60.0396 116.292C60.5615 126.084 65.4397 134.508 73.775 140.011C80.8224 144.663 89.899 146.938 99.3323 146.423C111.79 145.74 121.563 140.987 128.381 132.296C133.559 125.696 136.834 117.143 138.28 106.366C144.217 109.949 148.617 114.664 151.047 120.332C155.179 129.967 155.42 145.8 142.501 158.708C131.182 170.016 117.576 174.908 97.0135 175.059C74.2042 174.89 56.9538 167.575 45.7381 153.317C35.2355 139.966 29.8077 120.682 29.6052 96C29.8077 71.3178 35.2355 52.0336 45.7381 38.6827C56.9538 24.4249 74.2039 17.11 97.0132 16.9405C119.988 17.1113 137.539 24.4614 149.184 38.788C154.894 45.8136 159.199 54.6488 162.037 64.9503L178.184 60.6422C174.744 47.9622 169.331 37.0357 161.965 27.974C147.036 9.60668 125.202 0.195148 97.0695 0H96.9569C68.8816 0.19447 47.2921 9.6418 32.7883 28.0793C19.8819 44.4864 13.2244 67.3157 13.0007 95.9325L13 96L13.0007 96.0675C13.2244 124.684 19.8819 147.514 32.7883 163.921C47.2921 182.358 68.8816 191.806 96.9569 192H97.0695C122.03 191.827 139.624 185.292 154.118 170.811C173.081 151.866 172.51 128.119 166.26 113.541C161.776 103.087 153.227 94.5962 141.537 88.9883ZM98.4405 129.507C88.0005 130.095 77.1544 125.409 76.6196 115.372C76.2232 107.93 81.9158 99.626 99.0812 98.6368C101.047 98.5234 102.976 98.468 104.871 98.468C111.106 98.468 116.939 99.0737 122.242 100.233C120.264 124.935 108.662 128.946 98.4405 129.507Z"/>
+            </svg>
+          )}
+          {item.icon === 'github' && (
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+            </svg>
+          )}
+          {item.icon === 'twitch' && (
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/>
+            </svg>
+          )}
+          </span>
+          <span class="sb-social-label">{item.label}</span>
+        </a>
+        </li>
+      ))}
+    </ul>
+
+    <!-- Nav sections -->
+    <div class="sb-sections">
+      <section class="sb-section">
+        <h2 class="sb-section-heading">Gaming</h2>
+        <ul class="sb-nav-list">
+          {siteNav.gaming.map((link) => (
+            <li>
+              <a
+                class="sb-nav-link"
+                href={link.href}
+                aria-current={currentHref === link.href ? 'page' : undefined}
+                data-active={currentHref === link.href ? '' : undefined}
+              >
+                <span class="sb-icon-rail sb-nav-monogram" aria-hidden="true">
+                  {link.label.charAt(0)}
+                </span>
+                <span class="sb-nav-label">{link.label}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    </div>
+  </nav>
+</aside>
+
+<script>
+  (() => {
+    const sidebar = document.querySelector('[data-sidebar]');
+    if (!(sidebar instanceof HTMLElement)) return;
+
+    const panel = document.getElementById('sidebar-panel');
+    const trigger = sidebar.querySelector('[data-sb-trigger]');
+    const backdrop = sidebar.querySelector('[data-sb-backdrop]');
+    const collapseBtn = sidebar.querySelector('[data-sb-collapse]');
+    const brandLink = sidebar.querySelector('[data-sb-brand]');
+
+    if (
+      !(panel instanceof HTMLElement) ||
+      !(trigger instanceof HTMLButtonElement) ||
+      !(backdrop instanceof HTMLButtonElement) ||
+      !(collapseBtn instanceof HTMLButtonElement)
+    ) return;
+
+    const syncBrandLabel = () => {
+      if (!(brandLink instanceof HTMLAnchorElement)) return;
+      const collapsed = sidebar.getAttribute('data-collapsed') === 'true';
+      if (collapsed && !isMobile()) {
+        brandLink.setAttribute('aria-label', 'Expand sidebar');
+      } else {
+        brandLink.setAttribute('aria-label', 'Vocino — return home');
+      }
+    };
+
+    const STORAGE_KEY = 'site-sidebar-collapsed';
+    const BREAKPOINT = 768;
+
+    const isMobile = () => window.innerWidth < BREAKPOINT;
+
+    // --- Desktop collapse ---
+
+    const setCollapsed = (collapsed: boolean, persist = true) => {
+      document.documentElement.setAttribute('data-sidebar-collapsed', collapsed ? 'true' : 'false');
+      sidebar.setAttribute('data-collapsed', collapsed ? 'true' : 'false');
+      collapseBtn.setAttribute('aria-label', collapsed ? 'Expand sidebar' : 'Collapse sidebar');
+      syncBrandLabel();
+      if (persist) localStorage.setItem(STORAGE_KEY, collapsed ? '1' : '0');
+    };
+
+    const initCollapsed = (() => {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored === '0') return false;
+      return true;
+    })();
+
+    // --- Mobile open/close ---
+
+    const setMobileOpen = (open: boolean) => {
+      sidebar.setAttribute('data-mobile-open', open ? 'true' : 'false');
+      trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      trigger.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+      if (open) {
+        panel.removeAttribute('inert');
+        document.body.style.overflow = 'hidden';
+        const firstFocusable = panel.querySelector<HTMLElement>('a, button');
+        firstFocusable?.focus();
+      } else {
+        panel.setAttribute('inert', '');
+        document.body.style.overflow = '';
+      }
+    };
+
+    // Init based on viewport
+    if (isMobile()) {
+      panel.setAttribute('inert', '');
+      setMobileOpen(false);
+    } else {
+      setCollapsed(initCollapsed, false);
+      syncBrandLabel();
+    }
+
+    // Collapse toggle (desktop)
+    collapseBtn.addEventListener('click', () => {
+      if (isMobile()) return;
+      const collapsed = sidebar.getAttribute('data-collapsed') === 'true';
+      setCollapsed(!collapsed);
+    });
+
+    // Collapsed: logo expands sidebar instead of navigating home
+    brandLink?.addEventListener('click', (e) => {
+      if (isMobile()) return;
+      const collapsed = sidebar.getAttribute('data-collapsed') === 'true';
+      if (!collapsed) return;
+      e.preventDefault();
+      setCollapsed(false);
+    });
+
+    // Mobile trigger
+    trigger.addEventListener('click', () => {
+      const open = sidebar.getAttribute('data-mobile-open') === 'true';
+      if (open) {
+        setMobileOpen(false);
+        trigger.focus();
+      } else {
+        setMobileOpen(true);
+      }
+    });
+
+    // Backdrop
+    backdrop.addEventListener('click', () => {
+      setMobileOpen(false);
+      trigger.focus();
+    });
+
+    // Close mobile panel on link click
+    panel.addEventListener('click', (e) => {
+      if (e.target instanceof HTMLElement && e.target.closest('a')) {
+        if (isMobile()) setMobileOpen(false);
+      }
+    });
+
+    // Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key !== 'Escape') return;
+      if (isMobile() && sidebar.getAttribute('data-mobile-open') === 'true') {
+        setMobileOpen(false);
+        trigger.focus();
+      }
+    });
+
+    // Resize: sync state when crossing breakpoint
+    let lastMobile = isMobile();
+    window.addEventListener('resize', () => {
+      const nowMobile = isMobile();
+      if (nowMobile === lastMobile) return;
+      lastMobile = nowMobile;
+      if (nowMobile) {
+        // Switched to mobile: reset mobile state
+        setMobileOpen(false);
+        document.documentElement.setAttribute('data-sidebar-collapsed', 'false');
+      } else {
+        // Switched to desktop: restore collapse preference
+        panel.removeAttribute('inert');
+        document.body.style.overflow = '';
+        sidebar.setAttribute('data-mobile-open', 'false');
+        const stored = localStorage.getItem(STORAGE_KEY);
+        const collapsed = stored === '0' ? false : true;
+        setCollapsed(collapsed, false);
+      }
+    });
+  })();
+</script>

@@ -1,6 +1,6 @@
 ---
 import SEO from '../components/SEO.astro';
-import GlobalHamburgerMenu from '../components/GlobalHamburgerMenu.astro';
+import SiteSidebar from '../components/SiteSidebar.astro';
 import '../styles/main.scss';
 
 interface Props {
@@ -18,12 +18,21 @@ const { title, description, noindex } = Astro.props;
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="color-scheme" content="dark light" />
-  
+
   <SEO title={title} description={description} noindex={noindex} />
+
+  <!-- Sync sidebar collapsed state before first paint to prevent FOUC -->
+  <script is:inline>
+    ;(function () {
+      var s = localStorage.getItem('site-sidebar-collapsed');
+      var collapsed = s === '0' ? false : true;
+      document.documentElement.setAttribute('data-sidebar-collapsed', collapsed ? 'true' : 'false');
+    })();
+  </script>
 </head>
 <body class="site-root">
   <div class="site-chrome">
-    <GlobalHamburgerMenu />
+    <SiteSidebar />
   </div>
   <main class="site-main">
     <slot />

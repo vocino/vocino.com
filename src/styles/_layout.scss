@@ -93,7 +93,8 @@
 
   &:hover {
     transform: translateY(-2px);
-    color: var(--section-accent-bright, var(--accent-blue));
+    color: var(--section-accent, var(--brand));
+    text-decoration: none;
   }
 
   .brand-logo {

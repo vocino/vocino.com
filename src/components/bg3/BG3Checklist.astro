@@ -3,16 +3,19 @@ import type { CheckItem } from '../../data/bg3/types';
 
 interface Props {
   items: CheckItem[];
+  /** Build short-id prefix — e.g. 'pc', 'shart'. Namespaces check ids in localStorage. */
+  idPrefix?: string;
 }
 
-const { items } = Astro.props;
+const { items, idPrefix } = Astro.props;
+const checkId = (id: string) => idPrefix ? `${idPrefix}-${id}` : id;
 ---
 
 <ul class="checklist">
   {items.map((item) => (
     <li>
       <label class="check">
-        <input type="checkbox" data-check-id={item.id} />
+        <input type="checkbox" data-check-id={checkId(item.id)} />
         <span>
           <span class="check-label">{item.label}</span>
           {item.tag && <span class={`tag tag-${item.tag}`}>{item.tag}</span>}

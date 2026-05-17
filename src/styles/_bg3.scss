@@ -345,6 +345,116 @@
     border: 1px solid var(--border);
   }
 
+  // Build picker — global row between header and panels
+  .bg3-build-picker {
+    margin-top: 0;
+    padding: $spacing-unit * 1.5 0;
+    margin-bottom: $spacing-unit * 2;
+    border-bottom: 1px solid var(--section-frame);
+  }
+
+  // Coven tab build hub
+  .bg3-build-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-unit * 2;
+    margin-bottom: $spacing-unit * 2;
+
+    @media (min-width: $breakpoint-md) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .bg3-build-card {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface-1);
+    padding: $spacing-unit * 2;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-unit;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+
+    &:hover {
+      border-color: var(--section-frame);
+      box-shadow: var(--section-glow);
+    }
+
+    .bg3-build-card-header {
+      display: flex;
+      align-items: center;
+      gap: $spacing-unit;
+    }
+
+    .bg3-build-card-name {
+      font-family: $font-family-mono;
+      font-size: $font-size-sm;
+      font-weight: $font-weight-semibold;
+      letter-spacing: $label-tracking;
+      text-transform: uppercase;
+      color: var(--text-primary);
+      margin: 0;
+      flex: 1 1 auto;
+
+      &::before { content: '[ '; color: var(--section-accent); }
+      &::after  { content: ' ]'; color: var(--section-accent); }
+    }
+
+    .bg3-build-card-class {
+      font-family: $font-family-mono;
+      font-size: $font-size-xs;
+      color: var(--section-accent);
+      letter-spacing: $label-tracking;
+      margin: 0;
+    }
+
+    .bg3-build-card-role {
+      font-family: $font-family-mono;
+      font-size: $font-size-xs;
+      color: var(--text-muted);
+      letter-spacing: $label-tracking;
+      text-transform: uppercase;
+      margin: 0;
+    }
+
+    .bg3-build-card-summary {
+      font-size: $font-size-sm;
+      color: var(--text-secondary);
+      margin: 0;
+      line-height: $line-height-snug;
+    }
+
+    .bg3-build-card-link {
+      font-family: $font-family-mono;
+      font-size: $font-size-xs;
+      color: var(--section-accent);
+      text-decoration: none;
+      letter-spacing: $label-tracking;
+      margin-top: auto;
+      padding-top: $spacing-unit;
+      border-top: 1px solid var(--border);
+
+      &:hover,
+      &:focus-visible {
+        color: var(--section-accent-bright);
+        text-decoration: none;
+      }
+    }
+  }
+
+  // Empty-state placeholder for builds with no content yet
+  .build-placeholder {
+    text-align: center;
+    padding: $spacing-unit * 4;
+    color: var(--text-muted);
+    font-family: $font-family-mono;
+    font-size: $font-size-xs;
+    text-transform: uppercase;
+    letter-spacing: $label-tracking;
+    border: 1px dashed var(--border);
+    border-radius: 10px;
+  }
+
   // Companions
   .companion-meta {
     color: var(--text-secondary);
@@ -394,6 +504,21 @@
   --section-accent-bright: #C4B0FF;
   --section-accent-dim: rgba(157, 124, 255, 0.18);
   --section-glow: 0 0 18px rgba(157, 124, 255, 0.22);
+
+  // Offset from the persistent sidebar on desktop
+  @media (min-width: $breakpoint-md) {
+    left: var(--sb-expanded, 240px);
+    transition: left 0.22s ease;
+  }
+}
+
+html[data-sidebar-collapsed='true'] {
+  @media (min-width: $breakpoint-md) {
+    .bg3-section ~ .bg3-tabbar,
+    .bg3-tabbar {
+      left: var(--sb-collapsed, 60px);
+    }
+  }
 }
 
 .bg3-tabbar-inner {

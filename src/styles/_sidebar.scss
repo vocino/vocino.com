@@ -1,0 +1,553 @@
+@use "variables" as *;
+
+// ============================================
+// Site Sidebar
+//
+// Persistent collapsible panel on desktop (≥ 768 px).
+// Slide-in overlay on mobile (< 768 px).
+//
+// State attributes (on html / .site-sidebar):
+//   html[data-sidebar-collapsed="true"]  — desktop collapsed mode
+//   .site-sidebar[data-mobile-open="true"] — mobile overlay open
+// ============================================
+
+:root {
+  --sb-expanded: 240px;
+  --sb-collapsed: 60px;
+}
+
+// ------------------------------------
+// Mobile trigger (hamburger button)
+// ------------------------------------
+.sb-trigger {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 90;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text-muted);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  font: inherit;
+
+  &:hover,
+  &:focus-visible {
+    color: var(--text-secondary);
+    outline: none;
+  }
+
+  &:focus-visible {
+    box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px color-mix(in srgb, var(--brand) 50%, transparent);
+  }
+
+  @media (min-width: $breakpoint-md) {
+    display: none !important;
+  }
+}
+
+.sb-bars,
+.sb-bars::before,
+.sb-bars::after {
+  transform-origin: center;
+  transition: transform 0.2s ease;
+}
+
+.sb-bars {
+  position: relative;
+  width: 14px;
+  height: 2px;
+  border-radius: 1px;
+  background: currentColor;
+}
+
+.sb-bars::before,
+.sb-bars::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 14px;
+  height: 2px;
+  border-radius: 1px;
+  background: currentColor;
+}
+
+.sb-bars::before {
+  top: -5px;
+}
+
+.sb-bars::after {
+  top: 5px;
+}
+
+// ------------------------------------
+// Mobile backdrop
+// ------------------------------------
+.sb-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 55;
+  background: rgba(5, 8, 12, 0.88);
+  border: none;
+  padding: 0;
+  margin: 0;
+  opacity: 0;
+  pointer-events: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+
+  .site-sidebar[data-mobile-open='true'] & {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  @media (min-width: $breakpoint-md) {
+    display: none !important;
+  }
+}
+
+// ------------------------------------
+// Sidebar panel
+// ------------------------------------
+.sb-panel {
+  // Shared icon column — logo, social, and nav monograms align on this rail
+  --sb-rail-inset: #{$spacing-unit * 1.5};
+  --sb-rail-size: 28px;
+  --sb-rail-gap: #{$spacing-unit * 1.5};
+  --sb-row-pad-y: #{$spacing-unit};
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: var(--sb-expanded);
+  background: var(--surface-1);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: $font-family-sans;
+  font-size: 0.8125rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  // Mobile: off-screen, slides in
+  @media (max-width: #{$breakpoint-md - 1px}) {
+    z-index: 60;
+    transform: translateX(-100%);
+    transition: transform 0.22s ease;
+
+    .site-sidebar[data-mobile-open='true'] & {
+      transform: translateX(0);
+    }
+  }
+
+  // Desktop: persistent, changes width
+  @media (min-width: $breakpoint-md) {
+    z-index: 10;
+    transition: width 0.22s ease;
+
+    html[data-sidebar-collapsed='true'] & {
+      width: var(--sb-collapsed);
+      // Center the icon rail — equal space left and right in the narrow panel
+      --sb-rail-inset: calc((var(--sb-collapsed) - var(--sb-rail-size)) / 2);
+    }
+  }
+}
+
+// Collapsed desktop: center icon rail with equal side space
+html[data-sidebar-collapsed='true'] {
+  @media (min-width: $breakpoint-md) {
+    .sb-header {
+      justify-content: center;
+      padding-inline: 0;
+    }
+
+    .sb-social-link,
+    .sb-nav-link {
+      gap: 0;
+      justify-content: center;
+      padding-inline: 0;
+    }
+
+    .sb-sections {
+      display: none;
+    }
+  }
+}
+
+// ------------------------------------
+// Icon rail (shared column width for logo + list icons)
+// ------------------------------------
+.sb-icon-rail {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--sb-rail-size);
+  height: var(--sb-rail-size);
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+// ------------------------------------
+// Sidebar header (brand + collapse btn)
+// ------------------------------------
+.sb-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--sb-row-pad-y) var(--sb-rail-inset);
+  flex-shrink: 0;
+  min-height: calc(var(--sb-rail-size) + var(--sb-row-pad-y) * 2);
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
+}
+
+// Brand V mark
+.sb-brand {
+  display: inline-flex;
+  align-items: center;
+  color: var(--brand);
+  text-decoration: none;
+  transition: color 0.2s ease, opacity 0.2s ease;
+  line-height: 0;
+  flex-shrink: 0;
+
+  &:hover,
+  &:focus-visible {
+    color: var(--brand);
+    opacity: 0.75;
+    text-decoration: none;
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: 1px solid color-mix(in srgb, var(--brand) 50%, transparent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+}
+
+.sb-brand-logo {
+  width: 20px;
+  height: auto;
+}
+
+.sb-brand-expand {
+  display: none;
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 16px;
+  height: 16px;
+  // Same glyph as .sb-collapse; rotated to point right (expand)
+  transform: rotate(180deg);
+}
+
+html[data-sidebar-collapsed='true'] {
+  @media (min-width: $breakpoint-md) {
+    .sb-brand {
+      cursor: pointer;
+    }
+
+    // Hover anywhere on the collapsed rail, or focus the brand control
+    .sb-panel:hover .sb-brand,
+    .sb-brand:focus-visible {
+      color: var(--text-secondary);
+      opacity: 1;
+    }
+
+    .sb-panel:hover .sb-brand-logo,
+    .sb-brand:focus-visible .sb-brand-logo {
+      display: none;
+    }
+
+    .sb-panel:hover .sb-brand-expand,
+    .sb-brand:focus-visible .sb-brand-expand {
+      display: inline-flex;
+    }
+  }
+}
+
+// Collapse/expand toggle
+.sb-collapse {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: color 0.2s ease, background-color 0.2s ease;
+
+  svg {
+    transition: transform 0.22s ease;
+  }
+
+  html[data-sidebar-collapsed='true'] & svg {
+    transform: rotate(180deg);
+  }
+
+  &:hover,
+  &:focus-visible {
+    color: var(--text-secondary);
+    background: color-mix(in srgb, var(--selection) 55%, transparent);
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: 1px solid color-mix(in srgb, var(--brand) 45%, transparent);
+    outline-offset: 1px;
+  }
+
+  // Collapsed: logo is the expand affordance
+  html[data-sidebar-collapsed='true'] & {
+    @media (min-width: $breakpoint-md) {
+      display: none !important;
+    }
+  }
+
+  // Hidden on mobile (collapse is a desktop concept)
+  @media (max-width: #{$breakpoint-md - 1px}) {
+    display: none !important;
+  }
+}
+
+// ------------------------------------
+// Social links (vertical; icon rail fixed when collapsing)
+// ------------------------------------
+.sb-social {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 2px;
+  padding: 0;
+  flex-shrink: 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
+  list-style: none;
+  margin: 0;
+
+  li {
+    width: 100%;
+  }
+}
+
+.sb-social-link {
+  display: flex;
+  align-items: center;
+  gap: var(--sb-rail-gap);
+  width: 100%;
+  min-height: calc(var(--sb-rail-size) + var(--sb-row-pad-y) * 2);
+  padding: var(--sb-row-pad-y) var(--sb-rail-inset);
+  border-radius: 6px;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s ease, background-color 0.2s ease;
+
+  svg {
+    display: block;
+    flex-shrink: 0;
+  }
+
+  &:hover,
+  &:focus-visible {
+    color: var(--text-primary);
+    background: color-mix(in srgb, var(--selection) 55%, transparent);
+    text-decoration: none;
+    outline: none;
+
+    .sb-social-label {
+      color: var(--text-primary);
+    }
+  }
+
+  &:focus-visible {
+    outline: 1px solid color-mix(in srgb, var(--brand) 45%, transparent);
+    outline-offset: 1px;
+  }
+}
+
+.sb-social-label {
+  font-size: 0.8125rem;
+  font-weight: 400;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  opacity: 1;
+  max-width: 10rem;
+  transition:
+    opacity 0.22s ease,
+    max-width 0.22s ease,
+    color 0.2s ease;
+
+  html[data-sidebar-collapsed='true'] & {
+    @media (min-width: $breakpoint-md) {
+      opacity: 0;
+      max-width: 0;
+    }
+  }
+}
+
+// ------------------------------------
+// Nav sections (Gaming, etc.)
+// ------------------------------------
+.sb-sections {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+.sb-section {
+  margin-bottom: $spacing-unit * 2;
+}
+
+.sb-section-heading {
+  font-family: $font-family-mono;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-normal;
+  letter-spacing: $label-tracking;
+  text-transform: uppercase;
+  color: var(--text-disabled);
+  padding: $spacing-unit var(--sb-rail-inset);
+  padding-left: calc(var(--sb-rail-inset) + var(--sb-rail-size) + var(--sb-rail-gap));
+  margin-bottom: $spacing-unit * 0.5;
+  white-space: nowrap;
+  overflow: hidden;
+
+  html[data-sidebar-collapsed='true'] & {
+    @media (min-width: $breakpoint-md) {
+      opacity: 0;
+      height: 0;
+      padding-block: 0;
+      margin: 0;
+    }
+  }
+}
+
+.sb-nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sb-nav-link {
+  display: flex;
+  align-items: center;
+  gap: var(--sb-rail-gap);
+  padding: var(--sb-row-pad-y) var(--sb-rail-inset);
+  border-radius: 6px;
+  text-decoration: none;
+  color: var(--text-secondary);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  transition: color 0.2s ease, background-color 0.2s ease;
+
+  &:hover,
+  &:focus-visible {
+    color: var(--text-primary);
+    background: color-mix(in srgb, var(--selection) 55%, transparent);
+    text-decoration: none;
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: 1px solid color-mix(in srgb, var(--brand) 45%, transparent);
+    outline-offset: 1px;
+  }
+
+  &[aria-current='page'],
+  &[data-active] {
+    color: var(--brand);
+    background: color-mix(in srgb, var(--brand) 10%, transparent);
+
+    .sb-nav-monogram {
+      color: var(--brand);
+    }
+  }
+}
+
+.sb-nav-monogram {
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--selection) 70%, transparent);
+  color: var(--text-secondary);
+  font-family: $font-family-mono;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  letter-spacing: 0;
+}
+
+.sb-nav-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: opacity 0.15s ease;
+
+  html[data-sidebar-collapsed='true'] & {
+    @media (min-width: $breakpoint-md) {
+      display: none;
+    }
+  }
+}
+
+// ------------------------------------
+// Accessibility helpers
+// ------------------------------------
+.sb-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  border: 0;
+  white-space: nowrap;
+}
+
+// ------------------------------------
+// Desktop: site-main offset
+// ------------------------------------
+@media (min-width: $breakpoint-md) {
+  body.site-root .site-main {
+    margin-inline-start: var(--sb-expanded);
+    transition: margin-inline-start 0.22s ease;
+  }
+
+  html[data-sidebar-collapsed='true'] body.site-root .site-main {
+    margin-inline-start: var(--sb-collapsed);
+  }
+}
+
+// ------------------------------------
+// Reduced motion
+// ------------------------------------
+@media (prefers-reduced-motion: reduce) {
+  .sb-panel,
+  .sb-backdrop,
+  .sb-trigger,
+  .sb-bars,
+  .sb-bars::before,
+  .sb-bars::after,
+  .sb-collapse svg,
+  .sb-brand-logo,
+  .sb-brand-expand {
+    transition: none !important;
+  }
+}
