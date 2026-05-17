@@ -8,9 +8,12 @@
 // (--bg, --surface-*, --border, --text-*) and
 // global fonts. Overrides only the accent layer.
 //
-// Future game guides follow the same pattern —
-// scope to a .<game>-section root and re-bind
-// the --section-accent-* tokens.
+// This file is the reference implementation of
+// the "game guides (mini-sites)" pattern.
+// To add a new guide, see CLAUDE.md →
+// "Game guides (mini-sites)" — clone this file,
+// rename .bg3-* → .<game>-*, and rebind the
+// --section-accent-* block at the section root.
 // ============================================
 
 .bg3-section {
