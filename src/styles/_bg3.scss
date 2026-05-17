@@ -1,9 +1,9 @@
 @use "variables" as *;
 
 // ============================================
-// /bg3 — Baldur's Gate 3 Necromancer Guide
+// /bg3 — Baldur's Gate 3 Deathreaper Guide
 //
-// Section theme: necromancy violet over the
+// Section theme: necrotic green over the
 // site's cyberpunk base. Reuses global tokens
 // (--bg, --surface-*, --border, --text-*) and
 // global fonts. Overrides only the accent layer.
@@ -17,14 +17,18 @@
 // ============================================
 
 .bg3-section {
-  // Per-section accent — necromancy violet.
-  // Aligns with the site's existing --accent-purple.
-  --section-accent: #9D7CFF;
-  --section-accent-bright: #C4B0FF;
-  --section-accent-dim: rgba(157, 124, 255, 0.18);
-  --section-accent-soft: rgba(157, 124, 255, 0.08);
-  --section-frame: rgba(157, 124, 255, 0.32);
-  --section-glow: 0 0 24px rgba(157, 124, 255, 0.22);
+  // Per-section accent — necrotic green.
+  --section-accent: #5BE85C;
+  --section-accent-bright: #9CFFA0;
+  --section-accent-dim: rgba(91, 232, 92, 0.18);
+  --section-accent-soft: rgba(91, 232, 92, 0.08);
+  --section-frame: rgba(91, 232, 92, 0.32);
+  --section-glow: 0 0 24px rgba(91, 232, 92, 0.22);
+
+  // Multiclass chip palette — used by .bg3-class-chip.
+  --class-cleric: #E0E040;     // sun-warm yellow (radiant)
+  --class-wizard: #4DA3FF;     // arcane blue
+  --class-druid:  #5BE85C;     // green, mirrors section accent
 
   position: relative;
   z-index: 1;
@@ -75,7 +79,7 @@
     text-transform: uppercase;
     color: var(--text-primary);
     margin: 0 0 $spacing-unit;
-    text-shadow: 0 0 24px rgba(157, 124, 255, 0.18);
+    text-shadow: 0 0 24px rgba(91, 232, 92, 0.18);
   }
 
   .bg3-subtitle {
@@ -481,6 +485,207 @@
     }
   }
 
+  // ---- Build at-a-glance card (page header) ----
+  .bg3-glance {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-unit * 1.25;
+    margin: 0 0 $spacing-unit * 2;
+    padding: $spacing-unit * 1.5;
+    border: 1px solid var(--section-frame);
+    border-radius: 10px;
+    background: var(--section-accent-soft);
+
+    @media (min-width: $breakpoint-md) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .bg3-glance-row {
+    display: flex;
+    align-items: baseline;
+    gap: $spacing-unit;
+    min-width: 0;
+  }
+
+  .bg3-glance-label {
+    flex: 0 0 auto;
+    font-family: $font-family-mono;
+    font-size: $font-size-xs;
+    text-transform: uppercase;
+    letter-spacing: $label-tracking;
+    color: var(--text-muted);
+  }
+
+  .bg3-glance-value {
+    flex: 1 1 auto;
+    min-width: 0;
+    font-family: $font-family-mono;
+    font-size: $font-size-sm;
+    color: var(--text-primary);
+
+    strong {
+      font-weight: $font-weight-semibold;
+      color: var(--section-accent-bright);
+    }
+  }
+
+  .bg3-glance-split {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+    flex-wrap: wrap;
+
+    .bg3-glance-segment {
+      font-family: $font-family-mono;
+      font-size: $font-size-sm;
+      color: var(--text-primary);
+
+      &::before {
+        content: attr(data-count);
+        font-weight: $font-weight-semibold;
+        color: var(--class-color, var(--section-accent-bright));
+        margin-right: 4px;
+      }
+    }
+
+    .bg3-glance-sep {
+      color: var(--text-muted);
+    }
+  }
+
+  // ---- Triangle of Death — pinned combat reference ----
+  .bg3-triangle {
+    margin: 0 0 $spacing-unit * 2;
+    padding: $spacing-unit * 1.5;
+    border: 1px solid var(--section-frame);
+    border-radius: 10px;
+    background: var(--section-accent-soft);
+    position: relative;
+
+    &::before {
+      content: 'REFERENCE';
+      position: absolute;
+      top: -8px;
+      left: 12px;
+      padding: 0 6px;
+      font-family: $font-family-mono;
+      font-size: 0.65rem;
+      letter-spacing: $label-tracking;
+      color: var(--section-accent);
+      background: var(--bg);
+    }
+  }
+
+  .bg3-triangle-title {
+    font-family: $font-family-mono;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    text-transform: uppercase;
+    letter-spacing: $label-tracking;
+    color: var(--text-primary);
+    margin: 0 0 $spacing-unit;
+  }
+
+  .bg3-triangle-intro {
+    font-size: $font-size-sm;
+    color: var(--text-secondary);
+    margin: 0 0 $spacing-unit * 1.25;
+    line-height: $line-height-snug;
+  }
+
+  .bg3-triangle-rows {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-unit;
+
+    @media (min-width: $breakpoint-sm) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .bg3-triangle-row {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: $spacing-unit;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface-1);
+  }
+
+  .bg3-triangle-stat {
+    font-family: $font-family-mono;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: $label-tracking;
+    color: var(--text-muted);
+  }
+
+  .bg3-triangle-cantrip {
+    font-family: $font-family-sans;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: var(--section-accent-bright);
+  }
+
+  // ---- Class chips on level summaries ----
+  .bg3-class-chip {
+    display: inline-block;
+    margin-left: auto;
+    margin-right: $spacing-unit;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-family: $font-family-mono;
+    font-size: 0.65rem;
+    letter-spacing: $label-tracking;
+    text-transform: uppercase;
+    line-height: 1.6;
+    border: 1px solid currentColor;
+    white-space: nowrap;
+
+    &[data-class="cleric"] { color: var(--class-cleric); }
+    &[data-class="wizard"] { color: var(--class-wizard); }
+    &[data-class="druid"]  { color: var(--class-druid);  }
+  }
+
+  // Push the +/- glyph past the chip
+  .bg3-details:has(.bg3-class-chip) > .bg3-summary {
+    .bg3-summary-title { flex: 0 1 auto; }
+    .bg3-count { margin-right: $spacing-unit; }
+  }
+
+  // ---- Milestone halo on key levels ----
+  .bg3-details--milestone {
+    border-color: var(--section-frame);
+    background:
+      linear-gradient(
+        180deg,
+        var(--section-accent-soft) 0,
+        transparent 60%
+      ),
+      var(--surface-1);
+
+    > .bg3-summary {
+      .bg3-summary-title {
+        color: var(--section-accent-bright);
+      }
+    }
+
+    &::before {
+      content: '★';
+      position: absolute;
+      top: 8px;
+      right: -4px;
+      color: var(--section-accent);
+      font-size: 10px;
+      opacity: 0.65;
+      pointer-events: none;
+    }
+
+    position: relative;
+  }
+
   .hidden {
     display: none !important;
   }
@@ -500,10 +705,10 @@
   backdrop-filter: blur(10px);
 
   // Re-declare so the tabbar can sit at the body root and still pick up the accent.
-  --section-accent: #9D7CFF;
-  --section-accent-bright: #C4B0FF;
-  --section-accent-dim: rgba(157, 124, 255, 0.18);
-  --section-glow: 0 0 18px rgba(157, 124, 255, 0.22);
+  --section-accent: #5BE85C;
+  --section-accent-bright: #9CFFA0;
+  --section-accent-dim: rgba(91, 232, 92, 0.18);
+  --section-glow: 0 0 18px rgba(91, 232, 92, 0.22);
 
   // Offset from the persistent sidebar on desktop
   @media (min-width: $breakpoint-md) {

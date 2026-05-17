@@ -1,4 +1,16 @@
-import type { CheckItem, CheckSection } from './types';
+import type { CheckItem, CheckSection, TriangleCard } from './types';
+
+/** Pinned combat reference at the top of the Now tab. Not a checklist. */
+export const triangleOfDeath: TriangleCard = {
+  id: 'triangle-of-death',
+  title: 'Triangle of Death',
+  intro: 'Pick the cantrip that matches the enemy\'s weakest stat. Reaper twins the single-target ones on a second creature within 1.5 m.',
+  rows: [
+    { stat: 'low DEX', cantrip: 'Bursting Sinew' },
+    { stat: 'low AC',  cantrip: 'Bone Chill' },
+    { stat: 'low WIS', cantrip: 'Toll the Dead' }
+  ]
+};
 
 /** Lists shown by the "Don't Leave Act Without" act selector. */
 export const dontLeaveByAct: Record<'act1' | 'act2' | 'act3', CheckItem[]> = {

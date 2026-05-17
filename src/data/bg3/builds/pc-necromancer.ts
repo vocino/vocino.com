@@ -10,6 +10,13 @@ export const pcNecromancer: Build = {
   summary:
     '8 Death Domain Cleric / 2 Necromancy Wizard / 2 Spore Druid. WIS caster who twins Toll the Dead and Bone Chill via Reaper, then closes with dual hand crossbow attacks. No undead armies — necromancy as scalpel, not stampede.',
 
+  glance: {
+    split: '8 / 2 / 2',
+    classes: ['Cleric', 'Wizard', 'Druid'],
+    dominantStat: 'WIS',
+    feats: ['L4 War Caster', 'L8 Dual Wielder']
+  },
+
   levels: [
     {
       id: 'patch8-why',
@@ -54,19 +61,11 @@ export const pcNecromancer: Build = {
       ]
     },
     {
-      id: 'triangle-of-death',
-      title: 'Triangle of Death — targeting',
-      intro: 'Pick the cantrip that matches the enemy\'s weakest stat.',
-      items: [
-        { id: 'tri-bursting', label: 'Bursting Sinew vs enemies with low Dexterity', tag: 'combat' },
-        { id: 'tri-bone-chill', label: 'Bone Chill vs enemies with relatively lower AC', tag: 'combat' },
-        { id: 'tri-toll', label: 'Toll the Dead vs enemies with low Wisdom', tag: 'combat' }
-      ]
-    },
-    {
       id: 'level-1',
       title: 'L1 — Cleric (Death Domain)',
       intro: 'Cantrips and subclass at L1. No spell prep yet — preparation lands at L2.',
+      levelClass: 'cleric',
+      milestone: true,
       items: [
         { id: 'cantrips', label: 'Cantrips: Bone Chill, Toll the Dead, Guidance, Bursting Sinew (take all 4)', tag: 'combat' },
         { id: 'subclass', label: 'Subclass: Death Domain → Reaper', tag: 'lore' },
@@ -76,6 +75,7 @@ export const pcNecromancer: Build = {
     {
       id: 'level-2',
       title: 'L2 — Cleric · Touch of Death',
+      levelClass: 'cleric',
       items: [
         {
           id: 'spells-prep',
@@ -92,6 +92,7 @@ export const pcNecromancer: Build = {
     {
       id: 'level-3',
       title: 'L3 — Cleric · 2nd-level slots',
+      levelClass: 'cleric',
       items: [
         { id: 'spiritual-weapon', label: 'Prepare Spiritual Weapon', tag: 'combat' },
         { id: 'sanctuary', label: 'Prepare Sanctuary', tag: 'combat' }
@@ -101,6 +102,8 @@ export const pcNecromancer: Build = {
       id: 'level-4',
       title: 'L4 — Feat: War Caster',
       intro: 'Concentration save advantage is mandatory for Spirit Guardians at L5.',
+      levelClass: 'cleric',
+      milestone: true,
       items: [
         { id: 'hold-person', label: 'Prepare Hold Person', tag: 'combat' },
         { id: 'aid-enhance', label: 'Then prepare Aid or Enhance Ability', tag: 'combat' },
@@ -112,6 +115,7 @@ export const pcNecromancer: Build = {
       id: 'level-5',
       title: 'L5 — Cleric · 3rd-level slots',
       intro: 'Spirit Guardians is the workhorse — Inescapable Destruction (L6) makes it bypass necrotic resistance.',
+      levelClass: 'cleric',
       items: [
         { id: 'spirit-guardians', label: 'Prepare Spirit Guardians', tag: 'combat' }
       ]
@@ -120,6 +124,8 @@ export const pcNecromancer: Build = {
       id: 'level-6',
       title: 'L6 — Cleric · Inescapable Destruction',
       intro: 'Hit Cleric 6 before the Underdark. Glyph of Warding is the headline 3rd-level pick.',
+      levelClass: 'cleric',
+      milestone: true,
       items: [
         { id: 'glyph-of-warding', label: 'Prepare Glyph of Warding', tag: 'combat' },
         { id: 'revivify', label: 'Extras: Revivify, Mass Healing Word', tag: 'combat' },
@@ -134,6 +140,7 @@ export const pcNecromancer: Build = {
       id: 'level-7',
       title: 'L7 — Cleric · 4th-level slots',
       intro: 'The new Level IV spells are not great. Prep any previous spell that fits the next fight.',
+      levelClass: 'cleric',
       items: [
         { id: 'l7-refresh', label: 'Refresh prepared list from L1-L3 spells', tag: 'combat' }
       ]
@@ -142,6 +149,8 @@ export const pcNecromancer: Build = {
       id: 'level-8',
       title: 'L8 — Feat: Dual Wielder + Divine Strike',
       intro: 'L4 spells still aren\'t great — keep the prep flexible. The feat and the feature are the milestone.',
+      levelClass: 'cleric',
+      milestone: true,
       items: [
         {
           id: 'divine-strike-feature',
@@ -155,6 +164,7 @@ export const pcNecromancer: Build = {
       id: 'level-9',
       title: 'L9 — Wizard 1',
       intro: 'First dip. You can now learn scrolls — Circle of Death and Dethrone are chef\'s kiss.',
+      levelClass: 'wizard',
       items: [
         { id: 'wiz-cantrips', label: 'Cantrips: Booming Blade, Light, Minor Illusion', tag: 'combat' },
         {
@@ -172,6 +182,8 @@ export const pcNecromancer: Build = {
     {
       id: 'level-10',
       title: 'L10 — Wizard 2 · Necromancy School',
+      levelClass: 'wizard',
+      milestone: true,
       items: [
         { id: 'subclass-wiz', label: 'Subclass: School of Necromancy', tag: 'lore' },
         { id: 'savant', label: 'Necromancy Savant — scribe necromancy scrolls for 25 gp per spell level', tag: 'lore' },
@@ -182,6 +194,7 @@ export const pcNecromancer: Build = {
     {
       id: 'level-11',
       title: 'L11 — Druid 1',
+      levelClass: 'druid',
       items: [
         { id: 'druid-cantrips', label: 'Cantrips: Thorn Whip, Shillelagh', tag: 'combat' },
         {
@@ -205,6 +218,8 @@ export const pcNecromancer: Build = {
       id: 'level-12',
       title: 'L12 — Druid 2 · Circle of Spores',
       intro: 'Symbiotic Entity is the capstone buff. Burns a Wild Shape charge for temp HP and +1d6 necrotic on weapons.',
+      levelClass: 'druid',
+      milestone: true,
       items: [
         { id: 'subclass-druid', label: 'Subclass: Circle of the Spores', tag: 'lore' },
         { id: 'druid-l12-spells', label: 'Interesting adds: Ice Knife, Faerie Fire', tag: 'combat' },
