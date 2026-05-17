@@ -146,7 +146,7 @@ export const criticalQuests: CheckSection = {
 export const combatLoop: CheckSection = {
   id: 'now-combat-loop',
   title: 'Combat Loop',
-  intro: 'Triangle of Death first; hand crossbows close the distance.',
+  intro: 'Triangle of Death first; hand crossbows close at L8 once Dual Wielder + Divine Strike land.',
   items: [
     {
       id: 'combat-pre-fight',
@@ -155,14 +155,20 @@ export const combatLoop: CheckSection = {
     },
     {
       id: 'combat-spirit-guardians',
-      label: 'Open with Spirit Guardians (Necrotic) + Spiritual Weapon',
-      note: 'Necrotic flavour ignores resistance once you have Inescapable Destruction.',
+      label: 'Open with Spirit Guardians + Spiritual Weapon',
+      note: 'Inescapable Destruction (Cleric 6) makes necrotic ignore resistance — pair with the necrotic flavour where available.',
+      tag: 'combat'
+    },
+    {
+      id: 'combat-triangle-pick',
+      label: 'Triangle of Death — pick the cantrip that matches the weak stat',
+      note: 'Bursting Sinew vs low DEX · Bone Chill vs low AC · Toll the Dead vs low WIS.',
       tag: 'combat'
     },
     {
       id: 'combat-triangle',
-      label: 'Triangle of Death: Toll the Dead → Bone Chill → Bursting Sinew',
-      note: 'Reaper twins single-target cantrips. Bursting Sinew detonates a corpse for AoE.',
+      label: 'Cantrip rotation: Toll the Dead → Bone Chill → Bursting Sinew',
+      note: 'Reaper (Cleric 1) twins single-target cantrips on a second creature within 1.5 m.',
       tag: 'combat'
     },
     {
@@ -172,13 +178,13 @@ export const combatLoop: CheckSection = {
     },
     {
       id: 'combat-crossbows',
-      label: 'Hand crossbows for the off-action with Divine Strike: Necrotic (+1d8)',
-      note: 'Touch of Death (Channel Divinity) adds a one-shot necrotic rider on a melee hit.',
+      label: 'L8+: hand crossbows with Divine Strike: Necrotic (+1d8 once per turn)',
+      note: 'Touch of Death (Channel Divinity) adds 5 + 2× Cleric level necrotic on a single melee hit.',
       tag: 'combat'
     },
     {
       id: 'combat-grim-harvest',
-      label: 'Finish low-HP enemies with Toll the Dead for Grim Harvest healing',
+      label: 'L10+: finish low-HP enemies with Toll the Dead for Grim Harvest healing',
       note: '+3 HP per spell level (necromancy) every time a spell lands the killing blow.',
       tag: 'combat'
     },
@@ -189,7 +195,7 @@ export const combatLoop: CheckSection = {
     },
     {
       id: 'combat-concentration',
-      label: 'Concentration: Spirit Guardians or Hold Person. Drop it for Banishment on big saves.',
+      label: 'Concentration: Spirit Guardians or Hold Person. Drop it for Glyph of Warding setup or Hold Monster later.',
       tag: 'combat'
     }
   ]
