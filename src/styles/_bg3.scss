@@ -1,0 +1,447 @@
+@use "variables" as *;
+
+// ============================================
+// /bg3 — Baldur's Gate 3 Necromancer Guide
+//
+// Section theme: necromancy violet over the
+// site's cyberpunk base. Reuses global tokens
+// (--bg, --surface-*, --border, --text-*) and
+// global fonts. Overrides only the accent layer.
+//
+// Future game guides follow the same pattern —
+// scope to a .<game>-section root and re-bind
+// the --section-accent-* tokens.
+// ============================================
+
+.bg3-section {
+  // Per-section accent — necromancy violet.
+  // Aligns with the site's existing --accent-purple.
+  --section-accent: #9D7CFF;
+  --section-accent-bright: #C4B0FF;
+  --section-accent-dim: rgba(157, 124, 255, 0.18);
+  --section-accent-soft: rgba(157, 124, 255, 0.08);
+  --section-frame: rgba(157, 124, 255, 0.32);
+  --section-glow: 0 0 24px rgba(157, 124, 255, 0.22);
+
+  position: relative;
+  z-index: 1;
+  font-family: $font-family-sans;
+  color: var(--text-primary);
+
+  .bg3-app {
+    width: 100%;
+    max-width: 520px;
+    margin: 0 auto;
+    padding:
+      $spacing-unit * 2
+      $spacing-unit * 2
+      calc(#{$spacing-unit * 12} + env(safe-area-inset-bottom));
+
+    @media (min-width: $breakpoint-md) {
+      max-width: 640px;
+      padding-top: $spacing-unit * 6;
+    }
+  }
+
+  .bg3-header {
+    margin-bottom: $spacing-unit * 3;
+  }
+
+  .bg3-eyebrow {
+    display: inline-block;
+    font-family: $font-family-mono;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-normal;
+    letter-spacing: $label-tracking;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 0 0 $spacing-unit;
+
+    &::before {
+      content: '// ';
+      color: var(--section-accent);
+      opacity: 0.85;
+    }
+  }
+
+  .bg3-title {
+    font-family: $font-family-mono;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    letter-spacing: $display-tracking;
+    text-transform: uppercase;
+    color: var(--text-primary);
+    margin: 0 0 $spacing-unit;
+    text-shadow: 0 0 24px rgba(157, 124, 255, 0.18);
+  }
+
+  .bg3-subtitle {
+    font-family: $font-family-sans;
+    font-size: $font-size-sm;
+    color: var(--text-secondary);
+    margin: 0 0 $spacing-unit * 2;
+    max-width: 46ch;
+  }
+
+  .bg3-accent-bar {
+    display: block;
+    width: calc((var(--block-size) + var(--block-gap)) * 6);
+    height: var(--block-size);
+    margin-bottom: $spacing-unit * 2;
+    background-image: repeating-linear-gradient(
+      90deg,
+      var(--section-accent) 0,
+      var(--section-accent) var(--block-size),
+      transparent var(--block-size),
+      transparent calc(var(--block-size) + var(--block-gap))
+    );
+  }
+
+  .bg3-controls {
+    display: flex;
+    gap: $spacing-unit;
+    margin: 0 0 $spacing-unit * 2;
+  }
+
+  .bg3-button {
+    min-height: 44px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface-1);
+    color: var(--text-primary);
+    padding: 0 $spacing-unit * 2;
+    font-family: $font-family-mono;
+    font-size: $font-size-xs;
+    text-transform: uppercase;
+    letter-spacing: $label-tracking;
+    cursor: pointer;
+    transition:
+      border-color 0.25s ease,
+      color 0.25s ease,
+      box-shadow 0.25s ease,
+      background 0.25s ease;
+
+    &:hover,
+    &:focus-visible {
+      border-color: var(--section-accent);
+      color: var(--section-accent-bright);
+      box-shadow: var(--section-glow);
+      outline: none;
+    }
+  }
+
+  .bg3-panel {
+    display: none;
+    flex-direction: column;
+    gap: $spacing-unit * 1.5;
+    margin-top: $spacing-unit * 1.5;
+
+    &[aria-hidden="false"] {
+      display: flex;
+    }
+  }
+
+  .bg3-details {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface-1);
+    overflow: hidden;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+
+    &[open] {
+      border-color: var(--section-frame);
+    }
+
+    &[open]:focus-within {
+      box-shadow: var(--section-glow);
+    }
+  }
+
+  .bg3-summary {
+    list-style: none;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    padding: 12px 14px;
+    cursor: pointer;
+    font-family: $font-family-sans;
+    font-weight: $font-weight-semibold;
+    font-size: $font-size-sm;
+    color: var(--text-primary);
+    position: relative;
+    gap: $spacing-unit;
+    letter-spacing: $tracking-wide;
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    &::after {
+      content: '+';
+      margin-left: auto;
+      color: var(--section-accent);
+      font-family: $font-family-mono;
+      font-size: 18px;
+      line-height: 1;
+    }
+  }
+
+  .bg3-details[open] > .bg3-summary::after {
+    content: '−';
+  }
+
+  .bg3-summary-title {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .bg3-count {
+    color: var(--text-muted);
+    font-family: $font-family-mono;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-normal;
+    letter-spacing: $label-tracking;
+    white-space: nowrap;
+    margin-left: $spacing-unit;
+
+    &[data-complete="true"] {
+      color: var(--section-accent-bright);
+    }
+  }
+
+  .bg3-body {
+    padding: 0 14px 12px;
+    border-top: 1px solid var(--border);
+    background: var(--surface-2);
+  }
+
+  .bg3-intro {
+    color: var(--text-secondary);
+    font-size: $font-size-sm;
+    margin: 10px 0 4px;
+  }
+
+  // Checklist primitives — scoped to .bg3-section, names kept short for the data layer.
+  .checklist {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .checklist li + li {
+    border-top: 1px solid var(--border);
+  }
+
+  .check {
+    min-height: 44px;
+    display: grid;
+    grid-template-columns: 26px 1fr;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    cursor: pointer;
+    font-size: $font-size-sm;
+    line-height: $line-height-snug;
+    color: var(--text-primary);
+
+    input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      accent-color: var(--section-accent);
+      margin: 0;
+    }
+
+    small {
+      display: block;
+      margin-top: 2px;
+      color: var(--text-muted);
+      font-size: $font-size-xs;
+    }
+  }
+
+  .check-label {
+    display: inline;
+  }
+
+  // Pills (act selector)
+  .pill-row {
+    display: flex;
+    gap: $spacing-unit;
+    flex-wrap: wrap;
+    margin-top: $spacing-unit;
+  }
+
+  .pill {
+    min-height: 40px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--surface-1);
+    color: var(--text-secondary);
+    padding: 0 $spacing-unit * 2;
+    font-family: $font-family-mono;
+    font-size: $font-size-xs;
+    text-transform: uppercase;
+    letter-spacing: $label-tracking;
+    cursor: pointer;
+    transition:
+      background 0.25s ease,
+      border-color 0.25s ease,
+      color 0.25s ease;
+
+    &[aria-pressed="true"] {
+      background: var(--section-accent-dim);
+      border-color: var(--section-accent);
+      color: var(--section-accent-bright);
+    }
+
+    &:hover,
+    &:focus-visible {
+      border-color: var(--section-accent);
+      color: var(--section-accent-bright);
+      outline: none;
+    }
+  }
+
+  // Tag pills — lore / combat / both / lore-fit-*
+  .tag,
+  .lore-fit {
+    display: inline-block;
+    vertical-align: baseline;
+    margin-left: $spacing-unit;
+    padding: 1px $spacing-unit;
+    border-radius: 999px;
+    font-family: $font-family-mono;
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1.6;
+    white-space: nowrap;
+  }
+
+  .tag-lore,
+  .lore-fit-high {
+    background: var(--section-accent-dim);
+    color: var(--section-accent-bright);
+  }
+
+  .tag-combat,
+  .lore-fit-hostile {
+    background: rgba(255, 92, 92, 0.14);
+    color: #FFB7A4;
+  }
+
+  .tag-both,
+  .lore-fit-medium {
+    background: rgba(77, 163, 255, 0.14);
+    color: var(--accent-blue);
+  }
+
+  .lore-fit-low {
+    background: var(--surface-2);
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+  }
+
+  // Companions
+  .companion-meta {
+    color: var(--text-secondary);
+    font-family: $font-family-mono;
+    font-size: $font-size-xs;
+    text-transform: uppercase;
+    letter-spacing: $label-tracking;
+    margin: $spacing-unit 0;
+  }
+
+  .companion-notes {
+    margin: 0;
+    padding-left: 1.1rem;
+    font-size: $font-size-sm;
+    color: var(--text-primary);
+    line-height: $line-height-snug;
+
+    li + li {
+      margin-top: 4px;
+    }
+
+    li::marker {
+      color: var(--section-accent);
+    }
+  }
+
+  .hidden {
+    display: none !important;
+  }
+}
+
+// Fixed bottom tabbar — lives outside .bg3-section visually
+// but inherits the section accent via CSS variables on .bg3-tabbar.
+.bg3-section ~ .bg3-tabbar,
+.bg3-tabbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  border-top: 1px solid var(--border);
+  background: rgba(15, 20, 25, 0.92);
+  backdrop-filter: blur(10px);
+
+  // Re-declare so the tabbar can sit at the body root and still pick up the accent.
+  --section-accent: #9D7CFF;
+  --section-accent-bright: #C4B0FF;
+  --section-accent-dim: rgba(157, 124, 255, 0.18);
+  --section-glow: 0 0 18px rgba(157, 124, 255, 0.22);
+}
+
+.bg3-tabbar-inner {
+  max-width: 520px;
+  margin: 0 auto;
+  padding:
+    $spacing-unit
+    calc(#{$spacing-unit * 1.5})
+    calc(#{$spacing-unit} + env(safe-area-inset-bottom));
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: $spacing-unit;
+
+  @media (min-width: $breakpoint-md) {
+    max-width: 640px;
+  }
+}
+
+.bg3-tab {
+  min-height: 44px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface-1);
+  color: var(--text-secondary);
+  font-family: $font-family-mono;
+  font-size: $font-size-xs;
+  text-transform: uppercase;
+  letter-spacing: $label-tracking;
+  cursor: pointer;
+  padding: 0 4px;
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease,
+    box-shadow 0.25s ease;
+
+  &[aria-selected="true"] {
+    background: var(--section-accent-dim);
+    border-color: var(--section-accent);
+    color: var(--section-accent-bright);
+    box-shadow: var(--section-glow);
+  }
+
+  &:hover,
+  &:focus-visible {
+    border-color: var(--section-accent);
+    color: var(--section-accent-bright);
+    outline: none;
+  }
+}
+
+.bg3-tab.hidden {
+  display: none !important;
+}
