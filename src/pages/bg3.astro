@@ -1,5 +1,6 @@
 ---
-import GlobalHamburgerMenu from "../components/GlobalHamburgerMenu.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteBrand from "../components/SiteBrand.astro";
 import BG3Checklist from "../components/bg3/BG3Checklist.astro";
 import {
   dontLeaveByAct,
@@ -15,523 +16,159 @@ import { companions, loreRules } from "../data/bg3/coven";
 import { setupSections } from "../data/bg3/setup";
 ---
 
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BG3 Necromancer Guide</title>
-  <meta
-    name="description"
-    content="Mobile-first second-screen companion for a Baldur's Gate 3 necromancer run."
-  />
-  <style>
-    :root {
-      --bg: #0b0b0c;
-      --surface: #121216;
-      --surface-2: #18181d;
-      --text: #e8e8e8;
-      --muted: #9b9ba3;
-      --accent: #8b5cf6;
-      --accent-soft: #2a1d45;
-      --border: #262630;
-      --tag-lore: #2a1d45;
-      --tag-lore-text: #d7c4ff;
-      --tag-combat: #3a1d1d;
-      --tag-combat-text: #ffb7a4;
-      --tag-both: #1f2a3a;
-      --tag-both-text: #a4c7ff;
-    }
+<BaseLayout
+  title="BG3 Necromancer Guide — Vocino"
+  description="Mobile-first second-screen companion for a Baldur’s Gate 3 Custom Tav Human Wizard Necromancer run."
+>
+  <section class="bg3-section">
+    <div class="bg3-app">
+      <header class="bg3-header">
+        <SiteBrand class="site-brand--mark" />
+        <span class="bg3-eyebrow">guide · baldur’s gate 3</span>
+        <h1 class="bg3-title">Necromancer Guide</h1>
+        <span class="bg3-accent-bar" aria-hidden="true"></span>
+        <p class="bg3-subtitle">Second-screen companion for a Custom Tav Human Wizard Necromancer. Lore-leaning. Phone first.</p>
+      </header>
 
-    * {
-      box-sizing: border-box;
-    }
+      <div class="bg3-controls">
+        <button id="show-setup-button" class="bg3-button hidden" type="button">Show Setup</button>
+        <button id="reset-button" class="bg3-button" type="button">Reset Checks</button>
+      </div>
 
-    html,
-    body {
-      margin: 0;
-      padding: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, "Helvetica Neue", Arial, sans-serif;
-      font-size: 16px;
-      line-height: 1.45;
-    }
+      <section id="now-panel" class="bg3-panel" data-tab-panel="now" aria-hidden="false">
+        <details class="bg3-details" data-section-id="now-act-selector" data-no-count>
+          <summary class="bg3-summary"><span class="bg3-summary-title">Spot Check</span></summary>
+          <div class="bg3-body">
+            <p class="bg3-intro">Act selector</p>
+            <div class="pill-row" role="radiogroup" aria-label="Act selector">
+              <button type="button" class="pill" data-act="act1" aria-pressed="true">Act 1</button>
+              <button type="button" class="pill" data-act="act2" aria-pressed="false">Act 2</button>
+              <button type="button" class="pill" data-act="act3" aria-pressed="false">Act 3</button>
+            </div>
+          </div>
+        </details>
 
-    body {
-      min-height: 100vh;
-    }
+        <details class="bg3-details" data-section-id="now-dont-leave">
+          <summary class="bg3-summary"><span class="bg3-summary-title">Don’t Leave Act Without</span></summary>
+          <div class="bg3-body">
+            <div data-act-list="act1">
+              <BG3Checklist items={dontLeaveByAct.act1} />
+            </div>
+            <div data-act-list="act2" class="hidden">
+              <BG3Checklist items={dontLeaveByAct.act2} />
+            </div>
+            <div data-act-list="act3" class="hidden">
+              <BG3Checklist items={dontLeaveByAct.act3} />
+            </div>
+          </div>
+        </details>
 
-    .app {
-      width: 100%;
-      max-width: 480px;
-      margin: 0 auto;
-      padding: 12px 12px 88px;
-    }
+        <details class="bg3-details" data-section-id={beforeLongRest.id}>
+          <summary class="bg3-summary"><span class="bg3-summary-title">{beforeLongRest.title}</span></summary>
+          <div class="bg3-body">
+            <BG3Checklist items={beforeLongRest.items} />
+          </div>
+        </details>
 
-    h1,
-    h2,
-    h3 {
-      margin: 0;
-      font-size: 20px;
-      line-height: 1.25;
-      letter-spacing: 0.01em;
-    }
+        <details class="bg3-details" data-section-id={thayReading.id}>
+          <summary class="bg3-summary"><span class="bg3-summary-title">{thayReading.title}</span></summary>
+          <div class="bg3-body">
+            {thayReading.intro && <p class="bg3-intro">{thayReading.intro}</p>}
+            <BG3Checklist items={thayReading.items} />
+          </div>
+        </details>
 
-    h1 {
-      margin-bottom: 8px;
-    }
+        <details class="bg3-details" data-section-id={approvalGates.id}>
+          <summary class="bg3-summary"><span class="bg3-summary-title">{approvalGates.title}</span></summary>
+          <div class="bg3-body">
+            <BG3Checklist items={approvalGates.items} />
+          </div>
+        </details>
 
-    p {
-      margin: 0;
-    }
+        <details class="bg3-details" data-section-id={afterLevelUp.id}>
+          <summary class="bg3-summary"><span class="bg3-summary-title">{afterLevelUp.title}</span></summary>
+          <div class="bg3-body">
+            <BG3Checklist items={afterLevelUp.items} />
+          </div>
+        </details>
 
-    .intro {
-      color: var(--muted);
-      margin-bottom: 12px;
-    }
+        <details class="bg3-details" data-section-id={beforeLeaving.id}>
+          <summary class="bg3-summary"><span class="bg3-summary-title">{beforeLeaving.title}</span></summary>
+          <div class="bg3-body">
+            <BG3Checklist items={beforeLeaving.items} />
+          </div>
+        </details>
+      </section>
 
-    .controls {
-      display: flex;
-      gap: 8px;
-      margin: 0 0 12px;
-    }
+      <section id="levels-panel" class="bg3-panel" data-tab-panel="levels" aria-hidden="true">
+        {levels.map((level) => (
+          <details class="bg3-details" data-section-id={level.id}>
+            <summary class="bg3-summary"><span class="bg3-summary-title">{level.title}</span></summary>
+            <div class="bg3-body">
+              {level.intro && <p class="bg3-intro">{level.intro}</p>}
+              <BG3Checklist items={level.items} />
+            </div>
+          </details>
+        ))}
+      </section>
 
-    .button {
-      min-height: 44px;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      background: var(--surface);
-      color: var(--text);
-      padding: 0 14px;
-      font: inherit;
-      cursor: pointer;
-    }
+      <section id="gear-panel" class="bg3-panel" data-tab-panel="gear" aria-hidden="true">
+        {gearByAct.map((section) => (
+          <details class="bg3-details" data-section-id={section.id} data-no-count>
+            <summary class="bg3-summary"><span class="bg3-summary-title">{section.title}</span></summary>
+            <div class="bg3-body">
+              <BG3Checklist items={section.items} />
+            </div>
+          </details>
+        ))}
+      </section>
 
-    .button:hover,
-    .button:focus-visible {
-      border-color: var(--accent);
-      outline: none;
-    }
+      <section id="coven-panel" class="bg3-panel" data-tab-panel="coven" aria-hidden="true">
+        {companions.map((c) => (
+          <details class="bg3-details" data-section-id={c.id} data-no-count>
+            <summary class="bg3-summary">
+              <span class="bg3-summary-title">{c.name}</span>
+              <span class={`lore-fit lore-fit-${c.loreFit}`}>{c.loreFit}</span>
+            </summary>
+            <div class="bg3-body">
+              <p class="companion-meta">{c.recruit}</p>
+              <ul class="companion-notes">
+                {c.notes.map((line) => <li>{line}</li>)}
+              </ul>
+            </div>
+          </details>
+        ))}
 
-    .panel {
-      display: none;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: 10px;
-    }
+        <details class="bg3-details" data-section-id={loreRules.id} data-no-count>
+          <summary class="bg3-summary"><span class="bg3-summary-title">{loreRules.title}</span></summary>
+          <div class="bg3-body">
+            {loreRules.intro && <p class="bg3-intro">{loreRules.intro}</p>}
+            <BG3Checklist items={loreRules.items} />
+          </div>
+        </details>
+      </section>
 
-    .panel[aria-hidden="false"] {
-      display: flex;
-    }
-
-    details {
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      background: var(--surface);
-      overflow: hidden;
-    }
-
-    summary {
-      list-style: none;
-      min-height: 44px;
-      display: flex;
-      align-items: center;
-      padding: 10px 14px;
-      cursor: pointer;
-      font-weight: 600;
-      position: relative;
-      gap: 8px;
-    }
-
-    summary::-webkit-details-marker {
-      display: none;
-    }
-
-    summary::after {
-      content: "+";
-      margin-left: auto;
-      color: var(--accent);
-      font-size: 20px;
-      line-height: 1;
-    }
-
-    details[open] > summary::after {
-      content: "-";
-    }
-
-    .summary-title {
-      flex: 1 1 auto;
-      min-width: 0;
-    }
-
-    .count {
-      color: var(--muted);
-      font-weight: 400;
-      font-size: 0.85rem;
-      margin-left: 8px;
-      white-space: nowrap;
-    }
-
-    .count[data-complete="true"] {
-      color: var(--accent);
-    }
-
-    .section-body {
-      padding: 0 14px 12px;
-      border-top: 1px solid var(--border);
-      background: var(--surface-2);
-    }
-
-    .section-body p + p,
-    .section-body ul + p,
-    .section-body p + ul {
-      margin-top: 8px;
-    }
-
-    .section-intro {
-      color: var(--muted);
-      margin: 10px 0 4px;
-    }
-
-    .checklist {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    .checklist li + li {
-      border-top: 1px solid rgba(139, 92, 246, 0.17);
-    }
-
-    .check {
-      min-height: 44px;
-      display: grid;
-      grid-template-columns: 28px 1fr;
-      align-items: center;
-      gap: 10px;
-      padding: 8px 0;
-      cursor: pointer;
-    }
-
-    .check input {
-      width: 22px;
-      height: 22px;
-      accent-color: var(--accent);
-      margin: 0;
-    }
-
-    .check small {
-      color: var(--muted);
-      display: block;
-      margin-top: 2px;
-    }
-
-    .check-label {
-      display: inline;
-    }
-
-    .tag {
-      display: inline-block;
-      vertical-align: baseline;
-      margin-left: 6px;
-      padding: 1px 8px;
-      border-radius: 999px;
-      font-size: 0.7rem;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      line-height: 1.6;
-    }
-
-    .tag-lore {
-      background: var(--tag-lore);
-      color: var(--tag-lore-text);
-    }
-
-    .tag-combat {
-      background: var(--tag-combat);
-      color: var(--tag-combat-text);
-    }
-
-    .tag-both {
-      background: var(--tag-both);
-      color: var(--tag-both-text);
-    }
-
-    .lore-fit {
-      display: inline-block;
-      margin-left: 8px;
-      padding: 1px 8px;
-      border-radius: 999px;
-      font-size: 0.7rem;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      line-height: 1.6;
-    }
-
-    .lore-fit-high {
-      background: var(--tag-lore);
-      color: var(--tag-lore-text);
-    }
-
-    .lore-fit-medium {
-      background: var(--tag-both);
-      color: var(--tag-both-text);
-    }
-
-    .lore-fit-low {
-      background: var(--surface-2);
-      color: var(--muted);
-      border: 1px solid var(--border);
-    }
-
-    .lore-fit-hostile {
-      background: var(--tag-combat);
-      color: var(--tag-combat-text);
-    }
-
-    .companion-meta {
-      color: var(--muted);
-      font-size: 0.85rem;
-      margin: 4px 0 8px;
-    }
-
-    .companion-notes {
-      margin: 0;
-      padding-left: 1.1rem;
-    }
-
-    .companion-notes li + li {
-      margin-top: 4px;
-    }
-
-    .pill-row {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .pill {
-      min-height: 44px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--text);
-      padding: 0 14px;
-      font: inherit;
-      cursor: pointer;
-    }
-
-    .pill[aria-pressed="true"] {
-      background: var(--accent-soft);
-      border-color: var(--accent);
-      color: #f3ecff;
-    }
-
-    .muted {
-      color: var(--muted);
-    }
-
-    .row {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 8px;
-    }
-
-    .badge {
-      color: var(--muted);
-      font-size: 0.88rem;
-    }
-
-    .tabbar {
-      position: fixed;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      border-top: 1px solid var(--border);
-      background: rgba(11, 11, 12, 0.97);
-      backdrop-filter: blur(10px);
-    }
-
-    .tabbar-inner {
-      max-width: 480px;
-      margin: 0 auto;
-      padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
-      display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 8px;
-    }
-
-    .tab {
-      min-height: 44px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--text);
-      font: inherit;
-      font-size: 0.82rem;
-      cursor: pointer;
-      padding: 0 4px;
-    }
-
-    .tab[aria-selected="true"] {
-      border-color: var(--accent);
-      background: var(--accent-soft);
-      color: #f3ecff;
-    }
-
-    .hidden {
-      display: none !important;
-    }
-  </style>
-</head>
-<body class="site-root">
-  <div class="site-chrome">
-    <GlobalHamburgerMenu />
-  </div>
-  <main class="app">
-    <h1>BG3 Necromancer Guide</h1>
-    <p class="intro">Mobile-first second-screen companion for a Custom Tav Human Wizard Necromancer.</p>
-
-    <div class="controls">
-      <button id="show-setup-button" class="button hidden" type="button">Show Setup Tab</button>
-      <button id="reset-button" class="button" type="button">Reset Checks</button>
+      <section id="setup-panel" class="bg3-panel" data-tab-panel="setup" aria-hidden="true">
+        {setupSections.map((section) => (
+          <details class="bg3-details" data-section-id={section.id} data-no-count>
+            <summary class="bg3-summary"><span class="bg3-summary-title">{section.title}</span></summary>
+            <div class="bg3-body">
+              {section.intro && <p class="bg3-intro">{section.intro}</p>}
+              <BG3Checklist items={section.items} />
+            </div>
+          </details>
+        ))}
+      </section>
     </div>
+  </section>
 
-    <section id="now-panel" class="panel" data-tab-panel="now" aria-hidden="false">
-      <details data-section-id="now-act-selector" data-no-count>
-        <summary><span class="summary-title">Spot Check</span></summary>
-        <div class="section-body">
-          <p class="section-intro">Act selector</p>
-          <div class="pill-row" role="radiogroup" aria-label="Act selector">
-            <button type="button" class="pill" data-act="act1" aria-pressed="true">Act 1</button>
-            <button type="button" class="pill" data-act="act2" aria-pressed="false">Act 2</button>
-            <button type="button" class="pill" data-act="act3" aria-pressed="false">Act 3</button>
-          </div>
-        </div>
-      </details>
-
-      <details data-section-id="now-dont-leave">
-        <summary><span class="summary-title">Don’t Leave Act Without</span></summary>
-        <div class="section-body">
-          <div data-act-list="act1">
-            <BG3Checklist items={dontLeaveByAct.act1} />
-          </div>
-          <div data-act-list="act2" class="hidden">
-            <BG3Checklist items={dontLeaveByAct.act2} />
-          </div>
-          <div data-act-list="act3" class="hidden">
-            <BG3Checklist items={dontLeaveByAct.act3} />
-          </div>
-        </div>
-      </details>
-
-      <details data-section-id={beforeLongRest.id}>
-        <summary><span class="summary-title">{beforeLongRest.title}</span></summary>
-        <div class="section-body">
-          <BG3Checklist items={beforeLongRest.items} />
-        </div>
-      </details>
-
-      <details data-section-id={thayReading.id}>
-        <summary><span class="summary-title">{thayReading.title}</span></summary>
-        <div class="section-body">
-          {thayReading.intro && <p class="section-intro">{thayReading.intro}</p>}
-          <BG3Checklist items={thayReading.items} />
-        </div>
-      </details>
-
-      <details data-section-id={approvalGates.id}>
-        <summary><span class="summary-title">{approvalGates.title}</span></summary>
-        <div class="section-body">
-          <BG3Checklist items={approvalGates.items} />
-        </div>
-      </details>
-
-      <details data-section-id={afterLevelUp.id}>
-        <summary><span class="summary-title">{afterLevelUp.title}</span></summary>
-        <div class="section-body">
-          <BG3Checklist items={afterLevelUp.items} />
-        </div>
-      </details>
-
-      <details data-section-id={beforeLeaving.id}>
-        <summary><span class="summary-title">{beforeLeaving.title}</span></summary>
-        <div class="section-body">
-          <BG3Checklist items={beforeLeaving.items} />
-        </div>
-      </details>
-    </section>
-
-    <section id="levels-panel" class="panel" data-tab-panel="levels" aria-hidden="true">
-      {levels.map((level) => (
-        <details data-section-id={level.id}>
-          <summary><span class="summary-title">{level.title}</span></summary>
-          <div class="section-body">
-            {level.intro && <p class="section-intro">{level.intro}</p>}
-            <BG3Checklist items={level.items} />
-          </div>
-        </details>
-      ))}
-    </section>
-
-    <section id="gear-panel" class="panel" data-tab-panel="gear" aria-hidden="true">
-      {gearByAct.map((section) => (
-        <details data-section-id={section.id} data-no-count>
-          <summary><span class="summary-title">{section.title}</span></summary>
-          <div class="section-body">
-            <BG3Checklist items={section.items} />
-          </div>
-        </details>
-      ))}
-    </section>
-
-    <section id="coven-panel" class="panel" data-tab-panel="coven" aria-hidden="true">
-      {companions.map((c) => (
-        <details data-section-id={c.id} data-no-count>
-          <summary>
-            <span class="summary-title">{c.name}</span>
-            <span class={`lore-fit lore-fit-${c.loreFit}`}>{c.loreFit}</span>
-          </summary>
-          <div class="section-body">
-            <p class="companion-meta">{c.recruit}</p>
-            <ul class="companion-notes">
-              {c.notes.map((line) => <li>{line}</li>)}
-            </ul>
-          </div>
-        </details>
-      ))}
-
-      <details data-section-id={loreRules.id} data-no-count>
-        <summary><span class="summary-title">{loreRules.title}</span></summary>
-        <div class="section-body">
-          {loreRules.intro && <p class="section-intro">{loreRules.intro}</p>}
-          <BG3Checklist items={loreRules.items} />
-        </div>
-      </details>
-    </section>
-
-    <section id="setup-panel" class="panel" data-tab-panel="setup" aria-hidden="true">
-      {setupSections.map((section) => (
-        <details data-section-id={section.id} data-no-count>
-          <summary><span class="summary-title">{section.title}</span></summary>
-          <div class="section-body">
-            {section.intro && <p class="section-intro">{section.intro}</p>}
-            <BG3Checklist items={section.items} />
-          </div>
-        </details>
-      ))}
-    </section>
-  </main>
-
-  <nav class="tabbar" aria-label="Guide tabs">
-    <div class="tabbar-inner">
-      <button class="tab" type="button" data-tab="now" aria-selected="true">Now</button>
-      <button class="tab" type="button" data-tab="levels" aria-selected="false">Levels</button>
-      <button class="tab" type="button" data-tab="gear" aria-selected="false">Gear</button>
-      <button class="tab" type="button" data-tab="coven" aria-selected="false">Coven</button>
-      <button class="tab" type="button" data-tab="setup" aria-selected="false">Setup</button>
+  <nav class="bg3-tabbar" aria-label="Guide tabs">
+    <div class="bg3-tabbar-inner">
+      <button class="bg3-tab" type="button" data-tab="now" aria-selected="true">Now</button>
+      <button class="bg3-tab" type="button" data-tab="levels" aria-selected="false">Levels</button>
+      <button class="bg3-tab" type="button" data-tab="gear" aria-selected="false">Gear</button>
+      <button class="bg3-tab" type="button" data-tab="coven" aria-selected="false">Coven</button>
+      <button class="bg3-tab" type="button" data-tab="setup" aria-selected="false">Setup</button>
     </div>
   </nav>
 
@@ -547,7 +184,6 @@ import { setupSections } from "../data/bg3/setup";
         setupHidden: false
       };
 
-      // One-shot migration from v1 → v2 so mid-playthrough progress survives.
       try {
         const legacy = localStorage.getItem(legacyKey);
         if (legacy && !localStorage.getItem(storageKey)) {
@@ -561,7 +197,7 @@ import { setupSections } from "../data/bg3/setup";
           localStorage.removeItem(legacyKey);
         }
       } catch (_error) {
-        // Ignore — legacy state will simply not migrate.
+        // Legacy state will simply not migrate.
       }
 
       const loadState = () => {
@@ -593,7 +229,6 @@ import { setupSections } from "../data/bg3/setup";
       const showSetupButton = document.getElementById("show-setup-button");
       const knownTabs = new Set(["now", "levels", "gear", "coven", "setup"]);
 
-      // X / Y completion counters only on Now and Levels panels.
       const counterPanels = new Set(["now", "levels"]);
       const counterSections = sectionDetails.filter((detail) => {
         if (detail.dataset.noCount !== undefined) return false;
@@ -603,9 +238,9 @@ import { setupSections } from "../data/bg3/setup";
 
       counterSections.forEach((detail) => {
         const summary = detail.querySelector("summary");
-        if (!summary || summary.querySelector(".count")) return;
+        if (!summary || summary.querySelector(".bg3-count")) return;
         const count = document.createElement("span");
-        count.className = "count";
+        count.className = "bg3-count";
         summary.appendChild(count);
       });
 
@@ -613,7 +248,7 @@ import { setupSections } from "../data/bg3/setup";
         counterSections.forEach((detail) => {
           const total = detail.querySelectorAll('input[type="checkbox"]').length;
           const done = detail.querySelectorAll('input[type="checkbox"]:checked').length;
-          const count = detail.querySelector(".count");
+          const count = detail.querySelector(".bg3-count");
           if (!count || total === 0) return;
           count.textContent = `${done} / ${total}`;
           count.dataset.complete = done === total ? "true" : "false";
@@ -791,5 +426,4 @@ import { setupSections } from "../data/bg3/setup";
       saveState();
     })();
   </script>
-</body>
-</html>
+</BaseLayout>
