@@ -17,7 +17,7 @@
 }
 
 // ------------------------------------
-// Mobile trigger (hamburger button)
+// Mobile trigger (logo button)
 // ------------------------------------
 .sb-trigger {
   position: fixed;
@@ -27,19 +27,20 @@
   width: 40px;
   height: 40px;
   border: none;
-  border-radius: 50%;
+  border-radius: 4px;
   background: transparent;
-  color: var(--text-muted);
+  color: var(--brand);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: color 0.2s ease;
+  transition: color 0.2s ease, opacity 0.2s ease;
   font: inherit;
 
   &:hover,
   &:focus-visible {
-    color: var(--text-secondary);
+    color: var(--brand);
+    opacity: 0.75;
     outline: none;
   }
 
@@ -52,38 +53,17 @@
   }
 }
 
-.sb-bars,
-.sb-bars::before,
-.sb-bars::after {
-  transform-origin: center;
-  transition: transform 0.2s ease;
+.sb-trigger-logo {
+  width: 22px;
+  height: auto;
+  display: block;
 }
 
-.sb-bars {
-  position: relative;
-  width: 14px;
-  height: 2px;
-  border-radius: 1px;
-  background: currentColor;
-}
-
-.sb-bars::before,
-.sb-bars::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  width: 14px;
-  height: 2px;
-  border-radius: 1px;
-  background: currentColor;
-}
-
-.sb-bars::before {
-  top: -5px;
-}
-
-.sb-bars::after {
-  top: 5px;
+@media (max-width: #{$breakpoint-md - 1px}) {
+  .site-sidebar[data-mobile-open='true'] .sb-trigger {
+    opacity: 0;
+    pointer-events: none;
+  }
 }
 
 // ------------------------------------
@@ -542,9 +522,7 @@ html[data-sidebar-collapsed='true'] {
   .sb-panel,
   .sb-backdrop,
   .sb-trigger,
-  .sb-bars,
-  .sb-bars::before,
-  .sb-bars::after,
+  .sb-trigger-logo,
   .sb-collapse svg,
   .sb-brand-logo,
   .sb-brand-expand {
