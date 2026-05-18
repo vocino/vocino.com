@@ -1,16 +1,12 @@
 @use "variables" as *;
 
 // ============================================
-// /bg3 — Baldur's Gate 3 Deathreaper Guide
+// /bg3 — Baldur's Gate 3 Dark Urge Necrotic Guide
 //
 // Section theme: necrotic green over the
 // site's cyberpunk base. Reuses global tokens
 // (--bg, --surface-*, --border, --text-*) and
 // global fonts. Overrides only the accent layer.
-//
-// One-page layout: sticky TOC nav, flat section
-// cards, anchor jumps. No tabs, no per-section
-// collapsibles — the page is the table.
 // ============================================
 
 .bg3-section {
@@ -22,10 +18,10 @@
   --section-frame: rgba(91, 232, 92, 0.32);
   --section-glow: 0 0 24px rgba(91, 232, 92, 0.22);
 
-  // Multiclass chip palette
-  --class-cleric: #E0E040;
-  --class-wizard: #4DA3FF;
-  --class-druid:  #5BE85C;
+  // Single-class chip palette
+  --class-paladin: #FFB347;
+  --class-cleric:  #E0E040;
+  --class-wizard:  #4DA3FF;
 
   position: relative;
   z-index: 1;
@@ -98,150 +94,6 @@
       transparent var(--block-size),
       transparent calc(var(--block-size) + var(--block-gap))
     );
-  }
-
-  // ---- Build at-a-glance card ----
-  .bg3-glance {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: $spacing-unit * 1.25;
-    margin: 0 0 $spacing-unit * 2;
-    padding: $spacing-unit * 1.5;
-    border: 1px solid var(--section-frame);
-    border-radius: 10px;
-    background: var(--section-accent-soft);
-
-    @media (min-width: $breakpoint-md) {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-
-  .bg3-glance-row {
-    display: flex;
-    align-items: baseline;
-    gap: $spacing-unit;
-    min-width: 0;
-  }
-
-  .bg3-glance-label {
-    flex: 0 0 56px;
-    font-family: $font-family-mono;
-    font-size: $font-size-xs;
-    text-transform: uppercase;
-    letter-spacing: $label-tracking;
-    color: var(--text-muted);
-  }
-
-  .bg3-glance-value {
-    flex: 1 1 auto;
-    min-width: 0;
-    font-family: $font-family-mono;
-    font-size: $font-size-sm;
-    color: var(--text-primary);
-
-    strong {
-      font-weight: $font-weight-semibold;
-      color: var(--section-accent-bright);
-    }
-  }
-
-  .bg3-glance-split {
-    display: inline-flex;
-    align-items: baseline;
-    gap: 6px;
-    flex-wrap: wrap;
-
-    .bg3-glance-segment {
-      font-family: $font-family-mono;
-      font-size: $font-size-sm;
-      color: var(--text-primary);
-
-      &::before {
-        content: attr(data-count);
-        font-weight: $font-weight-semibold;
-        color: var(--class-color, var(--section-accent-bright));
-        margin-right: 4px;
-      }
-    }
-
-    .bg3-glance-sep {
-      color: var(--text-muted);
-    }
-  }
-
-  // ---- Triangle of Death pinned reference ----
-  .bg3-triangle {
-    margin: 0 0 $spacing-unit * 2;
-    padding: $spacing-unit * 1.5;
-    border: 1px solid var(--section-frame);
-    border-radius: 10px;
-    background: var(--section-accent-soft);
-    position: relative;
-
-    &::before {
-      content: 'REFERENCE';
-      position: absolute;
-      top: -8px;
-      left: 12px;
-      padding: 0 6px;
-      font-family: $font-family-mono;
-      font-size: 0.65rem;
-      letter-spacing: $label-tracking;
-      color: var(--section-accent);
-      background: var(--bg);
-    }
-  }
-
-  .bg3-triangle-title {
-    font-family: $font-family-mono;
-    font-size: $font-size-sm;
-    font-weight: $font-weight-semibold;
-    text-transform: uppercase;
-    letter-spacing: $label-tracking;
-    color: var(--text-primary);
-    margin: 0 0 $spacing-unit;
-  }
-
-  .bg3-triangle-intro {
-    font-size: $font-size-sm;
-    color: var(--text-secondary);
-    margin: 0 0 $spacing-unit * 1.25;
-    line-height: $line-height-snug;
-  }
-
-  .bg3-triangle-rows {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: $spacing-unit;
-
-    @media (min-width: $breakpoint-sm) {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-
-  .bg3-triangle-row {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    padding: $spacing-unit;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    background: var(--surface-1);
-  }
-
-  .bg3-triangle-stat {
-    font-family: $font-family-mono;
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: $label-tracking;
-    color: var(--text-muted);
-  }
-
-  .bg3-triangle-cantrip {
-    font-family: $font-family-sans;
-    font-size: $font-size-sm;
-    font-weight: $font-weight-semibold;
-    color: var(--section-accent-bright);
   }
 
   // ---- Sticky TOC nav ----
@@ -325,6 +177,28 @@
     &:first-child { margin-top: 0; }
   }
 
+  .bg3-h5 {
+    font-family: $font-family-sans;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    letter-spacing: $tracking-wide;
+    color: var(--text-primary);
+    margin: 0 0 $spacing-unit;
+  }
+
+  // ---- Build block (Setup / Level Plan inside a build card) ----
+  .bg3-build-block {
+    margin-top: $spacing-unit * 2;
+
+    &:first-of-type { margin-top: $spacing-unit * 1.5; }
+  }
+
+  .bg3-build-subsection {
+    margin-bottom: $spacing-unit * 1.5;
+
+    &:last-child { margin-bottom: 0; }
+  }
+
   // ---- Cards ----
   .bg3-card {
     border: 1px solid var(--border);
@@ -352,7 +226,7 @@
     .bg3-card-title { margin: 0; flex: 1 1 auto; min-width: 0; }
   }
 
-  // Level cards — flat, with class chip + milestone halo
+  // Level cards — flat, with class chip + milestone halo. Standalone (not nested in .bg3-card).
   .bg3-level-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -363,16 +237,23 @@
     }
   }
 
-  .bg3-level-card { margin: 0; }
+  .bg3-level-card {
+    margin: 0;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface-2);
+    padding: $spacing-unit * 1.25;
+    position: relative;
+  }
 
   .bg3-card--milestone {
     border-color: var(--section-frame);
     background:
       linear-gradient(180deg, var(--section-accent-soft) 0, transparent 60%),
-      var(--surface-1);
-    position: relative;
+      var(--surface-2);
 
-    .bg3-card-title {
+    .bg3-card-title,
+    .bg3-h5 {
       color: var(--section-accent-bright);
     }
 
@@ -387,20 +268,6 @@
       pointer-events: none;
     }
   }
-
-  // Gear grid — 1 col phone, 3 col desktop
-  .bg3-gear-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: $spacing-unit * 1.5;
-
-    @media (min-width: $breakpoint-md) {
-      grid-template-columns: repeat(3, 1fr);
-      align-items: start;
-    }
-  }
-
-  .bg3-gear-card { margin: 0; }
 
   // Act stack inside Don't Leave Act Without
   .bg3-act-stack {
@@ -430,9 +297,9 @@
     border: 1px solid currentColor;
     white-space: nowrap;
 
-    &[data-class="cleric"] { color: var(--class-cleric); }
-    &[data-class="wizard"] { color: var(--class-wizard); }
-    &[data-class="druid"]  { color: var(--class-druid);  }
+    &[data-class="paladin"] { color: var(--class-paladin); }
+    &[data-class="cleric"]  { color: var(--class-cleric);  }
+    &[data-class="wizard"]  { color: var(--class-wizard);  }
   }
 
   // ---- Intro text inside cards ----
