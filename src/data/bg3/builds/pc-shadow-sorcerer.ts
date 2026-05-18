@@ -6,6 +6,7 @@ export const pcShadowSorcerer: Build = {
   name: 'Tav (Dark Urge)',
   className: 'Sorcerer — Shadow Magic',
   role: 'Backline CC + shadow caster',
+  focus: ['Cold', 'Necrotic', 'Control'],
   summary:
     "Innate shadow magic in the blood — no oath to break, no holy magic to swear off. Strength of the Grave narratively explains why Tav keeps surviving the urges. Twinned Hold Person, free Darkness from L3, and a Hound of Ill Omen at L6. Single-class through L12.",
 

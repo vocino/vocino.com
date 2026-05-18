@@ -6,6 +6,7 @@ export const jaheira: Build = {
   name: 'Jaheira',
   className: 'Druid — Circle of the Moon',
   role: 'Hostile foil',
+  focus: ['Bludgeoning', 'Wild Shape'],
   summary:
     "High Harper actively hunting Bhaalspawn. She joins the party on a thin alliance against the Absolute and leaves the moment you tip into Slayer / accept Bhaal. Keep her for the Act 2 moral tension, then expect a break — or skip the recruit entirely.",
   recruit: 'Act 2 — Last Light Inn',

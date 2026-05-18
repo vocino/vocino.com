@@ -6,6 +6,7 @@ export const gale: Build = {
   name: 'Gale',
   className: 'Wizard — School of Necromancy',
   role: 'Undead general',
+  focus: ['Necrotic', 'Summons'],
   summary:
     'School of Necromancy Wizard. Builds the actual undead army the Paladin keeps small. Grim Harvest heals him on spell kills; Danse Macabre arrives after completing the Necromancy of Thay in Act 3.',
   recruit: 'Act 1 — Roadside Cliffs (waypoint hand)',

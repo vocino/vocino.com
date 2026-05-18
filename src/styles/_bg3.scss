@@ -392,6 +392,72 @@
     border: 1px solid var(--border);
   }
 
+  // ---- Damage / role focus chips ----
+  // Quick "what this build brings" row. Color-coded by damage type.
+  .bg3-focus-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 0 0 $spacing-unit * 1.25;
+  }
+
+  .bg3-focus-chip {
+    display: inline-block;
+    padding: 1px 8px;
+    border-radius: 999px;
+    font-family: $font-family-mono;
+    font-size: 0.65rem;
+    letter-spacing: $label-tracking;
+    text-transform: uppercase;
+    line-height: 1.7;
+    border: 1px solid currentColor;
+    white-space: nowrap;
+    background: var(--surface-2);
+    color: var(--text-muted);
+
+    // On-theme: necrotic / shadow magic
+    &[data-focus="Necrotic"] {
+      background: var(--section-accent-dim);
+      color: var(--section-accent-bright);
+    }
+    &[data-focus="Cold"] {
+      background: rgba(77, 163, 255, 0.18);
+      color: #A5CCFF;
+    }
+    &[data-focus="Poison"] {
+      background: rgba(160, 220, 60, 0.18);
+      color: #C7E883;
+    }
+
+    // Off-theme: warns the run isn't built around these
+    &[data-focus="Fire"] {
+      background: rgba(255, 92, 92, 0.14);
+      color: #FFB7A4;
+    }
+    &[data-focus="Radiant"] {
+      background: rgba(255, 200, 80, 0.16);
+      color: #FFD98A;
+    }
+
+    // Physical — neutral grey, defaults
+    &[data-focus="Piercing"],
+    &[data-focus="Slashing"],
+    &[data-focus="Bludgeoning"] {
+      background: var(--surface-2);
+      color: var(--text-secondary);
+    }
+
+    // Roles / strategy tags — soft violet
+    &[data-focus="Control"],
+    &[data-focus="Debuff"],
+    &[data-focus="Summons"],
+    &[data-focus="Stealth"],
+    &[data-focus="Wild Shape"] {
+      background: rgba(178, 137, 255, 0.16);
+      color: #D3BCFF;
+    }
+  }
+
   // ---- Coven companion build grid ----
   .bg3-build-grid {
     display: grid;

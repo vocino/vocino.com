@@ -64,6 +64,14 @@ export interface Build {
   recruit?: string;
   /** How well this companion fits the Dark Urge necrotic run's tone. */
   loreFit?: LoreFit;
+  /**
+   * Damage types and roles this build leans on, in priority order.
+   * Rendered as small color-coded chips. Known values map to colors
+   * in _bg3.scss; unknown values get the default grey chip.
+   * Examples: 'Necrotic', 'Cold', 'Poison', 'Fire', 'Slashing',
+   * 'Piercing', 'Bludgeoning', 'Control', 'Summons', 'Stealth'.
+   */
+  focus?: string[];
   /** L1–L12 level-up plan. Empty array = flex / alternate (no detailed plan). */
   levels: CheckSection[];
   /** Character creation or respec recipe. Empty array = flex / alternate. */

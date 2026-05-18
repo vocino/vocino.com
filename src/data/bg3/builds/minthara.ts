@@ -6,6 +6,7 @@ export const minthara: Build = {
   name: 'Minthara',
   className: 'Paladin — Oathbreaker (single-class)',
   role: 'Alternate frontline — canonical Dark Urge ally',
+  focus: ['Necrotic', 'Slashing'],
   summary:
     'The canonical Dark Urge companion. A Lolth-rejected Drow Paladin who already reads as Oathbreaker before you respec her. Stacks a second Aura of Hate next to yours — recruit her if you want two necrotic auras instead of a fourth caster.',
   recruit: 'Act 1 (Grove massacre) or Act 2 (spare her at Moonrise)',

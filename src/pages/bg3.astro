@@ -77,6 +77,13 @@ const sections = [
                 {build.loreFit && <span class={`lore-fit lore-fit-${build.loreFit}`}>{build.loreFit}</span>}
               </div>
               <p class="bg3-build-card-class">{build.className}</p>
+              {build.focus && build.focus.length > 0 && (
+                <div class="bg3-focus-row">
+                  {build.focus.map((tag) => (
+                    <span class="bg3-focus-chip" data-focus={tag}>{tag}</span>
+                  ))}
+                </div>
+              )}
               <p class="bg3-build-card-role">{build.role}</p>
               <p class="bg3-build-card-summary">{build.summary}</p>
               {build.recruit && <p class="companion-meta">{build.recruit}</p>}
@@ -106,6 +113,13 @@ const sections = [
             <header class="bg3-card-header">
               <h3 class="bg3-card-title">{build.name} — {build.className}</h3>
             </header>
+            {build.focus && build.focus.length > 0 && (
+              <div class="bg3-focus-row">
+                {build.focus.map((tag) => (
+                  <span class="bg3-focus-chip" data-focus={tag}>{tag}</span>
+                ))}
+              </div>
+            )}
             <p class="bg3-intro">{build.summary}</p>
             {build.setup.length > 0 && (
               <div class="bg3-build-block">
@@ -153,6 +167,13 @@ const sections = [
                   {build.loreFit && <span class={`lore-fit lore-fit-${build.loreFit}`}>{build.loreFit}</span>}
                 </div>
                 <p class="bg3-build-card-class">{build.className}</p>
+                {build.focus && build.focus.length > 0 && (
+                  <div class="bg3-focus-row">
+                    {build.focus.map((tag) => (
+                      <span class="bg3-focus-chip" data-focus={tag}>{tag}</span>
+                    ))}
+                  </div>
+                )}
                 <p class="bg3-build-card-role">{build.role}</p>
                 <p class="bg3-build-card-summary">{build.summary}</p>
                 {build.recruit && <p class="companion-meta">{build.recruit}</p>}

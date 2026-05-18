@@ -6,6 +6,7 @@ export const shadowheart: Build = {
   name: 'Shadowheart',
   className: 'Cleric — Death Domain (Shar)',
   role: 'Necrotic nuker',
+  focus: ['Necrotic', 'Poison', 'Debuff'],
   summary:
     'Death Domain Cleric of Shar — Reaper twins necromancy cantrips at L1, Touch of Death rides melee hits, Inescapable Destruction lets her necrotic damage ignore resistance from L6. Stays Shar-aligned through the Nightsong arc.',
   recruit: 'Act 1 — Nautiloid pod / beach',
