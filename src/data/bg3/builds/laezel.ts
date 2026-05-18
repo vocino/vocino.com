@@ -4,12 +4,14 @@ export const laezel: Build = {
   id: 'laezel',
   shortId: 'laezel',
   name: "Lae'zel",
-  className: 'Fighter — Battle Master',
-  role: 'Frontline Tank',
-  summary: 'Githyanki warrior — precision fighter and tactical anchor of the formation.',
+  className: 'Fighter — Battle Master (single-class)',
+  role: 'Flex frontline / necrotic riders',
+  focus: ['Piercing', 'Slashing', 'Necrotic'],
+  summary:
+    "Single-class Fighter holding the line. Equip her with necrotic-rider weapons (Phalar Aluve in Shrieking mode, Vampiric Weapons, Bhaalist Armour aura) so even her swings contribute to the party's necrotic theme.",
   recruit: 'Act 1 — tieflings + cage',
-  loreFit: 'low',
+  loreFit: 'medium',
+
   levels: [],
-  gear: [],
   setup: []
 };

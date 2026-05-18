@@ -1,16 +1,20 @@
 import type { Build } from '../types';
-import { pcNecromancer } from './pc-necromancer';
+import { pcShadowSorcerer } from './pc-shadow-sorcerer';
 import { shadowheart } from './shadowheart';
-import { karlach } from './karlach';
+import { gale } from './gale';
+import { astarion } from './astarion';
 import { laezel } from './laezel';
-import { jaheira } from './jaheira';
 import { minthara } from './minthara';
+import { karlach } from './karlach';
+import { jaheira } from './jaheira';
 
 export const builds: Build[] = [
-  pcNecromancer,
+  pcShadowSorcerer,
   shadowheart,
-  karlach,
+  gale,
+  astarion,
   laezel,
-  jaheira,
-  minthara
+  minthara,
+  karlach,
+  jaheira
 ];

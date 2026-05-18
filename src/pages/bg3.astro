@@ -2,90 +2,49 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import BG3Checklist from "../components/bg3/BG3Checklist.astro";
 import {
-  dontLeaveByAct,
-  criticalQuests,
-  combatLoop,
-  beforeLongRest,
-  afterLevelUp,
-  beforeLeaving,
-  thayReading,
-  approvalGates,
-  triangleOfDeath
+  darkUrgeOrigin,
+  withersTiming,
+  loreByAct,
+  gearByAct,
+  pitfalls
 } from "../data/bg3/now";
-import { coreParty, loreRules } from "../data/bg3/coven";
+import { partyOverview, partyAlternates, scholarStance } from "../data/bg3/party";
 import { builds } from "../data/bg3/builds/index";
 
-const pcBuild = builds.find((b) => b.id === "pc-necromancer")!;
-const glance = pcBuild.glance;
-const covenBuilds = builds.filter((b) => b.id !== "pc-necromancer");
+const buildById = (id: string) => builds.find((b) => b.id === id)!;
+const coreBuilds = [
+  buildById("pc-shadow-sorcerer"),
+  buildById("shadowheart"),
+  buildById("gale")
+];
+const flexBuilds = [buildById("astarion"), buildById("laezel")];
+const alternateBuilds = [buildById("minthara"), buildById("karlach"), buildById("jaheira")];
 
 const sections = [
-  { id: "setup",  label: "Setup" },
-  { id: "levels", label: "Levels" },
+  { id: "party",  label: "Party" },
+  { id: "origin", label: "Origin" },
+  { id: "builds", label: "Builds" },
+  { id: "lore",   label: "Lore" },
   { id: "gear",   label: "Gear" },
-  { id: "quests", label: "Quests & Lore" },
-  { id: "combat", label: "Combat & Rest" },
-  { id: "coven",  label: "Coven" }
+  { id: "avoid",  label: "Pitfalls" }
 ];
 ---
 
 <BaseLayout
-  title="BG3 Patch 8 Deathreaper Guide — Vocino"
-  description="Patch 8 second-screen companion: Human Death Domain Cleric who dual-wields hand crossbows. 8 Cleric / 2 Necromancy Wizard / 2 Spore Druid. No undead armies."
+  title="BG3 Dark Urge Shadow Sorcerer Necrotic Party — Vocino"
+  description="Lore-first Dark Urge run. Single-class party: Shadow Sorcerer Tav, Death Domain Cleric, Necromancy Wizard, plus a flex slot. Balanced difficulty, no holy magic."
 >
   <section class="bg3-section">
     <div class="bg3-app">
       <header class="bg3-header">
-        <span class="bg3-eyebrow">guide · baldur's gate 3</span>
-        <h1 class="bg3-title">Deathreaper Guide</h1>
+        <span class="bg3-eyebrow">guide · baldur's gate 3 · dark urge</span>
+        <h1 class="bg3-title">Shadow Sorcerer Necrotic Party</h1>
         <span class="bg3-accent-bar" aria-hidden="true"></span>
-        <p class="bg3-subtitle">Patch 8 · Human Death Domain Cleric · Triangle of Death cantrips, dual hand crossbows, no undead armies.</p>
+        <p class="bg3-subtitle">
+          Lore-first Dark Urge. Single-class party, balanced difficulty, no holy magic.
+          Shadow Sorcerer Tav · Death Domain Cleric · Necromancy Wizard · Astarion or Lae'zel flex · Minthara optional Oathbreaker.
+        </p>
       </header>
-
-      {glance && (
-        <aside class="bg3-glance" aria-label="Build at a glance">
-          <div class="bg3-glance-row">
-            <span class="bg3-glance-label">Split</span>
-            <span class="bg3-glance-value bg3-glance-split">
-              {glance.split.split('/').map((seg, i) => (
-                <>
-                  <span
-                    class="bg3-glance-segment"
-                    data-count={seg.trim()}
-                    style={`--class-color: var(--class-${(glance.classes[i] || '').toLowerCase()})`}
-                  >{glance.classes[i]}</span>
-                  {i < glance.classes.length - 1 && <span class="bg3-glance-sep">·</span>}
-                </>
-              ))}
-            </span>
-          </div>
-          <div class="bg3-glance-row">
-            <span class="bg3-glance-label">Stat</span>
-            <span class="bg3-glance-value"><strong>{glance.dominantStat}</strong></span>
-          </div>
-          <div class="bg3-glance-row">
-            <span class="bg3-glance-label">Role</span>
-            <span class="bg3-glance-value">{pcBuild.role}</span>
-          </div>
-          <div class="bg3-glance-row">
-            <span class="bg3-glance-label">Feats</span>
-            <span class="bg3-glance-value">{glance.feats.join(' · ')}</span>
-          </div>
-        </aside>
-      )}
-
-      <aside id={triangleOfDeath.id} class="bg3-triangle" aria-label={triangleOfDeath.title}>
-        <h2 class="bg3-triangle-title">{triangleOfDeath.title}</h2>
-        {triangleOfDeath.intro && <p class="bg3-triangle-intro">{triangleOfDeath.intro}</p>}
-        <div class="bg3-triangle-rows">
-          {triangleOfDeath.rows.map((row) => (
-            <div class="bg3-triangle-row">
-              <span class="bg3-triangle-stat">{row.stat}</span>
-              <span class="bg3-triangle-cantrip">{row.cantrip}</span>
-            </div>
-          ))}
-        </div>
-      </aside>
 
       <nav class="bg3-toc" aria-label="Jump to section">
         {sections.map((s) => (
@@ -93,131 +52,183 @@ const sections = [
         ))}
       </nav>
 
-      <section id="setup" class="bg3-page-section">
-        <h2 class="bg3-h2">Character Creation</h2>
-        {pcBuild.setup
-          .filter((section) => section.id !== "setup-complete-section")
-          .map((section) => (
-            <article class="bg3-card">
-              <h3 class="bg3-card-title">{section.title}</h3>
-              {section.intro && <p class="bg3-intro">{section.intro}</p>}
-              <BG3Checklist items={section.items} idPrefix={pcBuild.shortId} />
-            </article>
-          ))}
-      </section>
-
-      <section id="levels" class="bg3-page-section">
-        <h2 class="bg3-h2">Level Progression</h2>
-        <div class="bg3-level-grid">
-          {pcBuild.levels.map((level) => (
-            <article class:list={["bg3-card bg3-level-card", level.milestone && "bg3-card--milestone"]}>
-              <header class="bg3-card-header">
-                <h3 class="bg3-card-title">{level.title}</h3>
-                {level.levelClass && (
-                  <span class="bg3-class-chip" data-class={level.levelClass}>{level.levelClass}</span>
-                )}
-              </header>
-              {level.intro && <p class="bg3-intro">{level.intro}</p>}
-              <BG3Checklist items={level.items} idPrefix={pcBuild.shortId} />
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section id="gear" class="bg3-page-section">
-        <h2 class="bg3-h2">Gear by Act</h2>
-        <div class="bg3-gear-grid">
-          {pcBuild.gear.map((section) => (
-            <article class="bg3-card bg3-gear-card">
-              <h3 class="bg3-card-title">{section.title}</h3>
-              <BG3Checklist items={section.items} idPrefix={pcBuild.shortId} />
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section id="quests" class="bg3-page-section">
-        <h2 class="bg3-h2">Quests & Lore</h2>
+      <section id="party" class="bg3-page-section">
+        <h2 class="bg3-h2">Party</h2>
         <article class="bg3-card">
-          <h3 class="bg3-card-title">{criticalQuests.title}</h3>
-          {criticalQuests.intro && <p class="bg3-intro">{criticalQuests.intro}</p>}
-          <BG3Checklist items={criticalQuests.items} />
+          <h3 class="bg3-card-title">{partyOverview.title}</h3>
+          {partyOverview.intro && <p class="bg3-intro">{partyOverview.intro}</p>}
+          <BG3Checklist items={partyOverview.items} />
         </article>
         <article class="bg3-card">
-          <h3 class="bg3-card-title">{loreRules.title}</h3>
-          {loreRules.intro && <p class="bg3-intro">{loreRules.intro}</p>}
-          <BG3Checklist items={loreRules.items} />
+          <h3 class="bg3-card-title">{scholarStance.title}</h3>
+          {scholarStance.intro && <p class="bg3-intro">{scholarStance.intro}</p>}
+          <BG3Checklist items={scholarStance.items} />
         </article>
         <article class="bg3-card">
-          <h3 class="bg3-card-title">{thayReading.title}</h3>
-          {thayReading.intro && <p class="bg3-intro">{thayReading.intro}</p>}
-          <BG3Checklist items={thayReading.items} />
-        </article>
-      </section>
-
-      <section id="combat" class="bg3-page-section">
-        <h2 class="bg3-h2">Combat & Rest</h2>
-        <article class="bg3-card">
-          <h3 class="bg3-card-title">{combatLoop.title}</h3>
-          {combatLoop.intro && <p class="bg3-intro">{combatLoop.intro}</p>}
-          <BG3Checklist items={combatLoop.items} />
-        </article>
-        <article class="bg3-card">
-          <h3 class="bg3-card-title">Don't Leave Act Without</h3>
-          <div class="bg3-act-stack">
-            <div class="bg3-act-block">
-              <h4 class="bg3-h4">Act 1</h4>
-              <BG3Checklist items={dontLeaveByAct.act1} />
-            </div>
-            <div class="bg3-act-block">
-              <h4 class="bg3-h4">Act 2</h4>
-              <BG3Checklist items={dontLeaveByAct.act2} />
-            </div>
-            <div class="bg3-act-block">
-              <h4 class="bg3-h4">Act 3</h4>
-              <BG3Checklist items={dontLeaveByAct.act3} />
-            </div>
-          </div>
-        </article>
-        <article class="bg3-card">
-          <h3 class="bg3-card-title">{beforeLongRest.title}</h3>
-          <BG3Checklist items={beforeLongRest.items} />
-        </article>
-        <article class="bg3-card">
-          <h3 class="bg3-card-title">{beforeLeaving.title}</h3>
-          <BG3Checklist items={beforeLeaving.items} />
-        </article>
-        <article class="bg3-card">
-          <h3 class="bg3-card-title">{afterLevelUp.title}</h3>
-          <BG3Checklist items={afterLevelUp.items} />
-        </article>
-        <article class="bg3-card">
-          <h3 class="bg3-card-title">{approvalGates.title}</h3>
-          <BG3Checklist items={approvalGates.items} />
-        </article>
-      </section>
-
-      <section id="coven" class="bg3-page-section">
-        <h2 class="bg3-h2">Coven</h2>
-        <article class="bg3-card">
-          <h3 class="bg3-card-title">{coreParty.title}</h3>
-          {coreParty.intro && <p class="bg3-intro">{coreParty.intro}</p>}
-          <BG3Checklist items={coreParty.items} />
+          <h3 class="bg3-card-title">{partyAlternates.title}</h3>
+          {partyAlternates.intro && <p class="bg3-intro">{partyAlternates.intro}</p>}
+          <BG3Checklist items={partyAlternates.items} />
         </article>
         <div class="bg3-build-grid">
-          {covenBuilds.map((build) => (
+          {alternateBuilds.map((build) => (
             <article class="bg3-build-card">
               <div class="bg3-build-card-header">
                 <h3 class="bg3-build-card-name">{build.name}</h3>
                 {build.loreFit && <span class={`lore-fit lore-fit-${build.loreFit}`}>{build.loreFit}</span>}
               </div>
               <p class="bg3-build-card-class">{build.className}</p>
+              {build.focus && build.focus.length > 0 && (
+                <div class="bg3-focus-row">
+                  {build.focus.map((tag) => (
+                    <span class="bg3-focus-chip" data-focus={tag}>{tag}</span>
+                  ))}
+                </div>
+              )}
               <p class="bg3-build-card-role">{build.role}</p>
               <p class="bg3-build-card-summary">{build.summary}</p>
               {build.recruit && <p class="companion-meta">{build.recruit}</p>}
             </article>
           ))}
         </div>
+      </section>
+
+      <section id="origin" class="bg3-page-section">
+        <h2 class="bg3-h2">Origin + Withers</h2>
+        <article class="bg3-card">
+          <h3 class="bg3-card-title">{darkUrgeOrigin.title}</h3>
+          {darkUrgeOrigin.intro && <p class="bg3-intro">{darkUrgeOrigin.intro}</p>}
+          <BG3Checklist items={darkUrgeOrigin.items} />
+        </article>
+        <article class="bg3-card">
+          <h3 class="bg3-card-title">{withersTiming.title}</h3>
+          {withersTiming.intro && <p class="bg3-intro">{withersTiming.intro}</p>}
+          <BG3Checklist items={withersTiming.items} />
+        </article>
+      </section>
+
+      <section id="builds" class="bg3-page-section">
+        <h2 class="bg3-h2">Single-Class Builds</h2>
+        {coreBuilds.map((build) => (
+          <article class="bg3-card">
+            <header class="bg3-card-header">
+              <h3 class="bg3-card-title">{build.name} — {build.className}</h3>
+            </header>
+            {build.focus && build.focus.length > 0 && (
+              <div class="bg3-focus-row">
+                {build.focus.map((tag) => (
+                  <span class="bg3-focus-chip" data-focus={tag}>{tag}</span>
+                ))}
+              </div>
+            )}
+            <p class="bg3-intro">{build.summary}</p>
+            {build.setup.length > 0 && (
+              <div class="bg3-build-block">
+                <h4 class="bg3-h4">Setup</h4>
+                {build.setup.map((section) => (
+                  <div class="bg3-build-subsection">
+                    <h5 class="bg3-h5">{section.title}</h5>
+                    {section.intro && <p class="bg3-intro">{section.intro}</p>}
+                    <BG3Checklist items={section.items} idPrefix={build.shortId} />
+                  </div>
+                ))}
+              </div>
+            )}
+            {build.levels.length > 0 && (
+              <div class="bg3-build-block">
+                <h4 class="bg3-h4">Level Plan</h4>
+                <div class="bg3-level-grid">
+                  {build.levels.map((level) => (
+                    <article class:list={["bg3-level-card", level.milestone && "bg3-card--milestone"]}>
+                      <header class="bg3-card-header">
+                        <h5 class="bg3-h5">{level.title}</h5>
+                        {level.levelClass && (
+                          <span class="bg3-class-chip" data-class={level.levelClass}>{level.levelClass}</span>
+                        )}
+                      </header>
+                      {level.intro && <p class="bg3-intro">{level.intro}</p>}
+                      <BG3Checklist items={level.items} idPrefix={build.shortId} />
+                    </article>
+                  ))}
+                </div>
+              </div>
+            )}
+          </article>
+        ))}
+        <article class="bg3-card">
+          <h3 class="bg3-card-title">Flex slot — pick one</h3>
+          <p class="bg3-intro">
+            Take whichever you want to roleplay. Both keep the necrotic theme intact when geared right.
+          </p>
+          <div class="bg3-build-grid">
+            {flexBuilds.map((build) => (
+              <article class="bg3-build-card">
+                <div class="bg3-build-card-header">
+                  <h3 class="bg3-build-card-name">{build.name}</h3>
+                  {build.loreFit && <span class={`lore-fit lore-fit-${build.loreFit}`}>{build.loreFit}</span>}
+                </div>
+                <p class="bg3-build-card-class">{build.className}</p>
+                {build.focus && build.focus.length > 0 && (
+                  <div class="bg3-focus-row">
+                    {build.focus.map((tag) => (
+                      <span class="bg3-focus-chip" data-focus={tag}>{tag}</span>
+                    ))}
+                  </div>
+                )}
+                <p class="bg3-build-card-role">{build.role}</p>
+                <p class="bg3-build-card-summary">{build.summary}</p>
+                {build.recruit && <p class="companion-meta">{build.recruit}</p>}
+              </article>
+            ))}
+          </div>
+        </article>
+      </section>
+
+      <section id="lore" class="bg3-page-section">
+        <h2 class="bg3-h2">Lore Decisions by Act</h2>
+        <article class="bg3-card">
+          <div class="bg3-act-stack">
+            <div class="bg3-act-block">
+              <h4 class="bg3-h4">Act 1</h4>
+              <BG3Checklist items={loreByAct.act1} />
+            </div>
+            <div class="bg3-act-block">
+              <h4 class="bg3-h4">Act 2</h4>
+              <BG3Checklist items={loreByAct.act2} />
+            </div>
+            <div class="bg3-act-block">
+              <h4 class="bg3-h4">Act 3</h4>
+              <BG3Checklist items={loreByAct.act3} />
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section id="gear" class="bg3-page-section">
+        <h2 class="bg3-h2">Gear — Do Not Leave Act Without</h2>
+        <article class="bg3-card">
+          <div class="bg3-act-stack">
+            <div class="bg3-act-block">
+              <h4 class="bg3-h4">Act 1</h4>
+              <BG3Checklist items={gearByAct.act1} />
+            </div>
+            <div class="bg3-act-block">
+              <h4 class="bg3-h4">Act 2</h4>
+              <BG3Checklist items={gearByAct.act2} />
+            </div>
+            <div class="bg3-act-block">
+              <h4 class="bg3-h4">Act 3</h4>
+              <BG3Checklist items={gearByAct.act3} />
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section id="avoid" class="bg3-page-section">
+        <h2 class="bg3-h2">Pitfalls</h2>
+        <article class="bg3-card">
+          <h3 class="bg3-card-title">{pitfalls.title}</h3>
+          <BG3Checklist items={pitfalls.items} />
+        </article>
       </section>
 
       <div class="bg3-footer-controls">
@@ -228,20 +239,17 @@ const sections = [
 
   <script is:inline>
     (() => {
-      const storageKey = "bg3-deathreaper-guide-v5";
-      const legacyKeys = ["bg3-necro-guide-v4", "bg3-necro-guide-v3", "bg3-necro-guide-v2", "bg3-necro-guide-v1"];
+      const storageKey = "bg3-dark-urge-guide-v2";
+      const legacyKeys = [
+        "bg3-dark-urge-guide-v1",
+        "bg3-deathreaper-guide-v5",
+        "bg3-necro-guide-v4",
+        "bg3-necro-guide-v3",
+        "bg3-necro-guide-v2",
+        "bg3-necro-guide-v1"
+      ];
 
-      // Migrate v1–v4 → v5 by carrying over only the `checks` map.
       try {
-        if (!localStorage.getItem(storageKey)) {
-          for (const k of legacyKeys) {
-            const raw = localStorage.getItem(k);
-            if (!raw) continue;
-            const old = JSON.parse(raw);
-            localStorage.setItem(storageKey, JSON.stringify({ checks: old.checks || {} }));
-            break;
-          }
-        }
         for (const k of legacyKeys) {
           try { localStorage.removeItem(k); } catch (_e) {}
         }
