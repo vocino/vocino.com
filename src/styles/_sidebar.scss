@@ -507,11 +507,13 @@ html[data-sidebar-collapsed='true'] {
 @media (min-width: $breakpoint-md) {
   body.site-root .site-main {
     margin-inline-start: var(--sb-expanded);
-    transition: margin-inline-start 0.22s ease;
+    padding-inline-end: var(--sb-expanded);
+    transition: margin-inline-start 0.22s ease, padding-inline-end 0.22s ease;
   }
 
   html[data-sidebar-collapsed='true'] body.site-root .site-main {
     margin-inline-start: var(--sb-collapsed);
+    padding-inline-end: var(--sb-collapsed);
   }
 }
 
