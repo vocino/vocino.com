@@ -26,8 +26,8 @@ export const partyOverview: CheckSection = {
     },
     {
       id: 'party-flex',
-      label: "Flex slot — Astarion (Thief Rogue) OR Lae'zel (Fighter)",
-      note: 'Vampire-spawn lore vs. necrotic-rider weapons. Pick whichever fits the moment.',
+      label: "Flex slot — Astarion (Assassin Rogue) OR Lae'zel (Battle Master Fighter)",
+      note: 'Vampire-spawn alpha strike vs. necrotic-rider weapons on a Githyanki frontline. Pick whichever fits the moment.',
       tag: 'lore'
     }
   ]
