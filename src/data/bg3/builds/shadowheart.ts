@@ -58,28 +58,34 @@ export const shadowheart: Build = {
       id: 'shart-cantrips',
       title: 'Cantrips',
       levelClass: 'cleric',
+      intro:
+        'Reaper twins necromancy-school cantrips on a second target. Chill Touch is Wizard / Sorcerer only — Cleric uses the Patch 8 additions instead.',
       items: [
-        { id: 'shart-c-toll', label: 'Toll the Dead — Reaper twins it', tag: 'combat' },
-        { id: 'shart-c-chill', label: 'Chill Touch — Reaper twins it', tag: 'combat' }
+        { id: 'shart-c-toll', label: 'Toll the Dead — necromancy, Reaper twins it', tag: 'combat' },
+        { id: 'shart-c-bone', label: 'Bone Chill — necromancy, Reaper twins it (Patch 8 cleric cantrip)', tag: 'combat' },
+        { id: 'shart-c-guidance', label: 'Guidance — utility for skill checks', tag: 'combat' }
       ]
     },
     {
       id: 'shart-l1',
       title: 'L1 spells',
       levelClass: 'cleric',
+      intro: 'Death Domain auto-prepares False Life and Ray of Sickness (free, on top of prep limit). Inflict Wounds and Bane are extra preps.',
       items: [
-        { id: 'shart-l1-inflict', label: 'Inflict Wounds', tag: 'combat' },
-        { id: 'shart-l1-ray-sickness', label: 'Ray of Sickness', tag: 'combat' },
-        { id: 'shart-l1-bane', label: 'Bane', tag: 'combat' }
+        { id: 'shart-l1-ray-sickness', label: 'Ray of Sickness (auto-prepared by Death Domain)', tag: 'combat' },
+        { id: 'shart-l1-false-life', label: 'False Life (auto-prepared by Death Domain)', tag: 'combat' },
+        { id: 'shart-l1-inflict', label: 'Inflict Wounds (prepare manually)', tag: 'combat' },
+        { id: 'shart-l1-bane', label: 'Bane (prepare manually — debuff stacks with Inescapable Destruction setups)', tag: 'combat' }
       ]
     },
     {
       id: 'shart-l2',
       title: 'L2 spells',
       levelClass: 'cleric',
+      intro: 'Death Domain auto-prepares Blindness and Ray of Enfeeblement.',
       items: [
-        { id: 'shart-l2-blindness', label: 'Blindness', tag: 'combat' },
-        { id: 'shart-l2-rofe', label: 'Ray of Enfeeblement', tag: 'combat' }
+        { id: 'shart-l2-blindness', label: 'Blindness (auto-prepared)', tag: 'combat' },
+        { id: 'shart-l2-rofe', label: 'Ray of Enfeeblement (auto-prepared)', tag: 'combat' }
       ]
     },
     {
@@ -87,23 +93,33 @@ export const shadowheart: Build = {
       title: 'L3 spells',
       levelClass: 'cleric',
       milestone: true,
+      intro: 'Death Domain auto-prepares Animate Dead and Vampiric Touch. Bestow Curse is a manual prep.',
       items: [
-        { id: 'shart-l3-animate', label: 'Animate Dead', tag: 'combat' },
-        { id: 'shart-l3-bestow', label: 'Bestow Curse', tag: 'combat' }
+        { id: 'shart-l3-animate', label: 'Animate Dead (auto-prepared)', tag: 'combat' },
+        { id: 'shart-l3-vampiric', label: 'Vampiric Touch (auto-prepared) — sustains her in melee at the Touch of Death range', tag: 'combat' },
+        { id: 'shart-l3-bestow', label: 'Bestow Curse (prepare manually — necromancy school)', tag: 'combat' }
       ]
     },
     {
       id: 'shart-l4',
       title: 'L4 spells',
       levelClass: 'cleric',
-      items: [{ id: 'shart-l4-blight', label: 'Blight', tag: 'combat' }]
+      intro: 'Death Domain auto-prepares Blight and Death Ward.',
+      items: [
+        { id: 'shart-l4-blight', label: 'Blight (auto-prepared)', tag: 'combat' },
+        { id: 'shart-l4-death-ward', label: 'Death Ward (auto-prepared) — a free Strength-of-the-Grave for the rest of the party', tag: 'combat' }
+      ]
     },
     {
       id: 'shart-l5',
       title: 'L5 spells',
       levelClass: 'cleric',
       milestone: true,
-      items: [{ id: 'shart-l5-contagion', label: 'Contagion', tag: 'combat' }]
+      intro: 'Death Domain auto-prepares Antilife Shell and Cloudkill. Contagion is a manual prep.',
+      items: [
+        { id: 'shart-l5-cloudkill', label: 'Cloudkill (auto-prepared) — recurring necrotic-flavour poison AoE, the L5 workhorse', tag: 'combat' },
+        { id: 'shart-l5-contagion', label: 'Contagion (prepare manually — necromancy, lingering disease)', tag: 'combat' }
+      ]
     }
   ]
 };

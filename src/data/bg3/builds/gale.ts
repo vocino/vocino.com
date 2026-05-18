@@ -53,36 +53,48 @@ export const gale: Build = {
       id: 'gale-cantrips',
       title: 'Cantrips',
       levelClass: 'wizard',
+      intro: 'All three are necromancy school on the Wizard list — Toll the Dead and Chill Touch are the necrotic damage staples.',
       items: [
-        { id: 'gale-c-toll', label: 'Toll the Dead', tag: 'combat' },
-        { id: 'gale-c-chill', label: 'Chill Touch', tag: 'combat' },
-        { id: 'gale-c-mage-hand', label: 'Mage Hand', tag: 'combat' }
+        { id: 'gale-c-toll', label: 'Toll the Dead — necromancy, necrotic damage', tag: 'combat' },
+        { id: 'gale-c-chill', label: 'Chill Touch — necromancy, necrotic + prevents healing', tag: 'combat' },
+        { id: 'gale-c-mage-hand', label: 'Mage Hand — utility', tag: 'combat' }
       ]
     },
     {
       id: 'gale-l1',
       title: 'L1 spells',
       levelClass: 'wizard',
+      intro: 'Necromancy Savant: pick necromancy spells for half the gold to scribe. Two of three picks below are necromancy school.',
       items: [
-        { id: 'gale-l1-false-life', label: 'False Life', tag: 'combat' },
-        { id: 'gale-l1-ray-sickness', label: 'Ray of Sickness', tag: 'combat' },
-        { id: 'gale-l1-familiar', label: 'Find Familiar', tag: 'combat' }
+        { id: 'gale-l1-false-life', label: 'False Life — necromancy, temp HP', tag: 'combat' },
+        { id: 'gale-l1-ray-sickness', label: 'Ray of Sickness — necromancy, poison damage + poisoned condition', tag: 'combat' },
+        {
+          id: 'gale-l1-familiar',
+          label: 'Find Familiar — utility (conjuration, off-theme but iconic Gale)',
+          note: 'Pick Raven (Help action from range) or Spider (web cover) for the death / shadow look.',
+          tag: 'lore'
+        }
       ]
     },
     {
       id: 'gale-l2',
       title: 'L2 spells',
       levelClass: 'wizard',
-      items: [{ id: 'gale-l2-blindness', label: 'Blindness', tag: 'combat' }]
+      items: [
+        { id: 'gale-l2-blindness', label: 'Blindness — necromancy school', tag: 'combat' },
+        { id: 'gale-l2-misty-step', label: 'Misty Step — utility, keeps him out of melee', tag: 'combat' }
+      ]
     },
     {
       id: 'gale-l3',
       title: 'L3 spells',
       levelClass: 'wizard',
       milestone: true,
+      intro: 'L3 is when Gale becomes the necromancer in earnest — three necromancy-school picks, all auto-prepared in the necromancy book.',
       items: [
-        { id: 'gale-l3-animate', label: 'Animate Dead', tag: 'combat' },
-        { id: 'gale-l3-vampiric-touch', label: 'Vampiric Touch', tag: 'combat' }
+        { id: 'gale-l3-animate', label: 'Animate Dead — necromancy, summons that persist to long rest', tag: 'combat' },
+        { id: 'gale-l3-vampiric-touch', label: 'Vampiric Touch — necromancy, self-heal on hit', tag: 'combat' },
+        { id: 'gale-l3-bestow', label: 'Bestow Curse — necromancy, on-target debuff (extra damage / disadvantage)', tag: 'combat' }
       ]
     },
     {

@@ -88,8 +88,18 @@ export const pcShadowSorcerer: Build = {
           note: 'Once per long rest. Does not work on radiant or critical kills.',
           tag: 'combat'
         },
-        { id: 'pc-l1-cantrips', label: 'Cantrips: Chill Touch, Ray of Frost, Mage Hand, Minor Illusion', tag: 'combat' },
-        { id: 'pc-l1-spells', label: 'Spells: Shield, Ray of Sickness', tag: 'combat' }
+        {
+          id: 'pc-l1-cantrips',
+          label: 'Cantrips: Chill Touch, Ray of Frost, Mage Hand, Minor Illusion',
+          note: 'All shadow / cold / necromancy on the Sorcerer list. No fire cantrips on this run.',
+          tag: 'combat'
+        },
+        {
+          id: 'pc-l1-spells',
+          label: 'Spells: Shield, Ray of Sickness',
+          note: 'Ray of Sickness is necromancy-school poison — the only L1 necromancy on the Sorcerer list.',
+          tag: 'combat'
+        }
       ]
     },
     {
@@ -98,7 +108,11 @@ export const pcShadowSorcerer: Build = {
       levelClass: 'sorcerer',
       items: [
         { id: 'pc-l2-font', label: 'Font of Magic — sorcery points equal to your Sorcerer level', tag: 'combat' },
-        { id: 'pc-l2-spell-mage-armor', label: 'Spell pick: Mage Armor', tag: 'combat' }
+        {
+          id: 'pc-l2-spell-mage-armor',
+          label: 'Spell pick: Mage Armor (utility — no shadow-themed L1 left to grab)',
+          tag: 'combat'
+        }
       ]
     },
     {
@@ -109,8 +123,17 @@ export const pcShadowSorcerer: Build = {
       items: [
         { id: 'pc-l3-metamagic', label: 'Metamagic: Twinned Spell, Quickened Spell', tag: 'combat' },
         { id: 'pc-l3-darkness', label: 'Free spell: Darkness (from Eyes of the Dark)', tag: 'lore' },
-        { id: 'pc-l3-hold-person', label: 'Spell pick: Hold Person', tag: 'combat' },
-        { id: 'pc-l3-mirror-image', label: 'Spell pick: Mirror Image', tag: 'combat' }
+        {
+          id: 'pc-l3-hold-person',
+          label: 'Spell pick: Hold Person (the Twinned target — paralyse two enemies on one slot)',
+          tag: 'combat'
+        },
+        {
+          id: 'pc-l3-spell-replace',
+          label: 'Spell replace (L3 ability): swap Ray of Sickness → Mirror Image',
+          note: 'Sorcerer can replace one known spell on level-up. Mirror Image is illusion — keeps the shadow / mind-trick theme.',
+          tag: 'combat'
+        }
       ]
     },
     {
@@ -119,7 +142,12 @@ export const pcShadowSorcerer: Build = {
       levelClass: 'sorcerer',
       items: [
         { id: 'pc-l4-feat', label: 'Feat: Resilient (CON)', tag: 'combat' },
-        { id: 'pc-l4-cantrip', label: 'New cantrip: Bone Chill', tag: 'combat' }
+        {
+          id: 'pc-l4-cantrip',
+          label: 'New cantrip: Poison Spray (necromancy-flavoured poison) or Blade Ward (defensive)',
+          note: 'Bone Chill / Toll the Dead are NOT on the Sorcerer list — Shadowheart and Gale carry those. Poison Spray is the closest necrotic-coded Sorcerer cantrip.',
+          tag: 'combat'
+        }
       ]
     },
     {
@@ -128,8 +156,17 @@ export const pcShadowSorcerer: Build = {
       levelClass: 'sorcerer',
       milestone: true,
       items: [
-        { id: 'pc-l5-counterspell', label: 'Spell pick: Counterspell', tag: 'combat' },
-        { id: 'pc-l5-fear', label: 'Spell pick: Fear (or Hunger of Hadar)', tag: 'combat' }
+        {
+          id: 'pc-l5-fear',
+          label: 'Spell pick: Fear (necromancy-coded CC — pairs with the shadow aesthetic)',
+          tag: 'combat'
+        },
+        {
+          id: 'pc-l5-counterspell-note',
+          label: 'Counterspell is on the Sorcerer list too — pick it up at L6 if you want it',
+          note: 'Hunger of Hadar is Warlock / Druid in BG3, NOT Sorcerer. Skip it on Tav.',
+          tag: 'combat'
+        }
       ]
     },
     {
@@ -143,7 +180,12 @@ export const pcShadowSorcerer: Build = {
           label: 'Hound of Ill Omen — 3 sorcery points: summon a shadow hound that knocks prone and forces disadvantage on saves against your spells',
           tag: 'combat'
         },
-        { id: 'pc-l6-vampiric', label: 'Spell pick: Vampiric Touch', tag: 'combat' }
+        {
+          id: 'pc-l6-sleet-storm',
+          label: 'Spell pick: Sleet Storm (cold + heavy obscurement — the perfect Shadow Sorcerer AoE)',
+          note: 'Vampiric Touch is Warlock / Wizard in BG3, NOT Sorcerer. Gale carries Vampiric Touch instead.',
+          tag: 'combat'
+        }
       ]
     },
     {
@@ -151,8 +193,16 @@ export const pcShadowSorcerer: Build = {
       title: 'L7 — 4th-level slots',
       levelClass: 'sorcerer',
       items: [
-        { id: 'pc-l7-greater-invis', label: 'Spell pick: Greater Invisibility', tag: 'combat' },
-        { id: 'pc-l7-dimension-door', label: 'Spell pick: Dimension Door', tag: 'combat' }
+        {
+          id: 'pc-l7-greater-invis',
+          label: 'Spell pick: Greater Invisibility (shadow / stealth flavour, the L7 winner)',
+          tag: 'combat'
+        },
+        {
+          id: 'pc-l7-ice-storm',
+          label: 'Alt pick: Ice Storm (cold AoE) — or Dimension Door if you want a shadow-step utility',
+          tag: 'combat'
+        }
       ]
     },
     {
@@ -169,8 +219,16 @@ export const pcShadowSorcerer: Build = {
       levelClass: 'sorcerer',
       milestone: true,
       items: [
-        { id: 'pc-l9-hold-monster', label: 'Spell pick: Hold Monster', tag: 'combat' },
-        { id: 'pc-l9-cone-of-cold', label: 'Spell pick: Cone of Cold', tag: 'combat' }
+        {
+          id: 'pc-l9-hold-monster',
+          label: 'Spell pick: Hold Monster (Twinned at L5 = paralyse two bosses)',
+          tag: 'combat'
+        },
+        {
+          id: 'pc-l9-cone-of-cold',
+          label: 'Spell pick: Cone of Cold (the lore-headline AoE — pure Shadow Sorcerer signature)',
+          tag: 'combat'
+        }
       ]
     },
     {
@@ -188,7 +246,12 @@ export const pcShadowSorcerer: Build = {
       levelClass: 'sorcerer',
       milestone: true,
       items: [
-        { id: 'pc-l11-chain-lightning', label: 'Spell pick: Chain Lightning OR Disintegrate', tag: 'combat' }
+        {
+          id: 'pc-l11-freezing-sphere',
+          label: "Spell pick: Otiluke's Freezing Sphere (cold, lore-headline) — Disintegrate as the force-damage backup",
+          note: 'Skip Chain Lightning and Sunbeam — lightning and radiant are off-theme.',
+          tag: 'combat'
+        }
       ]
     },
     {
