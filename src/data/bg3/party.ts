@@ -4,12 +4,12 @@ export const partyOverview: CheckSection = {
   id: 'party-overview',
   title: 'Core Party',
   intro:
-    'Single-class, no holy magic, every member contributing necrotic damage somewhere on their sheet. Balanced difficulty — this is a lore party, not an optimized one.',
+    'Single-class, balanced difficulty, no holy magic. Tav holds the shadow + CC line from the back so the frontline can stay reserved for Minthara or a flex pick.',
   items: [
     {
       id: 'party-pc',
-      label: 'You — Dark Urge Paladin → Oathbreaker',
-      note: 'Frontline. Necrotic smites, Control Undead, Aura of Hate.',
+      label: 'You — Dark Urge Shadow Sorcerer (Shadow Magic)',
+      note: 'Backline. Twinned Hold Person, free Darkness, Hound of Ill Omen, Strength of the Grave keeps you upright.',
       tag: 'lore'
     },
     {
@@ -41,8 +41,8 @@ export const partyAlternates: CheckSection = {
   items: [
     {
       id: 'alt-minthara',
-      label: 'Minthara — canonical Dark Urge ally',
-      note: 'Single-class Oathbreaker Paladin. Stacks a second Aura of Hate next to yours. Recruit via Grove massacre (Act 1) or spare her at Moonrise (Act 2).',
+      label: 'Minthara — canonical Dark Urge ally + the party Oathbreaker',
+      note: 'Single-class Oathbreaker Paladin. Tav is a caster now, so Minthara is the run\'s only Aura of Hate carrier — recruit her if you want the frontline. Grove massacre (Act 1) or spare her at Moonrise (Act 2).',
       tag: 'lore'
     },
     {
@@ -64,16 +64,16 @@ export const scholarStance: CheckSection = {
   id: 'party-stance',
   title: 'Scholar Stance',
   intro:
-    'Treat the run as devotion to Bhaal expressed through necromancy. The Paladin breaks oath in Act 1; the Cleric stays Shar-aligned; the Wizard studies. No healing word, no Cure Wounds, no holy magic on your Paladin.',
+    "Treat the run as devotion to Bhaal expressed through shadow and necromancy. Tav's magic is innate — no oath to break, no choice to swear off the light. The Cleric stays Shar-aligned; the Wizard studies.",
   items: [
     {
       id: 'stance-no-holy',
-      label: 'No holy magic on your Paladin — skip Cure Wounds, Lesser Restoration, every radiant smite spell',
+      label: 'No holy magic on the party — skip Cure Wounds, Lesser Restoration, and every radiant smite spell',
       tag: 'lore'
     },
     {
       id: 'stance-potions',
-      label: 'Heal with potions, food, Lay on Hands, and Grim Harvest only',
+      label: 'Heal with potions, food, Vampiric Touch, and Grim Harvest only',
       tag: 'lore'
     },
     {

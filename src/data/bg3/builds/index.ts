@@ -1,5 +1,5 @@
 import type { Build } from '../types';
-import { pcOathbreaker } from './pc-oathbreaker';
+import { pcShadowSorcerer } from './pc-shadow-sorcerer';
 import { shadowheart } from './shadowheart';
 import { gale } from './gale';
 import { astarion } from './astarion';
@@ -9,7 +9,7 @@ import { karlach } from './karlach';
 import { jaheira } from './jaheira';
 
 export const builds: Build[] = [
-  pcOathbreaker,
+  pcShadowSorcerer,
   shadowheart,
   gale,
   astarion,

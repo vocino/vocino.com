@@ -1,7 +1,7 @@
 export type Tag = 'lore' | 'combat' | 'both';
 
 /** Which class is taken at a given character level. Drives the chip on level cards. */
-export type LevelClass = 'paladin' | 'cleric' | 'wizard' | 'fighter' | 'rogue' | 'barbarian' | 'druid';
+export type LevelClass = 'sorcerer' | 'cleric' | 'wizard';
 
 export interface CheckItem {
   /** Stable ID used as data-check-id and for localStorage keying. */
@@ -37,7 +37,7 @@ export type BuildShortId =
   | 'jaheira';
 
 export type BuildId =
-  | 'pc-oathbreaker'
+  | 'pc-shadow-sorcerer'
   | 'shadowheart'
   | 'gale'
   | 'astarion'

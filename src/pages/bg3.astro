@@ -2,7 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import BG3Checklist from "../components/bg3/BG3Checklist.astro";
 import {
-  oathBreak,
+  darkUrgeOrigin,
   withersTiming,
   loreByAct,
   gearByAct,
@@ -13,7 +13,7 @@ import { builds } from "../data/bg3/builds/index";
 
 const buildById = (id: string) => builds.find((b) => b.id === id)!;
 const coreBuilds = [
-  buildById("pc-oathbreaker"),
+  buildById("pc-shadow-sorcerer"),
   buildById("shadowheart"),
   buildById("gale")
 ];
@@ -22,7 +22,7 @@ const alternateBuilds = [buildById("minthara"), buildById("karlach"), buildById(
 
 const sections = [
   { id: "party",  label: "Party" },
-  { id: "oath",   label: "Oath" },
+  { id: "origin", label: "Origin" },
   { id: "builds", label: "Builds" },
   { id: "lore",   label: "Lore" },
   { id: "gear",   label: "Gear" },
@@ -31,18 +31,18 @@ const sections = [
 ---
 
 <BaseLayout
-  title="BG3 Dark Urge Oathbreaker Necrotic Party — Vocino"
-  description="Lore-first Dark Urge run. Single-class party: Oathbreaker Paladin, Death Domain Cleric, Necromancy Wizard, plus a flex slot. Balanced difficulty, no holy magic."
+  title="BG3 Dark Urge Shadow Sorcerer Necrotic Party — Vocino"
+  description="Lore-first Dark Urge run. Single-class party: Shadow Sorcerer Tav, Death Domain Cleric, Necromancy Wizard, plus a flex slot. Balanced difficulty, no holy magic."
 >
   <section class="bg3-section">
     <div class="bg3-app">
       <header class="bg3-header">
         <span class="bg3-eyebrow">guide · baldur's gate 3 · dark urge</span>
-        <h1 class="bg3-title">Oathbreaker Necrotic Party</h1>
+        <h1 class="bg3-title">Shadow Sorcerer Necrotic Party</h1>
         <span class="bg3-accent-bar" aria-hidden="true"></span>
         <p class="bg3-subtitle">
-          Lore-first Dark Urge. Single-class party, balanced difficulty, no holy magic on your Paladin.
-          Oathbreaker frontline · Death Domain Cleric · Necromancy Wizard · Astarion or Lae'zel flex.
+          Lore-first Dark Urge. Single-class party, balanced difficulty, no holy magic.
+          Shadow Sorcerer Tav · Death Domain Cleric · Necromancy Wizard · Astarion or Lae'zel flex · Minthara optional Oathbreaker.
         </p>
       </header>
 
@@ -85,12 +85,12 @@ const sections = [
         </div>
       </section>
 
-      <section id="oath" class="bg3-page-section">
-        <h2 class="bg3-h2">Oath Break + Withers</h2>
+      <section id="origin" class="bg3-page-section">
+        <h2 class="bg3-h2">Origin + Withers</h2>
         <article class="bg3-card">
-          <h3 class="bg3-card-title">{oathBreak.title}</h3>
-          {oathBreak.intro && <p class="bg3-intro">{oathBreak.intro}</p>}
-          <BG3Checklist items={oathBreak.items} />
+          <h3 class="bg3-card-title">{darkUrgeOrigin.title}</h3>
+          {darkUrgeOrigin.intro && <p class="bg3-intro">{darkUrgeOrigin.intro}</p>}
+          <BG3Checklist items={darkUrgeOrigin.items} />
         </article>
         <article class="bg3-card">
           <h3 class="bg3-card-title">{withersTiming.title}</h3>
@@ -218,8 +218,9 @@ const sections = [
 
   <script is:inline>
     (() => {
-      const storageKey = "bg3-dark-urge-guide-v1";
+      const storageKey = "bg3-dark-urge-guide-v2";
       const legacyKeys = [
+        "bg3-dark-urge-guide-v1",
         "bg3-deathreaper-guide-v5",
         "bg3-necro-guide-v4",
         "bg3-necro-guide-v3",

@@ -19,9 +19,9 @@
   --section-glow: 0 0 24px rgba(91, 232, 92, 0.22);
 
   // Single-class chip palette
-  --class-paladin: #FFB347;
-  --class-cleric:  #E0E040;
-  --class-wizard:  #4DA3FF;
+  --class-sorcerer: #B289FF;
+  --class-cleric:   #E0E040;
+  --class-wizard:   #4DA3FF;
 
   position: relative;
   z-index: 1;
@@ -297,9 +297,9 @@
     border: 1px solid currentColor;
     white-space: nowrap;
 
-    &[data-class="paladin"] { color: var(--class-paladin); }
-    &[data-class="cleric"]  { color: var(--class-cleric);  }
-    &[data-class="wizard"]  { color: var(--class-wizard);  }
+    &[data-class="sorcerer"] { color: var(--class-sorcerer); }
+    &[data-class="cleric"]   { color: var(--class-cleric);   }
+    &[data-class="wizard"]   { color: var(--class-wizard);   }
   }
 
   // ---- Intro text inside cards ----

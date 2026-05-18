@@ -1,37 +1,31 @@
 import type { CheckItem, CheckSection } from './types';
 
-export const oathBreak: CheckSection = {
-  id: 'oath-break',
-  title: 'How and When to Break Your Oath',
+export const darkUrgeOrigin: CheckSection = {
+  id: 'origin',
+  title: 'Dark Urge + Shadow Magic',
   intro:
-    'Start as Devotion (innocents) or Vengeance (mercy). Pick one of the two break paths below in Act 1, then long-rest to summon the Oathbreaker Knight in camp.',
+    "The shadow magic is innate — Tav has no oath to break and no holy magic to swear off. The Dark Urge cutscenes still fire on their own schedule; just play them out and collect the rewards.",
   items: [
     {
-      id: 'oath-tiefling-trap',
-      label: 'Path A — Tieflings holding Lae\'zel: promise not to attack, then attack after dialogue ends',
-      note: 'Killing innocents breaks Devotion. Works whether or not you take Lae\'zel.',
+      id: 'origin-alfira',
+      label: 'Let the Alfira camp night play out — Sceleritas Fel grants the Deathstalker Mantle',
+      note: 'The Dark Urge-only invisibility cloak. No oath consequence since Tav is a Sorcerer.',
       tag: 'lore'
     },
     {
-      id: 'oath-alfira',
-      label: 'Path B (canonical Dark Urge) — let the Alfira camp night play out',
-      note: 'The forced murder breaks your oath instantly and grants the Deathstalker Mantle from Sceleritas Fel.',
+      id: 'origin-isobel',
+      label: 'Act 2: kill Isobel (or let Marcus take her) to trigger early Slayer form',
       tag: 'lore'
     },
     {
-      id: 'oath-sazza',
-      label: 'Path C — free Sazza for an easy Vengeance break',
-      note: 'Use this only if you skipped Alfira and want to break Vengeance instead of Devotion.',
+      id: 'origin-grave',
+      label: 'Roleplay Strength of the Grave as Bhaal refusing to let you die',
+      note: 'Once per long rest, a 0-HP hit drops you to 1 HP instead. Save it for the urge scenes — narratively, the god keeps his vessel alive.',
       tag: 'lore'
     },
     {
-      id: 'oath-knight',
-      label: 'Long rest — Oathbreaker Knight appears in camp; accept the subclass (free)',
-      tag: 'both'
-    },
-    {
-      id: 'oath-no-restore',
-      label: 'Do not restore the oath later — 1,000 → 2,000 → 10,000 gold and you do not need it',
+      id: 'origin-bhaal',
+      label: 'Act 3: accept Bhaal in the Temple of Bhaal, defeat Orin',
       tag: 'lore'
     }
   ]
@@ -41,17 +35,11 @@ export const withersTiming: CheckSection = {
   id: 'withers-timing',
   title: 'Withers Respec Timing',
   intro:
-    'Withers recruits in the Dank Crypt (Act 1). Respecs cost 100 gold per character and reset to L1 while keeping XP. Two hard rules:',
+    'Withers recruits in the Dank Crypt (Act 1). Respecs cost 100 gold per character and reset to L1 while keeping XP. Tav has no special timing constraint — the Sorcerer can be respecced freely.',
   items: [
     {
-      id: 'withers-pc-lock',
-      label: 'Lock your Paladin BEFORE breaking the oath',
-      note: 'Withers cannot respec a Paladin who already has the Oathbreaker subclass.',
-      tag: 'both'
-    },
-    {
       id: 'withers-shart',
-      label: 'Shadowheart → Cleric (Death Domain) early Act 2, after Shar commit, before the Gauntlet of Shar',
+      label: 'Shadowheart → Cleric (Death Domain) early Act 2, after the Shar commit, before the Gauntlet of Shar',
       note: 'Respec after the story flag so her arc holds. Death Domain gives Reaper at L1 — bring it to Nightsong.',
       tag: 'both'
     },
@@ -59,6 +47,12 @@ export const withersTiming: CheckSection = {
       id: 'withers-gale',
       label: 'Gale → Wizard (Necromancy) after he joins camp in Act 1',
       note: 'Pick School of Necromancy at L2 — Grim Harvest is the engine.',
+      tag: 'both'
+    },
+    {
+      id: 'withers-minthara',
+      label: 'Minthara (optional) — confirm she stays single-class Oathbreaker Paladin',
+      note: 'Default kit works. Only respec to clean up her L1 stats if recruited mid-Act 1.',
       tag: 'both'
     },
     {
@@ -75,17 +69,17 @@ export const loreByAct: Record<'act1' | 'act2' | 'act3', CheckItem[]> = {
     {
       id: 'lore-a1-thay-keep',
       label: 'Keep the Necromancy of Thay from the Apothecary Basement (Blighted Village)',
-      note: 'Open it with the Dark Amethyst from the Whispering Depths Matriarch. Do NOT sell or destroy it — Gale\'s Danse Macabre depends on it.',
+      note: "Open it with the Dark Amethyst from the Whispering Depths Matriarch. Do NOT sell or destroy it — Gale's Danse Macabre depends on it.",
       tag: 'lore'
     },
     {
-      id: 'lore-a1-alfira',
-      label: 'Let the Dark Urge Alfira camp scene trigger',
-      tag: 'lore'
+      id: 'lore-a1-mage-armor',
+      label: 'Cast Mage Armor on Tav every long rest from L2 onward',
+      tag: 'combat'
     },
     {
-      id: 'lore-a1-sazza',
-      label: 'Free Sazza if you skipped Alfira and want the easy Vengeance break',
+      id: 'lore-a1-recruit-minthara',
+      label: 'Decide on Minthara before leaving Act 1 — Grove massacre recruits her here; otherwise spare her at Moonrise in Act 2',
       tag: 'lore'
     }
   ],
@@ -99,11 +93,6 @@ export const loreByAct: Record<'act1' | 'act2' | 'act3', CheckItem[]> = {
     {
       id: 'lore-a2-balthazar-loot',
       label: 'Gale: loot Circle of Bones from Balthazar',
-      tag: 'lore'
-    },
-    {
-      id: 'lore-a2-isobel',
-      label: 'Dark Urge: kill Isobel (or let Marcus take her) to trigger early Slayer form',
       tag: 'lore'
     },
     {
@@ -125,11 +114,6 @@ export const loreByAct: Record<'act1' | 'act2' | 'act3', CheckItem[]> = {
       note: 'Loot Staff of Cherished Necromancy, Armour of the Sporekeeper, and the Crypt Lord Ring.',
       tag: 'lore'
     },
-    {
-      id: 'lore-a3-bhaal',
-      label: 'Accept Bhaal in the Temple of Bhaal — defeat Orin',
-      tag: 'lore'
-    }
   ]
 };
 
@@ -142,13 +126,14 @@ export const gearByAct: Record<'act1' | 'act2' | 'act3', CheckItem[]> = {
       tag: 'lore'
     },
     {
-      id: 'gear-a1-sword-of-justice',
-      label: 'Sword of Justice (Paladin Anders, Mountain Pass)',
+      id: 'gear-a1-spellsparkler',
+      label: 'Spellsparkler (Arfur\'s Storage, Toymaker basement)',
+      note: 'Quarterstaff that grants Lightning Charges on every spell — best Act 1 staff for Tav and Gale.',
       tag: 'combat'
     },
     {
-      id: 'gear-a1-everburn',
-      label: 'Everburn Blade (Commander Zhalk, Nautiloid)',
+      id: 'gear-a1-hag-hair',
+      label: 'Auntie Ethel Hair → +1 CHA on Tav (CHA 18 in Act 1)',
       tag: 'combat'
     },
     {
@@ -156,6 +141,12 @@ export const gearByAct: Record<'act1' | 'act2' | 'act3', CheckItem[]> = {
       label: 'Deathstalker Mantle (Sceleritas Fel, after the Alfira camp night)',
       note: 'Invisibility on a creature kill. The Dark Urge-only cloak.',
       tag: 'lore'
+    },
+    {
+      id: 'gear-a1-everburn',
+      label: 'Everburn Blade / Sword of Justice — pass to the flex frontline',
+      note: 'Nautiloid + Mountain Pass martial drops. Not for Tav; equip them on Lae\'zel, Astarion, or Minthara.',
+      tag: 'combat'
     }
   ],
   act2: [
@@ -202,8 +193,19 @@ export const gearByAct: Record<'act1' | 'act2' | 'act3', CheckItem[]> = {
     },
     {
       id: 'gear-a3-bhaalist',
-      label: 'Bhaalist Armour (Murder Tribunal)',
-      note: 'Aura of Murder — enemies within 2 m take double piercing. Centerpiece of the build.',
+      label: 'Bhaalist Armour (Murder Tribunal) — give it to the frontline carrier',
+      note: 'Aura of Murder doubles piercing damage inside 2 m. Tav is a Sorcerer with no medium-armour proficiency — Minthara, Lae\'zel, or Astarion wears it.',
+      tag: 'combat'
+    },
+    {
+      id: 'gear-a3-markoheshkir',
+      label: 'Markoheshkir (Sorcerous Sundries vault) — best-in-slot staff for Tav',
+      tag: 'combat'
+    },
+    {
+      id: 'gear-a3-robe-weave',
+      label: 'Robe of the Weave + Cloak of the Weave (Sorcerous Sundries)',
+      note: '+1 spell save DC each — stack on Tav and Gale.',
       tag: 'combat'
     }
   ]
