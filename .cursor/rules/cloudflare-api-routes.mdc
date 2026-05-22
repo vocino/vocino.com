@@ -1,0 +1,31 @@
+---
+description: Astro API routes on Cloudflare — runtime, cache, env (see CLAUDE.md)
+globs: src/pages/api/**/*.ts
+alwaysApply: false
+---
+
+# Cloudflare API routes
+
+Routes live in `src/pages/api/`. Reference: `twitch-status.ts`, `instagram-stickers.ts`, [CLAUDE.md](../../CLAUDE.md).
+
+## Runtime and env
+
+```typescript
+export const GET: APIRoute = async ({ request, locals }) => {
+  const runtime = locals.runtime;
+  const value = runtime?.env?.VAR_NAME; // production
+  // Local dev: follow existing routes — import.meta.env fallbacks where needed
+};
+```
+
+- Prefer `locals.runtime.env` in production; do not use `process.env` for Cloudflare secrets.
+- Use `runtime.waitUntil()` for non-blocking work (e.g. `cache.put` after responding).
+
+## Caching
+
+- Use `caches.default` with a stable cache key per endpoint.
+- Set explicit `Cache-Control` on JSON responses.
+
+## Twitch secrets (Pages)
+
+`TWITCH_CLIENT_ID`, `TWITCH_CLIENT_SECRET`, `TWITCH_USERNAME` (default `vocino`).

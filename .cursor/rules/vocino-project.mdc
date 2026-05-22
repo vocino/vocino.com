@@ -1,0 +1,26 @@
+---
+description: vocino.com stack, commands, and non-negotiable project conventions (see CLAUDE.md)
+alwaysApply: true
+---
+
+# vocino.com — project baseline
+
+Full detail: [CLAUDE.md](../../CLAUDE.md). README may still mention Jekyll; this repo is **Astro + Cloudflare Pages (SSR)**.
+
+## Commands
+
+- Dev: `npm run dev` / `npm start`
+- Build (includes typecheck): `npm run build`
+- Preview: `npm run preview`
+- Types only: `astro check`
+
+## Must follow
+
+- **SSR** via `@astrojs/cloudflare`; site URL https://vocino.com
+- **Single page**: only `src/pages/index.astro` is public; `/bg3` redirects to `/`
+- **Pages** use `BaseLayout` from `src/layouts/BaseLayout.astro` — inherit dot grid, scanlines, fonts, SEO
+- **API** in `src/pages/api/` only — not Cloudflare Pages Functions
+- **Cloudflare env** in production: `locals.runtime.env` (not `process.env`); use `runtime.waitUntil()` for background cache writes
+- **SCSS** imported in layouts (`import '../styles/main.scss'`), not `<link>` tags; tokens in `_variables.scss`
+- **TypeScript** strict mode; run `npm run build` after substantive edits
+- **Commits**: only when the user explicitly asks

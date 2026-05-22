@@ -35,7 +35,7 @@
   padding: 0;
 
   > * {
-    animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) backwards;
+    animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .site-brand {
@@ -82,7 +82,9 @@
 // .bg3-section, etc.). The inner notch uses var(--bg) to match the page
 // background.
 .site-brand {
-  display: block;
+  display: inline-block;
+  width: fit-content;
+  line-height: 0;
   margin-bottom: $spacing-unit * 6;
   color: var(--section-accent, var(--brand));
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s ease;
@@ -99,6 +101,7 @@
 
   .brand-logo {
     width: 80px;
+    max-width: none;
     height: auto;
     opacity: 0.95;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);

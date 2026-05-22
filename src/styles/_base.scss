@@ -73,9 +73,14 @@ img,
 picture,
 video,
 canvas,
-svg {
+svg:not(.brand-logo) {
   display: block;
   max-width: 100%;
+}
+
+svg.brand-logo {
+  display: block;
+  flex-shrink: 0;
 }
 
 h1,
