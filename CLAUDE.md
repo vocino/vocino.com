@@ -119,6 +119,8 @@ Required for Twitch integration (Cloudflare Pages secrets):
 - **Build output**: `dist/`
 - Auto-deploys on push to master
 
+**Important:** This project uses **Astro 5** with `@astrojs/cloudflare` v12 because Cloudflare Pages expects the `dist/_worker.js` build layout. Astro 6 removed Cloudflare Pages support; migrating to Astro 6 requires moving the deploy target to Cloudflare Workers (`wrangler deploy`).
+
 ## Important Notes
 
 - The README.md still references Jekyll but the project has been migrated to Astro

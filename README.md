@@ -69,6 +69,7 @@ This site is deployed on Cloudflare Pages with server-side rendering (SSR). Chan
 - **Build command**: `npm run build`
 - **Build output directory**: `dist`
 - **Framework preset**: Astro
+- **Stack note**: Astro 5 + `@astrojs/cloudflare` v12 (required for Pages SSR). Astro 6 needs Cloudflare Workers instead — see [Astro Cloudflare adapter docs](https://docs.astro.build/en/guides/integrations-guide/cloudflare/#removed-cloudflare-pages-support).
 - **Environment variables** (set in Cloudflare dashboard):
   - `TWITCH_CLIENT_ID`
   - `TWITCH_CLIENT_SECRET`
