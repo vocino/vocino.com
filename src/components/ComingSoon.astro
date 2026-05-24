@@ -16,7 +16,8 @@ const { label, title, text } = Astro.props;
     <h1 class="hub-soon__title">{title}</h1>
     {text && <p class="hub-soon__text">{text}</p>}
     <p class="hub-soon__status">
-      <span class="hub-soon__dot" aria-hidden="true"></span>coming soon<span class="hub-soon__cursor" aria-hidden="true"></span>
+      <span class="hub-soon__dot" aria-hidden="true"></span>
+      <span class="hub-soon__say">coming soon<span class="hub-soon__cursor" aria-hidden="true"></span></span>
     </p>
   </div>
 </section>
@@ -90,9 +91,15 @@ const { label, title, text } = Astro.props;
     animation: hubSoonPulse 2s ease-in-out infinite;
   }
 
+  .hub-soon__say {
+    display: inline-flex;
+    align-items: center;
+  }
+
   .hub-soon__cursor {
-    width: 9px;
+    width: 8px;
     height: 1.05em;
+    margin-left: 3px;
     background: var(--section-accent, var(--brand));
     display: inline-block;
     animation: hubSoonBlink 1s steps(2, start) infinite;

@@ -1,7 +1,9 @@
 ---
+import BrandMark from './BrandMark.astro';
+
 // The one constant across every hub: the Vocino mark, top-left, linking home.
-// Color inherits from `--section-accent` so the logo re-tints to match the
-// hub it's rendered inside (green on /bg3, amber on /homelab, cyan at root).
+// Color inherits from `--section-accent` (via `.site-brand`) so the logo
+// re-tints to match the hub it's rendered inside.
 interface Props {
   class?: string;
 }
@@ -13,17 +15,26 @@ const cls = ["site-brand", "site-brand--mark", "brand-home", className]
 ---
 
 <a href="/" class={cls} aria-label="Vocino — home">
-  <svg
-    class="brand-logo"
-    width="80"
-    height="69"
-    viewBox="0 0 250 216"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    aria-hidden="true"
-    focusable="false"
-  >
-    <path d="M125 215.909L0 0L250 2.17954e-05L125 215.909Z" fill="currentColor" />
-    <path d="M125 71.9697L83.3334 0L166.667 7.26513e-06L125 71.9697Z" fill="var(--bg, #0F1419)" />
-  </svg>
+  <BrandMark />
 </a>
+
+<style>
+  /* Expand the click/tap target without moving the logo: padding grows the
+     hit area, the matching negative margin keeps it visually in the corner. */
+  a.brand-home {
+    margin: -0.6rem;
+    padding: 0.6rem;
+    border-radius: 10px;
+    transition: background-color 0.25s ease;
+  }
+
+  a.brand-home:hover,
+  a.brand-home:focus-visible {
+    background-color: color-mix(in srgb, var(--section-accent, var(--brand)) 12%, transparent);
+  }
+
+  a.brand-home:focus-visible {
+    outline: 2px solid var(--section-accent, var(--brand));
+    outline-offset: 2px;
+  }
+</style>
