@@ -30,6 +30,7 @@ astro check
 - **Output mode**: `server` (SSR enabled)
 - **Adapter**: `@astrojs/cloudflare` for Cloudflare Pages deployment
 - **Site URL**: https://vocino.com
+- **Trailing slashes**: `trailingSlash: 'never'` — canonical URLs omit trailing slashes (e.g. `/bg3`, not `/bg3/`). `/bg3/` redirects to `/bg3` in production.
 - **Redirects**: none currently (`/bg3` is now a real hub, not a redirect)
 
 ### Project Structure

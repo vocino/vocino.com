@@ -11,7 +11,10 @@ const {
   noindex = false,
 } = Astro.props;
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const pathname = Astro.url.pathname;
+const canonicalPath =
+  pathname !== '/' && pathname.endsWith('/') ? pathname.slice(0, -1) : pathname;
+const canonicalURL = new URL(canonicalPath, Astro.site);
 ---
 
 <!-- Primary Meta Tags -->
