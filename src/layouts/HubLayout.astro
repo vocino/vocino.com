@@ -11,20 +11,58 @@
 // into its own shell.
 import BaseLayout from './BaseLayout.astro';
 import BrandHome from '../components/BrandHome.astro';
+import type { JsonLdObject, SeoBreadcrumbItem } from '../data/seo';
 
 interface Props {
   title?: string;
   description?: string;
+  hubName?: string;
+  canonicalPath?: string;
+  imagePath?: string;
+  imageAlt?: string;
+  schema?: JsonLdObject | JsonLdObject[];
+  breadcrumb?: SeoBreadcrumbItem[];
   /** CSS color that tints the logo + any `--section-accent` usage in the hub. */
   accent?: string;
   noindex?: boolean;
+  nofollow?: boolean;
+  publishedTime?: string;
+  modifiedTime?: string;
 }
 
-const { title, description, accent, noindex } = Astro.props;
+const {
+  title,
+  description,
+  hubName,
+  canonicalPath,
+  imagePath,
+  imageAlt,
+  schema,
+  breadcrumb,
+  accent,
+  noindex,
+  nofollow,
+  publishedTime,
+  modifiedTime,
+} = Astro.props;
 const accentStyle = accent ? `--section-accent: ${accent};` : undefined;
 ---
 
-<BaseLayout title={title} description={description} noindex={noindex}>
+<BaseLayout
+  title={title}
+  description={description}
+  pageType="hub"
+  hubName={hubName}
+  canonicalPath={canonicalPath}
+  imagePath={imagePath}
+  imageAlt={imageAlt}
+  schema={schema}
+  breadcrumb={breadcrumb}
+  noindex={noindex}
+  nofollow={nofollow}
+  publishedTime={publishedTime}
+  modifiedTime={modifiedTime}
+>
   <div class="hub" style={accentStyle}>
     <header class="hub__chrome">
       <BrandHome />

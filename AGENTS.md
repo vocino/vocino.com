@@ -13,3 +13,5 @@ Scoped pointers into `CLAUDE.md` (only load when matching files are in context):
 | `astro-styling.mdc` | `**/*.astro`, `src/styles/**` | Styling, Project Structure |
 
 Do not duplicate `CLAUDE.md` content in these files — update `CLAUDE.md` instead.
+
+For SEO/metadata, see CLAUDE.md → **SEO and metadata standardization** (`src/data/seo.ts`, `src/data/hubs.ts`, `src/pages/sitemap.xml.ts`).

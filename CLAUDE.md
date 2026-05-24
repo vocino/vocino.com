@@ -110,6 +110,14 @@ export const GET: APIRoute = async ({ request, locals }) => {
 - Reusable HUD utilities are in `_hacker.scss`: `.label-mono`, `.heading-bracket`, `.hud-corners`, `.telemetry-rail`, `.accent-block`, `.terminal-prefix`, `.cursor-blink`, `.status-block`.
 - `BaseLayout` provides the shared foundation — design tokens, fonts, reset, and the base background — and is where global styling applies. **Prefer `BaseLayout` over a custom `<html>/<body>` shell** for anything that should live inside the site's design system. (Exception: a hub that intentionally diverges may build its own shell — see "Content Hubs" below.)
 
+#### SEO and metadata standardization
+- Site-wide SEO defaults live in `src/data/seo.ts` and helper logic in `src/lib/seo.ts`.
+- `BaseLayout` routes all metadata through `components/SEO.astro`; do not hand-roll per-page head tags unless there is a clear exception.
+- Use `pageType` (`home`, `hub`, `article`, `generic`) so title templates + default JSON-LD schemas are applied consistently.
+- Hub defaults (name/slug/description/accent/indexability) live in `src/data/hubs.ts`. Hub pages should consume these defaults rather than duplicating strings.
+- Dynamic sitemap is served by `src/pages/sitemap.xml.ts`; it includes `/` plus hubs marked `indexable: true` in the hub registry.
+- Placeholder/thin hubs must keep `indexable: false` and pass `noindex` until real content is published.
+
 #### Client-Side Interactivity
 - Component-scoped scripts use `<script>` tags in `.astro` files (see TwitchStatus.astro)
 - Larger scripts can live in `public/assets/js/` and be referenced with `<script src="...">`
@@ -160,8 +168,8 @@ The authoritative list of hubs and their fixed properties. Update this when addi
 ### Adding a new hub
 1. Create `src/pages/<slug>/index.astro`.
 2. Either use `HubLayout` (fast path — inherits the shared vibe) **or** build a custom shell that includes `<BrandHome />`.
-3. Choose an `accent` color and add a row to the **Hub registry** above.
-4. While it's a placeholder, render `<ComingSoon>` and pass `noindex`. Add the slug to `public/sitemap.xml` only once it has real, indexable content.
+3. Add/update the hub entry in `src/data/hubs.ts` (slug, name, description, accent, `indexable`).
+4. While it's a placeholder, render `<ComingSoon>` and keep `indexable: false` + `noindex`. Flip to `indexable: true` only once the hub has real, indexable content (the sitemap is generated automatically).
 5. **Do NOT add a `CLAUDE.md` inside `src/pages/<slug>/`** — Astro routes any `.md` under `src/pages/` as a public page (e.g. `/bg3/claude`). Keep per-hub notes in the Hub registry instead.
 
 ## Environment Variables

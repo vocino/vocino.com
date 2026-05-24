@@ -1,14 +1,39 @@
 ---
 import SEO from '../components/SEO.astro';
 import '../styles/main.scss';
+import type { JsonLdObject, SeoBreadcrumbItem, SeoPageType } from '../data/seo';
 
 interface Props {
   title?: string;
   description?: string;
+  pageType?: SeoPageType;
+  hubName?: string;
+  canonicalPath?: string;
+  imagePath?: string;
+  imageAlt?: string;
   noindex?: boolean;
+  nofollow?: boolean;
+  schema?: JsonLdObject | JsonLdObject[];
+  breadcrumb?: SeoBreadcrumbItem[];
+  publishedTime?: string;
+  modifiedTime?: string;
 }
 
-const { title, description, noindex } = Astro.props;
+const {
+  title,
+  description,
+  pageType,
+  hubName,
+  canonicalPath,
+  imagePath,
+  imageAlt,
+  noindex,
+  nofollow,
+  schema,
+  breadcrumb,
+  publishedTime,
+  modifiedTime,
+} = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -18,7 +43,21 @@ const { title, description, noindex } = Astro.props;
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="color-scheme" content="dark light" />
 
-  <SEO title={title} description={description} noindex={noindex} />
+  <SEO
+    title={title}
+    description={description}
+    pageType={pageType}
+    hubName={hubName}
+    canonicalPath={canonicalPath}
+    imagePath={imagePath}
+    imageAlt={imageAlt}
+    noindex={noindex}
+    nofollow={nofollow}
+    schema={schema}
+    breadcrumb={breadcrumb}
+    publishedTime={publishedTime}
+    modifiedTime={modifiedTime}
+  />
 </head>
 <body class="site-root">
   <main class="site-main">

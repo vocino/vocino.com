@@ -1,6 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: /style
 
 Sitemap: https://vocino.com/sitemap.xml
 
