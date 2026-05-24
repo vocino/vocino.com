@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a personal website for Travis Vocino built with **Astro** (not Jekyll - the README is outdated) and deployed on **Cloudflare Pages**. It uses server-side rendering (SSR) with the Cloudflare adapter. The site is a **single-page landing** at `/` with external social links only; `/bg3` redirects to `/`.
+This is a personal website for Travis Vocino built with **Astro** (not Jekyll - the README is outdated) and deployed on **Cloudflare Pages**. It uses server-side rendering (SSR) with the Cloudflare adapter. The landing page lives at `/` (external social links only); topic "hubs" — self-contained mini-sites like `/bg3` and `/homelab` — branch off it.
 
 ## Development Commands
 

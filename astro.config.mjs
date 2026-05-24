@@ -5,7 +5,4 @@ export default defineConfig({
   output: 'server',
   adapter: cloudflare(),
   site: 'https://vocino.com',
-  redirects: {
-    '/bg3': '/',
-  },
 });
