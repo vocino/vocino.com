@@ -5,5 +5,5 @@ export default defineConfig({
   output: 'server',
   adapter: cloudflare(),
   site: 'https://vocino.com',
-  trailingSlash: 'never',
+  trailingSlash: 'ignore',
 });

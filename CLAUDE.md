@@ -30,7 +30,7 @@ astro check
 - **Output mode**: `server` (SSR enabled)
 - **Adapter**: `@astrojs/cloudflare` for Cloudflare Pages deployment
 - **Site URL**: https://vocino.com
-- **Trailing slashes**: `trailingSlash: 'never'` — canonical URLs omit trailing slashes (e.g. `/bg3`, not `/bg3/`). `/bg3/` redirects to `/bg3` in production.
+- **Trailing slashes**: canonical URLs omit trailing slashes (e.g. `/bg3`, not `/bg3/`). `src/middleware.ts` 301-redirects `/bg3/` → `/bg3` (and likewise for other paths).
 - **Redirects**: none currently (`/bg3` is now a real hub, not a redirect)
 
 ### Project Structure
@@ -54,10 +54,8 @@ src/
 │   └── formatIsoDate.ts
 ├── pages/
 │   ├── index.astro              # Landing page
-│   ├── bg3/                     # HUB: Baldur's Gate 3 mini-site (independent — see "Content Hubs")
-│   │   └── index.astro
-│   ├── homelab/                 # HUB: Home Lab mini-site (independent — see "Content Hubs")
-│   │   └── index.astro
+│   ├── bg3.astro                # HUB: Baldur's Gate 3 (nested pages go in bg3/)
+│   ├── homelab.astro            # HUB: Home Lab (nested pages go in homelab/)
 │   └── api/                     # Astro API routes (Cloudflare runtime)
 │       ├── twitch-status.ts
 │       └── instagram-stickers.ts

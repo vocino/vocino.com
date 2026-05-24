@@ -1,6 +1,6 @@
 ---
 description: Content hub mini-sites — read CLAUDE.md before editing hubs or shared hub chrome
-globs: "src/pages/*/**,src/layouts/HubLayout.astro,src/components/BrandHome.astro,src/components/BrandMark.astro,src/components/ComingSoon.astro"
+globs: "src/pages/bg3.astro,src/pages/homelab.astro,src/pages/*/**,src/layouts/HubLayout.astro,src/components/BrandHome.astro,src/components/BrandMark.astro,src/components/ComingSoon.astro"
 alwaysApply: false
 ---
 
