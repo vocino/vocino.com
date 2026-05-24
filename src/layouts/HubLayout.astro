@@ -1,0 +1,63 @@
+---
+// Opt-in wrapper for a "hub" (a mini-site like /bg3 or /homelab).
+//
+// It provides only the shared, invisible plumbing + the one visual constant:
+//   - <head>/SEO/fonts (via BaseLayout)
+//   - the top-left BrandHome logo that links to "/"
+//   - a per-hub accent color, set once via the `accent` prop
+//
+// Everything inside the slot is the hub's own to design freely. A hub that
+// wants to diverge completely can skip this layout and just drop <BrandHome />
+// into its own shell.
+import BaseLayout from './BaseLayout.astro';
+import BrandHome from '../components/BrandHome.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** CSS color that tints the logo + any `--section-accent` usage in the hub. */
+  accent?: string;
+  noindex?: boolean;
+}
+
+const { title, description, accent, noindex } = Astro.props;
+const accentStyle = accent ? `--section-accent: ${accent};` : undefined;
+---
+
+<BaseLayout title={title} description={description} noindex={noindex}>
+  <div class="hub" style={accentStyle}>
+    <header class="hub__chrome">
+      <BrandHome />
+    </header>
+    <slot />
+  </div>
+</BaseLayout>
+
+<style>
+  .hub {
+    position: relative;
+    min-height: 100vh;
+  }
+
+  .hub__chrome {
+    position: fixed;
+    top: 2rem;
+    left: 2rem;
+    z-index: 50;
+    line-height: 0;
+  }
+
+  @media (max-width: 768px) {
+    .hub__chrome {
+      top: 1.5rem;
+      left: 1.5rem;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .hub__chrome {
+      top: 1.25rem;
+      left: 1.25rem;
+    }
+  }
+</style>
