@@ -1,13 +1,20 @@
 ---
 import HubLayout from '../../layouts/HubLayout.astro';
 import ComingSoon from '../../components/ComingSoon.astro';
+import { getHubBreadcrumb, getHubBySlug } from '../../data/hubs';
+
+const hub = getHubBySlug('bg3');
 ---
 
 <HubLayout
-  title="Baldur's Gate 3 — Vocino"
-  description="Baldur's Gate 3 builds, guides, and honour-mode notes by Travis Vocino."
-  accent="#46E08B"
-  noindex
+  title={hub.name}
+  hubName={hub.name}
+  description={hub.description}
+  canonicalPath={`/${hub.slug}`}
+  breadcrumb={getHubBreadcrumb(hub)}
+  imagePath={hub.imagePath}
+  accent={hub.accent}
+  noindex={!hub.indexable}
 >
   <ComingSoon
     label="BG3"

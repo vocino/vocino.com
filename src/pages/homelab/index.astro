@@ -1,13 +1,20 @@
 ---
 import HubLayout from '../../layouts/HubLayout.astro';
 import ComingSoon from '../../components/ComingSoon.astro';
+import { getHubBreadcrumb, getHubBySlug } from '../../data/hubs';
+
+const hub = getHubBySlug('homelab');
 ---
 
 <HubLayout
-  title="Home Lab — Vocino"
-  description="Travis Vocino's home lab: hardware, self-hosting, and infrastructure write-ups."
-  accent="#FFB86B"
-  noindex
+  title={hub.name}
+  hubName={hub.name}
+  description={hub.description}
+  canonicalPath={`/${hub.slug}`}
+  breadcrumb={getHubBreadcrumb(hub)}
+  imagePath={hub.imagePath}
+  accent={hub.accent}
+  noindex={!hub.indexable}
 >
   <ComingSoon
     label="Home Lab"

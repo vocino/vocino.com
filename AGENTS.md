@@ -20,6 +20,7 @@ Project rules live in `.cursor/rules/`:
 
 - **Stack**: Astro (SSR), `@astrojs/cloudflare`, TypeScript strict — not Jekyll.
 - **Layouts**: Use `BaseLayout`; do not hand-roll `<html>/<body>` shells.
+- **SEO**: Use `BaseLayout`/`SEO.astro` contract (`pageType`, canonical, schema). Hub defaults come from `src/data/hubs.ts`; site defaults from `src/data/seo.ts`; sitemap is `src/pages/sitemap.xml.ts`.
 - **API**: Astro API routes in `src/pages/api/`; env via `locals.runtime.env` in production (see existing routes for local fallbacks).
 - **Styles**: Import `main.scss` from layouts; use design tokens in `_variables.scss` and HUD utilities in `_hacker.scss`.
 - **Verify**: `npm run build` before finishing substantive changes.
