@@ -187,3 +187,10 @@ Required for Twitch integration (Cloudflare Pages secrets):
 - Always access Cloudflare environment through `locals.runtime.env`, not `process.env`
 - TypeScript is configured with strict mode and React JSX support
 - **Hubs are independent mini-sites.** Before editing anything under `src/pages/<hub>/`, read the "Content Hubs" section above (including the Hub registry). Do not copy one hub's styles/patterns into another hub or the shared layer.
+
+## Agent context (Cursor / Claude Code)
+
+This file is the **single source of truth**. Cursor and Claude Code auto-apply it every session.
+
+- **[AGENTS.md](./AGENTS.md)** — thin index for Cursor; points here. Do not duplicate architecture there.
+- **`.cursor/rules/*.mdc`** — file-scoped pointers into sections of this doc. Update this file when conventions change; keep rules as pointers only.

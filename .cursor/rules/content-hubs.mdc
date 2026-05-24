@@ -1,0 +1,9 @@
+---
+description: Content hub mini-sites — read CLAUDE.md before editing hubs or shared hub chrome
+globs: "src/pages/*/**,src/layouts/HubLayout.astro,src/components/BrandHome.astro,src/components/BrandMark.astro,src/components/ComingSoon.astro"
+alwaysApply: false
+---
+
+# Content hubs
+
+Read **[CLAUDE.md](../../CLAUDE.md) → "Content Hubs"** (including the Hub registry) before editing.

@@ -1,23 +1,9 @@
 ---
-description: Astro pages, BaseLayout, SCSS tokens and HUD utilities (see CLAUDE.md)
+description: Astro layouts and SCSS — see CLAUDE.md
 globs: "**/*.astro,src/styles/**"
 alwaysApply: false
 ---
 
 # Astro pages and styling
 
-## Layouts
-
-- Wrap pages in `BaseLayout` so `_base.scss` chrome (grid, scanlines, vignette) applies automatically.
-- Global styles: `src/styles/main.scss` imports partials in order — add new partials there with `@use "name";`.
-
-## Design system
-
-- Tokens: `_variables.scss` (`--bg`, `--surface-*`, `--text-*`, `--brand`, `--accent-*`)
-- HUD utilities: `_hacker.scss` — `.label-mono`, `.heading-bracket`, `.hud-corners`, `.telemetry-rail`, `.accent-block`, `.terminal-prefix`, `.status-block`
-- Fonts: Source Sans 3 (body), Source Serif 4 (display), Source Code Pro (mono)
-
-## Component styles
-
-- Scoped `<style>` in `.astro` is fine for small component-specific tweaks.
-- Client scripts: `<script>` in `.astro` components, or `public/assets/js/` for larger bundles.
+Read **[CLAUDE.md](../../CLAUDE.md) → "Styling"** and **Project Structure** (`layouts/`, `styles/`).

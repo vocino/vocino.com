@@ -1,25 +1,15 @@
 # AGENTS
 
-This repository is **vocino.com** — Travis Vocino's personal site (Astro + Cloudflare Pages SSR). Single-page landing at `/`.
-
-## Source of truth
-
-Follow **[CLAUDE.md](./CLAUDE.md)** for architecture, commands, styling, API routes, and deployment. If anything conflicts with a guess or outdated README, prefer `CLAUDE.md` and the code.
+**Source of truth:** [CLAUDE.md](./CLAUDE.md) — architecture, commands, styling, API routes, hubs, deployment. If anything here, in README, or in a rule conflicts with `CLAUDE.md` or the code, follow `CLAUDE.md` and the code.
 
 ## Cursor rules
 
-Project rules live in `.cursor/rules/`:
+Scoped pointers into `CLAUDE.md` (only load when matching files are in context):
 
-| Rule | When it applies |
-|------|-----------------|
-| `vocino-project.mdc` | Always |
-| `cloudflare-api-routes.mdc` | `src/pages/api/**` |
-| `astro-styling.mdc` | `*.astro`, `src/styles/**` |
+| Rule | Globs | CLAUDE.md section |
+|------|-------|-------------------|
+| `content-hubs.mdc` | `src/pages/*/**`, hub shared components | Content Hubs |
+| `cloudflare-api-routes.mdc` | `src/pages/api/**` | API Routes |
+| `astro-styling.mdc` | `**/*.astro`, `src/styles/**` | Styling, Project Structure |
 
-## Quick constraints
-
-- **Stack**: Astro (SSR), `@astrojs/cloudflare`, TypeScript strict — not Jekyll.
-- **Layouts**: Use `BaseLayout`; do not hand-roll `<html>/<body>` shells.
-- **API**: Astro API routes in `src/pages/api/`; env via `locals.runtime.env` in production (see existing routes for local fallbacks).
-- **Styles**: Import `main.scss` from layouts; use design tokens in `_variables.scss` and HUD utilities in `_hacker.scss`.
-- **Verify**: `npm run build` before finishing substantive changes.
+Do not duplicate `CLAUDE.md` content in these files — update `CLAUDE.md` instead.
