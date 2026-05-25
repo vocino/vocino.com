@@ -37,7 +37,7 @@ astro check
 - **Adapter**: `@astrojs/cloudflare` v13+ for Cloudflare Workers deployment
 - **Wrangler**: [`wrangler.jsonc`](./wrangler.jsonc) — `main` is `@astrojs/cloudflare/entrypoints/server`
 - **Site URL**: https://vocino.com
-- **Trailing slashes**: canonical URLs omit trailing slashes (e.g. `/bg3`, not `/bg3/`). `src/middleware.ts` 301-redirects dynamic routes; prerendered hubs also use `public/_redirects`.
+- **Trailing slashes**: canonical URLs omit trailing slashes (e.g. `/bg3`, not `/bg3/`). `trailingSlash: 'never'` + `build.format: 'file'` for prerendered pages; `src/middleware.ts` 301-strips slashes on dynamic routes.
 - **Redirects**: none currently (`/bg3` is now a real hub, not a redirect)
 
 ### Project Structure
