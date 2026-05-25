@@ -37,7 +37,7 @@ dist/
 
 # Cloudflare
 .wrangler/
-.dev.vars
+.dev.vars # Worker local secrets (never commit)
 
 # Secrets & local env (keep .env.example committed)
 .env*

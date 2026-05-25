@@ -1,6 +1,6 @@
 # vocino.com
 
-Personal website for Travis Vocino built with Astro and deployed on Cloudflare Pages.
+Personal website for Travis Vocino built with Astro 6 and deployed on Cloudflare Workers.
 
 ## Quick Start
 
@@ -61,19 +61,20 @@ npm run preview
 
 ## Deployment
 
-This site is deployed on Cloudflare Pages with server-side rendering (SSR). Changes pushed to the `master` branch automatically trigger a new build and deployment.
+This site deploys to **Cloudflare Workers** with Wrangler. Content pages are prerendered at build time; API routes run on-demand in the Worker.
 
-### Cloudflare Pages Configuration
+### Cloudflare Workers Configuration
 
-- **Production branch**: `master`
 - **Build command**: `npm run build`
+- **Deploy command**: `npm run deploy`
+- **Wrangler config**: `wrangler.jsonc` (worker name `vocino-com`)
 - **Build output directory**: `dist`
-- **Framework preset**: Astro
-- **Stack note**: Astro 5 + `@astrojs/cloudflare` v12 (required for Pages SSR). Astro 6 needs Cloudflare Workers instead — see [Astro Cloudflare adapter docs](https://docs.astro.build/en/guides/integrations-guide/cloudflare/#removed-cloudflare-pages-support).
-- **Environment variables** (set in Cloudflare dashboard):
+- **Node**: `>=22`
+- **Environment variables** (Wrangler secrets or dashboard):
   - `TWITCH_CLIENT_ID`
   - `TWITCH_CLIENT_SECRET`
   - `TWITCH_USERNAME` (defaults to "vocino")
+  - Optional Instagram vars — see `.env.example`
 
 ## Project Structure
 
@@ -132,7 +133,7 @@ Edit `src/layouts/BaseLayout.astro` and `src/components/SEO.astro` to update:
 Edit `src/pages/index.astro` or create new pages in `src/pages/` to add content.
 
 ### API Routes
-Create new API endpoints in `src/pages/api/` - they'll have access to Cloudflare runtime via `locals.runtime`.
+Create new API endpoints in `src/pages/api/` with `export const prerender = false`. Use `getWorkerEnvVar()` from `src/lib/cloudflare-env.ts` for secrets.
 
 ## Environment Variables
 
@@ -143,7 +144,7 @@ TWITCH_CLIENT_SECRET=your_client_secret_here
 TWITCH_USERNAME=vocino
 ```
 
-Production uses Cloudflare Pages environment variables (set in dashboard).
+Local Worker dev uses `.dev.vars` (Twitch/Instagram keys from `.env.example`). Wrangler CLI auth uses `.env` for `CLOUDFLARE_API_TOKEN` / `CLOUDFLARE_ACCOUNT_ID` (both files are gitignored). Production uses `wrangler secret put` or dashboard variables.
 
 ## License
 

@@ -1,4 +1,7 @@
 import type { APIRoute } from 'astro';
+import { getWorkerEnvVar } from '../../lib/cloudflare-env';
+
+export const prerender = false;
 
 /**
  * Instagram Graph API — fetches your own media and filters by hashtag in the caption.
@@ -37,13 +40,6 @@ type StickerPost = {
   timestamp: string | null;
 };
 
-function getEnv(runtime: { env?: Record<string, string | undefined> } | undefined, key: string): string | undefined {
-  const isProduction = runtime && runtime.env;
-  if (isProduction && runtime?.env?.[key]) return String(runtime.env[key]);
-  const v = import.meta.env[key];
-  return typeof v === 'string' && v.length > 0 ? v : undefined;
-}
-
 function hasHashtag(caption: string | undefined, rawTag: string): boolean {
   if (!caption) return false;
   const tag = rawTag.replace(/^#/, '');
@@ -72,12 +68,9 @@ function formatLocation(loc: IgMedia['location']): string | null {
 }
 
 export const GET: APIRoute = async ({ request, locals }) => {
-  // @ts-ignore - Cloudflare runtime types
-  const runtime = locals.runtime;
-
-  const accessToken = getEnv(runtime, 'INSTAGRAM_ACCESS_TOKEN');
-  const userId = getEnv(runtime, 'INSTAGRAM_USER_ID');
-  const hashtag = (getEnv(runtime, 'INSTAGRAM_HASHTAG') || 'vocino').replace(/^#/, '');
+  const accessToken = getWorkerEnvVar('INSTAGRAM_ACCESS_TOKEN');
+  const userId = getWorkerEnvVar('INSTAGRAM_USER_ID');
+  const hashtag = (getWorkerEnvVar('INSTAGRAM_HASHTAG') || 'vocino').replace(/^#/, '');
 
   if (!accessToken || !userId) {
     return new Response(
@@ -95,13 +88,10 @@ export const GET: APIRoute = async ({ request, locals }) => {
     );
   }
 
-  const isProduction = runtime && runtime.env;
-  let cache: Cache | undefined;
   let cacheKey: Request | undefined;
-  if (isProduction && typeof caches !== 'undefined') {
-    cache = caches.default;
+  if (typeof caches !== 'undefined') {
     cacheKey = new Request(`https://vocino.com${CACHE_KEY_PATH}-${hashtag}`, request);
-    const hit = await cache.match(cacheKey);
+    const hit = await caches.default.match(cacheKey);
     if (hit) return hit;
   }
 
@@ -167,8 +157,9 @@ export const GET: APIRoute = async ({ request, locals }) => {
       },
     });
 
-    if (isProduction && runtime.waitUntil && cache && cacheKey) {
-      runtime.waitUntil(cache.put(cacheKey, response.clone()));
+    const ctx = locals.cfContext;
+    if (ctx?.waitUntil && cacheKey) {
+      ctx.waitUntil(caches.default.put(cacheKey, response.clone()));
     }
 
     return response;

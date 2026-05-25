@@ -2,25 +2,32 @@
   "name": "vocino.com",
   "type": "module",
   "version": "2.0.0",
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
+    "deploy": "astro build && wrangler deploy",
+    "cf:types": "wrangler types --include-runtime false",
     "astro": "astro",
     "bg3:icons": "node scripts/download-bg3-icons.mjs",
     "bg3:icons:verify": "node scripts/verify-bg3-icons.mjs",
     "bg3:icons:refresh": "node scripts/download-bg3-icons.mjs && node scripts/verify-bg3-icons.mjs && astro sync"
   },
   "dependencies": {
-    "@astrojs/cloudflare": "^12.6.13",
-    "astro": "^5.18.1",
     "unist-util-visit": "^5.1.0"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
+    "@astrojs/cloudflare": "^13.5.4",
+    "@cloudflare/workers-types": "^4.20260525.1",
     "@types/node": "^20.0.0",
+    "astro": "^6.3.7",
     "sass": "^1.80.0",
-    "typescript": "^5.0.0"
+    "typescript": "^5.0.0",
+    "wrangler": "^4.94.0"
   }
 }

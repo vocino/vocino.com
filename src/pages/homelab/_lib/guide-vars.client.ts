@@ -177,7 +177,7 @@ export function initHomelabGuide(): void {
   fillForm(form, vars);
   collectTemplates(document);
   applyVarsToDom(document, vars);
-  initCopyButtons(prose);
+  initCopyButtons(prose as ParentNode);
   initScrollSpy();
 
   let debounce: ReturnType<typeof setTimeout> | undefined;

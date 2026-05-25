@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a personal website for Travis Vocino built with **Astro** (not Jekyll - the README is outdated) and deployed on **Cloudflare Pages**. It uses server-side rendering (SSR) with the Cloudflare adapter. The landing page lives at `/` (external social links only); topic "hubs" — self-contained mini-sites like `/bg3` and `/homelab` — branch off it.
+This is a personal website for Travis Vocino built with **Astro** (not Jekyll - the README is outdated) and deployed on **Cloudflare Workers** via Wrangler. It uses hybrid rendering: static prerender for content pages, on-demand SSR for API routes. The landing page lives at `/` (external social links only); topic "hubs" — self-contained mini-sites like `/bg3` and `/homelab` — branch off it.
 
 ## Development Commands
 
@@ -17,8 +17,14 @@ npm start
 # Build for production (runs type checking first)
 npm run build
 
-# Preview production build locally
+# Preview production build locally (workerd runtime)
 npm run preview
+
+# Deploy to Cloudflare Workers
+npm run deploy
+
+# Regenerate Wrangler binding types after wrangler.jsonc changes
+npm run cf:types
 
 # Type checking only
 astro check
@@ -27,10 +33,11 @@ astro check
 ## Architecture
 
 ### Framework Configuration
-- **Output mode**: `server` (SSR enabled)
-- **Adapter**: `@astrojs/cloudflare` for Cloudflare Pages deployment
+- **Output mode**: `server` (hybrid: prerender static pages, SSR for APIs)
+- **Adapter**: `@astrojs/cloudflare` v13+ for Cloudflare Workers deployment
+- **Wrangler**: [`wrangler.jsonc`](./wrangler.jsonc) — `main` is `@astrojs/cloudflare/entrypoints/server`
 - **Site URL**: https://vocino.com
-- **Trailing slashes**: canonical URLs omit trailing slashes (e.g. `/bg3`, not `/bg3/`). `src/middleware.ts` 301-redirects `/bg3/` → `/bg3` (and likewise for other paths).
+- **Trailing slashes**: canonical URLs omit trailing slashes (e.g. `/bg3`, not `/bg3/`). `src/middleware.ts` 301-redirects dynamic routes; prerendered hubs also use `public/_redirects`.
 - **Redirects**: none currently (`/bg3` is now a real hub, not a redirect)
 
 ### Project Structure
@@ -77,25 +84,24 @@ public/
 ### Key Architectural Patterns
 
 #### API Routes
-- Use **Astro API routes** (in `src/pages/api/`) instead of Cloudflare Pages Functions
-- API routes have access to Cloudflare runtime via `locals.runtime`
-- Environment variables: `locals.runtime.env.VAR_NAME`
-- Cache API: Use `caches.default` for caching responses
-- Background tasks: Use `runtime.waitUntil()` for non-blocking operations
+- Use **Astro API routes** (in `src/pages/api/`) with `export const prerender = false`
+- Environment variables: `getWorkerEnvVar()` from [`src/lib/cloudflare-env.ts`](src/lib/cloudflare-env.ts) (`import { env } from 'cloudflare:workers'`)
+- Cache API: use global `caches.default`
+- Background tasks: `locals.cfContext.waitUntil()` (Astro 6; replaces `locals.runtime`)
 
 Example pattern from `twitch-status.ts`:
 ```typescript
+import { getWorkerEnvVar } from '../../lib/cloudflare-env';
+
+export const prerender = false;
+
 export const GET: APIRoute = async ({ request, locals }) => {
-  const runtime = locals.runtime;
-  const envVar = runtime.env.ENV_VAR_NAME;
+  const clientId = getWorkerEnvVar('TWITCH_CLIENT_ID');
+  const cached = await caches.default.match(cacheKey);
 
-  // Use Cloudflare Cache API
-  const cache = caches.default;
-  const cachedResponse = await cache.match(cacheKey);
-
-  // Background cache write
-  if (runtime.waitUntil) {
-    runtime.waitUntil(cache.put(cacheKey, response.clone()));
+  const ctx = locals.cfContext;
+  if (ctx?.waitUntil) {
+    ctx.waitUntil(caches.default.put(cacheKey, response.clone()));
   }
 }
 ```
@@ -172,26 +178,31 @@ The authoritative list of hubs and their fixed properties. Update this when addi
 
 ## Environment Variables
 
-Required for Twitch integration (Cloudflare Pages secrets):
+Required for Twitch integration (Wrangler secrets / dashboard vars):
 - `TWITCH_CLIENT_ID`
 - `TWITCH_CLIENT_SECRET`
 - `TWITCH_USERNAME` (defaults to "vocino" if not set)
 
 ## Deployment
 
-- **Platform**: Cloudflare Pages
-- **Production branch**: `master`
+- **Platform**: Cloudflare Workers (`wrangler deploy`)
+- **Worker name**: `vocino-com` (see `wrangler.jsonc`)
 - **Build command**: `npm run build` (includes type checking)
+- **Deploy command**: `npm run deploy` (`astro build && wrangler deploy`)
 - **Build output**: `dist/`
-- Auto-deploys on push to master
+- **Node**: `>=22` (see `package.json` `engines`)
+- **Local Worker vars**: `.dev.vars` (Twitch/Instagram keys; copy from `.env.example`) — **gitignored**
+- **Wrangler CLI auth**: `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` in `.env` (gitignored), not in `.dev.vars`
+- Set production secrets with `wrangler secret put TWITCH_CLIENT_ID` etc., or the Cloudflare dashboard
 
-**Important:** This project uses **Astro 5** with `@astrojs/cloudflare` v12 because Cloudflare Pages expects the `dist/_worker.js` build layout. Astro 6 removed Cloudflare Pages support; migrating to Astro 6 requires moving the deploy target to Cloudflare Workers (`wrangler deploy`).
+**CI/CD:** point your pipeline at `npm run deploy` instead of Pages Git integration. Attach `vocino.com` as a Workers custom domain/route in the Cloudflare dashboard after first deploy.
 
 ## Important Notes
 
 - The README.md still references Jekyll but the project has been migrated to Astro
-- Prefer Astro API routes over Cloudflare Pages Functions (best practice for Astro on Cloudflare)
-- Always access Cloudflare environment through `locals.runtime.env`, not `process.env`
+- Prefer Astro API routes over legacy Pages Functions
+- Access environment through `cloudflare:workers` (`getWorkerEnvVar`), not `process.env`
+- Run `npm run cf:types` after changing `wrangler.jsonc` bindings
 - TypeScript is configured with strict mode and React JSX support
 - **Hubs are independent mini-sites.** Before editing anything under `src/pages/<hub>/`, read the "Content Hubs" section above (including the Hub registry). Do not copy one hub's styles/patterns into another hub or the shared layer.
 

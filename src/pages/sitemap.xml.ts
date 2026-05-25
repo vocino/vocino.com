@@ -1,4 +1,6 @@
 import type { APIRoute } from 'astro';
+
+export const prerender = true;
 import { getHubIndexablePaths } from '../data/hubs';
 import { siteSeo } from '../data/seo';
 import { normalizeCanonicalPath, toAbsoluteUrl } from '../lib/seo';

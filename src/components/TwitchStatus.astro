@@ -19,7 +19,11 @@
   async function fetchTwitchStatus() {
     try {
       const response = await fetch('/api/twitch-status');
-      const data = await response.json();
+      const data = (await response.json()) as {
+        online?: boolean;
+        title?: string | null;
+        game?: string | null;
+      };
 
       const indicator = document.getElementById('twitch-indicator');
       const link = document.getElementById('twitch-status-link');

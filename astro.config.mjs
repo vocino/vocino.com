@@ -4,7 +4,9 @@ import { remarkBg3Icons } from './src/lib/remark-bg3-icons.ts';
 
 export default defineConfig({
   output: 'server',
-  adapter: cloudflare(),
+  adapter: cloudflare({
+    imageService: 'compile',
+  }),
   site: 'https://vocino.com',
   trailingSlash: 'ignore',
   markdown: {
