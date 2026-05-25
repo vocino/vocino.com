@@ -4,6 +4,7 @@ import '../_styles/guide-layout.scss';
 import '../_styles/guide-toc.scss';
 import '../_styles/guide-prose.scss';
 import GuideHero from './GuideHero.astro';
+import GuideDisclaimer from './GuideDisclaimer.astro';
 import GuideVarsPanel from './GuideVarsPanel.astro';
 import ServiceNav from './ServiceNav.astro';
 import StackDiagram from './StackDiagram.astro';
@@ -46,6 +47,7 @@ const { title, description, updated, readingMinutes, headings } = Astro.props;
         updated={updated}
         readingMinutes={readingMinutes}
       />
+      <GuideDisclaimer />
       <GuideVarsPanel />
       <ServiceNav />
       <StackDiagram />

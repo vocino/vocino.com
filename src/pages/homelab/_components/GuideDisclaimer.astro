@@ -1,0 +1,94 @@
+---
+/**
+ * Educational / copyright notice for guides covering acquisition tooling.
+ * Wording informed by common university copyright tutorials (e.g. IU file-sharing
+ * guidance: assume no permission without proof) and informational disclaimers
+ * on self-hosting write-ups — not legal advice.
+ */
+---
+
+<aside class="guide-disclaimer" role="note" aria-labelledby="guide-disclaimer-title">
+  <p id="guide-disclaimer-title" class="guide-disclaimer__label label-mono">Legal notice</p>
+  <div class="guide-disclaimer__body">
+    <p>
+      This guide is for <strong>educational and informational purposes only</strong>. It describes
+      personal homelab infrastructure and software configuration; it is <strong>not legal advice</strong>.
+    </p>
+    <ul>
+      <li>
+        Downloading, sharing, or streaming copyrighted works
+        <strong>without permission from the rights holder</strong> may violate copyright law in your
+        jurisdiction and can carry serious penalties.
+      </li>
+      <li>
+        Unless you have clear proof otherwise (you own the media, explicit permission, or a license that
+        allows it), <strong>assume you do not have permission</strong> to copy or distribute a work.
+      </li>
+      <li>
+        Only acquire and store content you have the legal right to use—media you created or purchased,
+        public domain works, or material explicitly offered under a license that permits your use.
+      </li>
+      <li>
+        <strong>You are solely responsible</strong> for how you configure and use these tools and for
+        complying with applicable laws, licenses, and terms of service.
+      </li>
+    </ul>
+    <p class="guide-disclaimer__footer">
+      This site does not host or provide access to third-party media. Nothing here is intended to
+      facilitate or encourage copyright infringement.
+    </p>
+  </div>
+</aside>
+
+<style lang="scss">
+  .guide-disclaimer {
+    margin: 0;
+    padding: clamp(1rem, 3vw, 1.25rem) clamp(1rem, 3vw, 1.5rem);
+    background: color-mix(in srgb, var(--section-accent, #ffb86b) 8%, var(--surface-1));
+    border: 1px solid color-mix(in srgb, var(--section-accent, #ffb86b) 35%, var(--border));
+    border-radius: 6px;
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+
+    &__label {
+      margin: 0 0 0.75rem;
+      color: var(--section-accent, #ffb86b);
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+
+      &::before {
+        content: "! ";
+        opacity: 0.85;
+      }
+    }
+
+    &__body {
+      p {
+        margin: 0 0 0.75rem;
+      }
+
+      ul {
+        margin: 0 0 0.75rem;
+        padding-left: 1.25rem;
+        list-style: disc;
+
+        li + li {
+          margin-top: 0.5rem;
+        }
+      }
+
+      strong {
+        color: var(--text-primary);
+        font-weight: 600;
+      }
+    }
+
+    &__footer {
+      margin: 0;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+  }
+</style>

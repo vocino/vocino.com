@@ -6,6 +6,8 @@ updated: 2026-05-24
 
 This is how I run a self-hosted media setup on one Linux box with Docker Compose: automated grabs, streaming, requests, subtitles, basic analytics, and a public URL without punching holes in the router.
 
+**Use only media you have the legal right to access.** The legal notice at the top of this page applies; this guide is documentation, not permission to infringe copyright.
+
 I'm assuming you already know Linux and Docker. I won't re-teach containers or compose syntax. I will go deep on the parts that actually burned me: keeping downloads and the library on one filesystem (hardlinks), qBittorrent's WebUI whitelist, Jellyfin trickplay OOMs, whether you want a recycle bin, and handing quality profiles to Recyclarr once it's in charge.
 
 
