@@ -6,8 +6,7 @@
   "compatibility_flags": ["nodejs_compat"],
   "assets": {
     "directory": "./dist/client",
-    "binding": "ASSETS",
-    "html_handling": "drop-trailing-slash"
+    "binding": "ASSETS"
   },
   "observability": {
     "enabled": true,

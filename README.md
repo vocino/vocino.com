@@ -63,6 +63,8 @@ npm run preview
 
 Production deploys via **Cloudflare Workers Builds** when you push to `master` on GitHub (`vocino/vocino.com`). Content pages are prerendered at build time; API routes run on-demand in the Worker.
 
+**URLs:** Canonical paths have no trailing slash (`/bg3`, `/homelab`). Cloudflare’s default `auto-trailing-slash` serves flat `*.html` assets at slashless paths; Astro `trailingSlash: 'never'` keeps build output and SEO tags in sync.
+
 ### Cloudflare Workers Builds (dashboard)
 
 | Setting | Value |
