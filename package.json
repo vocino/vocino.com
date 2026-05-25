@@ -13,7 +13,7 @@
     "bg3:icons:refresh": "node scripts/download-bg3-icons.mjs && node scripts/verify-bg3-icons.mjs && astro sync"
   },
   "dependencies": {
-    "@astrojs/cloudflare": "^12.6.13",
+    "@astrojs/cloudflare": "^13.1.10",
     "astro": "^5.18.1",
     "unist-util-visit": "^5.1.0"
   },
