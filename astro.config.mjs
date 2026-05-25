@@ -8,7 +8,10 @@ export default defineConfig({
     imageService: 'compile',
   }),
   site: 'https://vocino.com',
-  trailingSlash: 'ignore',
+  trailingSlash: 'never',
+  build: {
+    format: 'file',
+  },
   markdown: {
     remarkPlugins: [remarkBg3Icons],
     syntaxHighlight: 'shiki',
