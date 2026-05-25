@@ -1,0 +1,75 @@
+---
+import GuideToc from './GuideToc.astro';
+import { getTocHeadings } from '../_lib/guide-toc';
+import type { MarkdownHeading } from 'astro';
+
+interface Props {
+  headings: MarkdownHeading[];
+}
+
+const { headings } = Astro.props;
+const sectionCount = getTocHeadings(headings).length;
+---
+
+{
+  sectionCount > 0 && (
+    <details class="guide-toc-drawer">
+      <summary class="guide-toc-drawer__summary">
+        <span class="guide-toc-drawer__title">Jump to section</span>
+        <span class="guide-toc-drawer__count">{sectionCount} steps</span>
+      </summary>
+      <div class="guide-toc-drawer__panel">
+        <GuideToc headings={headings} />
+      </div>
+    </details>
+  )
+}
+
+<style lang="scss">
+  .guide-toc-drawer {
+    display: block;
+    margin: 0;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--surface-1);
+
+    @media (min-width: 1024px) {
+      display: none;
+    }
+
+    &__summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      padding: 0.875rem 1rem;
+      cursor: pointer;
+      list-style: none;
+      min-height: 2.75rem;
+
+      &::-webkit-details-marker {
+        display: none;
+      }
+    }
+
+    &__title {
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.8125rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--section-accent, #46e08b);
+    }
+
+    &__count {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    &__panel {
+      border-top: 1px solid var(--border);
+      padding: 0.5rem 0.75rem 1rem;
+      max-height: min(45vh, 18rem);
+      overflow-y: auto;
+    }
+  }
+</style>

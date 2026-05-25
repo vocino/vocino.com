@@ -7,11 +7,15 @@
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "bg3:icons": "node scripts/download-bg3-icons.mjs",
+    "bg3:icons:verify": "node scripts/verify-bg3-icons.mjs",
+    "bg3:icons:refresh": "node scripts/download-bg3-icons.mjs && node scripts/verify-bg3-icons.mjs && astro sync"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^12.6.13",
-    "astro": "^5.18.1"
+    "astro": "^5.18.1",
+    "unist-util-visit": "^5.1.0"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",

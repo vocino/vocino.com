@@ -1,0 +1,101 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  updated?: Date;
+  readingMinutes?: number;
+}
+
+const { title, description, updated, readingMinutes } = Astro.props;
+
+const updatedLabel = updated
+  ? updated.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
+  : undefined;
+---
+
+<header class="guide-hero hud-corners">
+  <p class="guide-hero__label label-mono">bg3</p>
+  <h1 class="guide-hero__title">{title}</h1>
+  <p class="guide-hero__desc">{description}</p>
+  <ul class="guide-hero__meta" aria-label="Guide metadata">
+    {
+      readingMinutes && (
+        <li class="guide-hero__meta-item">
+          <span class="guide-hero__meta-key">read</span>
+          {readingMinutes} min
+        </li>
+      )
+    }
+    {
+      updatedLabel && (
+        <li class="guide-hero__meta-item">
+          <span class="guide-hero__meta-key">updated</span>
+          {updatedLabel}
+        </li>
+      )
+    }
+    <li class="guide-hero__meta-item">
+      <span class="guide-hero__meta-key">mode</span>
+      Honour
+    </li>
+  </ul>
+</header>
+
+<style lang="scss">
+  .guide-hero {
+    margin: 0;
+    padding: clamp(1.25rem, 4vw, 2rem) clamp(1rem, 3vw, 1.75rem);
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+
+    &__label {
+      margin: 0 0 0.75rem;
+      color: var(--section-accent, #46e08b);
+      font-size: 0.8125rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+
+      &::before {
+        content: '// ';
+        opacity: 0.6;
+      }
+    }
+
+    &__title {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: clamp(1.625rem, 4vw, 2.25rem);
+      font-weight: 500;
+      line-height: 1.2;
+      margin: 0;
+      color: var(--text-primary);
+    }
+
+    &__desc {
+      font-size: 1.0625rem;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      margin: 0.875rem 0 0;
+      max-width: 42rem;
+    }
+
+    &__meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 1.25rem;
+      list-style: none;
+      margin: 1rem 0 0;
+      padding: 0;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+    }
+
+    &__meta-key {
+      color: var(--section-accent, #46e08b);
+      margin-right: 0.35rem;
+    }
+  }
+</style>

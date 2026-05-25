@@ -1,0 +1,152 @@
+@use 'guide-tokens';
+
+.bg3-step {
+  max-width: 100%;
+  margin: var(--guide-space-lg) 0;
+  padding: 1rem 1.125rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface-1);
+
+  &__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: 0.875rem;
+  }
+
+  &__badge {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--section-accent, #46e08b);
+  }
+
+  &__title {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0.25rem 0 0;
+    color: var(--text-primary);
+  }
+
+  &__now {
+    margin: 0 0 1rem;
+    padding: 0.875rem 1rem;
+    border-radius: 6px;
+    background: color-mix(in srgb, var(--section-accent, #46e08b) 10%, var(--surface-2));
+    border: 1px solid color-mix(in srgb, var(--section-accent, #46e08b) 35%, var(--border));
+
+    strong {
+      display: block;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.6875rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--section-accent, #46e08b);
+      margin-bottom: 0.35rem;
+    }
+
+    p {
+      margin: 0;
+      font-size: 1.0625rem;
+      line-height: 1.55;
+      max-width: none;
+    }
+  }
+
+  &__warn {
+    margin-top: 0.75rem;
+    padding: 0.65rem 0.85rem;
+    font-size: 0.9375rem;
+    border-radius: 4px;
+    background: color-mix(in srgb, #e85d5d 12%, var(--surface-2));
+    border: 1px solid color-mix(in srgb, #e85d5d 40%, var(--border));
+    color: var(--text-primary);
+    max-width: none;
+  }
+
+  &__optional {
+    margin-top: 0.75rem;
+    padding: 0.65rem 0.85rem;
+    font-size: 0.9375rem;
+    border-radius: 4px;
+    border: 1px dashed var(--border);
+    color: var(--text-secondary);
+    max-width: none;
+  }
+
+  &__pager {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    padding-top: 0.875rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.875rem;
+  }
+
+  &__pager a {
+    text-decoration: none;
+    padding: 0.4rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text-secondary);
+
+    &:hover {
+      border-color: var(--section-accent, #46e08b);
+      color: var(--section-accent, #46e08b);
+    }
+  }
+}
+
+.bg3-checkpoint {
+  flex-shrink: 0;
+  font-family: 'Source Code Pro', monospace;
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.45rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--surface-2);
+  color: var(--text-muted);
+  cursor: pointer;
+  min-height: 2.75rem;
+  min-width: 5.5rem;
+
+  &.is-done {
+    border-color: var(--section-accent, #46e08b);
+    color: var(--section-accent, #46e08b);
+  }
+}
+
+.bg3-act-jump {
+  font-family: 'Source Code Pro', monospace;
+  font-size: 0.8125rem;
+  padding: 0.5rem 0.75rem;
+  min-height: 2.75rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--surface-1);
+  color: var(--text-primary);
+  flex: 1;
+  min-width: 10rem;
+  max-width: 100%;
+}
+
+.bg3-guide-attribution {
+  margin-top: var(--guide-space-2xl);
+  padding-top: var(--guide-space-lg);
+  border-top: 1px solid var(--border);
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  max-width: var(--guide-measure);
+
+  a {
+    color: var(--section-accent, #46e08b);
+  }
+}

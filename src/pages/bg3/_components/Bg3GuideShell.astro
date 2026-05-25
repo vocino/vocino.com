@@ -1,0 +1,54 @@
+---
+import '../_styles/guide-tokens.scss';
+import '../_styles/guide-layout.scss';
+import '../_styles/guide-toc.scss';
+import '../_styles/guide-prose.scss';
+import GuideHero from './GuideHero.astro';
+import GuideToc from './GuideToc.astro';
+import GuideTocDrawer from './GuideTocDrawer.astro';
+import GuideProgressNav from './GuideProgressNav.astro';
+import GuideAttribution from './GuideAttribution.astro';
+import type { MarkdownHeading } from 'astro';
+
+interface Props {
+  title: string;
+  description: string;
+  updated?: Date;
+  readingMinutes?: number;
+  headings: MarkdownHeading[];
+}
+
+const { title, description, updated, readingMinutes, headings } = Astro.props;
+---
+
+<div class="bg3-guide">
+  <aside class="bg3-guide__sidebar" aria-hidden="true"></aside>
+
+  <nav class="bg3-guide__toc-fixed" aria-label="Table of contents">
+    <GuideToc headings={headings} />
+  </nav>
+
+  <main class="bg3-guide__main">
+    <GuideProgressNav />
+    <GuideTocDrawer headings={headings} />
+
+    <div class="bg3-guide__chrome">
+      <GuideHero
+        title={title}
+        description={description}
+        updated={updated}
+        readingMinutes={readingMinutes}
+      />
+    </div>
+
+    <article class="guide-prose">
+      <slot />
+    </article>
+
+    <GuideAttribution />
+  </main>
+</div>
+
+<script>
+  import '../_lib/guide-progress.client.ts';
+</script>

@@ -160,7 +160,7 @@ The authoritative list of hubs and their fixed properties. Update this when addi
 
 | Hub | Slug | Accent | Status | Notes |
 | --- | --- | --- | --- | --- |
-| Baldur's Gate 3 | `/bg3` | `#46E08B` (green) | Placeholder (`ComingSoon`, `noindex`) | Builds, run notes, honour-mode guides. Pages nest as `/bg3/<guide-slug>`. |
+| Baldur's Gate 3 | `/bg3` | `#46E08B` (green) | Live (`indexable`) | Honour Mode progression guide at `/bg3`. Pages nest as `/bg3/<guide-slug>`. |
 | Home Lab | `/homelab` | `#FFB86B` (amber) | Live (`indexable`) | Self-hosted media stack guide (Docker Compose, *arr, Jellyfin). Interactive stack diagram + personalized copy-paste vars. Pages nest as `/homelab/<page-slug>`. |
 
 ### Adding a new hub

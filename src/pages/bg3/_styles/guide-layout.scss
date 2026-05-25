@@ -1,0 +1,51 @@
+@use 'guide-tokens';
+
+.bg3-guide {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: var(--guide-scroll-offset) clamp(1rem, 4vw, 2.5rem) var(--guide-space-2xl);
+
+  @media (min-width: 1024px) {
+    grid-template-columns: 11.25rem minmax(0, 1fr);
+    gap: clamp(1.75rem, 3vw, 2.5rem);
+    align-items: start;
+  }
+
+  &__sidebar {
+    display: none;
+
+    @media (min-width: 1024px) {
+      display: block;
+      visibility: hidden;
+      pointer-events: none;
+      min-height: 1px;
+    }
+  }
+
+  &__main {
+    min-width: 0;
+  }
+
+  &__chrome {
+    display: flex;
+    flex-direction: column;
+    gap: var(--guide-chrome-gap);
+    margin-bottom: var(--guide-space-xl);
+  }
+
+  &__sticky {
+    position: sticky;
+    top: 0.75rem;
+    z-index: 45;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+    padding: 0.5rem 0;
+    margin: 0 0 0.75rem;
+    background: color-mix(in srgb, var(--bg) 92%, transparent);
+    backdrop-filter: blur(8px);
+  }
+}

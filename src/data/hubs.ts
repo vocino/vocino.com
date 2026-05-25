@@ -15,7 +15,7 @@ export const hubRegistry: HubRegistryEntry[] = [
     name: "Baldur's Gate 3",
     description: "Baldur's Gate 3 builds, guides, and honour-mode notes by Travis Vocino.",
     accent: '#46E08B',
-    indexable: false,
+    indexable: true,
   },
   {
     slug: 'homelab',

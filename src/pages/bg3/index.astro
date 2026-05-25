@@ -1,0 +1,43 @@
+---
+import HubLayout from '../../layouts/HubLayout.astro';
+import Bg3GuideShell from './_components/Bg3GuideShell.astro';
+import { getHubBreadcrumb, getHubBySlug } from '../../data/hubs';
+import { getEntry, render } from 'astro:content';
+
+const hub = getHubBySlug('bg3');
+const entry = await getEntry('bg3', 'honour-mode');
+
+if (!entry) {
+  throw new Error('BG3 guide entry "honour-mode" not found');
+}
+
+const { Content, headings } = await render(entry);
+const { title, description, updated } = entry.data;
+
+const wordCount = entry.body?.split(/\s+/).filter(Boolean).length ?? 12000;
+const readingMinutes = Math.max(1, Math.round(wordCount / 220));
+
+const modifiedTime = updated?.toISOString();
+---
+
+<HubLayout
+  title={title}
+  hubName={hub.name}
+  description={description}
+  canonicalPath={`/${hub.slug}`}
+  breadcrumb={getHubBreadcrumb(hub)}
+  imagePath={hub.imagePath}
+  accent={hub.accent}
+  noindex={!hub.indexable}
+  modifiedTime={modifiedTime}
+>
+  <Bg3GuideShell
+    title={title}
+    description={description}
+    updated={updated}
+    readingMinutes={readingMinutes}
+    headings={headings}
+  >
+    <Content />
+  </Bg3GuideShell>
+</HubLayout>

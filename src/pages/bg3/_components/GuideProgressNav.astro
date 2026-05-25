@@ -1,0 +1,38 @@
+---
+const acts = [
+  { slug: 'how-to-use-this-guide', label: 'Start' },
+  { slug: 'character-creation', label: 'Create character' },
+  { slug: 'nautiloid-to-grove', label: 'Act 1 start' },
+  { slug: 'early-act-1-route', label: 'Early Act 1' },
+  { slug: 'act-1-level-5-route', label: 'Level 5 push' },
+  { slug: 'leaving-act-1', label: 'Leave Act 1' },
+  { slug: 'act-2-progression', label: 'Act 2' },
+  { slug: 'ketheric-and-myrkul', label: 'Ketheric' },
+  { slug: 'act-3-progression', label: 'Act 3' },
+  { slug: 'endgame-nether-brain', label: 'Finale' },
+  { slug: 'unique-and-missable-index', label: 'Missables' },
+];
+---
+
+<div class="bg3-guide__sticky" role="navigation" aria-label="Quick jump">
+  <label class="visually-hidden" for="bg3-act-jump">Jump to act or step</label>
+  <select id="bg3-act-jump" class="bg3-act-jump">
+    <option value="">Jump to step…</option>
+    {acts.map((act) => (
+      <option value={act.slug}>{act.label}</option>
+    ))}
+  </select>
+</div>
+
+<style lang="scss">
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
+</style>
