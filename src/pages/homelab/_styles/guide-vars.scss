@@ -1,0 +1,171 @@
+.guide-vars {
+  margin: 0;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface-1);
+
+  &__summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    cursor: pointer;
+    list-style: none;
+    font-family: "Source Code Pro", monospace;
+    font-size: 0.8125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--section-accent, #ffb86b);
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    &::before {
+      content: "// ";
+      opacity: 0.55;
+    }
+
+    &::after {
+      content: "+";
+      font-size: 1rem;
+      color: var(--text-muted);
+    }
+  }
+
+  &[open] &__summary::after {
+    content: "−";
+  }
+
+  &__hint {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: none;
+    letter-spacing: 0;
+    font-family: "Source Sans 3", sans-serif;
+  }
+
+  &__body {
+    padding: 0 1.25rem 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  &__intro {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin: 1.25rem 0 1.5rem;
+    max-width: 42rem;
+  }
+
+  &__groups {
+    display: grid;
+    gap: 1.25rem 1.5rem;
+
+    @media (min-width: 640px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (min-width: 1024px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  &__group-title {
+    font-family: "Source Code Pro", monospace;
+    font-size: 0.6875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--text-muted);
+    margin: 0 0 0.75rem;
+    grid-column: 1 / -1;
+
+    @media (min-width: 640px) {
+      grid-column: auto;
+    }
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  &__label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--text-primary);
+  }
+
+  &__input {
+    font-family: "Source Code Pro", monospace;
+    font-size: 0.875rem;
+    line-height: 1.4;
+    padding: 0.625rem 0.75rem;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    color: var(--text-primary);
+
+    &:focus {
+      outline: none;
+      border-color: var(--section-accent, #ffb86b);
+      box-shadow: 0 0 0 2px color-mix(in srgb, var(--section-accent, #ffb86b) 25%, transparent);
+    }
+  }
+
+  &__field-hint {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border);
+  }
+
+  &__btn {
+    font-family: "Source Code Pro", monospace;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.5rem 1rem;
+    border-radius: 3px;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    color: var(--text-secondary);
+
+    &:hover {
+      border-color: var(--section-accent, #ffb86b);
+      color: var(--section-accent, #ffb86b);
+    }
+
+    &--secondary {
+      background: transparent;
+    }
+  }
+
+  &__secret-hint {
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+    margin: 0.75rem 0 0;
+    font-family: "Source Code Pro", monospace;
+    word-break: break-all;
+  }
+}
+
+.guide-noscript {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin: 0 0 1rem;
+  padding: 0.75rem 1rem;
+  background: var(--surface-2);
+  border-radius: 4px;
+}

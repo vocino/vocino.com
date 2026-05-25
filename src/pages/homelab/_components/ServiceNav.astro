@@ -1,0 +1,73 @@
+---
+const services = [
+  { name: 'Prowlarr', slug: 'prowlarr-and-flaresolverr' },
+  { name: 'qBittorrent', slug: 'download-clients-qbittorrent-and-sabnzbd' },
+  { name: 'SABnzbd', slug: 'download-clients-qbittorrent-and-sabnzbd' },
+  { name: 'Sonarr', slug: 'the-arr-stack-sonarr-and-radarr' },
+  { name: 'Radarr', slug: 'the-arr-stack-sonarr-and-radarr' },
+  { name: 'Recyclarr', slug: 'quality-profiles-as-code-recyclarr' },
+  { name: 'Bazarr', slug: 'subtitles-bazarr' },
+  { name: 'Unpackerr', slug: 'post-download-extraction-unpackerr' },
+  { name: 'Jellyseerr', slug: 'requests-jellyseerr' },
+  { name: 'Jellyfin', slug: 'media-server-jellyfin' },
+  { name: 'Jellystat', slug: 'shared-postgres-and-analytics-jellystat' },
+  { name: 'cloudflared', slug: 'public-access-cloudflare-tunnel' },
+  { name: 'Glance', slug: 'lan-dashboard-glance' },
+  { name: 'Portainer', slug: 'container-management-portainer-and-wud' },
+];
+---
+
+<nav class="service-nav" aria-label="Stack services">
+  <p class="service-nav__label label-mono">Services</p>
+  <ul class="service-nav__list">
+    {
+      services.map((svc) => (
+        <li>
+          <a class="service-nav__link" href={`#${svc.slug}`}>
+            {svc.name}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<style lang="scss">
+  .service-nav {
+    margin: 0;
+
+    &__label {
+      margin: 0 0 0.875rem;
+      font-size: 0.6875rem;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+    }
+
+    &__list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.625rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    &__link {
+      display: inline-block;
+      font-family: "Source Code Pro", monospace;
+      font-size: 0.8125rem;
+      line-height: 1.3;
+      padding: 0.5rem 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: border-color 0.15s, color 0.15s;
+
+      &:hover {
+        border-color: var(--section-accent, #ffb86b);
+        color: var(--section-accent, #ffb86b);
+      }
+    }
+  }
+</style>

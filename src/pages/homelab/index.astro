@@ -1,0 +1,43 @@
+---
+import HubLayout from '../../layouts/HubLayout.astro';
+import HomelabGuideShell from './_components/HomelabGuideShell.astro';
+import { getHubBreadcrumb, getHubBySlug } from '../../data/hubs';
+import { getEntry, render } from 'astro:content';
+
+const hub = getHubBySlug('homelab');
+const entry = await getEntry('homelab', 'media-stack');
+
+if (!entry) {
+  throw new Error('Homelab guide entry "media-stack" not found');
+}
+
+const { Content, headings } = await render(entry);
+const { title, description, updated } = entry.data;
+
+const wordCount = entry.body?.split(/\s+/).filter(Boolean).length ?? 8000;
+const readingMinutes = Math.max(1, Math.round(wordCount / 220));
+
+const modifiedTime = updated?.toISOString();
+---
+
+<HubLayout
+  title={title}
+  hubName={hub.name}
+  description={description}
+  canonicalPath={`/${hub.slug}`}
+  breadcrumb={getHubBreadcrumb(hub)}
+  imagePath={hub.imagePath}
+  accent={hub.accent}
+  noindex={!hub.indexable}
+  modifiedTime={modifiedTime}
+>
+  <HomelabGuideShell
+    title={title}
+    description={description}
+    updated={updated}
+    readingMinutes={readingMinutes}
+    headings={headings}
+  >
+    <Content />
+  </HomelabGuideShell>
+</HubLayout>

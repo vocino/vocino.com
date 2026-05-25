@@ -1,0 +1,213 @@
+---
+/** Interactive stack topology — labels use guide placeholders; guide-vars.client.ts substitutes them. */
+---
+
+<figure class="stack-diagram hud-corners hud-corners--glow" aria-labelledby="stack-diagram-title">
+  <figcaption id="stack-diagram-title" class="stack-diagram__caption">
+    Architecture
+  </figcaption>
+  <svg
+    class="stack-diagram__svg"
+    viewBox="0 0 720 420"
+    role="img"
+    aria-label="Media stack architecture diagram"
+  >
+    <defs>
+      <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+        <path d="M0,0 L8,4 L0,8 Z" fill="var(--section-accent, #ffb86b)" opacity="0.7"></path>
+      </marker>
+    </defs>
+
+    <!-- Internet -->
+    <rect x="280" y="8" width="160" height="36" rx="3" class="stack-diagram__box"></rect>
+    <text x="360" y="31" text-anchor="middle" class="stack-diagram__label">Internet</text>
+
+    <!-- Cloudflare -->
+    <a href="#public-access-cloudflare-tunnel" class="stack-diagram__link">
+      <rect x="220" y="64" width="280" height="52" rx="3" class="stack-diagram__box stack-diagram__box--accent"></rect>
+      <text x="360" y="86" text-anchor="middle" class="stack-diagram__label">Cloudflare Tunnel</text>
+      <text x="360" y="104" text-anchor="middle" class="stack-diagram__label stack-diagram__label--sm">
+        watch.example.com
+      </text>
+    </a>
+
+    <!-- MEDIA_HOST container -->
+    <rect x="40" y="140" width="640" height="200" rx="4" class="stack-diagram__host"></rect>
+    <text x="56" y="162" class="stack-diagram__label stack-diagram__host-title">MEDIA_HOST</text>
+
+    <!-- Edge services row -->
+    <a href="#public-access-cloudflare-tunnel" class="stack-diagram__link">
+      <rect x="56" y="176" width="72" height="32" rx="2" class="stack-diagram__box"></rect>
+      <text x="92" y="196" text-anchor="middle" class="stack-diagram__label stack-diagram__label--sm">cloudflared</text>
+    </a>
+    <a href="#media-server-jellyfin" class="stack-diagram__link">
+      <rect x="140" y="176" width="72" height="32" rx="2" class="stack-diagram__box"></rect>
+      <text x="176" y="196" text-anchor="middle" class="stack-diagram__label stack-diagram__label--sm">jellyfin</text>
+    </a>
+    <a href="#requests-jellyseerr" class="stack-diagram__link">
+      <rect x="224" y="176" width="80" height="32" rx="2" class="stack-diagram__box"></rect>
+      <text x="264" y="196" text-anchor="middle" class="stack-diagram__label stack-diagram__label--sm">jellyseerr</text>
+    </a>
+    <a href="#lan-dashboard-glance" class="stack-diagram__link">
+      <rect x="316" y="176" width="64" height="32" rx="2" class="stack-diagram__box"></rect>
+      <text x="348" y="196" text-anchor="middle" class="stack-diagram__label stack-diagram__label--sm">glance</text>
+    </a>
+    <a href="#container-management-portainer-and-wud" class="stack-diagram__link">
+      <rect x="392" y="176" width="80" height="32" rx="2" class="stack-diagram__box"></rect>
+      <text x="432" y="196" text-anchor="middle" class="stack-diagram__label stack-diagram__label--sm">portainer</text>
+    </a>
+
+    <!-- arr-net bridge -->
+    <rect x="56" y="220" width="608" height="36" rx="2" class="stack-diagram__bridge"></rect>
+    <text x="360" y="242" text-anchor="middle" class="stack-diagram__label">arr-net</text>
+
+    <!-- *arr row -->
+    <a href="#the-arr-stack-sonarr-and-radarr" class="stack-diagram__link">
+      <rect x="72" y="268" width="56" height="28" rx="2" class="stack-diagram__box"></rect>
+      <text x="100" y="286" text-anchor="middle" class="stack-diagram__label stack-diagram__label--sm">sonarr</text>
+    </a>
+    <a href="#the-arr-stack-sonarr-and-radarr" class="stack-diagram__link">
+      <rect x="136" y="268" width="56" height="28" rx="2" class="stack-diagram__box"></rect>
+      <text x="164" y="286" text-anchor="middle" class="stack-diagram__label stack-diagram__label--sm">radarr</text>
+    </a>
+    <a href="#prowlarr-and-flaresolverr" class="stack-diagram__link">
+      <rect x="200" y="268" width="64" height="28" rx="2" class="stack-diagram__box"></rect>
+      <text x="232" y="286" text-anchor="middle" class="stack-diagram__label stack-diagram__label--sm">prowlarr</text>
+    </a>
+    <a href="#subtitles-bazarr" class="stack-diagram__link">
+      <rect x="272" y="268" width="56" height="28" rx="2" class="stack-diagram__box"></rect>
+      <text x="300" y="286" text-anchor="middle" class="stack-diagram__label stack-diagram__label--sm">bazarr</text>
+    </a>
+    <a href="#download-clients-qbittorrent-and-sabnzbd" class="stack-diagram__link">
+      <rect x="336" y="268" width="48" height="28" rx="2" class="stack-diagram__box"></rect>
+      <text x="360" y="286" text-anchor="middle" class="stack-diagram__label stack-diagram__label--sm">qbit</text>
+    </a>
+    <a href="#download-clients-qbittorrent-and-sabnzbd" class="stack-diagram__link">
+      <rect x="392" y="268" width="64" height="28" rx="2" class="stack-diagram__box"></rect>
+      <text x="424" y="286" text-anchor="middle" class="stack-diagram__label stack-diagram__label--sm">sabnzbd</text>
+    </a>
+
+    <!-- NFS strip -->
+    <rect x="56" y="308" width="608" height="24" rx="2" class="stack-diagram__nfs"></rect>
+    <text x="360" y="324" text-anchor="middle" class="stack-diagram__label stack-diagram__label--sm">
+      /mnt/nas/Media · /mnt/nas/Backup
+    </text>
+
+    <!-- Arrows -->
+    <line x1="360" y1="44" x2="360" y2="64" class="stack-diagram__line" marker-end="url(#arrow)"></line>
+    <line x1="360" y1="116" x2="360" y2="140" class="stack-diagram__line" marker-end="url(#arrow)"></line>
+    <line x1="360" y1="340" x2="360" y2="368" class="stack-diagram__line" marker-end="url(#arrow)"></line>
+
+    <!-- NAS -->
+    <a href="#storage-nfs-and-the-hardlink-invariant" class="stack-diagram__link">
+      <rect x="280" y="368" width="160" height="40" rx="3" class="stack-diagram__box stack-diagram__box--accent"></rect>
+      <text x="360" y="394" text-anchor="middle" class="stack-diagram__label">NAS_HOST</text>
+    </a>
+  </svg>
+</figure>
+
+<style lang="scss">
+  .stack-diagram {
+    --diagram-text: #e6edf3;
+    --diagram-text-muted: #b8c5d0;
+    --diagram-accent: var(--section-accent, #ffb86b);
+
+    margin: 0;
+    padding: 1.25rem 1.5rem 1.5rem;
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--diagram-text);
+
+    &__caption {
+      margin: 0 0 1rem;
+      font-family: "Source Code Pro", monospace;
+      font-size: 0.6875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--diagram-text-muted);
+    }
+
+    &__svg {
+      width: 100%;
+      height: auto;
+      display: block;
+      color: var(--diagram-text);
+    }
+
+    &__box {
+      fill: var(--surface-2);
+      stroke: var(--border);
+      stroke-width: 1;
+    }
+
+    &__box--accent {
+      stroke: color-mix(in srgb, var(--section-accent, #ffb86b) 55%, var(--border));
+    }
+
+    &__host {
+      fill: none;
+      stroke: color-mix(in srgb, var(--section-accent, #ffb86b) 35%, var(--border));
+      stroke-width: 1.5;
+      stroke-dasharray: 4 3;
+    }
+
+    &__host-title {
+      font-family: "Source Code Pro", monospace;
+      font-size: 11px;
+      font-weight: 600;
+      fill: var(--diagram-accent);
+    }
+
+    &__bridge {
+      fill: color-mix(in srgb, var(--section-accent, #ffb86b) 8%, var(--surface-2));
+      stroke: var(--border);
+    }
+
+    &__nfs {
+      fill: var(--bg);
+      stroke: var(--border);
+    }
+
+    &__label {
+      font-family: "Source Code Pro", monospace;
+      font-size: 11px;
+      font-weight: 500;
+      fill: var(--diagram-text);
+      pointer-events: none;
+
+      &--sm {
+        font-size: 10px;
+        fill: var(--diagram-text-muted);
+      }
+    }
+
+    &__link:hover .stack-diagram__label,
+    &__link:focus-visible .stack-diagram__label {
+      fill: var(--diagram-accent);
+    }
+
+    &__link:hover .stack-diagram__label--sm,
+    &__link:focus-visible .stack-diagram__label--sm {
+      fill: var(--diagram-accent);
+    }
+
+    &__line {
+      stroke: color-mix(in srgb, var(--diagram-accent) 65%, var(--border));
+      stroke-width: 1.25;
+      opacity: 0.9;
+    }
+
+    &__link {
+      cursor: pointer;
+      outline: none;
+
+      &:hover .stack-diagram__box,
+      &:focus-visible .stack-diagram__box {
+        stroke: var(--section-accent, #ffb86b);
+        filter: drop-shadow(0 0 6px color-mix(in srgb, var(--section-accent, #ffb86b) 40%, transparent));
+      }
+    }
+  }
+</style>

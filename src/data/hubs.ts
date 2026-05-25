@@ -20,9 +20,10 @@ export const hubRegistry: HubRegistryEntry[] = [
   {
     slug: 'homelab',
     name: 'Home Lab',
-    description: "Travis Vocino's home lab: hardware, self-hosting, and infrastructure write-ups.",
+    description:
+      'Self-hosted media stack — Docker Compose, *arr, Jellyfin, Cloudflare Tunnel, and the traps worth knowing.',
     accent: '#FFB86B',
-    indexable: false,
+    indexable: true,
   },
 ];
 

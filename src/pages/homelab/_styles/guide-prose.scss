@@ -1,0 +1,341 @@
+@use 'guide-tokens';
+
+// Plain descendant selectors only — :global() does not compile when imported as raw SCSS.
+
+.guide-prose {
+  --guide-accent: var(--section-accent, #ffb86b);
+  --guide-accent-dim: color-mix(in srgb, var(--guide-accent) 14%, transparent);
+
+  // Full width of the main column; body copy stays at --guide-measure
+  max-width: 100%;
+  font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: var(--guide-body-size);
+  font-weight: 400;
+  line-height: var(--guide-body-leading);
+  color: var(--text-primary);
+  letter-spacing: 0.01em;
+  text-wrap: pretty;
+
+  // Readable measure for body copy (code blocks excluded — see pre below)
+  p,
+  ul,
+  ol,
+  blockquote,
+  h2,
+  h3,
+  h4 {
+    max-width: var(--guide-measure);
+  }
+
+  // --- Intro copy (before first h2) ---
+  & > p:first-of-type {
+    font-size: 1.1875rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    margin: 0 0 var(--guide-space-md);
+  }
+
+  & > p:nth-of-type(2) {
+    margin: 0 0 var(--guide-space-xl);
+  }
+
+  // --- Paragraphs ---
+  p {
+    margin: 0 0 var(--guide-space-md);
+  }
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+
+  // --- Section headings (h2) ---
+  h2 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+    color: var(--text-primary);
+    margin: var(--guide-space-2xl) 0 var(--guide-space-lg);
+    padding-top: var(--guide-space-xl);
+    scroll-margin-top: var(--guide-scroll-offset);
+    border-top: 1px solid color-mix(in srgb, var(--border) 90%, transparent);
+  }
+
+  // First section: extra air after intro paragraphs
+  & > h2:first-of-type {
+    margin-top: var(--guide-space-xl);
+  }
+
+  h2 + p {
+    margin-top: 0;
+    margin-bottom: var(--guide-space-md);
+    font-size: var(--guide-body-size);
+    line-height: var(--guide-body-leading);
+  }
+
+  // --- Subheadings ---
+  h3 {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 1.375rem;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--text-primary);
+    margin: var(--guide-space-xl) 0 var(--guide-space-md);
+    scroll-margin-top: var(--guide-scroll-offset);
+  }
+
+  h4 {
+    font-size: 1.1875rem;
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--text-primary);
+    margin: var(--guide-space-lg) 0 var(--guide-space-sm);
+  }
+
+  h3 + p,
+  h4 + p {
+    margin-top: 0;
+  }
+
+  // --- Lists (reset strips bullets globally) ---
+  ul,
+  ol {
+    margin: 0 0 var(--guide-space-lg);
+    padding-left: 1.75rem;
+  }
+
+  ul {
+    list-style: disc;
+    list-style-position: outside;
+  }
+
+  ol {
+    list-style: decimal;
+    list-style-position: outside;
+  }
+
+  h2 + ul,
+  h2 + ol,
+  h3 + ul,
+  h3 + ol,
+  p + ul,
+  p + ol {
+    margin-top: var(--guide-space-sm);
+  }
+
+  li {
+    margin-bottom: 0.85em;
+    padding-left: 0.35rem;
+    line-height: var(--guide-body-leading);
+
+    &::marker {
+      color: color-mix(in srgb, var(--guide-accent) 85%, var(--text-muted));
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  li > p {
+    margin: 0 0 0.65em;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  li > ul,
+  li > ol {
+    margin-top: 0.65em;
+    margin-bottom: 0.65em;
+  }
+
+  // --- Inline & links ---
+  strong {
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  a {
+    color: var(--guide-accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+
+    &:hover {
+      color: color-mix(in srgb, var(--guide-accent) 75%, white);
+    }
+  }
+
+  // --- Blockquotes ---
+  blockquote {
+    margin: var(--guide-space-lg) 0;
+    padding: var(--guide-space-md) var(--guide-space-lg);
+    border-left: 3px solid var(--guide-accent);
+    background: var(--guide-accent-dim);
+    border-radius: 0 6px 6px 0;
+    color: var(--text-primary);
+    line-height: 1.7;
+
+    p {
+      margin-bottom: var(--guide-space-sm);
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  // Markdown rules duplicate h2 breaks
+  hr {
+    display: none;
+  }
+
+  // --- Tables (full column width, like code blocks) ---
+  table {
+    width: 100%;
+    max-width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9375rem;
+    line-height: 1.55;
+    margin: var(--guide-space-lg) 0;
+    display: table;
+    table-layout: auto;
+  }
+
+  // Horizontal scroll only when the table truly overflows (narrow viewports)
+  @media (max-width: 1023px) {
+    table {
+      display: block;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    thead,
+    tbody,
+    tr {
+      display: table;
+      width: 100%;
+      min-width: 36rem;
+      table-layout: auto;
+    }
+  }
+
+  th,
+  td {
+    border: 1px solid var(--border);
+    padding: 0.75rem 1rem;
+    text-align: left;
+    vertical-align: top;
+    word-wrap: break-word;
+    overflow-wrap: anywhere;
+  }
+
+  td:first-child,
+  th:first-child {
+    min-width: 10rem;
+  }
+
+  th {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-primary);
+    background: var(--surface-2);
+  }
+
+  tr:nth-child(even) td {
+    background: color-mix(in srgb, var(--surface-2) 50%, transparent);
+  }
+
+  // --- Code (inline) ---
+  :not(pre) > code {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 0.9em;
+    background: var(--surface-2);
+    padding: 0.15em 0.4em;
+    border-radius: 4px;
+    color: var(--guide-accent);
+    word-break: break-word;
+  }
+
+  // --- Code blocks (Shiki / .astro-code) — full column width, like the stack diagram ---
+  pre,
+  pre.astro-code {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    margin: var(--guide-space-lg) 0;
+    padding: var(--guide-space-md) var(--guide-space-lg);
+    background: var(--surface-1) !important;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow-x: auto;
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    box-sizing: border-box;
+  }
+
+  pre code,
+  pre.astro-code code {
+    display: block;
+    padding: 0;
+    background: none !important;
+    font-family: 'Source Code Pro', monospace;
+    font-size: inherit;
+    line-height: inherit;
+    white-space: pre;
+    word-break: normal;
+    // Shiki colors live on inline style="color: …" per span — do not override
+    color: inherit;
+  }
+
+  pre code span,
+  pre.astro-code span {
+    font-family: inherit;
+  }
+
+  h2 + pre,
+  h3 + pre,
+  p + pre {
+    margin-top: var(--guide-space-md);
+  }
+
+  .guide-pre--copyable {
+    padding-right: 5rem;
+  }
+
+  .guide-copy-btn {
+    position: absolute;
+    top: 0.625rem;
+    right: 0.625rem;
+    font-family: 'Source Code Pro', monospace;
+    font-size: 0.6875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.4rem 0.65rem;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s;
+
+    &:hover {
+      color: var(--guide-accent);
+      border-color: var(--guide-accent);
+    }
+  }
+}
+
+.guide-prose h2#the-pre-flight-ritual {
+  border-top-color: color-mix(in srgb, var(--guide-accent) 40%, var(--border));
+}
+
+#the-pre-flight-ritual {
+  scroll-margin-top: var(--guide-scroll-offset);
+}

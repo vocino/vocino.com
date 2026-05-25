@@ -1,0 +1,42 @@
+@use 'guide-tokens';
+
+.homelab-guide {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: var(--guide-scroll-offset) clamp(1.25rem, 4vw, 2.5rem) var(--guide-space-2xl);
+
+  @media (min-width: 1024px) {
+    // Left column reserves space for the fixed TOC (see guide-toc.scss)
+    grid-template-columns: 11.25rem minmax(0, 1fr);
+    gap: clamp(1.75rem, 3vw, 2.5rem);
+    align-items: start;
+  }
+
+  &__sidebar {
+    display: none;
+
+    @media (min-width: 1024px) {
+      // Visible placeholder in grid; nav is position:fixed in guide-toc.scss
+      display: block;
+      visibility: hidden;
+      pointer-events: none;
+      min-height: 1px;
+    }
+  }
+
+  &__main {
+    min-width: 0;
+  }
+
+  &__chrome {
+    display: flex;
+    flex-direction: column;
+    gap: var(--guide-chrome-gap);
+    margin-bottom: var(--guide-space-2xl);
+    width: 100%;
+    max-width: 100%;
+  }
+}

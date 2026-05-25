@@ -55,7 +55,7 @@ src/
 ├── pages/
 │   ├── index.astro              # Landing page
 │   ├── bg3.astro                # HUB: Baldur's Gate 3 (nested pages go in bg3/)
-│   ├── homelab.astro            # HUB: Home Lab (nested pages go in homelab/)
+│   ├── homelab/                 # HUB: Home Lab (index + nested pages)
 │   └── api/                     # Astro API routes (Cloudflare runtime)
 │       ├── twitch-status.ts
 │       └── instagram-stickers.ts
@@ -161,7 +161,7 @@ The authoritative list of hubs and their fixed properties. Update this when addi
 | Hub | Slug | Accent | Status | Notes |
 | --- | --- | --- | --- | --- |
 | Baldur's Gate 3 | `/bg3` | `#46E08B` (green) | Placeholder (`ComingSoon`, `noindex`) | Builds, run notes, honour-mode guides. Pages nest as `/bg3/<guide-slug>`. |
-| Home Lab | `/homelab` | `#FFB86B` (amber) | Placeholder (`ComingSoon`, `noindex`) | Hardware, self-hosting, infra write-ups. Pages nest as `/homelab/<page-slug>`. |
+| Home Lab | `/homelab` | `#FFB86B` (amber) | Live (`indexable`) | Self-hosted media stack guide (Docker Compose, *arr, Jellyfin). Interactive stack diagram + personalized copy-paste vars. Pages nest as `/homelab/<page-slug>`. |
 
 ### Adding a new hub
 1. Create `src/pages/<slug>/index.astro`.
