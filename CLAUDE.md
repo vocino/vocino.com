@@ -20,7 +20,7 @@ npm run build
 # Preview production build locally (workerd runtime)
 npm run preview
 
-# Deploy to Cloudflare Workers
+# Deploy locally (optional; production uses Git → Workers Builds)
 npm run deploy
 
 # Regenerate Wrangler binding types after wrangler.jsonc changes
@@ -185,17 +185,17 @@ Required for Twitch integration (Wrangler secrets / dashboard vars):
 
 ## Deployment
 
-- **Platform**: Cloudflare Workers (`wrangler deploy`)
-- **Worker name**: `vocino-com` (see `wrangler.jsonc`)
-- **Build command**: `npm run build` (includes type checking)
-- **Deploy command**: `npm run deploy` (`astro build && wrangler deploy`)
-- **Build output**: `dist/`
-- **Node**: `>=22` (see `package.json` `engines`)
-- **Local Worker vars**: `.dev.vars` (Twitch/Instagram keys; copy from `.env.example`) — **gitignored**
-- **Wrangler CLI auth**: `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` in `.env` (gitignored), not in `.dev.vars`
-- Set production secrets with `wrangler secret put TWITCH_CLIENT_ID` etc., or the Cloudflare dashboard
+- **Platform**: Cloudflare Workers (`vocino-com`), connected to GitHub `vocino/vocino.com`
+- **Production branch**: `master` — push triggers Workers Builds automatically
+- **Workers Builds**: build `npm run build`, deploy `npx wrangler deploy` (see `wrangler.jsonc`)
+- **Build output**: `dist/client` (static) + `dist/server` (Worker)
+- **Node**: `22` (`.nvmrc` / `package.json` `engines`)
+- **Production secrets**: Cloudflare dashboard → Worker **Variables and Secrets** (`TWITCH_*`, optional `INSTAGRAM_*`)
+- **Local Worker vars**: `.dev.vars` (copy Twitch/Instagram keys from `.env.example`) — **gitignored**
+- **Local Wrangler CLI auth**: `CLOUDFLARE_API_TOKEN` / `CLOUDFLARE_ACCOUNT_ID` in `.env` only — **gitignored**
+- **Observability**: Workers Logs enabled in `wrangler.jsonc` (invocation logs on, traces off)
 
-**CI/CD:** point your pipeline at `npm run deploy` instead of Pages Git integration. Attach `vocino.com` as a Workers custom domain/route in the Cloudflare dashboard after first deploy.
+**Local deploy (optional):** `npm run deploy`. Routine updates are `git push` only.
 
 ## Important Notes
 

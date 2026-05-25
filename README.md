@@ -61,20 +61,21 @@ npm run preview
 
 ## Deployment
 
-This site deploys to **Cloudflare Workers** with Wrangler. Content pages are prerendered at build time; API routes run on-demand in the Worker.
+Production deploys via **Cloudflare Workers Builds** when you push to `master` on GitHub (`vocino/vocino.com`). Content pages are prerendered at build time; API routes run on-demand in the Worker.
 
-### Cloudflare Workers Configuration
+### Cloudflare Workers Builds (dashboard)
 
-- **Build command**: `npm run build`
-- **Deploy command**: `npm run deploy`
-- **Wrangler config**: `wrangler.jsonc` (worker name `vocino-com`)
-- **Build output directory**: `dist`
-- **Node**: `>=22`
-- **Environment variables** (Wrangler secrets or dashboard):
-  - `TWITCH_CLIENT_ID`
-  - `TWITCH_CLIENT_SECRET`
-  - `TWITCH_USERNAME` (defaults to "vocino")
-  - Optional Instagram vars — see `.env.example`
+| Setting | Value |
+|--------|--------|
+| Build command | `npm run build` |
+| Deploy command | `npx wrangler deploy` |
+| Production branch | `master` |
+| Node | `22` (`.nvmrc`) |
+| Worker name | `vocino-com` |
+
+**Variables and Secrets** (Worker runtime, set in dashboard): `TWITCH_CLIENT_ID`, `TWITCH_CLIENT_SECRET`, `TWITCH_USERNAME`, optional Instagram vars — see `.env.example`.
+
+**Local only:** `.dev.vars` for Worker dev secrets; `.env` for Wrangler CLI auth. `npm run deploy` if you need a manual deploy.
 
 ## Project Structure
 
