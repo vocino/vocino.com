@@ -12,8 +12,7 @@
   --guide-space-2xl: 3.25rem;
   --guide-chrome-gap: 0.875rem;
   --guide-scroll-offset: 5.5rem;
-  --guide-playbar-offset: 4.25rem;
-  --guide-dock-offset: 4.5rem;
+  --guide-anchor-offset: 3.5rem;
 }
 
 @media (min-width: 640px) {
@@ -25,6 +24,5 @@
     --guide-space-lg: 2.25rem;
     --guide-space-xl: 3rem;
     --guide-space-2xl: 4rem;
-    --guide-playbar-offset: 4.75rem;
   }
 }

@@ -1,324 +1,181 @@
 @use 'guide-tokens';
 
-.bg3-step {
-  max-width: 100%;
+/* Flat callout for missables and skip-default warnings */
+.bg3-warn {
   margin: var(--guide-space-md) 0;
-  padding: 0.875rem 1rem;
-  border: 1px solid color-mix(in srgb, var(--section-accent, #46e08b) 28%, var(--border));
-  border-radius: 10px;
+  padding: 0.7rem 0.9rem;
+  border-left: 3px solid #e85d5d;
+  border-radius: 0 6px 6px 0;
+  background: color-mix(in srgb, #e85d5d 9%, var(--surface-1));
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--text-primary);
+  max-width: var(--guide-measure);
+
+  strong {
+    color: #f08080;
+  }
+}
+
+/* Level-up / decision ladder — "when you ding N, pick this" */
+.bg3-levels {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: var(--guide-space-md) 0;
+}
+
+.bg3-levels__lead {
+  font-family: 'Source Code Pro', monospace;
+  font-size: 0.625rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0 0 0.15rem;
+
+  &::before {
+    content: '// ';
+    color: var(--section-accent, #46e08b);
+    opacity: 0.7;
+  }
+}
+
+.bg3-level {
+  display: grid;
+  grid-template-columns: 3.5rem minmax(0, 1fr);
+  gap: 0.75rem;
+  align-items: start;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid var(--border);
+  border-left: 3px solid color-mix(in srgb, var(--section-accent, #46e08b) 55%, var(--border));
+  border-radius: 8px;
   background: var(--surface-1);
-  scroll-margin-top: calc(var(--guide-playbar-offset) + 0.35rem);
-  transition: border-color 0.2s, opacity 0.2s;
 
-  &.is-current {
-    border-color: var(--section-accent, #46e08b);
-    box-shadow: 0 0 0 1px color-mix(in srgb, var(--section-accent, #46e08b) 25%, transparent);
+  &--milestone {
+    border-left-width: 3px;
+    border-color: color-mix(in srgb, var(--section-accent, #46e08b) 32%, var(--border));
+    border-left-color: var(--section-accent, #46e08b);
+    background: color-mix(in srgb, var(--section-accent, #46e08b) 7%, var(--surface-1));
   }
 
-  &.is-complete {
-    opacity: 0.72;
-    border-color: color-mix(in srgb, var(--section-accent, #46e08b) 20%, var(--border));
-
-    .bg3-step__badge::after {
-      content: ' · done';
-      opacity: 0.85;
-    }
-  }
-
-  &__head {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 0.65rem;
-    margin-bottom: 0.75rem;
-  }
-
-  &__badge {
+  &__tier {
     font-family: 'Source Code Pro', monospace;
     font-size: 0.625rem;
-    letter-spacing: 0.14em;
+    font-weight: 600;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--section-accent, #46e08b);
-    margin: 0;
-  }
-
-  &__title {
-    font-family: 'Source Serif 4', Georgia, serif;
-    font-size: 1.125rem;
-    font-weight: 600;
-    margin: 0.2rem 0 0;
-    color: var(--text-primary);
-    line-height: 1.25;
-  }
-
-  &__now {
-    margin: 0;
-    padding: 0.875rem 0.95rem;
-    border-radius: 8px;
     background: color-mix(in srgb, var(--section-accent, #46e08b) 12%, var(--surface-2));
-    border: 1px solid color-mix(in srgb, var(--section-accent, #46e08b) 40%, var(--border));
+    border: 1px solid color-mix(in srgb, var(--section-accent, #46e08b) 30%, var(--border));
+    border-radius: 5px;
+    padding: 0.3rem 0.2rem;
+    text-align: center;
+    line-height: 1.15;
+    align-self: start;
+  }
+
+  &__body {
+    min-width: 0;
+  }
+
+  &__pick {
+    margin: 0;
+    font-size: 0.9375rem;
+    line-height: 1.4;
+    color: var(--text-primary);
+    font-weight: 500;
 
     strong {
-      display: block;
-      font-family: 'Source Code Pro', monospace;
-      font-size: 0.625rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
       color: var(--section-accent, #46e08b);
-      margin-bottom: 0.4rem;
+      font-weight: 600;
     }
+  }
 
-    p {
-      margin: 0;
-      font-size: 1.0625rem;
-      line-height: 1.5;
-      max-width: none;
-      font-weight: 500;
+  &__why {
+    margin: 0.3rem 0 0;
+    font-size: 0.8125rem;
+    line-height: 1.45;
+    color: var(--text-secondary);
+
+    strong {
       color: var(--text-primary);
-    }
-  }
-
-  &__warn {
-    margin-top: 0.65rem;
-    padding: 0.6rem 0.8rem;
-    font-size: 0.875rem;
-    line-height: 1.45;
-    border-radius: 6px;
-    background: color-mix(in srgb, #e85d5d 12%, var(--surface-2));
-    border: 1px solid color-mix(in srgb, #e85d5d 40%, var(--border));
-    color: var(--text-primary);
-    max-width: none;
-  }
-
-  &__optional {
-    margin-top: 0.65rem;
-    padding: 0.6rem 0.8rem;
-    font-size: 0.875rem;
-    line-height: 1.45;
-    border-radius: 6px;
-    border: 1px dashed var(--border);
-    color: var(--text-secondary);
-    max-width: none;
-  }
-
-  &__pager {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: 0.875rem;
-    padding-top: 0.75rem;
-    border-top: 1px solid var(--border);
-    font-size: 0.8125rem;
-  }
-
-  &__pager a {
-    text-decoration: none;
-    padding: 0.5rem 0.8rem;
-    min-height: 2.75rem;
-    display: inline-flex;
-    align-items: center;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    color: var(--text-secondary);
-    flex: 1;
-    justify-content: center;
-
-    &:hover {
-      border-color: var(--section-accent, #46e08b);
-      color: var(--section-accent, #46e08b);
+      font-weight: 600;
     }
   }
 }
 
-.bg3-checkpoint {
-  flex-shrink: 0;
-  font-family: 'Source Code Pro', monospace;
-  font-size: 0.6875rem;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  padding: 0.5rem 0.75rem;
+/* Collapsible reference block (full tables kept out of the reading flow) */
+.bg3-reference {
+  margin: var(--guide-space-md) 0;
   border: 1px solid var(--border);
-  border-radius: 6px;
-  background: var(--surface-2);
-  color: var(--text-muted);
-  cursor: pointer;
-  min-height: 2.75rem;
-  min-width: 5.75rem;
-  transition: border-color 0.15s, color 0.15s, background 0.15s;
+  border-radius: 8px;
+  background: var(--surface-1);
+  overflow: hidden;
 
-  &.is-done {
-    border-color: var(--section-accent, #46e08b);
-    color: var(--section-accent, #46e08b);
-    background: color-mix(in srgb, var(--section-accent, #46e08b) 10%, var(--surface-2));
+  &__summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0.7rem 0.9rem;
+    cursor: pointer;
+    list-style: none;
+    font-family: 'Source Code Pro', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    color: var(--text-secondary);
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    &::after {
+      content: '+';
+      color: var(--section-accent, #46e08b);
+      font-size: 1rem;
+      line-height: 1;
+    }
+  }
+
+  &[open] &__summary {
+    border-bottom: 1px solid var(--border);
+
+    &::after {
+      content: '–';
+    }
+  }
+
+  &__body {
+    padding: 0.4rem 0.9rem 0.9rem;
   }
 }
 
-.bg3-play-bar {
-  position: sticky;
-  top: 0;
-  z-index: 45;
-  margin: 0 calc(-1 * clamp(1rem, 4vw, 2.5rem)) var(--guide-space-sm);
-  padding: 0.65rem clamp(1rem, 4vw, 2.5rem);
-  background: color-mix(in srgb, var(--bg) 94%, transparent);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--border);
-  box-shadow: 0 1px 0 color-mix(in srgb, var(--section-accent, #46e08b) 15%, transparent);
+/* Act / chapter divider — gives the run a sense of moving between acts */
+.bg3-act-divider {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.85rem;
+  margin: var(--guide-space-2xl) 0 var(--guide-space-md);
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--section-accent, #46e08b) 35%, var(--border));
+  scroll-margin-top: var(--guide-anchor-offset);
 
-  &__row {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    grid-template-rows: auto auto;
-    gap: 0.5rem 0.65rem;
-    align-items: center;
-  }
-
-  &__now {
-    grid-column: 1;
-    grid-row: 1;
-    min-width: 0;
-  }
-
-  &__next-hint {
-    display: block;
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    margin-top: 0.15rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-
-    &[hidden] {
-      display: none;
-    }
-  }
-
-  &__kicker {
-    display: block;
+  &__num {
     font-family: 'Source Code Pro', monospace;
-    font-size: 0.5625rem;
-    letter-spacing: 0.14em;
+    font-size: clamp(1.5rem, 5vw, 2.25rem);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.03em;
     text-transform: uppercase;
-    color: var(--text-muted);
-    margin-bottom: 0.15rem;
-  }
-
-  &__section {
-    display: block;
-    font-size: 0.9375rem;
-    font-weight: 600;
-    line-height: 1.25;
-    color: var(--text-primary);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  &__progress {
-    grid-column: 2;
-    grid-row: 1;
-    font-family: 'Source Code Pro', monospace;
-    font-size: 0.6875rem;
-    letter-spacing: 0.06em;
     color: var(--section-accent, #46e08b);
-    white-space: nowrap;
-    padding: 0.35rem 0.5rem;
-    border: 1px solid color-mix(in srgb, var(--section-accent, #46e08b) 35%, var(--border));
-    border-radius: 4px;
-    background: color-mix(in srgb, var(--section-accent, #46e08b) 8%, var(--surface-1));
   }
 
-  &__jump {
-    grid-column: 1 / -1;
-    grid-row: 2;
-    display: flex;
-    gap: 0.5rem;
-    align-items: stretch;
-    flex-wrap: wrap;
-  }
-
-  &__next-btn {
-    flex-shrink: 0;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.55rem 0.7rem;
-    min-height: 2.75rem;
-    border: 1px solid color-mix(in srgb, var(--section-accent, #46e08b) 50%, var(--border));
-    border-radius: 6px;
-    background: color-mix(in srgb, var(--section-accent, #46e08b) 12%, var(--surface-1));
-    color: var(--section-accent, #46e08b);
-    font-family: 'Source Code Pro', monospace;
-    font-size: 0.6875rem;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    text-decoration: none;
-    white-space: nowrap;
-
-    &[hidden] {
-      display: none;
-    }
-  }
-
-  &__select {
-    flex: 1;
-    font-family: 'Source Code Pro', monospace;
-    font-size: 0.8125rem;
-    padding: 0.55rem 0.75rem;
-    min-height: 2.75rem;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    background: var(--surface-1);
-    color: var(--text-primary);
-    min-width: 0;
-  }
-
-  &__sections-btn {
-    flex-shrink: 0;
-    font-family: 'Source Code Pro', monospace;
-    font-size: 0.6875rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    padding: 0.55rem 0.7rem;
-    min-height: 2.75rem;
-    min-width: 2.75rem;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    background: var(--surface-1);
+  &__name {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: clamp(0.9375rem, 2.5vw, 1.0625rem);
+    font-style: italic;
     color: var(--text-secondary);
-    cursor: pointer;
-
-    &[aria-expanded='true'] {
-      border-color: var(--section-accent, #46e08b);
-      color: var(--section-accent, #46e08b);
-    }
-  }
-
-  @media (min-width: 640px) {
-    margin-bottom: var(--guide-space-md);
-    border-radius: 8px;
-    border: 1px solid var(--border);
-    box-shadow: none;
-
-    &__row {
-      grid-template-columns: minmax(0, 1fr) auto minmax(11rem, 14rem);
-      grid-template-rows: auto;
-      gap: 0.65rem 0.75rem;
-    }
-
-    &__jump {
-      grid-column: 3;
-      grid-row: 1;
-    }
-
-    &__select {
-      min-width: 10rem;
-    }
-
-    &__sections-btn {
-      display: none;
-    }
   }
 }
 

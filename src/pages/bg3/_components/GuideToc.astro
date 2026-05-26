@@ -1,5 +1,5 @@
 ---
-import { getTocHeadings } from '../_lib/guide-toc';
+import { getTocGroups } from '../_lib/guide-acts';
 import type { MarkdownHeading } from 'astro';
 
 interface Props {
@@ -7,22 +7,27 @@ interface Props {
 }
 
 const { headings } = Astro.props;
-const tocHeadings = getTocHeadings(headings);
+const tocGroups = getTocGroups(headings);
 ---
 
 {
-  tocHeadings.length > 0 && (
+  tocGroups.length > 0 && (
     <nav class="guide-toc" aria-label="Table of contents">
       <p class="guide-toc__label label-mono">Progress</p>
-      <ol class="guide-toc__list">
-        {tocHeadings.map((heading) => (
-          <li>
-            <a href={`#${heading.slug}`} data-toc-slug={heading.slug} class="guide-toc__link">
-              {heading.text}
-            </a>
-          </li>
-        ))}
-      </ol>
+      {tocGroups.map((group) => (
+        <div class="guide-toc__group">
+          <p class="guide-toc__act">{group.act}</p>
+          <ol class="guide-toc__list">
+            {group.headings.map((heading) => (
+              <li>
+                <a href={`#${heading.slug}`} data-toc-slug={heading.slug} class="guide-toc__link">
+                  {heading.text}
+                </a>
+              </li>
+            ))}
+          </ol>
+        </div>
+      ))}
     </nav>
   )
 }
