@@ -1,11 +1,11 @@
 ---
 title: Honour Mode — Bardadin run guide
-description: A progression-first Honour Mode playbook for a Half-Orc Bardadin lead, dark-synergy party, missable items, and the fights worth skipping.
+description: A progression-first Honour Mode playbook for a Half-Orc Smite Swords Bard lead (6/4/2), dark-synergy party, missable items, and the fights worth skipping.
 updated: 2026-05-25
-iconGeneration: 3
+iconGeneration: 4
 ---
 
-I wrote this for the Honour run I am on right now: Half-Orc Bardadin lead, a mean little party that actually likes each other in combat, and a bias toward skipping fights that can delete a 40-hour save. Keep it open on your phone or a second screen and follow the sections in order. Hit **Mark done** on a checkpoint when you finish that beat so you are not scrolling around trying to remember where you left off.
+I wrote this for the Honour run I am on right now: Half-Orc **Smite Swords Bard** lead (6 College of Swords / 4 Sorcerer / 2 Paladin), a mean little party that actually likes each other in combat, and a bias toward skipping fights that can delete a 40-hour save. Keep it open on your phone or a second screen and follow the sections in order. Hit **Mark done** on a checkpoint when you finish that beat so you are not scrolling around trying to remember where you left off.
 
 **Balanced** here means the strong stuff people already document (Grym setups, stealth openers, Gale's orb ending) without making bug abuse the default line. When something is optional cheese, I say so up front.
 
@@ -26,9 +26,11 @@ I wrote this for the Honour run I am on right now: Half-Orc Bardadin lead, a mea
 </div>
 
 - **Icons:** [[bg3:hold-person]] means the spell or item name matches the game UI (icons from [bg3.wiki](https://bg3.wiki/)).
+- **Your build:** 6 College of Swords Bard / 4 Sorcerer / 2 Paladin. Control with Command and Hold, then smite + Slashing Flourish on paralyzed targets.
 - **Critical path** = do this on your first Honour clear.
 - **Optional** = stronger or safer, but not required.
 - **Skip default** = I recommend avoiding the fight on a first run.
+- **Undead:** Enchantment holds ([[bg3:hold-person]], [[bg3:hold-monster]], [[bg3:hypnotic-pattern]]) do not work on undead. Plan [[bg3:command]], raw damage, or party tools for those fights.
 
 ## Character creation
 
@@ -42,46 +44,64 @@ I wrote this for the Honour run I am on right now: Half-Orc Bardadin lead, a mea
 </div>
 <div class="bg3-step__now">
 <strong>Do this now</strong>
-<p>Build for face checks, control spell DC, and melee smites after Act 1. Pick skills that help dialogue, not just damage.</p>
+<p>Pick Half-Orc, College of Swords, and the stat line below. Level as Bard through Act 1, then respec at Withers into the 6 / 4 / 2 split.</p>
 </div>
 </div>
 
 ### Origin and fantasy
 
-Any origin works mechanically. I like **Dark Urge** or a custom Half-Orc for the ruthless party tone. Your companions carry the stealth burst and the unkillable tank; you hold the line on social checks and battlefield control.
+Any origin works mechanically. I like **Dark Urge** or a custom Half-Orc for the ruthless party tone — the crit passive is excellent on a build that lives on paralyzed targets. Your companions carry the stealth burst and the unkillable tank; you hold the line on social checks and battlefield control.
 
 ### Ability scores (level 1)
 
-Aim for high Charisma first, enough Constitution to survive Act 1, Dexterity for initiative and AC.
+You want **high Dexterity** for weapon attacks and **high Charisma** for spell DC, smites, and dialogue.
 
-| Stat | Target | Why |
+| Stat | Value | Why |
 | --- | --- | --- |
-| STR | 8–10 | Not your job |
-| DEX | 14 | Initiative, medium armor |
-| CON | 14–16 | Honour Mode punishes squishy faces |
-| INT | 8–10 | Skills from party / scrolls |
+| STR | 8 | Not your job |
+| DEX | **17** | Attack rolls, AC, initiative |
+| CON | 14 | Honour Mode punishes squishy leads |
+| INT | 8–10 | Party / scrolls cover knowledge |
 | WIS | 10 | Saves |
-| CHA | 17 → 18 | Face, spell DC, smites |
+| CHA | **16** | Hold DC, smite damage, face checks |
 
-Hag hair (+1 CHA), the Mirror of Loss (+2), Act 3 **Birthright** [[bg3:birthright]], and ASIs can push you to **24 CHA** by late game.
+**Hag's Hair:** +1 **DEX** (18 DEX before gear).
 
-### Class path (Patch 8+ Bardadin)
+**Late game:** Mirror of Loss **+2 DEX**, then [[bg3:birthright]] in Act 3 — you are aiming for **22 DEX** and enough CHA to land holds on bosses.
 
-Respec once you have Withers if you want weapon proficiencies clean, but this is the target:
+### Class path
 
-1. **2 Paladin (Vengeance)** — martial proficiencies, smites, aura later.
-2. **6 Bard (College of Swords)** — extra attacks, flourishes, face spells.
-3. **4 Sorcerer (Draconic White or Shadow)** — metamagic, [[bg3:shadow-blade]], [[bg3:hold-person]] / [[bg3:hold-monster]] on scrolls, [[bg3:booming-blade]] nova.
+**End state at character level 12:** 6 College of Swords Bard / 4 Sorcerer (Draconic White or Shadow) / 2 Paladin.
 
-**Feats:** [[bg3:alert]] early if initiative feels bad, then **Savage Attacker**, ASI Charisma. Alert matters more than another damage feat in Act 1.
+| Class | Why |
+| --- | --- |
+| **6 Bard (Swords)** | Full caster slots through Paladin dip, Extra Attack, Slashing Flourish cleave, Magical Secrets, best dialogue |
+| **4 Sorcerer** | Metamagic (Quickened / Extended / Twinned), [[bg3:shield]], [[bg3:shadow-blade]], [[bg3:booming-blade]] |
+| **2 Paladin** | [[bg3:divine-smite]], [[bg3:command]], martial kit |
 
-**Cantrips / spells to grab early:** [[bg3:command]], [[bg3:healing-word]], [[bg3:shield]] (via Sorc), [[bg3:hold-person]], [[bg3:haste]] (scrolls count).
+At **level 3 Bard** take **College of Swords** and fighting style **Two-Weapon Fighting** — you will use dual hand crossbows in early Act 1; later your bonus action is usually a control spell, not an off-hand swing.
+
+**Paladin oath:** **Oath of the Crown** — Righteous Clarity is how you keep smites landing in Honour. Vengeance works if you prefer the fantasy; Crown is the pick for this route.
+
+Respec cleanly at Withers (see Early Act 1). Do not take **Dual Wielder** on a piercing-vulnerability route; it trades damage for +1 AC.
+
+**Feats (level order):**
+
+| Character level | Feat |
+| --- | --- |
+| 4 (Bard) | **+2 DEX** |
+| 8 (Bard) | **[[bg3:savage-attacker]]** |
+| 10+ | **+2 CHA** |
+
+If initiative keeps killing you before you cast Hold, take **[[bg3:alert]]** at level 4 instead of the DEX ASI — you trade damage for turn order.
+
+**Spells to prioritize:** [[bg3:command]] (especially **Approach** — pulls enemies into your cleave), [[bg3:hold-person]], [[bg3:healing-word]], [[bg3:shield]] (from Sorcerer), [[bg3:hold-monster]] when you have the slot. **Magical Secrets** at Bard 10: [[bg3:counterspell]] first; second pick is usually [[bg3:spirit-guardians]] on this party or [[bg3:misty-step]] if you want more mobility.
 
 ### Dark-synergy party (recruit order)
 
 | Slot | Character | Role |
 | --- | --- | --- |
-| You | Half-Orc Bardadin | Face, control, smite burst |
+| You | Half-Orc Bardadin | Command/Hold control, smite + Slashing Flourish |
 | 2 | Astarion | Stealth opener, single-target delete |
 | 3 | Shadowheart *or* Gale | Abjuration tank, heals, [[bg3:magic-missile]] + Radiant Orb engine |
 | 4 | Karlach | Stunning Strike, flurry cleanup, fire damage |
@@ -109,7 +129,7 @@ Shadowheart fits the dark theme; Gale is stronger if you want the Netherese orb 
 
 - On the beach, grab **Astarion** and **Shadowheart** (or Gale) before heavy exploration.
 - In the Grove, talk to **Karlach** after the gate drama; do not skip her.
-- Sell junk, buy **[[bg3:misty-step]]** scrolls when vendors stock them.
+- Sell junk, buy **[[bg3:misty-step]]**, **[[bg3:hold-person]]**, and **[[bg3:command]]** scrolls when vendors stock them.
 - Optional: pick up **Guidance** amulet and Thief gloves later for mirror checks (see Act 1 gear).
 
 ## Early Act 1 route
@@ -124,26 +144,55 @@ Shadowheart fits the dark theme; Gale is stronger if you want the Netherese orb 
 </div>
 <div class="bg3-step__now">
 <strong>Do this now</strong>
-<p>Reach the Underdark or Grymforge path, unlock Withers, respec everyone to the planned builds, assign party roles.</p>
+<p>Reach the Underdark or Grymforge path, unlock Withers, respec everyone to the planned builds (see level table below), assign party roles.</p>
 </div>
 <div class="bg3-step__warn"><strong>Missable:</strong> Free Barcus at the windmill within about one long rest or he dies and locks quests + his Act 2 shop.</div>
 </div>
 
 ### Unlock Withers and respec
 
-After the grove crisis, get to **Withers** in the Dank Crypt (or via Underdark route). **Respec** here:
+After the grove crisis, get to **Withers** in the Dank Crypt (or via Underdark route). **Respec** the party here.
 
-- **You:** start Bardadin path (2 Pal / 6 Bard / 4 Sorc target; level as you go).
+**You — level through Act 1 (6 Bard / 4 Sorc / 2 Pal by character level 12):**
+
+| Level | Class levels | Notes |
+| --- | --- | --- |
+| 1–2 | Bard | Start Bard |
+| 3 | Bard 3 | **College of Swords**, Two-Weapon Fighting |
+| 4 | Bard 4 | **+2 DEX** (or [[bg3:alert]] if you chose that trade) |
+| 5 | Bard 5 | Level 3 spells online |
+| 6 | Bard 6 | **Extra Attack** |
+| 7 | Respec → 1 Sorcerer / 6 Bard | CON save proficiencies from Sorcerer |
+| 8 | +1 Paladin (2 Pal / 6 Bard) | **[[bg3:divine-smite]]**, Defense fighting style |
+| 9–10 | Sorcerer | Finish **4 Sorcerer** |
+| 11–12 | +Paladin or Sorc as needed | Locked at **2 Pal / 6 Bard / 4 Sorc**; Bard 10 = Magical Secrets |
+
+If you are behind on XP, staying pure Bard through level 8 is fine — the route stabilizes once you have Extra Attack and two Paladin levels for smites.
+
+**Companions:**
+
 - **Astarion:** Ranger (Gloom Stalker) → Rogue (Assassin) → Fighter 2. Feat [[bg3:sharpshooter]] at 4.
 - **Shadowheart/Gale:** Warlock 1 (Hexblade) → Cleric 5 (Life) → Wizard 6 (Abjuration). Feats: Dual Wielder, [[bg3:alert]].
 - **Karlach:** Monk 6 (Open Hand) → Rogue 4 (Thief) → Monk 2. Feat [[bg3:tavern-brawler]] at 4.
 
+Stock **Enhance Ability** scrolls or learn the spell on Bard — it is an Honour Mode MVP for Ethel's mirror, Thorm checks, and any save you cannot afford to fail.
+
 ### Party combat roles
 
-1. **Pre-fight:** [[bg3:bless]] on frontliners; drink Hill Giant elixir on Astarion and Karlach when you have them.
+**Party opener (level 5+):**
+
+1. **Pre-fight:** [[bg3:bless]] on frontliners; Hill Giant elixir on Astarion and Karlach when you have them.
 2. **Open:** Astarion breaks stealth with burst (see level 5 section).
-3. **Mid:** Tank walks in with [[bg3:spirit-guardians]] / [[bg3:armor-of-agathys]]; you cast [[bg3:hold-person]] or [[bg3:hypnotic-pattern]].
-4. **Close:** Karlach stuns and flurries; you smite or [[bg3:booming-blade]] on controlled targets.
+3. **Mid:** Tank walks in with [[bg3:spirit-guardians]] / [[bg3:armor-of-agathys]].
+
+**Your turn pattern:**
+
+1. **[[bg3:command]]** when you need grouping or a non-concentration lockdown — **Command: Approach** pulls enemies into melee for cleave smites.
+2. **[[bg3:hold-person]]** or **[[bg3:hold-monster]]** on the boss (upcast for Paralyzed / auto-crit).
+3. **Attack + [[bg3:divine-smite]] + Slashing Flourish** — cleave a second held or adjacent target. Do not dump damage into uncontrolled targets.
+4. **[[bg3:shadow-blade]]** (Act 2+, upcast when worth it) when flourishes are spent; **[[bg3:booming-blade]]** on leftovers.
+
+**Close:** Karlach stuns and flurries; Astarion focuses held or isolated targets in **Aura of Murder** range.
 
 <div class="bg3-step__pager"><a href="#act-1-level-5-route">← Early Act 1</a> <a href="#act-1-level-5-route">Next: Level 5 push →</a></div>
 
@@ -163,7 +212,9 @@ After the grove crisis, get to **Withers** in the Dank Crypt (or via Underdark r
 </div>
 </div>
 
-Half of Act 1 is tuned for level 3–4 parties. At **level 5** you get extra attack, level 3 spells, and the whole run gets calmer.
+Half of Act 1 is tuned for level 3–4 parties. At **character level 5** you have level 3 spells; at **level 6** you pick up **Extra Attack**. Rush that band before optional bosses — the whole run gets calmer once you are there.
+
+Practice the hold → smite loop here: **Paralyzed** targets autocrit — that is your Act 2 and Act 3 boss pattern.
 
 ### Safe XP path (summary)
 
@@ -185,14 +236,23 @@ Half of Act 1 is tuned for level 3–4 parties. At **level 5** you get extra att
 
 ### Act 1 gear priorities
 
+**You:**
+
+| Item | Notes |
+| --- | --- |
+| Dual **+1 hand crossbows** | Best damage per action until core melee items |
+| Medium armor + shield if short on AC | Two-Weapon Fighting style until you pivot |
+| Water bottles | Wet + cold synergy with party |
+
+**Party:**
+
 | Item | Who | Notes |
 | --- | --- | --- |
 | [[bg3:phalar-aluve]] | Tank | Shriek before big fights |
 | [[bg3:titanstring-bow]] | Astarion | Hill Giant elixir |
-| Water bottles | You / tank | Enable wet + cold synergy |
-| [[bg3:drakethroat-glaive]] | Camp follower | Twin daily buff on bow + weapon (Act 2) |
+| [[bg3:drakethroat-glaive]] | Camp follower | Twin daily buff (Act 2 vendor chain) |
 
-Stock **[[bg3:greater-invisibility]]** and [[bg3:pass-without-trace]] scrolls when available; they define your opener from level 5 onward.
+Stock **[[bg3:greater-invisibility]]** and [[bg3:pass-without-trace]] scrolls when available; they define the party opener from level 5 onward.
 
 <div class="bg3-step__pager"><a href="#leaving-act-1">Next: Leaving Act 1 →</a></div>
 
@@ -216,6 +276,7 @@ Stock **[[bg3:greater-invisibility]]** and [[bg3:pass-without-trace]] scrolls wh
 - Barcus alive.
 - [[bg3:phalar-aluve]], Titanstring, key scrolls on hand.
 - You are **level 5+**; harder optional fights can wait or be deleted now.
+- **Mirror of Loss:** +2 **DEX**. Honour checks are brutal — use Enhance Ability and respec tricks if you fail the first roll.
 
 ## Act 2 progression
 
@@ -244,16 +305,21 @@ Talk them into destroying themselves when you can. **Thisobald** needs **save** 
 
 ### Act 2 gear pivot
 
+**You:** pivot to finesse and Arcane Acuity — [[bg3:shadow-blade]] (upcast level 5 slot) is your main weapon now. Target **Elegant Studded Leather**, **Helmet/Diadem of Arcane Acuity or Synergy**, **Gloves of Battlemage's Power**, **Disintegrating Night Walkers**, **Cloak of the Weave**, **Callous Glow Ring** or Band of the Mystic Scoundrel if the party can share hold duty.
+
+**Party:**
+
 - **True Love's Embrace / Caress** — Warding Bond + Arcane Ward trick on tank.
-- **Callous Glow Ring** — Radiant Orb stacking with [[bg3:magic-missile]].
+- **Callous Glow Ring** — Radiant Orb stacking with [[bg3:magic-missile]] on tank/Gale.
 - **[[bg3:drakethroat-glaive]]** — twin cold buff daily on tank weapon + Astarion bow.
 
 ### Standard fight opener (level 5+)
 
 1. [[bg3:greater-invisibility]] on Astarion; pre-attack from stealth.
 2. Phalar Shriek + Bane oil on tank; run tank in with speed potion for Orb stacks.
-3. [[bg3:create-water]] on boss pack; your [[bg3:hold-monster]] or [[bg3:hypnotic-pattern]].
-4. Karlach cleans up; Astarion walks into **Aura of Murder** range for crits on held targets.
+3. [[bg3:create-water]] on boss pack; your **[[bg3:command]]** (Approach) or [[bg3:hold-monster]] / [[bg3:hypnotic-pattern]] — concentration holds for bosses, Command when you need both setup and freedom.
+4. **You:** smite + Slashing Flourish cleave on paralyzed targets; do not attack the boss before Hold lands.
+5. Karlach cleans up; Astarion walks into **Aura of Murder** range for crits on held targets.
 
 <div class="bg3-step__pager"><a href="#ketheric-and-myrkul">Next: Ketheric →</a></div>
 
@@ -276,6 +342,7 @@ Talk them into destroying themselves when you can. **Thisobald** needs **save** 
 - **Doom Hammer** on tank for the fight.
 - Radiant Orb from [[bg3:magic-missile]] does **not** extra-proc on Ketheric the way you expect; do not rely on Glow Ring damage amp on him.
 - Use Astarion to clear adds; save boss damage for when holds land.
+- **Undead adds:** your enchantment holds may not land — lean on [[bg3:command]], tank control, and raw damage for necromites.
 - **Avatar of Myrkul:** he does not move — [[bg3:wall-of-fire]], darkness arrows for disadvantage manipulation, **Bone Chilled** on the avatar so necromites cannot heal him.
 
 Optional: fight phase 1 to free Aylin and burn the mind flayer before phase 2. Skipping phase 1 via dialogue is valid if you want less chaos.
@@ -298,7 +365,8 @@ Optional: fight phase 1 to free Aylin and burn the mind flayer before phase 2. S
 </div>
 
 - **Hold Monster** is the delete button; prioritize it every boss fight.
-- Daily **Markoheshkir** ice free casts.
+- At **Bard 10** (character level 12): take **[[bg3:counterspell]]** from Magical Secrets — non-negotiable for Honour tempo.
+- Rush [[bg3:birthright]] + [[bg3:markoheshkir]] for spell DC and free damage; daily ice casts from the staff.
 - Accept tadpoles on companions if you are comfortable with the story beat; flight and Far Realm luck are large buffs.
 - Do not waste long-rest buffs right before the elder brain sequence if you used day-long camp follower tricks.
 
@@ -342,24 +410,28 @@ Optional: fight phase 1 to free Aylin and burn the mind flayer before phase 2. S
 
 - Hit **level 5** before you pick fights Act 1 was not built for.
 - Wet the pack ([[bg3:create-water]] or bottles), then lean on cold and [[bg3:ray-of-frost]].
-- Land [[bg3:hold-monster]] (or Person) before anyone dumps damage into the wrong target.
+- **[[bg3:command]]** before or alongside holds — Approach sets up cleave smites without eating concentration.
+- Land [[bg3:hold-monster]] (or Person) before anyone dumps damage into the wrong target; paralyzed = autocrit for your smite flurry.
 - Pre-buff with [[bg3:bless]], elixirs, and Phalar Shriek on bosses that actually matter.
+- **Elixir of Bloodlust** on you when you are cleaning up — extra action on kill adds up.
 
 ### Advanced (strong, still fair)
 
 - Astarion opener: [[bg3:greater-invisibility]] plus [[bg3:pass-without-trace]].
 - Grym anvil or owlbear drop setups.
-- Thorm kids talked down with stacked checks.
+- Thorm kids talked down with stacked checks + Enhance Ability.
+- **Oil of Sharpness** or Accuracy when coatings matter; **Crawler Mucus** for paralysis without concentration.
 - Gale orb at the brainstem if you brought him.
 
 ### Optional cheese (not the default line)
 
 - Hexblade vendor gold loop.
-- Infinite sorcery point tricks (watch patches).
+- Infinite sorcery point / coffeelock-style loops (tedious, not this route).
+- Permanent Flame Blade / exploit-heavy fire variants.
 - Camp follower Aid / Heroes' Feast stacks (they strip at the brain).
 
 ## Patch notes
 
-I last validated this against **Patch 8** (Bardadin respec timing, upcast [[bg3:shadow-blade]], Honour stealth on repeated [[bg3:greater-invisibility]] rolls). If Larian hotfixes an exploit you were counting on, check [bg3.wiki](https://bg3.wiki/) before you blame the guide.
+Last verified **May 2026** on **Patch 8**: 6/4/2 respec at Withers, upcast [[bg3:shadow-blade]], Slashing Flourish cleave on held targets, Crown accuracy, Honour stealth on repeated [[bg3:greater-invisibility]] rolls. If Larian hotfixes something you relied on, check [bg3.wiki](https://bg3.wiki/) before you blame the guide.
 
 <div class="bg3-step__pager"><a href="#how-to-use-this-guide">Back to start ↑</a></div>
