@@ -5,7 +5,8 @@
   grid-template-columns: minmax(0, 1fr);
   max-width: 72rem;
   margin: 0 auto;
-  padding: calc(var(--guide-scroll-offset) - 1rem) clamp(1rem, 4vw, 2.5rem) var(--guide-space-2xl);
+  padding: calc(var(--guide-scroll-offset) - 1rem) clamp(1rem, 4vw, 2.5rem)
+    calc(var(--guide-space-2xl) + var(--guide-dock-offset, 0px));
 
   @media (min-width: 1024px) {
     grid-template-columns: 11.25rem minmax(0, 1fr);

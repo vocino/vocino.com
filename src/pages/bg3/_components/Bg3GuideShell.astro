@@ -2,11 +2,14 @@
 import '../_styles/guide-tokens.scss';
 import '../_styles/guide-layout.scss';
 import '../_styles/guide-toc.scss';
+import '../_styles/guide-tags.scss';
 import '../_styles/guide-prose.scss';
 import GuideHero from './GuideHero.astro';
 import GuideToc from './GuideToc.astro';
 import GuideTocDrawer from './GuideTocDrawer.astro';
 import GuideProgressNav from './GuideProgressNav.astro';
+import GuideQuickRef from './GuideQuickRef.astro';
+import GuideActionDock from './GuideActionDock.astro';
 import GuideAttribution from './GuideAttribution.astro';
 import type { MarkdownHeading } from 'astro';
 
@@ -39,6 +42,7 @@ const { title, description, updated, readingMinutes, headings } = Astro.props;
         updated={updated}
         readingMinutes={readingMinutes}
       />
+      <GuideQuickRef />
     </div>
 
     <article class="guide-prose">
@@ -46,6 +50,7 @@ const { title, description, updated, readingMinutes, headings } = Astro.props;
     </article>
 
     <GuideAttribution />
+    <GuideActionDock />
   </main>
 </div>
 

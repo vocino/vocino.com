@@ -1,19 +1,7 @@
 ---
-const acts = [
-  { slug: 'how-to-use-this-guide', label: 'Start' },
-  { slug: 'character-creation', label: 'Create character' },
-  { slug: 'nautiloid-to-grove', label: 'Act 1 start' },
-  { slug: 'early-act-1-route', label: 'Early Act 1' },
-  { slug: 'act-1-level-5-route', label: 'Level 5 push' },
-  { slug: 'leaving-act-1', label: 'Leave Act 1' },
-  { slug: 'act-2-progression', label: 'Act 2' },
-  { slug: 'ketheric-and-myrkul', label: 'Ketheric' },
-  { slug: 'act-3-progression', label: 'Act 3' },
-  { slug: 'endgame-nether-brain', label: 'Finale' },
-  { slug: 'unique-and-missable-index', label: 'Missables' },
-];
+import { BG3_GUIDE_ACTS, getSectionLabels } from '../_lib/guide-acts';
 
-const sectionLabels = Object.fromEntries(acts.map((a) => [a.slug, a.label]));
+const sectionLabels = getSectionLabels();
 ---
 
 <div
@@ -22,29 +10,43 @@ const sectionLabels = Object.fromEntries(acts.map((a) => [a.slug, a.label]));
   aria-label="Guide navigation"
   data-bg3-play-bar
   data-section-labels={JSON.stringify(sectionLabels)}
+  data-act-slugs={JSON.stringify(BG3_GUIDE_ACTS.map((a) => a.slug))}
 >
-  <div class="bg3-play-bar__now">
-    <span class="bg3-play-bar__kicker">Playing now</span>
-    <span class="bg3-play-bar__section" data-current-section>Start</span>
-  </div>
-  <span class="bg3-play-bar__progress" data-checkpoint-progress aria-live="polite">0 / 10</span>
-  <div class="bg3-play-bar__jump">
-    <label class="visually-hidden" for="bg3-act-jump">Jump to step</label>
-    <select id="bg3-act-jump" class="bg3-play-bar__select">
-      <option value="">Jump to step…</option>
-      {acts.map((act) => (
-        <option value={act.slug}>{act.label}</option>
-      ))}
-    </select>
-    <button
-      type="button"
-      class="bg3-play-bar__sections-btn"
-      data-toc-toggle
-      aria-expanded="false"
-      aria-controls="bg3-toc-panel"
-    >
-      List
+  <div class="bg3-resume" data-resume-banner hidden>
+    <button type="button" class="bg3-resume__btn" data-resume-btn>
+      Continue from <strong data-resume-label>…</strong>
+      <span aria-hidden="true">→</span>
     </button>
+  </div>
+
+  <div class="bg3-play-bar__row">
+    <div class="bg3-play-bar__now">
+      <span class="bg3-play-bar__kicker">Playing now</span>
+      <span class="bg3-play-bar__section" data-current-section>Start</span>
+      <span class="bg3-play-bar__next-hint" data-next-hint hidden></span>
+    </div>
+    <span class="bg3-play-bar__progress" data-checkpoint-progress aria-live="polite">0 / 10</span>
+    <div class="bg3-play-bar__jump">
+      <label class="visually-hidden" for="bg3-act-jump">Jump to step</label>
+      <select id="bg3-act-jump" class="bg3-play-bar__select">
+        <option value="">Jump to step…</option>
+        {BG3_GUIDE_ACTS.map((act) => (
+          <option value={act.slug}>{act.label}</option>
+        ))}
+      </select>
+      <a class="bg3-play-bar__next-btn" data-play-next href="#" hidden aria-label="Go to next step">
+        Next →
+      </a>
+      <button
+        type="button"
+        class="bg3-play-bar__sections-btn"
+        data-toc-toggle
+        aria-expanded="false"
+        aria-controls="bg3-toc-panel"
+      >
+        List
+      </button>
+    </div>
   </div>
 </div>
 

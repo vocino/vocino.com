@@ -25,12 +25,9 @@ I wrote this for the Honour run I am on right now: Half-Orc **Smite Swords Bard*
 </div>
 </div>
 
-- **Icons:** [[bg3:hold-person]] means the spell or item name matches the game UI (icons from [bg3.wiki](https://bg3.wiki/)).
-- **Your build:** 6 College of Swords Bard / 4 Sorcerer / 2 Paladin. Control with Command and Hold, then smite + Slashing Flourish on paralyzed targets.
-- **Critical path** = do this on your first Honour clear.
-- **Optional** = stronger or safer, but not required.
-- **Skip default** = I recommend avoiding the fight on a first run.
-- **Undead:** Enchantment holds ([[bg3:hold-person]], [[bg3:hold-monster]], [[bg3:hypnotic-pattern]]) do not work on undead. Plan [[bg3:command]], raw damage, or party tools for those fights.
+- **Icons:** [[bg3:hold-person]] matches in-game spell/item names ([bg3.wiki](https://bg3.wiki/)).
+- **Your build:** 6 College of Swords Bard / 4 Sorcerer / 2 Paladin — Command/Hold, then smite + Slashing Flourish on paralyzed targets.
+- Open **Combat & Honour cheat sheet** above for tags, copyable level-1 stats, combat loop, and a pre-fight checklist (saved on this device).
 
 ## Character creation
 
@@ -218,6 +215,11 @@ Stock **Enhance Ability** scrolls or learn the spell on Bard — it is an Honour
 </div>
 </div>
 
+<div class="bg3-rule bg3-rule--level">
+<strong>Level gate</strong>
+<p>Do <em>not</em> take Owlbear, harpies, or Inquisitor W'wargaz until <strong>character level 5</strong> unless you accept a save-ending risk.</p>
+</div>
+
 Half of Act 1 is tuned for level 3–4 parties. At **character level 5** you have level 3 spells; at **level 6** you pick up **Extra Attack**. Rush that band before optional bosses — the whole run gets calmer once you are there.
 
 Practice the hold → smite loop here: **Paralyzed** targets autocrit — that is your Act 2 and Act 3 boss pattern.
@@ -236,7 +238,7 @@ Practice the hold → smite loop here: **Paralyzed** targets autocrit — that i
 
 **Animated Armour (Gauntlet):** [[bg3:sussur-bloom]] in inventory or thrown disables them. Soloable at level 1 if you respect the mechanic.
 
-**Harpies:** **Skip** on Honour unless you need the tiefling rescue achievement. If you fight: [[bg3:calm-emotions]] from the back row while Mirkon is in range; high ground for ranged.
+**Harpies:** **Skip default** on Honour unless you need the tiefling rescue achievement. If you fight: [[bg3:calm-emotions]] from the back row while Mirkon is in range; high ground for ranged.
 
 **Inquisitor W'wargaz:** Read his kit first. Plan a **two-turn burst** from full HP. Do not drag this fight.
 
@@ -278,11 +280,16 @@ Stock **[[bg3:greater-invisibility]]** and [[bg3:pass-without-trace]] scrolls wh
 </div>
 </div>
 
-- Rolan still in grove chain → Last Light vendors later.
-- Barcus alive.
-- [[bg3:phalar-aluve]], Titanstring, key scrolls on hand.
-- You are **level 5+**; harder optional fights can wait or be deleted now.
-- **Mirror of Loss:** +2 **DEX**. Honour checks are brutal — use Enhance Ability and respec tricks if you fail the first roll.
+<ul class="bg3-checklist" data-checklist-id="leave-act-1">
+<li><label><input type="checkbox" /> Rolan still in grove chain (Last Light vendors)</label></li>
+<li><label><input type="checkbox" /> Barcus alive</label></li>
+<li><label><input type="checkbox" /> [[bg3:phalar-aluve]], Titanstring, key scrolls</label></li>
+<li><label><input type="checkbox" /> Character level 5+</label></li>
+<li><label><input type="checkbox" /> Mirror of Loss +2 DEX planned</label></li>
+<li><label><input type="checkbox" /> Long rest — full spell slots</label></li>
+</ul>
+
+Honour checks are brutal — stack Enhance Ability and respec tricks before **Mirror of Loss** (+2 **DEX**).
 
 ## Act 2 progression
 
@@ -397,6 +404,11 @@ Optional: fight phase 1 to free Aylin and burn the mind flayer before phase 2. S
 **If you fight:** Netherbrain rotates damage immunity to types hit last round. Keep elemental scrolls (lightning + wet is fine) on characters who are not your main damage type that turn. Spread platforms; Orbs of Negation delete tiles.
 
 ## Unique and missable index
+
+<div class="bg3-rule bg3-rule--honour">
+<strong>Honour reminder</strong>
+<p>Rows marked <span class="bg3-tag bg3-tag--missable">Missable</span> or <strong>Critical</strong> priority can brick vendors, gear, or whole acts. Filter below on mobile.</p>
+</div>
 
 | Item / NPC | Act | Lockout | Priority |
 | --- | --- | --- | --- |
