@@ -21,7 +21,7 @@ I wrote this for the Honour run I am on right now: Half-Orc **Smite Swords Bard*
 </div>
 <div class="bg3-step__now">
 <strong>Do this now</strong>
-<p>Skim the legend below. Use the jump menu at the top on mobile. Each section has a short "do this now" block first; details are underneath.</p>
+<p>Skim the legend below. The bar at the top shows where you are and lets you jump steps. Each section leads with <strong>Do this now</strong>; stat and level tables highlight the value you type in-game.</p>
 </div>
 </div>
 

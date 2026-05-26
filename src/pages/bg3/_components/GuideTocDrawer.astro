@@ -13,10 +13,10 @@ const sectionCount = getTocHeadings(headings).length;
 
 {
   sectionCount > 0 && (
-    <details class="guide-toc-drawer">
+    <details class="guide-toc-drawer" id="bg3-toc-panel">
       <summary class="guide-toc-drawer__summary">
-        <span class="guide-toc-drawer__title">Jump to section</span>
-        <span class="guide-toc-drawer__count">{sectionCount} steps</span>
+        <span class="guide-toc-drawer__title">All sections</span>
+        <span class="guide-toc-drawer__count">{sectionCount}</span>
       </summary>
       <div class="guide-toc-drawer__panel">
         <GuideToc headings={headings} />
@@ -28,13 +28,28 @@ const sectionCount = getTocHeadings(headings).length;
 <style lang="scss">
   .guide-toc-drawer {
     display: block;
-    margin: 0;
+    margin: 0 0 var(--guide-space-sm);
     border: 1px solid var(--border);
-    border-radius: 6px;
+    border-radius: 8px;
     background: var(--surface-1);
 
     @media (min-width: 1024px) {
       display: none;
+    }
+
+    &:not([open]) .guide-toc-drawer__summary {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
+    }
+
+    &[open] {
+      margin-bottom: var(--guide-space-md);
     }
 
     &__summary {
@@ -42,7 +57,7 @@ const sectionCount = getTocHeadings(headings).length;
       align-items: center;
       justify-content: space-between;
       gap: 0.75rem;
-      padding: 0.875rem 1rem;
+      padding: 0.75rem 1rem;
       cursor: pointer;
       list-style: none;
       min-height: 2.75rem;
@@ -54,22 +69,27 @@ const sectionCount = getTocHeadings(headings).length;
 
     &__title {
       font-family: 'Source Code Pro', monospace;
-      font-size: 0.8125rem;
+      font-size: 0.75rem;
       text-transform: uppercase;
       letter-spacing: 0.1em;
       color: var(--section-accent, #46e08b);
     }
 
     &__count {
-      font-size: 0.75rem;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.6875rem;
       color: var(--text-muted);
+      padding: 0.2rem 0.45rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
     }
 
     &__panel {
       border-top: 1px solid var(--border);
-      padding: 0.5rem 0.75rem 1rem;
-      max-height: min(45vh, 18rem);
+      padding: 0.5rem 0.75rem 0.875rem;
+      max-height: min(50vh, 20rem);
       overflow-y: auto;
+      overscroll-behavior: contain;
     }
   }
 </style>

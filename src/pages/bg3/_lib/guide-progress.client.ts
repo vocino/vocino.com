@@ -26,6 +26,17 @@ function syncButtons(): void {
     const label = btn.querySelector('.bg3-checkpoint__action');
     if (label) label.textContent = done ? 'Done' : 'Mark done';
   });
+  syncProgressCount();
+}
+
+function syncProgressCount(): void {
+  const el = document.querySelector<HTMLElement>('[data-checkpoint-progress]');
+  if (!el) return;
+
+  const buttons = document.querySelectorAll<HTMLButtonElement>('[data-checkpoint-id]');
+  const total = buttons.length;
+  const done = [...buttons].filter((btn) => btn.classList.contains('is-done')).length;
+  el.textContent = `${done} / ${total}`;
 }
 
 function initCheckpointButtons(): void {
@@ -48,6 +59,23 @@ function setActiveTocSlug(slug: string | null): void {
   });
 }
 
+function sectionLabelForSlug(slug: string): string {
+  const bar = document.querySelector<HTMLElement>('[data-bg3-play-bar]');
+  if (!bar?.dataset.sectionLabels) return slug;
+  try {
+    const map = JSON.parse(bar.dataset.sectionLabels) as Record<string, string>;
+    return map[slug] ?? slug.replace(/-/g, ' ');
+  } catch {
+    return slug;
+  }
+}
+
+function setCurrentSection(slug: string | null): void {
+  const el = document.querySelector<HTMLElement>('[data-current-section]');
+  if (!el || !slug) return;
+  el.textContent = sectionLabelForSlug(slug);
+}
+
 function slugFromHash(): string | null {
   const raw = location.hash.replace(/^#/, '');
   return raw || null;
@@ -65,7 +93,10 @@ function initTocActive(): void {
   const pickBestVisible = (): void => {
     if (!visibleRatios.size) return;
     const best = [...visibleRatios.entries()].sort((a, b) => b[1] - a[1])[0]?.[0];
-    if (best) setActiveTocSlug(best);
+    if (best) {
+      setActiveTocSlug(best);
+      setCurrentSection(best);
+    }
   };
 
   const observer = new IntersectionObserver(
@@ -81,7 +112,7 @@ function initTocActive(): void {
       }
       pickBestVisible();
     },
-    { rootMargin: '-20% 0px -65% 0px', threshold: [0, 0.25, 0.5, 1] },
+    { rootMargin: '-18% 0px -62% 0px', threshold: [0, 0.25, 0.5, 1] },
   );
 
   headings.forEach((h) => observer.observe(h));
@@ -89,17 +120,28 @@ function initTocActive(): void {
   links.forEach((link) => {
     link.addEventListener('click', () => {
       const slug = link.dataset.tocSlug;
-      if (slug) setActiveTocSlug(slug);
+      if (slug) {
+        setActiveTocSlug(slug);
+        setCurrentSection(slug);
+      }
     });
   });
 
   window.addEventListener('hashchange', () => {
-    setActiveTocSlug(slugFromHash());
+    const slug = slugFromHash();
+    if (slug) {
+      setActiveTocSlug(slug);
+      setCurrentSection(slug);
+    }
   });
 
   const initial = slugFromHash();
   if (initial && document.getElementById(initial)) {
     setActiveTocSlug(initial);
+    setCurrentSection(initial);
+  } else {
+    const first = headings[0]?.id;
+    if (first) setCurrentSection(first);
   }
 }
 
@@ -112,10 +154,37 @@ function initActJump(): void {
     const el = document.getElementById(slug);
     if (el) {
       setActiveTocSlug(slug);
+      setCurrentSection(slug);
       el.scrollIntoView({ behavior: 'smooth', block: 'start' });
       history.replaceState(null, '', `#${slug}`);
     }
     select.value = '';
+  });
+}
+
+function initTocToggle(): void {
+  const btn = document.querySelector<HTMLButtonElement>('[data-toc-toggle]');
+  const panel = document.getElementById('bg3-toc-panel') as HTMLDetailsElement | null;
+  if (!btn || !panel) return;
+
+  btn.addEventListener('click', () => {
+    const open = !panel.open;
+    panel.open = open;
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (open) {
+      panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  });
+
+  panel.addEventListener('toggle', () => {
+    btn.setAttribute('aria-expanded', panel.open ? 'true' : 'false');
+  });
+
+  panel.querySelectorAll<HTMLAnchorElement>('.guide-toc__link').forEach((link) => {
+    link.addEventListener('click', () => {
+      panel.open = false;
+      btn.setAttribute('aria-expanded', 'false');
+    });
   });
 }
 
@@ -131,10 +200,14 @@ function initBg3IconSrc(): void {
     const rel = current.slice(base.length);
     if (!rel.endsWith('.png')) return;
     const webp = `${base}${rel.replace(/\.png$/, '.webp')}`;
-    img.addEventListener('error', () => {
-      if (img.src.endsWith('.webp')) return;
-      img.src = webp;
-    }, { once: true });
+    img.addEventListener(
+      'error',
+      () => {
+        if (img.src.endsWith('.webp')) return;
+        img.src = webp;
+      },
+      { once: true },
+    );
     img.src = webp;
   });
 }
@@ -143,6 +216,7 @@ function initBg3Guide(): void {
   initCheckpointButtons();
   initActJump();
   initTocActive();
+  initTocToggle();
   initBg3IconSrc();
 }
 

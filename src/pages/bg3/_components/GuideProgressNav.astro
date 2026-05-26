@@ -12,16 +12,40 @@ const acts = [
   { slug: 'endgame-nether-brain', label: 'Finale' },
   { slug: 'unique-and-missable-index', label: 'Missables' },
 ];
+
+const sectionLabels = Object.fromEntries(acts.map((a) => [a.slug, a.label]));
 ---
 
-<div class="bg3-guide__sticky" role="navigation" aria-label="Quick jump">
-  <label class="visually-hidden" for="bg3-act-jump">Jump to act or step</label>
-  <select id="bg3-act-jump" class="bg3-act-jump">
-    <option value="">Jump to step…</option>
-    {acts.map((act) => (
-      <option value={act.slug}>{act.label}</option>
-    ))}
-  </select>
+<div
+  class="bg3-play-bar"
+  role="navigation"
+  aria-label="Guide navigation"
+  data-bg3-play-bar
+  data-section-labels={JSON.stringify(sectionLabels)}
+>
+  <div class="bg3-play-bar__now">
+    <span class="bg3-play-bar__kicker">Playing now</span>
+    <span class="bg3-play-bar__section" data-current-section>Start</span>
+  </div>
+  <span class="bg3-play-bar__progress" data-checkpoint-progress aria-live="polite">0 / 10</span>
+  <div class="bg3-play-bar__jump">
+    <label class="visually-hidden" for="bg3-act-jump">Jump to step</label>
+    <select id="bg3-act-jump" class="bg3-play-bar__select">
+      <option value="">Jump to step…</option>
+      {acts.map((act) => (
+        <option value={act.slug}>{act.label}</option>
+      ))}
+    </select>
+    <button
+      type="button"
+      class="bg3-play-bar__sections-btn"
+      data-toc-toggle
+      aria-expanded="false"
+      aria-controls="bg3-toc-panel"
+    >
+      List
+    </button>
+  </div>
 </div>
 
 <style lang="scss">
