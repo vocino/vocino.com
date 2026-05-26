@@ -4,6 +4,7 @@
 .guide-prose {
   --guide-accent: var(--section-accent, #46e08b);
   --guide-accent-dim: color-mix(in srgb, var(--guide-accent) 14%, transparent);
+  --guide-input-bg: color-mix(in srgb, var(--guide-accent) 8%, var(--surface-2));
 
   max-width: 100%;
   font-family: 'Source Sans 3', sans-serif;
@@ -27,56 +28,246 @@
 
   h2 {
     font-family: 'Source Serif 4', Georgia, serif;
-    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-size: clamp(1.375rem, 3vw, 1.875rem);
     font-weight: 600;
-    margin: var(--guide-space-2xl) 0 var(--guide-space-lg);
-    padding-top: var(--guide-space-xl);
-    scroll-margin-top: calc(var(--guide-scroll-offset) + 3rem);
+    margin: var(--guide-space-xl) 0 var(--guide-space-md);
+    padding-top: var(--guide-space-lg);
+    scroll-margin-top: calc(var(--guide-playbar-offset) + 0.5rem);
     border-top: 1px solid color-mix(in srgb, var(--border) 90%, transparent);
+
+    &:first-of-type {
+      border-top: 0;
+      padding-top: 0;
+      margin-top: var(--guide-space-md);
+    }
   }
 
   h3 {
-    font-size: 1.25rem;
+    font-size: 1.125rem;
     font-weight: 600;
-    margin: var(--guide-space-xl) 0 var(--guide-space-md);
-    scroll-margin-top: calc(var(--guide-scroll-offset) + 3rem);
+    margin: var(--guide-space-lg) 0 var(--guide-space-sm);
+    scroll-margin-top: calc(var(--guide-playbar-offset) + 0.5rem);
+    color: var(--text-primary);
+  }
+
+  h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: var(--guide-space-md) 0 var(--guide-space-xs);
+    scroll-margin-top: calc(var(--guide-playbar-offset) + 0.5rem);
   }
 
   ul,
   ol {
-    margin: 0 0 var(--guide-space-lg);
-    padding-left: 1.5rem;
+    margin: 0 0 var(--guide-space-md);
+    padding-left: 1.35rem;
   }
 
   li {
-    margin-bottom: 0.75em;
+    margin-bottom: 0.55em;
+
+    &::marker {
+      color: var(--guide-accent);
+    }
+  }
+
+  // Numbered combat / opener steps — easy to scan while alt-tabbing
+  ol li {
+    padding-left: 0.15rem;
+
+    strong:first-child {
+      color: var(--text-primary);
+    }
   }
 
   a {
     color: var(--guide-accent);
   }
 
-  table {
-    width: 100%;
+  // --- Data tables (second-screen reference) ---
+  .guide-table-wrap {
+    margin: var(--guide-space-md) 0;
     max-width: 100%;
+  }
+
+  .guide-table {
+    width: 100%;
     border-collapse: collapse;
-    font-size: 0.9375rem;
-    margin: var(--guide-space-lg) 0;
+    font-size: var(--guide-table-size);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .guide-table-wrap:not(.guide-table--reference) .guide-table {
+    @media (min-width: 640px) {
+      display: table;
+    }
+  }
+
+  @media (max-width: 639px) {
+    .guide-table-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+    }
+
+    .guide-table-wrap.guide-table--data .guide-table {
+      min-width: 34rem;
+    }
+
+    .guide-table-wrap.guide-table--reference {
+      overflow-x: visible;
+    }
+
+    .guide-table-wrap.guide-table--reference .guide-table {
+      display: block;
+      border: 0;
+    }
+
+    .guide-table-wrap.guide-table--reference thead {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
+    }
+
+    .guide-table-wrap.guide-table--reference tbody {
+      display: block;
+    }
+
+    .guide-table-wrap.guide-table--reference tr {
+      display: block;
+      margin-bottom: 0.65rem;
+      padding: 0.75rem 0.875rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface-1);
+    }
+
+    .guide-table-wrap.guide-table--reference td {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.35rem 0;
+      border: 0;
+      background: transparent;
+
+      &::before {
+        content: attr(data-label);
+        flex: 0 0 auto;
+        max-width: 42%;
+        font-size: 0.6875rem;
+        font-family: 'Source Code Pro', monospace;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+      }
+
+      &:first-child {
+        padding-top: 0;
+        font-weight: 600;
+        font-size: 1rem;
+
+        &::before {
+          display: none;
+        }
+      }
+
+      &:not(:first-child) {
+        border-top: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+        padding-top: 0.5rem;
+        margin-top: 0.15rem;
+      }
+    }
+
+    // Value / input column stands out on stat & level tables
+    .guide-table-wrap.guide-table--reference td:nth-child(2) {
+      font-family: 'Source Code Pro', monospace;
+      font-size: 1.0625rem;
+      font-weight: 600;
+      color: var(--guide-accent);
+      text-align: right;
+      justify-content: flex-end;
+
+      &::before {
+        color: var(--text-muted);
+      }
+    }
+  }
+
+  @media (min-width: 640px) {
+    .guide-table-wrap {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--surface-1);
+    }
+
+    .guide-table-wrap.guide-table--reference {
+      box-shadow: 0 0 0 1px color-mix(in srgb, var(--guide-accent) 12%, transparent);
+    }
   }
 
   th,
   td {
     border: 1px solid var(--border);
-    padding: 0.65rem 0.85rem;
+    padding: 0.7rem 0.9rem;
     text-align: left;
     vertical-align: top;
+    word-wrap: break-word;
+    overflow-wrap: anywhere;
+  }
+
+  @media (min-width: 640px) {
+    .guide-table th,
+    .guide-table td {
+      border: 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .guide-table tr:last-child td,
+    .guide-table tr:last-child th {
+      border-bottom: 0;
+    }
   }
 
   th {
-    background: var(--surface-2);
+    font-family: 'Source Sans 3', sans-serif;
     font-size: 0.75rem;
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+    color: var(--text-primary);
+    background: var(--surface-2);
+  }
+
+  .guide-table--reference th:nth-child(2),
+  .guide-table--reference td:nth-child(2) {
+    background: var(--guide-input-bg);
+    font-family: 'Source Code Pro', monospace;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    color: var(--text-primary);
+    white-space: nowrap;
+  }
+
+  .guide-table--reference td:nth-child(2) strong {
+    color: var(--guide-accent);
+    font-weight: 700;
+  }
+
+  tr:nth-child(even) td {
+    background: color-mix(in srgb, var(--surface-2) 35%, transparent);
+  }
+
+  .guide-table--reference tr:nth-child(even) td:nth-child(2) {
+    background: color-mix(in srgb, var(--guide-accent) 10%, var(--surface-2));
   }
 
   blockquote {
@@ -93,6 +284,12 @@
     background: var(--surface-2);
     padding: 0.12em 0.35em;
     border-radius: 4px;
+  }
+
+  .bg3-checklist,
+  .bg3-rule,
+  .bg3-legend {
+    max-width: 100%;
   }
 }
 

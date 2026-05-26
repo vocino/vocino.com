@@ -1,0 +1,17 @@
+---
+import { BG3_GUIDE_ACTS } from '../_lib/guide-acts';
+---
+
+<div
+  class="bg3-action-dock"
+  data-action-dock
+  data-guide-acts={JSON.stringify(BG3_GUIDE_ACTS)}
+  hidden
+>
+  <button type="button" class="bg3-action-dock__done" data-dock-checkpoint hidden>
+    <span data-dock-checkpoint-label>Mark done</span>
+  </button>
+  <a class="bg3-action-dock__next" data-dock-next href="#" hidden>
+    Next: <span data-dock-next-label>step</span> →
+  </a>
+</div>

@@ -5,12 +5,14 @@
   grid-template-columns: minmax(0, 1fr);
   max-width: 72rem;
   margin: 0 auto;
-  padding: var(--guide-scroll-offset) clamp(1rem, 4vw, 2.5rem) var(--guide-space-2xl);
+  padding: calc(var(--guide-scroll-offset) - 1rem) clamp(1rem, 4vw, 2.5rem)
+    calc(var(--guide-space-2xl) + var(--guide-dock-offset, 0px));
 
   @media (min-width: 1024px) {
     grid-template-columns: 11.25rem minmax(0, 1fr);
     gap: clamp(1.75rem, 3vw, 2.5rem);
     align-items: start;
+    padding-top: var(--guide-scroll-offset);
   }
 
   &__sidebar {
@@ -32,20 +34,10 @@
     display: flex;
     flex-direction: column;
     gap: var(--guide-chrome-gap);
-    margin-bottom: var(--guide-space-xl);
-  }
+    margin-bottom: var(--guide-space-md);
 
-  &__sticky {
-    position: sticky;
-    top: 0.75rem;
-    z-index: 45;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    align-items: center;
-    padding: 0.5rem 0;
-    margin: 0 0 0.75rem;
-    background: color-mix(in srgb, var(--bg) 92%, transparent);
-    backdrop-filter: blur(8px);
+    @media (min-width: 640px) {
+      margin-bottom: var(--guide-space-lg);
+    }
   }
 }
