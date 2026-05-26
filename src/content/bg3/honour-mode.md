@@ -45,6 +45,16 @@ I wrote this for the Honour run I am on right now: Half-Orc **Smite Swords Bard*
 </div>
 </div>
 
+<div class="bg3-levels">
+<div class="bg3-level bg3-level--milestone">
+<div class="bg3-level__tier">Lvl 1</div>
+<div class="bg3-level__body">
+<p class="bg3-level__pick">Create a <strong>Half-Orc Bard</strong> with the level-1 spread below.</p>
+<p class="bg3-level__why">Stay <strong>pure Bard</strong> — College of Swords isn't available until level 3, and you want Bard's dialogue. Do not pick Paladin or Sorcerer at creation. Every later pick is flagged as a card when you reach that level.</p>
+</div>
+</div>
+</div>
+
 ### Origin and fantasy
 
 Any origin works mechanically. I like **Dark Urge** or a custom Half-Orc for the ruthless party tone — the crit passive is excellent on a build that lives on paralyzed targets. Your companions carry the stealth burst and the unkillable tank; you hold the line on social checks and battlefield control.
@@ -68,7 +78,7 @@ You want **high Dexterity** for weapon attacks and **high Charisma** for spell D
 
 ### Class path
 
-**Start as Bard on the Nautiloid.** Every Smite Swords Bard guide levels Bard first — you need College of Swords at character level 3, Extra Attack at 6, and the best dialogue options before you touch multiclass. You do not start Paladin or Sorcerer at level 1.
+**Start as Bard on the Nautiloid** and stay pure Bard through level 6 — you need College of Swords at character level 3, Extra Attack at 6, and Bard's dialogue before you touch multiclass. The Paladin and Sorcerer levels come later, after a clean respec at Withers (see Early Act 1).
 
 **End state at character level 12:** 6 College of Swords Bard / 4 Sorcerer (Draconic White or Shadow) / 2 Paladin.
 
@@ -78,25 +88,9 @@ You want **high Dexterity** for weapon attacks and **high Charisma** for spell D
 | **4 Sorcerer** | Metamagic (Quickened / Extended / Twinned), [[bg3:shield]], [[bg3:shadow-blade]], [[bg3:booming-blade]] |
 | **2 Paladin** | [[bg3:divine-smite]], [[bg3:command]], Crown accuracy |
 
-At **level 3 Bard** take **College of Swords** and fighting style **Two-Weapon Fighting** — dual hand crossbows in early Act 1; later your bonus action is usually a control spell, not an off-hand swing.
+**Oath of the Crown** is the pick — Righteous Clarity keeps smites landing in Honour. Don't take **Dual Wielder** on a piercing-vulnerability route; it trades damage for +1 AC.
 
-**Level order after Bard 6:** take **Paladin 2** (levels 7–8) for smites and heavy armor, then **Sorcerer 4** (levels 9–12). You only cap at six Bard levels in this split, so you never reach Bard 10 — no Magical Secrets. Learn [[bg3:counterspell]] from a scroll in Act 3 instead.
-
-**Paladin oath:** **Oath of the Crown** — Righteous Clarity is how you keep smites landing in Honour. Vengeance works if you prefer the fantasy; Crown is the pick for this route.
-
-Respec cleanly at Withers (see Early Act 1). Do not take **Dual Wielder** on a piercing-vulnerability route; it trades damage for +1 AC.
-
-**Feats (level order):**
-
-| Character level | Feat |
-| --- | --- |
-| 4 | **+2 DEX** (pure Bard) |
-| 8 | **[[bg3:savage-attacker]]** (2 Pal / 6 Bard — smites online) |
-| 12 | **+2 CHA** |
-
-If initiative keeps killing you before you cast Hold, take **[[bg3:alert]]** at level 4 instead of the DEX ASI — you trade damage for turn order.
-
-**Spells to prioritize:** [[bg3:hold-person]], [[bg3:healing-word]], [[bg3:hold-monster]] when you have the slot. After the Paladin dip: [[bg3:command]] (especially **Approach**). After Sorcerer levels: [[bg3:shield]], [[bg3:shadow-blade]], [[bg3:booming-blade]]. Buy **[[bg3:command]]** and **[[bg3:counterspell]]** scrolls until those spells are on your bar — you will not get Counterspell from class levels on this split.
+You don't have to memorize the rest now: the exact subclass, feat, and key spell for **every level-up** is called out as a card at the moment you ding it, starting in Early Act 1. The whole table is under **Early Act 1 → Full level plan** if you want it at a glance.
 
 ### Dark-synergy party (recruit order)
 
@@ -152,25 +146,76 @@ Shadowheart fits the dark theme; Gale is stronger if you want the Netherese orb 
 
 ### Unlock Withers and respec
 
-After the grove crisis, get to **Withers** in the Dank Crypt (or via Underdark route). **Respec** the party here.
+After the grove crisis, get to **Withers** in the Dank Crypt (or via the Underdark route) and **respec** the party here.
 
-**You — level order (2 Pal / 6 Bard / 4 Sorc by character level 12):**
+<div class="bg3-levels">
+<p class="bg3-levels__lead">Your level-up picks — Act 1</p>
+<div class="bg3-level">
+<div class="bg3-level__tier">Lvl 3</div>
+<div class="bg3-level__body">
+<p class="bg3-level__pick"><strong>College of Swords</strong> subclass + <strong>Two-Weapon Fighting</strong> style.</p>
+<p class="bg3-level__why">Your first real power pick — unlocks Slashing Flourish and dual hand-crossbow damage.</p>
+</div>
+</div>
+<div class="bg3-level">
+<div class="bg3-level__tier">Lvl 4</div>
+<div class="bg3-level__body">
+<p class="bg3-level__pick">Feat: <strong>+2 DEX</strong> (18 with Hag's Hair).</p>
+<p class="bg3-level__why">Accuracy, AC, and initiative. Take <strong>Alert</strong> instead if you keep dying before you can cast Hold.</p>
+</div>
+</div>
+<div class="bg3-level">
+<div class="bg3-level__tier">Lvl 5</div>
+<div class="bg3-level__body">
+<p class="bg3-level__pick">Level-3 spells — slot <strong>Hold Person</strong> (upcast for two targets).</p>
+<p class="bg3-level__why">Paralyze = auto-crit. This hold → smite loop is your boss pattern for the rest of the game; drill it now.</p>
+</div>
+</div>
+<div class="bg3-level">
+<div class="bg3-level__tier">Lvl 6</div>
+<div class="bg3-level__body">
+<p class="bg3-level__pick"><strong>Extra Attack</strong> — last pure-Bard level.</p>
+<p class="bg3-level__why">Doubles your weapon hits and smite chances per turn. This is the Act 1 power spike.</p>
+</div>
+</div>
+<div class="bg3-level bg3-level--milestone">
+<div class="bg3-level__tier">Lvl 7 · respec</div>
+<div class="bg3-level__body">
+<p class="bg3-level__pick">At Withers, add <strong>Paladin 1</strong> — Oath of the Crown.</p>
+<p class="bg3-level__why">Heavy armor and Righteous Clarity, which keeps smites landing in Honour. Respec the whole party here too.</p>
+</div>
+</div>
+<div class="bg3-level bg3-level--milestone">
+<div class="bg3-level__tier">Lvl 8</div>
+<div class="bg3-level__body">
+<p class="bg3-level__pick"><strong>Paladin 2</strong> — Divine Smite, Defense style, Command. Feat: <strong>Savage Attacker</strong>.</p>
+<p class="bg3-level__why">Smites come online and Command (Approach) groups enemies for cleave. Savage Attacker rerolls your damage dice.</p>
+</div>
+</div>
+</div>
 
-| Level | Class levels | Notes |
+You take the Paladin dip (levels 7–8) after the level-5 push, so staying pure Bard through level 6 before the Withers respec is fine if you're behind on XP — the Act 1 route is built around reaching **character level 6**, not Paladin levels yet. The Sorcerer levels (9–12) land in Act 2 and 3.
+
+<details class="bg3-reference">
+<summary class="bg3-reference__summary"><span>Full level plan (levels 1–12)</span></summary>
+<div class="bg3-reference__body">
+
+| Level | Class levels | Pick |
 | --- | --- | --- |
 | 1–2 | Bard | Created as Bard on the Nautiloid |
 | 3 | Bard 3 | **College of Swords**, Two-Weapon Fighting |
-| 4 | Bard 4 | **+2 DEX** (or [[bg3:alert]] if you chose that trade) |
+| 4 | Bard 4 | Feat: **+2 DEX** (or [[bg3:alert]]) |
 | 5 | Bard 5 | Level 3 spells online |
 | 6 | Bard 6 | **Extra Attack** |
-| 7 | Respec → 1 Paladin / 6 Bard | At Withers — heavy armor, path to smites |
-| 8 | 2 Paladin / 6 Bard | **[[bg3:divine-smite]]**, Defense fighting style, **[[bg3:command]]** |
+| 7 | 1 Paladin / 6 Bard | Respec at Withers — heavy armor, Oath of the Crown |
+| 8 | 2 Paladin / 6 Bard | **[[bg3:divine-smite]]**, Defense style, **[[bg3:command]]**; feat **[[bg3:savage-attacker]]** |
 | 9 | 2 Pal / 6 Bard / 1 Sorc | Metamagic online |
-| 10 | 2 Pal / 6 Bard / 2 Sorc | **[[bg3:savage-attacker]]** feat |
-| 11 | 2 Pal / 6 Bard / 3 Sorc | [[bg3:shadow-blade]], [[bg3:shield]] |
-| 12 | 2 Pal / 6 Bard / 4 Sorc | Final split; **+2 CHA** feat |
+| 10 | 2 Pal / 6 Bard / 2 Sorc | **[[bg3:shield]]** reaction |
+| 11 | 2 Pal / 6 Bard / 3 Sorc | **[[bg3:shadow-blade]]** (upcast L5 slot) |
+| 12 | 2 Pal / 6 Bard / 4 Sorc | Final split; feat **+2 CHA** |
 
-If you are behind on XP, staying pure Bard through level 6 before the Withers respec is fine — the Act 1 route is built around reaching **Bard 6** and **character level 6**, not Paladin levels yet.
+</div>
+</details>
 
 **Companions:**
 
@@ -197,7 +242,7 @@ Stock **Enhance Ability** scrolls or learn the spell on Bard — it is an Honour
 
 **Close:** Karlach stuns and flurries; Astarion focuses held or isolated targets in **Aura of Murder** range.
 
-<div class="bg3-step__pager"><a href="#act-1-level-5-route">← Early Act 1</a> <a href="#act-1-level-5-route">Next: Level 5 push →</a></div>
+<div class="bg3-step__pager"><a href="#act-1-level-5-route">Next: Level 5 push →</a></div>
 
 ## Act 1 level 5 route
 
@@ -308,6 +353,31 @@ Honour checks are brutal — stack Enhance Ability and respec tricks before **Mi
 <div class="bg3-step__warn"><strong>Skip default — Isobel:</strong> One bad round can brick the whole act (inn falls, NPC deaths). Only fight if you accept that risk.</div>
 </div>
 
+<div class="bg3-levels">
+<p class="bg3-levels__lead">Your level-up picks — Act 2</p>
+<div class="bg3-level">
+<div class="bg3-level__tier">Lvl 9</div>
+<div class="bg3-level__body">
+<p class="bg3-level__pick"><strong>Sorcerer 1</strong> — Metamagic: Quickened, Twinned, Extended.</p>
+<p class="bg3-level__why">Quickened Spell lets you land Hold <em>and</em> attack in the same turn. This is the build's engine.</p>
+</div>
+</div>
+<div class="bg3-level">
+<div class="bg3-level__tier">Lvl 10</div>
+<div class="bg3-level__body">
+<p class="bg3-level__pick"><strong>Sorcerer 2</strong> — learn <strong>Shield</strong>.</p>
+<p class="bg3-level__why">A reaction that can negate a lethal hit — huge insurance for a squishy lead in Honour.</p>
+</div>
+</div>
+<div class="bg3-level">
+<div class="bg3-level__tier">Lvl 11</div>
+<div class="bg3-level__body">
+<p class="bg3-level__pick"><strong>Sorcerer 3</strong> — <strong>Shadow Blade</strong>, upcast to a level-5 slot.</p>
+<p class="bg3-level__why">Becomes your main weapon: psychic damage and advantage in dim light. Pairs with the gear pivot below.</p>
+</div>
+</div>
+</div>
+
 ### Isobel (optional, high risk)
 
 If you insist: cast [[bg3:sanctuary]] and [[bg3:protection-from-evil-and-good]] on Isobel before the scene; [[bg3:arcane-lock]] on doors helps vs winged horrors. Kill Marcus fast. I still skip this on first Honour clears.
@@ -375,6 +445,17 @@ Optional: fight phase 1 to free Aylin and burn the mind flayer before phase 2. S
 <p>Rush spell DC gear ([[bg3:birthright]], [[bg3:markoheshkir]], Cloak of the Weave). Skip Ansur on first clear.</p>
 </div>
 <div class="bg3-step__optional"><strong>Optional skip — Ansur:</strong> Hardest optional fight in the game. [[bg3:globe-of-invulnerability]] helps but the run does not need his loot. Save for a later run.</div>
+</div>
+
+<div class="bg3-levels">
+<p class="bg3-levels__lead">Your level-up pick — Act 3</p>
+<div class="bg3-level bg3-level--milestone">
+<div class="bg3-level__tier">Lvl 12</div>
+<div class="bg3-level__body">
+<p class="bg3-level__pick"><strong>Sorcerer 4</strong> — final split. Feat: <strong>+2 CHA</strong>.</p>
+<p class="bg3-level__why">Maxes spell DC so Hold Monster sticks on bosses. Learn <strong>Counterspell</strong> from a scroll — this split never reaches Bard 10, so there's no Magical Secrets pickup.</p>
+</div>
+</div>
 </div>
 
 - **Hold Monster** is the delete button; prioritize it every boss fight.

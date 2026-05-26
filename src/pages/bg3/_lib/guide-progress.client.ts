@@ -104,12 +104,14 @@ function syncButtons(): void {
 
 function syncProgressCount(): void {
   const el = document.querySelector<HTMLElement>('[data-checkpoint-progress]');
-  if (!el) return;
 
   const buttons = document.querySelectorAll<HTMLButtonElement>('[data-checkpoint-id]');
   const total = buttons.length;
   const done = [...buttons].filter((btn) => btn.classList.contains('is-done')).length;
-  el.textContent = `${done} / ${total}`;
+  if (el) el.textContent = `${done} / ${total}`;
+
+  const fill = document.querySelector<HTMLElement>('[data-progress-fill]');
+  if (fill) fill.style.width = total ? `${Math.round((done / total) * 100)}%` : '0';
 }
 
 function syncStepCompleteState(): void {
