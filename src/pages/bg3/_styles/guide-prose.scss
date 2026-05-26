@@ -32,7 +32,7 @@
     font-weight: 600;
     margin: var(--guide-space-xl) 0 var(--guide-space-md);
     padding-top: var(--guide-space-lg);
-    scroll-margin-top: calc(var(--guide-playbar-offset) + 0.5rem);
+    scroll-margin-top: var(--guide-anchor-offset);
     border-top: 1px solid color-mix(in srgb, var(--border) 90%, transparent);
 
     &:first-of-type {
@@ -46,7 +46,7 @@
     font-size: 1.125rem;
     font-weight: 600;
     margin: var(--guide-space-lg) 0 var(--guide-space-sm);
-    scroll-margin-top: calc(var(--guide-playbar-offset) + 0.5rem);
+    scroll-margin-top: var(--guide-anchor-offset);
     color: var(--text-primary);
   }
 
@@ -54,7 +54,7 @@
     font-size: 1rem;
     font-weight: 600;
     margin: var(--guide-space-md) 0 var(--guide-space-xs);
-    scroll-margin-top: calc(var(--guide-playbar-offset) + 0.5rem);
+    scroll-margin-top: var(--guide-anchor-offset);
   }
 
   ul,
@@ -284,12 +284,6 @@
     background: var(--surface-2);
     padding: 0.12em 0.35em;
     border-radius: 4px;
-  }
-
-  .bg3-checklist,
-  .bg3-rule,
-  .bg3-legend {
-    max-width: 100%;
   }
 }
 
