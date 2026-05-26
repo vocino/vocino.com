@@ -44,7 +44,7 @@ I wrote this for the Honour run I am on right now: Half-Orc **Smite Swords Bard*
 </div>
 <div class="bg3-step__now">
 <strong>Do this now</strong>
-<p>Pick Half-Orc, College of Swords, and the stat line below. Level as Bard through Act 1, then respec at Withers into the 6 / 4 / 2 split.</p>
+<p>Pick Half-Orc, class <strong>Bard</strong>, and the stat line below. Stay pure Bard through level 6, then respec at Withers and finish the 6 / 4 / 2 split from level 7 onward.</p>
 </div>
 </div>
 
@@ -71,15 +71,19 @@ You want **high Dexterity** for weapon attacks and **high Charisma** for spell D
 
 ### Class path
 
+**Start as Bard on the Nautiloid.** Every Smite Swords Bard guide levels Bard first — you need College of Swords at character level 3, Extra Attack at 6, and the best dialogue options before you touch multiclass. You do not start Paladin or Sorcerer at level 1.
+
 **End state at character level 12:** 6 College of Swords Bard / 4 Sorcerer (Draconic White or Shadow) / 2 Paladin.
 
 | Class | Why |
 | --- | --- |
-| **6 Bard (Swords)** | Full caster slots through Paladin dip, Extra Attack, Slashing Flourish cleave, Magical Secrets, best dialogue |
+| **6 Bard (Swords)** | Full caster slot progression with the Paladin dip, Extra Attack, Slashing Flourish cleave, best dialogue |
 | **4 Sorcerer** | Metamagic (Quickened / Extended / Twinned), [[bg3:shield]], [[bg3:shadow-blade]], [[bg3:booming-blade]] |
-| **2 Paladin** | [[bg3:divine-smite]], [[bg3:command]], martial kit |
+| **2 Paladin** | [[bg3:divine-smite]], [[bg3:command]], Crown accuracy |
 
-At **level 3 Bard** take **College of Swords** and fighting style **Two-Weapon Fighting** — you will use dual hand crossbows in early Act 1; later your bonus action is usually a control spell, not an off-hand swing.
+At **level 3 Bard** take **College of Swords** and fighting style **Two-Weapon Fighting** — dual hand crossbows in early Act 1; later your bonus action is usually a control spell, not an off-hand swing.
+
+**Level order after Bard 6:** take **Paladin 2** (levels 7–8) for smites and heavy armor, then **Sorcerer 4** (levels 9–12). You only cap at six Bard levels in this split, so you never reach Bard 10 — no Magical Secrets. Learn [[bg3:counterspell]] from a scroll in Act 3 instead.
 
 **Paladin oath:** **Oath of the Crown** — Righteous Clarity is how you keep smites landing in Honour. Vengeance works if you prefer the fantasy; Crown is the pick for this route.
 
@@ -89,13 +93,13 @@ Respec cleanly at Withers (see Early Act 1). Do not take **Dual Wielder** on a p
 
 | Character level | Feat |
 | --- | --- |
-| 4 (Bard) | **+2 DEX** |
-| 8 (Bard) | **[[bg3:savage-attacker]]** |
-| 10+ | **+2 CHA** |
+| 4 | **+2 DEX** (pure Bard) |
+| 8 | **[[bg3:savage-attacker]]** (2 Pal / 6 Bard — smites online) |
+| 12 | **+2 CHA** |
 
 If initiative keeps killing you before you cast Hold, take **[[bg3:alert]]** at level 4 instead of the DEX ASI — you trade damage for turn order.
 
-**Spells to prioritize:** [[bg3:command]] (especially **Approach** — pulls enemies into your cleave), [[bg3:hold-person]], [[bg3:healing-word]], [[bg3:shield]] (from Sorcerer), [[bg3:hold-monster]] when you have the slot. **Magical Secrets** at Bard 10: [[bg3:counterspell]] first; second pick is usually [[bg3:spirit-guardians]] on this party or [[bg3:misty-step]] if you want more mobility.
+**Spells to prioritize:** [[bg3:hold-person]], [[bg3:healing-word]], [[bg3:hold-monster]] when you have the slot. After the Paladin dip: [[bg3:command]] (especially **Approach**). After Sorcerer levels: [[bg3:shield]], [[bg3:shadow-blade]], [[bg3:booming-blade]]. Buy **[[bg3:command]]** and **[[bg3:counterspell]]** scrolls until those spells are on your bar — you will not get Counterspell from class levels on this split.
 
 ### Dark-synergy party (recruit order)
 
@@ -153,21 +157,23 @@ Shadowheart fits the dark theme; Gale is stronger if you want the Netherese orb 
 
 After the grove crisis, get to **Withers** in the Dank Crypt (or via Underdark route). **Respec** the party here.
 
-**You — level through Act 1 (6 Bard / 4 Sorc / 2 Pal by character level 12):**
+**You — level order (2 Pal / 6 Bard / 4 Sorc by character level 12):**
 
 | Level | Class levels | Notes |
 | --- | --- | --- |
-| 1–2 | Bard | Start Bard |
+| 1–2 | Bard | Created as Bard on the Nautiloid |
 | 3 | Bard 3 | **College of Swords**, Two-Weapon Fighting |
 | 4 | Bard 4 | **+2 DEX** (or [[bg3:alert]] if you chose that trade) |
 | 5 | Bard 5 | Level 3 spells online |
 | 6 | Bard 6 | **Extra Attack** |
-| 7 | Respec → 1 Sorcerer / 6 Bard | CON save proficiencies from Sorcerer |
-| 8 | +1 Paladin (2 Pal / 6 Bard) | **[[bg3:divine-smite]]**, Defense fighting style |
-| 9–10 | Sorcerer | Finish **4 Sorcerer** |
-| 11–12 | +Paladin or Sorc as needed | Locked at **2 Pal / 6 Bard / 4 Sorc**; Bard 10 = Magical Secrets |
+| 7 | Respec → 1 Paladin / 6 Bard | At Withers — heavy armor, path to smites |
+| 8 | 2 Paladin / 6 Bard | **[[bg3:divine-smite]]**, Defense fighting style, **[[bg3:command]]** |
+| 9 | 2 Pal / 6 Bard / 1 Sorc | Metamagic online |
+| 10 | 2 Pal / 6 Bard / 2 Sorc | **[[bg3:savage-attacker]]** feat |
+| 11 | 2 Pal / 6 Bard / 3 Sorc | [[bg3:shadow-blade]], [[bg3:shield]] |
+| 12 | 2 Pal / 6 Bard / 4 Sorc | Final split; **+2 CHA** feat |
 
-If you are behind on XP, staying pure Bard through level 8 is fine — the route stabilizes once you have Extra Attack and two Paladin levels for smites.
+If you are behind on XP, staying pure Bard through level 6 before the Withers respec is fine — the Act 1 route is built around reaching **Bard 6** and **character level 6**, not Paladin levels yet.
 
 **Companions:**
 
@@ -187,7 +193,7 @@ Stock **Enhance Ability** scrolls or learn the spell on Bard — it is an Honour
 
 **Your turn pattern:**
 
-1. **[[bg3:command]]** when you need grouping or a non-concentration lockdown — **Command: Approach** pulls enemies into melee for cleave smites.
+1. **[[bg3:command]]** (class spell after level 8; scroll before that) when you need grouping — **Command: Approach** pulls enemies into melee for cleave smites.
 2. **[[bg3:hold-person]]** or **[[bg3:hold-monster]]** on the boss (upcast for Paralyzed / auto-crit).
 3. **Attack + [[bg3:divine-smite]] + Slashing Flourish** — cleave a second held or adjacent target. Do not dump damage into uncontrolled targets.
 4. **[[bg3:shadow-blade]]** (Act 2+, upcast when worth it) when flourishes are spent; **[[bg3:booming-blade]]** on leftovers.
@@ -365,7 +371,7 @@ Optional: fight phase 1 to free Aylin and burn the mind flayer before phase 2. S
 </div>
 
 - **Hold Monster** is the delete button; prioritize it every boss fight.
-- At **Bard 10** (character level 12): take **[[bg3:counterspell]]** from Magical Secrets — non-negotiable for Honour tempo.
+- Learn **[[bg3:counterspell]]** from a scroll (Sorcerous Sundries or vendors) — this split never reaches Bard 10, so there is no Magical Secrets pickup.
 - Rush [[bg3:birthright]] + [[bg3:markoheshkir]] for spell DC and free damage; daily ice casts from the staff.
 - Accept tadpoles on companions if you are comfortable with the story beat; flight and Far Realm luck are large buffs.
 - Do not waste long-rest buffs right before the elder brain sequence if you used day-long camp follower tricks.
