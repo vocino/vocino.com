@@ -105,6 +105,11 @@ Shadowheart fits the dark theme; Gale is stronger if you want the Netherese orb 
 
 <div class="bg3-step__pager"><a href="#nautiloid-to-grove">Next: Nautiloid → Grove →</a></div>
 
+<div class="bg3-act-divider">
+<span class="bg3-act-divider__num">Act 1</span>
+<span class="bg3-act-divider__name">Wilderness · Grove · Underdark</span>
+</div>
+
 ## Nautiloid to Grove
 
 <div class="bg3-step" id="nautiloid-to-grove">
@@ -178,23 +183,9 @@ After the grove crisis, get to **Withers** in the Dank Crypt (or via the Underda
 <p class="bg3-level__why">Doubles your weapon hits and smite chances per turn. This is the Act 1 power spike.</p>
 </div>
 </div>
-<div class="bg3-level bg3-level--milestone">
-<div class="bg3-level__tier">Lvl 7 · respec</div>
-<div class="bg3-level__body">
-<p class="bg3-level__pick">At Withers, add <strong>Paladin 1</strong> — Oath of the Crown.</p>
-<p class="bg3-level__why">Heavy armor and Righteous Clarity, which keeps smites landing in Honour. Respec the whole party here too.</p>
-</div>
-</div>
-<div class="bg3-level bg3-level--milestone">
-<div class="bg3-level__tier">Lvl 8</div>
-<div class="bg3-level__body">
-<p class="bg3-level__pick"><strong>Paladin 2</strong> — Divine Smite, Defense style, Command. Feat: <strong>Savage Attacker</strong>.</p>
-<p class="bg3-level__why">Smites come online and Command (Approach) groups enemies for cleave. Savage Attacker rerolls your damage dice.</p>
-</div>
-</div>
 </div>
 
-You take the Paladin dip (levels 7–8) after the level-5 push, so staying pure Bard through level 6 before the Withers respec is fine if you're behind on XP — the Act 1 route is built around reaching **character level 6**, not Paladin levels yet. The Sorcerer levels (9–12) land in Act 2 and 3.
+Stay pure Bard through level 6 — the Act 1 route is built around reaching **character level 6**, not Paladin levels yet. Respec at Withers as soon as it's available; the **Paladin dip (levels 7–8) comes after the level-5 push** (see below), and the Sorcerer levels (9–12) land in Act 2 and 3.
 
 <details class="bg3-reference">
 <summary class="bg3-reference__summary"><span>Full level plan (levels 1–12)</span></summary>
@@ -307,6 +298,24 @@ Practice the hold → smite loop here: **Paralyzed** targets autocrit — that i
 
 Stock **[[bg3:greater-invisibility]]** and [[bg3:pass-without-trace]] scrolls when available; they define the party opener from level 5 onward.
 
+<div class="bg3-levels">
+<p class="bg3-levels__lead">Your level-up picks — the Paladin dip (late Act 1)</p>
+<div class="bg3-level bg3-level--milestone">
+<div class="bg3-level__tier">Lvl 7 · respec</div>
+<div class="bg3-level__body">
+<p class="bg3-level__pick">At Withers, add <strong>Paladin 1</strong> — Oath of the Crown.</p>
+<p class="bg3-level__why">Heavy armor and Righteous Clarity, which keeps smites landing in Honour. Respec the whole party to their plans here too.</p>
+</div>
+</div>
+<div class="bg3-level bg3-level--milestone">
+<div class="bg3-level__tier">Lvl 8</div>
+<div class="bg3-level__body">
+<p class="bg3-level__pick"><strong>Paladin 2</strong> — Divine Smite, Defense style, Command. Feat: <strong>Savage Attacker</strong>.</p>
+<p class="bg3-level__why">Smites come online and Command (Approach) groups enemies for cleave. Savage Attacker rerolls your damage dice.</p>
+</div>
+</div>
+</div>
+
 <div class="bg3-step__pager"><a href="#leaving-act-1">Next: Leaving Act 1 →</a></div>
 
 ## Leaving Act 1
@@ -335,6 +344,11 @@ Stock **[[bg3:greater-invisibility]]** and [[bg3:pass-without-trace]] scrolls wh
 </ul>
 
 Honour checks are brutal — stack Enhance Ability and respec tricks before **Mirror of Loss** (+2 **DEX**).
+
+<div class="bg3-act-divider">
+<span class="bg3-act-divider__num">Act 2</span>
+<span class="bg3-act-divider__name">The Shadow-Cursed Lands</span>
+</div>
 
 ## Act 2 progression
 
@@ -396,7 +410,9 @@ Talk them into destroying themselves when you can. **Thisobald** needs **save** 
 - **Callous Glow Ring** — Radiant Orb stacking with [[bg3:magic-missile]] on tank/Gale.
 - **[[bg3:drakethroat-glaive]]** — twin cold buff daily on tank weapon + Astarion bow.
 
-### Standard fight opener (level 5+)
+### Standard fight opener — same loop, Act 2 tools
+
+It's the Act 1 hold → smite loop (open the cheat sheet up top), now with your Act 2 kit layered on:
 
 1. [[bg3:greater-invisibility]] on Astarion; pre-attack from stealth.
 2. Phalar Shriek + Bane oil on tank; run tank in with speed potion for Orb stacks.
@@ -430,6 +446,11 @@ Talk them into destroying themselves when you can. **Thisobald** needs **save** 
 
 Optional: fight phase 1 to free Aylin and burn the mind flayer before phase 2. Skipping phase 1 via dialogue is valid if you want less chaos.
 
+<div class="bg3-act-divider">
+<span class="bg3-act-divider__num">Act 3</span>
+<span class="bg3-act-divider__name">Rivington & the Lower City</span>
+</div>
+
 ## Act 3 progression
 
 <div class="bg3-step" id="act-3-progression">
@@ -458,9 +479,14 @@ Optional: fight phase 1 to free Aylin and burn the mind flayer before phase 2. S
 </div>
 </div>
 
-- **Hold Monster** is the delete button; prioritize it every boss fight.
-- Learn **[[bg3:counterspell]]** from a scroll (Sorcerous Sundries or vendors) — this split never reaches Bard 10, so there is no Magical Secrets pickup.
+### Power spikes — rush these first
+
 - Rush [[bg3:birthright]] + [[bg3:markoheshkir]] for spell DC and free damage; daily ice casts from the staff.
+- **Hold Monster** is the delete button now — prioritize it every boss fight.
+- Learn **[[bg3:counterspell]]** from a scroll (Sorcerous Sundries or vendors) — this split never reaches Bard 10, so there is no Magical Secrets pickup.
+
+### Before the Nether Brain
+
 - Accept tadpoles on companions if you are comfortable with the story beat; flight and Far Realm luck are large buffs.
 - Do not waste long-rest buffs right before the elder brain sequence if you used day-long camp follower tricks.
 

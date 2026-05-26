@@ -287,6 +287,35 @@
   }
 }
 
+/* Act / chapter divider — gives the run a sense of moving between acts */
+.bg3-act-divider {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.85rem;
+  margin: var(--guide-space-2xl) 0 var(--guide-space-md);
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--section-accent, #46e08b) 35%, var(--border));
+  scroll-margin-top: var(--guide-scroll-offset);
+
+  &__num {
+    font-family: 'Source Code Pro', monospace;
+    font-size: clamp(1.5rem, 5vw, 2.25rem);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--section-accent, #46e08b);
+  }
+
+  &__name {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: clamp(0.9375rem, 2.5vw, 1.0625rem);
+    font-style: italic;
+    color: var(--text-secondary);
+  }
+}
+
 .bg3-play-bar {
   position: sticky;
   top: 0;

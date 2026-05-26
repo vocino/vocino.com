@@ -54,6 +54,17 @@ function sectionLabelForSlug(slug: string): string {
   }
 }
 
+function actForSlug(slug: string): string | null {
+  const bar = document.querySelector<HTMLElement>('[data-bg3-play-bar]');
+  if (!bar?.dataset.sectionActs) return null;
+  try {
+    const map = JSON.parse(bar.dataset.sectionActs) as Record<string, string>;
+    return map[slug] ?? null;
+  } catch {
+    return null;
+  }
+}
+
 function saveLastSection(slug: string): void {
   try {
     localStorage.setItem(LAST_SECTION_KEY, slug);
@@ -79,6 +90,9 @@ function setCurrentSection(slug: string | null): void {
 
   const el = document.querySelector<HTMLElement>('[data-current-section]');
   if (el) el.textContent = sectionLabelForSlug(slug);
+
+  const actEl = document.querySelector<HTMLElement>('[data-current-act]');
+  if (actEl) actEl.textContent = actForSlug(slug) ?? 'Playing now';
 
   syncStepHighlight(slug);
   updateNextNavigation(slug);

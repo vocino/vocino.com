@@ -1,7 +1,9 @@
 ---
-import { BG3_GUIDE_ACTS, getSectionLabels } from '../_lib/guide-acts';
+import { BG3_GUIDE_ACTS, getActGroups, getSectionActs, getSectionLabels } from '../_lib/guide-acts';
 
 const sectionLabels = getSectionLabels();
+const sectionActs = getSectionActs();
+const actGroups = getActGroups();
 ---
 
 <div
@@ -10,6 +12,7 @@ const sectionLabels = getSectionLabels();
   aria-label="Guide navigation"
   data-bg3-play-bar
   data-section-labels={JSON.stringify(sectionLabels)}
+  data-section-acts={JSON.stringify(sectionActs)}
   data-act-slugs={JSON.stringify(BG3_GUIDE_ACTS.map((a) => a.slug))}
 >
   <div class="bg3-resume" data-resume-banner hidden>
@@ -21,7 +24,7 @@ const sectionLabels = getSectionLabels();
 
   <div class="bg3-play-bar__row">
     <div class="bg3-play-bar__now">
-      <span class="bg3-play-bar__kicker">Playing now</span>
+      <span class="bg3-play-bar__kicker" data-current-act>Playing now</span>
       <span class="bg3-play-bar__section" data-current-section>Start</span>
       <span class="bg3-play-bar__next-hint" data-next-hint hidden></span>
     </div>
@@ -30,8 +33,12 @@ const sectionLabels = getSectionLabels();
       <label class="visually-hidden" for="bg3-act-jump">Jump to step</label>
       <select id="bg3-act-jump" class="bg3-play-bar__select">
         <option value="">Jump to step…</option>
-        {BG3_GUIDE_ACTS.map((act) => (
-          <option value={act.slug}>{act.label}</option>
+        {actGroups.map((group) => (
+          <optgroup label={group.act}>
+            {group.beats.map((beat) => (
+              <option value={beat.slug}>{beat.label}</option>
+            ))}
+          </optgroup>
         ))}
       </select>
       <a class="bg3-play-bar__next-btn" data-play-next href="#" hidden aria-label="Go to next step">
