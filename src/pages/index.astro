@@ -4,6 +4,9 @@ export const prerender = true;
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SiteBrand from '../components/SiteBrand.astro';
 import SocialLinks from '../components/SocialLinks.astro';
+import { getHomepageHubs } from '../lib/homepage-hubs';
+
+const homepageHubs = await getHomepageHubs();
 ---
 
 <BaseLayout
@@ -22,4 +25,24 @@ import SocialLinks from '../components/SocialLinks.astro';
       <SocialLinks />
     </div>
   </div>
+
+  {
+    homepageHubs.length > 0 && (
+      <nav class="home-hub-pills" aria-label="Hub links">
+        <ul class="home-hub-pills__list">
+          {homepageHubs.map((hub) => (
+            <li class="home-hub-pills__item">
+              <a
+                class="home-hub-pills__link"
+                href={hub.href}
+                style={`--hub-accent: ${hub.accent}`}
+              >
+                {hub.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    )
+  }
 </BaseLayout>

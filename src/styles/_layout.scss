@@ -159,6 +159,86 @@
   }
 }
 
+// Homepage hub pills — fixed-bottom tag nav (index only)
+.home-hub-pills {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 40;
+  display: flex;
+  justify-content: center;
+  padding: $spacing-unit * 3 $spacing-unit * 4;
+  padding-bottom: calc(#{$spacing-unit * 3} + env(safe-area-inset-bottom, 0px));
+  pointer-events: none;
+
+  @media (max-width: $breakpoint-sm) {
+    padding: $spacing-unit * 2 $spacing-unit * 3;
+    padding-bottom: calc(#{$spacing-unit * 2} + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+.home-hub-pills__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-unit * 1.25;
+  max-width: min(100%, 42rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  pointer-events: auto;
+}
+
+.home-hub-pills__item {
+  margin: 0;
+}
+
+.home-hub-pills__link {
+  display: inline-flex;
+  align-items: center;
+  font-family: $font-family-sans;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-normal;
+  letter-spacing: $tracking-wide;
+  line-height: 1.2;
+  color: var(--text-muted);
+  text-decoration: none;
+  padding: 0.35rem 0.65rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--border) 85%, transparent);
+  background: color-mix(in srgb, var(--surface-1) 55%, transparent);
+  opacity: 0.72;
+  transition:
+    color 0.25s ease,
+    border-color 0.25s ease,
+    background-color 0.25s ease,
+    opacity 0.25s ease;
+
+  &:hover {
+    color: var(--text-secondary);
+    border-color: color-mix(in srgb, var(--hub-accent, var(--border)) 28%, var(--border));
+    background: color-mix(in srgb, var(--surface-2) 70%, transparent);
+    opacity: 0.92;
+    text-decoration: none;
+  }
+
+  &:focus-visible {
+    outline: 1px solid color-mix(in srgb, var(--hub-accent, var(--brand)) 45%, var(--border));
+    outline-offset: 2px;
+    color: var(--text-secondary);
+    opacity: 1;
+    text-decoration: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-hub-pills__link {
+    transition: none;
+  }
+}
+
 // Social links — horizontal row, centered under bio
 .social-links {
   display: flex;

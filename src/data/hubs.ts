@@ -1,29 +1,43 @@
 import type { SeoBreadcrumbItem } from './seo';
 
+/** Content collection keys used for hub freshness on the homepage nav. */
+export type HubContentCollection = 'bg3' | 'homelab';
+
 export interface HubRegistryEntry {
   slug: string;
   name: string;
+  /** Short label for compact nav (homepage pills). Falls back to `name`. */
+  navLabel?: string;
   description: string;
   accent: string;
   indexable: boolean;
   imagePath?: string;
+  /** Collection + entry slug for resolving `updated` from frontmatter. */
+  contentCollection?: HubContentCollection;
+  contentEntry?: string;
 }
 
 export const hubRegistry: HubRegistryEntry[] = [
   {
     slug: 'bg3',
     name: "Baldur's Gate 3",
+    navLabel: "Baldur's Gate 3",
     description: "Baldur's Gate 3 builds, guides, and honour-mode notes by Travis Vocino.",
     accent: '#46E08B',
     indexable: true,
+    contentCollection: 'bg3',
+    contentEntry: 'honour-mode',
   },
   {
     slug: 'homelab',
     name: 'Home Lab',
+    navLabel: 'Homelab',
     description:
       'Self-hosted media stack — Docker Compose, *arr, Jellyfin, Cloudflare Tunnel, and the traps worth knowing.',
     accent: '#FFB86B',
     indexable: true,
+    contentCollection: 'homelab',
+    contentEntry: 'media-stack',
   },
 ];
 
