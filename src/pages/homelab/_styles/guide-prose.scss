@@ -1,45 +1,58 @@
 @use 'guide-tokens';
+@use 'guide-components';
 
-// Plain descendant selectors only — :global() does not compile when imported as raw SCSS.
+.homelab-console .guide-prose {
+  --guide-accent: var(--term-phosphor);
+  --guide-accent-dim: color-mix(in srgb, var(--guide-accent) 10%, transparent);
 
-.guide-prose {
-  --guide-accent: var(--section-accent, #ffb86b);
-  --guide-accent-dim: color-mix(in srgb, var(--guide-accent) 14%, transparent);
-
-  // Full width of the main column; body copy stays at --guide-measure
   max-width: 100%;
-  font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: 'Source Code Pro', monospace;
   font-size: var(--guide-body-size);
   font-weight: 400;
   line-height: var(--guide-body-leading);
-  color: var(--text-primary);
+  color: var(--term-text);
   letter-spacing: 0.01em;
   text-wrap: pretty;
+  padding: 1rem 1.1rem 1.5rem;
+  background: var(--term-bg);
+  border: 1px solid var(--term-border-dim);
+  box-shadow: inset 0 0 80px color-mix(in srgb, var(--term-phosphor) 3%, transparent);
 
-  // Readable measure for body copy (code blocks excluded — see pre below)
   p,
   ul,
   ol,
   blockquote,
   h2,
   h3,
-  h4 {
-    max-width: var(--guide-measure);
+  h4,
+  .hl-warn,
+  .hl-phase,
+  .hl-svc {
+    max-width: 100%;
   }
 
-  // --- Intro copy (before first h2) ---
   & > p:first-of-type {
-    font-size: 1.1875rem;
-    line-height: 1.7;
-    color: var(--text-secondary);
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    color: var(--term-text-dim);
     margin: 0 0 var(--guide-space-md);
+
+    &::before {
+      content: '# intro';
+      display: block;
+      margin-bottom: 0.35rem;
+      font-size: 0.625rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--term-phosphor);
+      opacity: 0.85;
+    }
   }
 
   & > p:nth-of-type(2) {
     margin: 0 0 var(--guide-space-xl);
   }
 
-  // --- Paragraphs ---
   p {
     margin: 0 0 var(--guide-space-md);
   }
@@ -48,136 +61,141 @@
     margin-bottom: 0;
   }
 
-  // --- Section headings (h2) ---
   h2 {
-    font-family: 'Source Serif 4', Georgia, serif;
-    font-size: clamp(1.75rem, 3vw, 2.25rem);
-    font-weight: 600;
-    line-height: 1.2;
-    letter-spacing: -0.025em;
-    color: var(--text-primary);
+    font-family: 'Source Code Pro', monospace;
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--term-phosphor);
     margin: var(--guide-space-2xl) 0 var(--guide-space-lg);
-    padding-top: var(--guide-space-xl);
+    padding: 0.5rem 0 0.5rem 0.65rem;
     scroll-margin-top: var(--guide-scroll-offset);
-    border-top: 1px solid color-mix(in srgb, var(--border) 90%, transparent);
+    border-left: 3px solid var(--term-phosphor);
+    background: color-mix(in srgb, var(--term-phosphor) 5%, var(--term-surface));
+
+    &::before {
+      content: '## ';
+      opacity: 0.55;
+      font-weight: 400;
+    }
   }
 
-  // First section: extra air after intro paragraphs
   & > h2:first-of-type {
-    margin-top: var(--guide-space-xl);
+    margin-top: var(--guide-space-lg);
   }
 
   h2 + p {
     margin-top: 0;
-    margin-bottom: var(--guide-space-md);
-    font-size: var(--guide-body-size);
-    line-height: var(--guide-body-leading);
   }
 
-  // --- Subheadings ---
   h3 {
-    font-family: 'Source Sans 3', sans-serif;
-    font-size: 1.375rem;
-    font-weight: 600;
-    line-height: 1.3;
-    color: var(--text-primary);
+    font-size: 0.9375rem;
+    font-weight: 700;
+    line-height: 1.35;
+    color: var(--term-text);
     margin: var(--guide-space-xl) 0 var(--guide-space-md);
     scroll-margin-top: var(--guide-scroll-offset);
+
+    &::before {
+      content: '### ';
+      color: var(--term-text-muted);
+      font-weight: 400;
+    }
   }
 
   h4 {
-    font-size: 1.1875rem;
+    font-size: 0.875rem;
     font-weight: 600;
-    line-height: 1.35;
-    color: var(--text-primary);
+    color: var(--term-text-dim);
     margin: var(--guide-space-lg) 0 var(--guide-space-sm);
+
+    &::before {
+      content: '#### ';
+      color: var(--term-text-muted);
+      font-weight: 400;
+    }
   }
 
-  h3 + p,
-  h4 + p {
-    margin-top: 0;
-  }
-
-  // --- Lists (reset strips bullets globally) ---
   ul,
   ol {
     margin: 0 0 var(--guide-space-lg);
-    padding-left: 1.75rem;
+    padding-left: 1.25rem;
   }
 
   ul {
-    list-style: disc;
-    list-style-position: outside;
+    list-style: none;
+
+    li::before {
+      content: '- ';
+      color: var(--term-phosphor);
+      margin-left: -1.25rem;
+      display: inline-block;
+      width: 1.25rem;
+    }
   }
 
   ol {
-    list-style: decimal;
-    list-style-position: outside;
-  }
+    list-style: none;
+    counter-reset: hl-ol;
 
-  h2 + ul,
-  h2 + ol,
-  h3 + ul,
-  h3 + ol,
-  p + ul,
-  p + ol {
-    margin-top: var(--guide-space-sm);
+    li {
+      counter-increment: hl-ol;
+
+      &::before {
+        content: counter(hl-ol) '. ';
+        color: var(--term-phosphor);
+        margin-left: -1.5rem;
+        display: inline-block;
+        width: 1.5rem;
+      }
+    }
   }
 
   li {
-    margin-bottom: 0.85em;
-    padding-left: 0.35rem;
-    line-height: var(--guide-body-leading);
-
-    &::marker {
-      color: color-mix(in srgb, var(--guide-accent) 85%, var(--text-muted));
-    }
+    margin-bottom: 0.55em;
 
     &:last-child {
       margin-bottom: 0;
     }
   }
 
-  li > p {
-    margin: 0 0 0.65em;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-
-  li > ul,
-  li > ol {
-    margin-top: 0.65em;
-    margin-bottom: 0.65em;
-  }
-
-  // --- Inline & links ---
   strong {
-    font-weight: 600;
-    color: var(--text-primary);
+    font-weight: 700;
+    color: var(--term-text);
   }
 
   a {
-    color: var(--guide-accent);
+    color: var(--term-phosphor);
     text-decoration: underline;
-    text-underline-offset: 3px;
+    text-underline-offset: 2px;
     text-decoration-thickness: 1px;
 
     &:hover {
-      color: color-mix(in srgb, var(--guide-accent) 75%, white);
+      color: color-mix(in srgb, var(--term-phosphor) 80%, white);
     }
   }
 
-  // --- Blockquotes ---
   blockquote {
-    margin: var(--guide-space-lg) 0;
-    padding: var(--guide-space-md) var(--guide-space-lg);
-    border-left: 3px solid var(--guide-accent);
+    margin: var(--guide-space-md) 0;
+    padding: 0.65rem 0.85rem;
+    border: 1px solid color-mix(in srgb, var(--term-phosphor) 35%, var(--term-border-dim));
+    border-left-width: 3px;
+    border-left-color: var(--term-phosphor);
     background: var(--guide-accent-dim);
-    border-radius: 0 6px 6px 0;
-    color: var(--text-primary);
-    line-height: 1.7;
+    color: var(--term-text);
+    line-height: 1.6;
+
+    &::before {
+      display: block;
+      margin-bottom: 0.35rem;
+      font-size: 0.625rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--term-phosphor);
+      content: '[note]';
+    }
 
     p {
       margin-bottom: var(--guide-space-sm);
@@ -188,154 +206,226 @@
     }
   }
 
-  // Markdown rules duplicate h2 breaks
   hr {
     display: none;
   }
 
-  // --- Tables (full column width, like code blocks) ---
-  table {
+  // --- Tables (remark/rehype wrappers) ---
+  .guide-table-wrap {
     width: 100%;
     max-width: 100%;
-    border-collapse: collapse;
-    font-size: 0.9375rem;
-    line-height: 1.55;
     margin: var(--guide-space-lg) 0;
+  }
+
+  .guide-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--guide-table-size);
+    line-height: 1.5;
+  }
+
+  .guide-table-wrap:not(.guide-table--reference) .guide-table {
     display: table;
     table-layout: auto;
   }
 
-  // Horizontal scroll only when the table truly overflows (narrow viewports)
-  @media (max-width: 1023px) {
-    table {
-      display: block;
+  @media (max-width: 639px) {
+    .guide-table-wrap {
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
     }
 
-    thead,
-    tbody,
-    tr {
-      display: table;
-      width: 100%;
-      min-width: 36rem;
-      table-layout: auto;
+    .guide-table-wrap.guide-table--data .guide-table {
+      min-width: 32rem;
+    }
+
+    .guide-table-wrap.guide-table--reference {
+      border: 1px solid var(--term-border-dim);
+    }
+
+    .guide-table-wrap.guide-table--reference .guide-table {
+      display: block;
+      min-width: 0;
+    }
+
+    .guide-table-wrap.guide-table--reference thead {
+      display: none;
+    }
+
+    .guide-table-wrap.guide-table--reference tbody {
+      display: block;
+    }
+
+    .guide-table-wrap.guide-table--reference tr {
+      display: block;
+      margin-bottom: 0.5rem;
+      padding: 0.5rem 0.65rem;
+      border: 1px solid var(--term-border-dim);
+      background: var(--term-surface);
+    }
+
+    .guide-table-wrap.guide-table--reference td {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.75rem;
+      padding: 0.35rem 0;
+      border: 0;
+      text-align: right;
+
+      &::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: var(--term-text-muted);
+        text-align: left;
+        flex-shrink: 0;
+        max-width: 45%;
+      }
+    }
+
+    .guide-table-wrap.guide-table--reference td:nth-child(2) {
+      font-weight: 600;
+      color: var(--term-phosphor);
+    }
+  }
+
+  @media (min-width: 640px) {
+    .guide-table-wrap {
+      border: 1px solid var(--term-border-dim);
+      background: var(--term-surface);
+    }
+
+    .guide-table-wrap.guide-table--reference {
+      box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--term-phosphor) 10%, transparent);
     }
   }
 
   th,
   td {
-    border: 1px solid var(--border);
-    padding: 0.75rem 1rem;
+    border: 1px solid var(--term-border-dim);
+    padding: 0.55rem 0.75rem;
     text-align: left;
     vertical-align: top;
     word-wrap: break-word;
     overflow-wrap: anywhere;
   }
 
-  td:first-child,
-  th:first-child {
-    min-width: 10rem;
+  @media (min-width: 640px) {
+    .guide-table th,
+    .guide-table td {
+      border: 0;
+      border-bottom: 1px solid var(--term-border-dim);
+    }
+
+    .guide-table tr:last-child td,
+    .guide-table tr:last-child th {
+      border-bottom: 0;
+    }
   }
 
   th {
-    font-family: 'Source Sans 3', sans-serif;
-    font-size: 0.8125rem;
-    font-weight: 600;
+    font-size: 0.6875rem;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.04em;
-    color: var(--text-primary);
-    background: var(--surface-2);
+    letter-spacing: 0.06em;
+    color: var(--term-text-dim);
+    background: var(--term-surface-2);
+  }
+
+  .guide-table--reference th:nth-child(2),
+  .guide-table--reference td:nth-child(2) {
+    background: var(--guide-input-bg);
+    font-weight: 600;
+    color: var(--term-phosphor);
+    white-space: nowrap;
   }
 
   tr:nth-child(even) td {
-    background: color-mix(in srgb, var(--surface-2) 50%, transparent);
+    background: color-mix(in srgb, var(--term-surface-2) 50%, transparent);
   }
 
-  // --- Code (inline) ---
+  // Fallback bare tables (no wrapper)
+  table:not(.guide-table) {
+    width: 100%;
+    max-width: 100%;
+    border-collapse: collapse;
+    font-size: var(--guide-table-size);
+    margin: var(--guide-space-lg) 0;
+    border: 1px solid var(--term-border-dim);
+  }
+
   :not(pre) > code {
-    font-family: 'Source Code Pro', monospace;
     font-size: 0.9em;
-    background: var(--surface-2);
-    padding: 0.15em 0.4em;
-    border-radius: 4px;
-    color: var(--guide-accent);
+    background: var(--term-surface-2);
+    padding: 0.1em 0.35em;
+    color: var(--term-phosphor);
     word-break: break-word;
   }
 
-  // --- Code blocks (Shiki / .astro-code) — full column width, like the stack diagram ---
   pre,
   pre.astro-code {
     position: relative;
     width: 100%;
     max-width: 100%;
-    margin: var(--guide-space-lg) 0;
-    padding: var(--guide-space-md) var(--guide-space-lg);
-    background: var(--surface-1) !important;
-    border: 1px solid var(--border);
-    border-radius: 6px;
+    margin: var(--guide-space-md) 0;
+    padding: 0.75rem 1rem;
+    background: #000 !important;
+    border: 1px solid var(--term-border-dim);
     overflow-x: auto;
-    font-size: 0.9375rem;
-    line-height: 1.65;
+    font-size: 0.8125rem;
+    line-height: 1.6;
     box-sizing: border-box;
+    box-shadow: inset 0 0 40px color-mix(in srgb, var(--term-phosphor) 4%, transparent);
+
+    &::before {
+      content: '$';
+      position: absolute;
+      top: 0.5rem;
+      left: 0.65rem;
+      font-size: 0.625rem;
+      color: var(--term-phosphor);
+      opacity: 0.7;
+      pointer-events: none;
+    }
   }
 
   pre code,
   pre.astro-code code {
     display: block;
-    padding: 0;
+    padding: 0 0 0 1rem;
     background: none !important;
-    font-family: 'Source Code Pro', monospace;
+    font-family: inherit;
     font-size: inherit;
     line-height: inherit;
     white-space: pre;
-    word-break: normal;
-    // Shiki colors live on inline style="color: …" per span — do not override
     color: inherit;
   }
 
-  pre code span,
-  pre.astro-code span {
-    font-family: inherit;
-  }
-
-  h2 + pre,
-  h3 + pre,
-  p + pre {
-    margin-top: var(--guide-space-md);
-  }
-
   .guide-pre--copyable {
-    padding-right: 5rem;
+    padding-right: 4.5rem;
   }
 
   .guide-copy-btn {
     position: absolute;
-    top: 0.625rem;
-    right: 0.625rem;
+    top: 0.45rem;
+    right: 0.45rem;
     font-family: 'Source Code Pro', monospace;
-    font-size: 0.6875rem;
+    font-size: 0.625rem;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    padding: 0.4rem 0.65rem;
-    background: var(--surface-2);
-    border: 1px solid var(--border);
-    color: var(--text-muted);
-    border-radius: 4px;
+    padding: 0.3rem 0.5rem;
+    background: var(--term-surface-2);
+    border: 1px solid var(--term-border-dim);
+    color: var(--term-text-muted);
     cursor: pointer;
-    transition: color 0.15s, border-color 0.15s;
+    transition: color 0.12s, border-color 0.12s;
 
     &:hover {
-      color: var(--guide-accent);
-      border-color: var(--guide-accent);
+      color: var(--term-phosphor);
+      border-color: var(--term-phosphor);
     }
   }
 }
 
 .guide-prose h2#the-pre-flight-ritual {
-  border-top-color: color-mix(in srgb, var(--guide-accent) 40%, var(--border));
-}
-
-#the-pre-flight-ritual {
-  scroll-margin-top: var(--guide-scroll-offset);
+  border-left-color: color-mix(in srgb, var(--term-phosphor) 70%, var(--term-alert));
 }

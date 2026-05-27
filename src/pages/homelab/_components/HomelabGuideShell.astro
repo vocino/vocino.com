@@ -1,12 +1,13 @@
 ---
 import '../_styles/guide-tokens.scss';
+import '../_styles/guide-terminal.scss';
 import '../_styles/guide-layout.scss';
 import '../_styles/guide-toc.scss';
 import '../_styles/guide-prose.scss';
+import '../_styles/guide-components.scss';
 import GuideHero from './GuideHero.astro';
 import GuideDisclaimer from './GuideDisclaimer.astro';
 import GuideVarsPanel from './GuideVarsPanel.astro';
-import ServiceNav from './ServiceNav.astro';
 import StackDiagram from './StackDiagram.astro';
 import GuideToc from './GuideToc.astro';
 import GuideTocDrawer from './GuideTocDrawer.astro';
@@ -23,43 +24,67 @@ interface Props {
 const { title, description, updated, readingMinutes, headings } = Astro.props;
 ---
 
-<div class="homelab-guide">
-  <aside class="homelab-guide__sidebar" aria-hidden="true"></aside>
+<div class="homelab-console">
+  <div class="homelab-console__scanlines" aria-hidden="true"></div>
 
-  <nav class="homelab-guide__toc-fixed" aria-label="Table of contents">
-    <GuideToc headings={headings} />
-  </nav>
+  <aside class="homelab-console__rail" aria-label="Guide navigation">
+    <div class="homelab-console__nav-body">
+      <GuideToc headings={headings} />
+    </div>
+  </aside>
 
-  <main class="homelab-guide__main">
-    <GuideTocDrawer headings={headings} />
-
-    <noscript>
-      <p class="guide-noscript">
-        JavaScript is required to personalize hostnames and copy customized snippets. The guide still
-        works with default placeholders.
-      </p>
-    </noscript>
-
-    <div class="homelab-guide__chrome">
+  <div class="homelab-console__stage">
+    <header class="homelab-console__statusbar">
       <GuideHero
         title={title}
         description={description}
         updated={updated}
         readingMinutes={readingMinutes}
       />
-      <GuideDisclaimer />
-      <GuideVarsPanel />
-      <ServiceNav />
-      <StackDiagram />
-    </div>
+    </header>
 
-    <article class="guide-prose">
-      <slot />
-    </article>
-  </main>
+    <div class="homelab-console__body">
+      <div class="homelab-console__flow">
+        <GuideTocDrawer headings={headings} />
+
+        <noscript>
+          <p class="guide-noscript">
+            JavaScript is required to personalize hostnames and copy customized snippets. The guide still
+            works with default placeholders.
+          </p>
+        </noscript>
+
+        <div class="homelab-console__intro-stack">
+          <div class="terminal-pane">
+            <div class="terminal-pane__titlebar">legal.txt</div>
+            <div class="terminal-pane__body terminal-pane__body--flush">
+              <GuideDisclaimer />
+            </div>
+          </div>
+
+          <div class="terminal-pane">
+            <div class="terminal-pane__titlebar">topology.svg</div>
+            <div class="terminal-pane__body terminal-pane__body--flush">
+              <StackDiagram />
+            </div>
+          </div>
+        </div>
+
+        <article class="guide-prose homelab-console__transcript">
+          <slot />
+        </article>
+      </div>
+
+      <div class="homelab-console__session-slot terminal-pane">
+        <div class="terminal-pane__titlebar">session.env</div>
+        <div class="terminal-pane__body terminal-pane__body--flush">
+          <GuideVarsPanel variant="pane" />
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
   import '../_lib/guide-vars.client.ts';
 </script>
-

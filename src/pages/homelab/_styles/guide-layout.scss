@@ -1,42 +1,144 @@
 @use 'guide-tokens';
+@use 'guide-terminal';
 
-.homelab-guide {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 0;
-  max-width: 72rem;
-  margin: 0 auto;
-  padding: var(--guide-scroll-offset) clamp(1.25rem, 4vw, 2.5rem) var(--guide-space-2xl);
+// Logo sits in fixed .hub__chrome; rail content starts below it
+.hub:has(.homelab-console) .hub__chrome {
+  left: clamp(1rem, 2vw, 2rem);
+  top: 1.5rem;
+  z-index: 60;
+}
 
-  @media (min-width: 1024px) {
-    // Left column reserves space for the fixed TOC (see guide-toc.scss)
-    grid-template-columns: 11.25rem minmax(0, 1fr);
-    gap: clamp(1.75rem, 3vw, 2.5rem);
-    align-items: start;
+.homelab-console {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  color: var(--term-text);
+  font-family: 'Source Code Pro', monospace;
+  display: block;
+  min-height: 100vh;
+
+  &__scanlines {
+    z-index: 3;
   }
 
-  &__sidebar {
+  // Left rail: nav under the logo (desktop)
+  &__rail {
     display: none;
+  }
 
-    @media (min-width: 1024px) {
-      // Visible placeholder in grid; nav is position:fixed in guide-toc.scss
-      display: block;
-      visibility: hidden;
+  &__stage {
+    min-width: 0;
+    width: 100%;
+    padding: 1.25rem clamp(1rem, 2.5vw, 2.5rem) var(--guide-space-2xl);
+  }
+
+  &__statusbar {
+    margin-bottom: var(--guide-pane-gap);
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--guide-pane-gap);
+    width: 100%;
+  }
+
+  &__flow {
+    display: flex;
+    flex-direction: column;
+    gap: var(--guide-pane-gap);
+    min-width: 0;
+    width: 100%;
+  }
+
+  &__intro-stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--guide-pane-gap);
+    width: 100%;
+  }
+
+  &__session-slot {
+    min-width: 0;
+    width: 100%;
+  }
+
+  &__transcript {
+    width: 100%;
+  }
+
+  &__nav-body {
+    display: none;
+  }
+
+  @media (min-width: 1024px) {
+    // Reserve rail width; nav is fixed so it stays on screen while the stage scrolls
+    padding-left: var(--guide-rail-width);
+
+    &__rail {
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: var(--guide-rail-width);
+      height: 100dvh;
+      max-height: 100dvh;
+      padding: var(--guide-rail-top) clamp(0.75rem, 1.5vw, 1.25rem) 1rem clamp(1rem, 2vw, 2rem);
+      border-right: 1px solid var(--term-border-dim);
+      background: var(--term-bg);
+      overflow: visible;
+      z-index: 45;
+      // Let wheel events reach the document when the pointer is on rail padding
       pointer-events: none;
-      min-height: 1px;
+    }
+
+    &__nav-body {
+      display: block;
+      flex: 1;
+      min-height: 0;
+      max-height: calc(100dvh - var(--guide-rail-top) - 1rem);
+      overflow-y: auto;
+      // contain traps the scroll wheel here even when the nav has nowhere to scroll
+      overscroll-behavior: auto;
+      padding: 0;
+      pointer-events: auto;
+    }
+
+    &__stage {
+      padding-top: 1.5rem;
     }
   }
 
-  &__main {
-    min-width: 0;
-  }
+  @media (min-width: 1280px) {
+    &__body {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) var(--guide-session-width);
+      gap: var(--guide-pane-gap);
+      align-items: start;
+    }
 
-  &__chrome {
-    display: flex;
-    flex-direction: column;
-    gap: var(--guide-chrome-gap);
-    margin-bottom: var(--guide-space-2xl);
-    width: 100%;
-    max-width: 100%;
+    &__session-slot {
+      position: sticky;
+      top: 1.5rem;
+      max-height: calc(100vh - 2rem);
+      align-self: start;
+      overflow-y: auto;
+      overscroll-behavior: auto;
+    }
+  }
+}
+
+.terminal-pane__body--flush {
+  padding: 0;
+
+  .stack-diagram,
+  .guide-disclaimer,
+  .guide-vars--pane {
+    border: 0;
+    box-shadow: none;
   }
 }

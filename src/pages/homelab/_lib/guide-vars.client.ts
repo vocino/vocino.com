@@ -9,10 +9,12 @@ import {
   type GuideVars,
 } from './guide-vars';
 
-const PROSE_SELECTOR = '.guide-prose';
+const PROSE_SELECTOR = '.homelab-console .guide-prose';
 const TEMPLATE_ATTR = 'data-var-template';
 const SUBSTITUTABLE_SELECTOR =
-  'p, li, td, th, blockquote, h2, h3, h4, h5, h6, pre > code, .stack-diagram__label, .stack-diagram__host';
+  'p, li, td, th, blockquote, .hl-warn, .hl-svc, h2, h3, h4, h5, h6, pre > code, .stack-diagram__label, .stack-diagram__host-title';
+const CHROME_EXCLUDE =
+  'nav, form, .guide-vars, .guide-toc, .service-nav, .console-status, .guide-disclaimer';
 
 /** Original text for Shiki-highlighted code (Text nodes cannot carry data attributes). */
 const highlightedTextTemplates = new WeakMap<Text, string>();
@@ -21,9 +23,13 @@ function isHighlightedCodeBlock(el: HTMLElement): boolean {
   return el.matches('pre > code') && el.querySelector('span') !== null;
 }
 
+function isExcluded(el: HTMLElement): boolean {
+  return Boolean(el.closest(CHROME_EXCLUDE));
+}
+
 function collectTemplates(root: ParentNode): void {
   root.querySelectorAll<HTMLElement>(SUBSTITUTABLE_SELECTOR).forEach((el) => {
-    if (el.closest('nav, form, .guide-vars, .guide-toc')) return;
+    if (isExcluded(el)) return;
     if (!el.hasAttribute(TEMPLATE_ATTR)) {
       el.setAttribute(TEMPLATE_ATTR, el.textContent ?? '');
     }
@@ -62,7 +68,7 @@ function setElementFromTemplate(el: HTMLElement, vars: GuideVars): void {
 
 function applyVarsToDom(root: ParentNode, vars: GuideVars): void {
   root.querySelectorAll<HTMLElement>(`[${TEMPLATE_ATTR}]`).forEach((el) => {
-    if (el.closest('nav, form, .guide-vars, .guide-toc')) return;
+    if (isExcluded(el)) return;
     setElementFromTemplate(el, vars);
   });
 }
@@ -117,18 +123,21 @@ function initCopyButtons(root: ParentNode): void {
     const btn = document.createElement('button');
     btn.type = 'button';
     btn.className = 'guide-copy-btn';
-    btn.textContent = 'Copy';
-    btn.setAttribute('aria-label', 'Copy code block');
+    btn.textContent = '[cp]';
+    btn.setAttribute('aria-label', 'Copy code block with your stack variables');
     btn.addEventListener('click', async () => {
       const text = getCopyTextForPre(pre);
       try {
         await navigator.clipboard.writeText(text);
-        btn.textContent = 'Copied';
+        btn.textContent = '[ok]';
         setTimeout(() => {
-          btn.textContent = 'Copy';
+          btn.textContent = '[cp]';
         }, 2000);
       } catch {
-        btn.textContent = 'Failed';
+        btn.textContent = '[err]';
+        setTimeout(() => {
+          btn.textContent = '[cp]';
+        }, 2000);
       }
     });
     pre.classList.add('guide-pre--copyable');
@@ -137,7 +146,9 @@ function initCopyButtons(root: ParentNode): void {
 }
 
 function initScrollSpy(): void {
-  const tocLinks = document.querySelectorAll<HTMLAnchorElement>('.guide-toc a[data-toc-slug]');
+  const tocLinks = document.querySelectorAll<HTMLAnchorElement>(
+    '.homelab-console .guide-toc a[data-toc-slug]'
+  );
   if (!tocLinks.length) return;
 
   const slugToLink = new Map<string, HTMLAnchorElement>();
@@ -146,7 +157,7 @@ function initScrollSpy(): void {
     if (slug) slugToLink.set(slug, link);
   });
 
-  const headings = document.querySelectorAll<HTMLElement>('.guide-prose h2[id]');
+  const headings = document.querySelectorAll<HTMLElement>(`${PROSE_SELECTOR} h2[id]`);
   if (!headings.length) return;
 
   const observer = new IntersectionObserver(
@@ -160,10 +171,21 @@ function initScrollSpy(): void {
       tocLinks.forEach((l) => l.classList.remove('is-active'));
       slugToLink.get(id)?.classList.add('is-active');
     },
-    { rootMargin: '-20% 0px -70% 0px', threshold: [0, 0.25, 0.5, 1] }
+    { rootMargin: '-15% 0px -65% 0px', threshold: [0, 0.25, 0.5, 1] }
   );
 
   headings.forEach((h) => observer.observe(h));
+}
+
+function initTocDrawerClose(): void {
+  const drawer = document.querySelector<HTMLDetailsElement>('.guide-toc-drawer');
+  if (!drawer) return;
+
+  drawer.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach((link) => {
+    link.addEventListener('click', () => {
+      drawer.open = false;
+    });
+  });
 }
 
 export function initHomelabGuide(): void {
@@ -179,6 +201,7 @@ export function initHomelabGuide(): void {
   applyVarsToDom(document, vars);
   initCopyButtons(prose as ParentNode);
   initScrollSpy();
+  initTocDrawerClose();
 
   let debounce: ReturnType<typeof setTimeout> | undefined;
 
@@ -223,7 +246,7 @@ export function initHomelabGuide(): void {
     const hex = Array.from(bytes, (b) => b.toString(16).padStart(2, '0')).join('');
     const msg = document.querySelector('#guide-vars-secret-hint');
     if (msg) {
-      msg.textContent = `Generated (copy from a code block after substituting): ${hex}`;
+      msg.textContent = `export SECRET_HEX=${hex}`;
     }
   });
 }

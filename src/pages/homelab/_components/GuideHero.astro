@@ -13,82 +13,139 @@ const updatedLabel = updated
   : undefined;
 ---
 
-<header class="guide-hero hud-corners">
-  <p class="guide-hero__label label-mono">homelab</p>
-  <h1 class="guide-hero__title">{title}</h1>
-  <p class="guide-hero__desc">{description}</p>
-  <ul class="guide-hero__meta" aria-label="Guide metadata">
-    {readingMinutes && (
-      <li class="guide-hero__meta-item">
-        <span class="guide-hero__meta-key">read</span>
-        {readingMinutes} min
-      </li>
-    )}
-    {updatedLabel && (
-      <li class="guide-hero__meta-item">
-        <span class="guide-hero__meta-key">updated</span>
-        {updatedLabel}
-      </li>
-    )}
-  </ul>
+<header class="console-status terminal-pane">
+  <div class="terminal-pane__titlebar">homelab — media-stack.md</div>
+  <div class="terminal-pane__body console-status__body">
+    <p class="console-status__line" aria-hidden="true">
+      <span class="console-status__user">user</span><span class="console-status__at">@</span><span
+        class="console-status__host">homelab</span><span class="console-status__colon">:</span><span
+        class="console-status__path">~/media-stack</span><span class="console-status__prompt">$</span>
+      <span class="console-status__cmd">cat README</span>
+    </p>
+    <h1 class="console-status__title">{title}</h1>
+    <p class="console-status__desc">{description}</p>
+    <dl class="console-status__meta" aria-label="Guide metadata">
+      {
+        readingMinutes && (
+          <div class="console-status__meta-row">
+            <dt>read</dt>
+            <dd>{readingMinutes} min</dd>
+          </div>
+        )
+      }
+      {
+        updatedLabel && (
+          <div class="console-status__meta-row">
+            <dt>mtime</dt>
+            <dd>{updatedLabel}</dd>
+          </div>
+        )
+      }
+      <div class="console-status__meta-row">
+        <dt>mode</dt>
+        <dd>honest-docs</dd>
+      </div>
+    </dl>
+  </div>
 </header>
 
 <style lang="scss">
-  .guide-hero {
+  .console-status {
     margin: 0;
-    padding: clamp(1.5rem, 4vw, 2.25rem) clamp(1.25rem, 3vw, 2rem);
-    background: var(--surface-1);
-    border: 1px solid var(--border);
-    border-radius: 6px;
 
-    &__label {
-      margin: 0 0 0.875rem;
-      color: var(--section-accent, #ffb86b);
-      font-size: 0.8125rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
+    &__body {
+      padding: 0.85rem 1rem 1rem;
+    }
 
-      &::before {
-        content: "// ";
-        opacity: 0.6;
-      }
+    &__line {
+      margin: 0 0 0.65rem;
+      font-size: 0.75rem;
+      line-height: 1.4;
+      color: var(--term-text-dim);
+      word-break: break-word;
+    }
+
+    &__user {
+      color: var(--term-phosphor);
+      font-weight: 600;
+    }
+
+    &__at,
+    &__colon {
+      color: var(--term-text-muted);
+    }
+
+    &__host {
+      color: var(--term-text);
+    }
+
+    &__path {
+      color: var(--term-text-dim);
+    }
+
+    &__prompt {
+      color: var(--term-phosphor);
+      margin: 0 0.35rem 0 0.15rem;
+    }
+
+    &__cmd {
+      color: var(--term-text);
     }
 
     &__title {
-      font-family: "Source Serif 4", Georgia, serif;
-      font-size: clamp(1.875rem, 4vw, 2.5rem);
-      font-weight: 500;
-      line-height: 1.2;
-      color: var(--text-primary);
+      font-family: 'Source Code Pro', monospace;
+      font-size: clamp(1.125rem, 3vw, 1.5rem);
+      font-weight: 700;
+      line-height: 1.25;
+      letter-spacing: 0.02em;
+      color: var(--term-text);
       margin: 0;
       text-wrap: balance;
     }
 
     &__desc {
-      font-size: 1.125rem;
-      line-height: 1.65;
-      color: var(--text-secondary);
-      margin: 1rem 0 0;
-      max-width: 42rem;
+      font-size: 0.8125rem;
+      line-height: 1.6;
+      color: var(--term-text-dim);
+      margin: 0.65rem 0 0;
+      max-width: 52rem;
     }
 
     &__meta {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.75rem 1.25rem;
-      list-style: none;
-      margin: 1.25rem 0 0;
+      gap: 0.5rem 1.25rem;
+      margin: 0.85rem 0 0;
       padding: 0;
-      font-family: "Source Code Pro", monospace;
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--text-muted);
     }
 
-    &__meta-key {
-      color: var(--section-accent, #ffb86b);
-      margin-right: 0.35rem;
+    &__meta-row {
+      display: flex;
+      align-items: baseline;
+      gap: 0.4rem;
+      margin: 0;
+      font-size: 0.6875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+
+      dt {
+        margin: 0;
+        color: var(--term-text-muted);
+        font-weight: 400;
+
+        &::after {
+          content: '=';
+          margin-left: 0.15rem;
+          color: var(--term-phosphor);
+          opacity: 0.6;
+        }
+      }
+
+      dd {
+        margin: 0;
+        color: var(--term-phosphor);
+        font-weight: 600;
+      }
     }
   }
 </style>

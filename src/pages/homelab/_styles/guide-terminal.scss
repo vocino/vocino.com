@@ -1,0 +1,86 @@
+@use 'guide-tokens';
+
+// Shared terminal pane chrome
+.terminal-pane {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  background: var(--term-surface);
+  border: 1px solid var(--term-border-dim);
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--term-phosphor) 8%, transparent),
+    0 0 24px color-mix(in srgb, var(--term-phosphor) 4%, transparent);
+
+  &__titlebar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+    padding: 0.4rem 0.65rem;
+    background: var(--term-surface-2);
+    border-bottom: 1px solid var(--term-border-dim);
+    font-family: 'Source Code Pro', monospace;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--term-text-dim);
+
+    &::before {
+      content: '● ● ●';
+      font-size: 0.5rem;
+      letter-spacing: 0.12em;
+      color: var(--term-text-muted);
+      margin-right: 0.25rem;
+    }
+  }
+
+  &__body {
+    flex: 1;
+    min-height: 0;
+    overflow: auto;
+    overscroll-behavior: auto;
+    padding: 0.75rem;
+    scrollbar-width: thin;
+    scrollbar-color: var(--term-border-dim) transparent;
+
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: var(--term-border-dim);
+    }
+  }
+}
+
+// CRT scanline overlay (subtle)
+.homelab-console__scanlines {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  opacity: 0.04;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.35) 2px,
+    rgba(0, 0, 0, 0.35) 4px
+  );
+}
+
+.guide-noscript {
+  font-family: 'Source Code Pro', monospace;
+  font-size: 0.8125rem;
+  color: var(--term-alert);
+  margin: 0 0 var(--guide-space-md);
+  padding: 0.65rem 0.85rem;
+  background: color-mix(in srgb, var(--term-alert) 8%, var(--term-surface));
+  border: 1px solid color-mix(in srgb, var(--term-alert) 35%, var(--term-border-dim));
+
+  &::before {
+    content: '[WARN] ';
+    font-weight: 700;
+  }
+}

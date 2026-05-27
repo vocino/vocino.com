@@ -1,62 +1,31 @@
 ---
 import '../_styles/guide-vars.scss';
-import { DEFAULT_GUIDE_VARS, GUIDE_VAR_FIELDS } from '../_lib/guide-vars';
+import GuideVarsForm from './GuideVarsForm.astro';
 
-const groups = [
-  { id: 'hosts', title: 'Hosts' },
-  { id: 'domain', title: 'Domain & tunnel' },
-  { id: 'ids', title: 'IDs & timezone' },
-  { id: 'paths', title: 'Paths & NFS' },
-] as const;
+interface Props {
+  variant?: 'embedded' | 'pane';
+}
+
+const { variant = 'embedded' } = Astro.props;
+const isPane = variant === 'pane';
 ---
 
-<details class="guide-vars" open>
-  <summary class="guide-vars__summary">
-    Your stack
-    <span class="guide-vars__hint">Personalize copy-paste snippets</span>
-  </summary>
-  <div class="guide-vars__body">
-    <p class="guide-vars__intro">
-      Fill in your hostnames and paths once. Code blocks and commands update live; Copy always uses your values.
-      Saved in this browser only.
-    </p>
-    <form id="guide-vars-form" class="guide-vars__form">
-      <div class="guide-vars__groups">
-        {
-          groups.map((group) => (
-            <>
-              <h3 class="guide-vars__group-title">{group.title}</h3>
-              {GUIDE_VAR_FIELDS.filter((f) => f.group === group.id).map((field) => (
-                <div class="guide-vars__field">
-                  <label class="guide-vars__label" for={`guide-var-${field.key}`}>
-                    {field.label}
-                  </label>
-                  <input
-                    class="guide-vars__input"
-                    type="text"
-                    id={`guide-var-${field.key}`}
-                    name={field.key}
-                    value={DEFAULT_GUIDE_VARS[field.key]}
-                    placeholder={field.placeholder}
-                    autocomplete="off"
-                    spellcheck="false"
-                  />
-                  {field.hint && <span class="guide-vars__field-hint">{field.hint}</span>}
-                </div>
-              ))}
-            </>
-          ))
-        }
+{
+  isPane ? (
+    <div class="guide-vars guide-vars--pane">
+      <div class="guide-vars__body">
+        <GuideVarsForm />
       </div>
-      <div class="guide-vars__actions">
-        <button type="reset" class="guide-vars__btn guide-vars__btn--secondary">
-          Reset to defaults
-        </button>
-        <button type="button" class="guide-vars__btn" id="guide-vars-generate-secret">
-          Generate secret hex
-        </button>
+    </div>
+  ) : (
+    <details class="guide-vars" open>
+      <summary class="guide-vars__summary">
+        session.env
+        <span class="guide-vars__hint">live substitution</span>
+      </summary>
+      <div class="guide-vars__body">
+        <GuideVarsForm />
       </div>
-      <p class="guide-vars__secret-hint" id="guide-vars-secret-hint" aria-live="polite"></p>
-    </form>
-  </div>
-</details>
+    </details>
+  )
+}

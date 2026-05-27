@@ -14,18 +14,20 @@ export interface GuideVars {
   nfsBackupExport: string;
 }
 
-export const GUIDE_VARS_STORAGE_KEY = 'vocino-homelab-guide-vars';
+/** Bumped when default example values change — clears stale personalized localStorage. */
+export const GUIDE_VARS_STORAGE_KEY = 'homelab-guide-vars-v2';
 
+/** Fictional example values only; guide prose uses matching placeholders for substitution. */
 export const DEFAULT_GUIDE_VARS: GuideVars = {
   mediaHost: 'MEDIA_HOST',
-  mediaHostIp: 'MEDIA_HOST_IP',
+  mediaHostIp: '192.168.1.10',
   nasHost: 'NAS_HOST',
   domain: 'example.com',
   watchHost: 'watch.example.com',
   requestHost: 'request.example.com',
   puid: '999',
   pgid: '999',
-  tz: 'America/Los_Angeles',
+  tz: 'America/New_York',
   nasPath: '/mnt/nas',
   configPath: '/opt/media',
   nfsMediaExport: '/volume/Media',
@@ -126,14 +128,14 @@ export const GUIDE_VAR_FIELDS: {
   hint?: string;
 }[] = [
   { key: 'mediaHost', label: 'Media host name', placeholder: 'MEDIA_HOST', group: 'hosts' },
-  { key: 'mediaHostIp', label: 'Media host IP', placeholder: '192.168.1.100', group: 'hosts', hint: 'LAN IP for browse URLs' },
+  { key: 'mediaHostIp', label: 'Media host IP', placeholder: '192.168.1.10', group: 'hosts', hint: 'LAN IP for browse URLs' },
   { key: 'nasHost', label: 'NAS host', placeholder: 'NAS_HOST', group: 'hosts' },
   { key: 'domain', label: 'Domain', placeholder: 'example.com', group: 'domain' },
   { key: 'watchHost', label: 'Watch hostname', placeholder: 'watch.example.com', group: 'domain' },
   { key: 'requestHost', label: 'Request hostname', placeholder: 'request.example.com', group: 'domain' },
   { key: 'puid', label: 'PUID', placeholder: '999', group: 'ids' },
   { key: 'pgid', label: 'PGID', placeholder: '999', group: 'ids' },
-  { key: 'tz', label: 'Timezone', placeholder: 'America/Los_Angeles', group: 'ids' },
+  { key: 'tz', label: 'Timezone', placeholder: 'America/New_York', group: 'ids' },
   { key: 'nasPath', label: 'NAS mount path', placeholder: '/mnt/nas', group: 'paths' },
   { key: 'configPath', label: 'Config path', placeholder: '/opt/media', group: 'paths' },
   { key: 'nfsMediaExport', label: 'NFS media export', placeholder: '/volume/Media', group: 'paths' },

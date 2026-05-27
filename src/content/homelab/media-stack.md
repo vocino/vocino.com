@@ -103,9 +103,16 @@ sudo timedatectl set-timezone America/Los_Angeles   # or your zone
 
 ## Storage: NFS and the Hardlink Invariant
 
+<div class="hl-phase">
+  <span class="hl-phase__num">phase_02</span>
+  <span class="hl-phase__name">storage — nfs mounts & hardlinks</span>
+</div>
+
 ### The single-most-important rule
 
-> Downloads, the staging area, and the final library must all live on the same filesystem.
+<div class="hl-warn">
+  <strong>Hardlink invariant:</strong> Downloads, the staging area, and the final library must all live on the same filesystem.
+</div>
 
 When Sonarr or Radarr imports a finished download, you want a hardlink: a second directory entry pointing at the same bytes on disk. The torrent can keep seeding from its path, the file shows up in the library, and you only pay for the space once.
 
@@ -1079,6 +1086,11 @@ Combined with Sonarr's **Unmonitor Deleted Episodes** = ON, this gives you a sel
 
 
 ## The Pre-Flight Ritual
+
+<div class="hl-phase">
+  <span class="hl-phase__num">phase_ops</span>
+  <span class="hl-phase__name">pre-flight — before you touch prod</span>
+</div>
 
 Before I change anything in this stack (compose edits, *arr settings, NFS mounts, quality profiles, bulk deletes), I stop for half a minute and run through:
 

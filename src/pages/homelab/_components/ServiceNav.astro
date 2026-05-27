@@ -1,4 +1,10 @@
 ---
+interface Props {
+  layout?: 'horizontal' | 'vertical';
+}
+
+const { layout = 'horizontal' } = Astro.props;
+
 const services = [
   { name: 'Prowlarr', slug: 'prowlarr-and-flaresolverr' },
   { name: 'qBittorrent', slug: 'download-clients-qbittorrent-and-sabnzbd' },
@@ -17,8 +23,8 @@ const services = [
 ];
 ---
 
-<nav class="service-nav" aria-label="Stack services">
-  <p class="service-nav__label label-mono">Services</p>
+<nav class:list={['service-nav', layout === 'vertical' && 'service-nav--vertical']} aria-label="Stack services">
+  <p class="service-nav__label">services[]</p>
   <ul class="service-nav__list">
     {
       services.map((svc) => (
@@ -37,16 +43,17 @@ const services = [
     margin: 0;
 
     &__label {
-      margin: 0 0 0.875rem;
-      font-size: 0.6875rem;
-      letter-spacing: 0.16em;
-      color: var(--text-muted);
+      margin: 0 0 0.5rem;
+      font-size: 0.625rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--term-text-muted);
     }
 
     &__list {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.625rem;
+      gap: 0.4rem;
       list-style: none;
       margin: 0;
       padding: 0;
@@ -54,19 +61,45 @@ const services = [
 
     &__link {
       display: inline-block;
-      font-family: "Source Code Pro", monospace;
-      font-size: 0.8125rem;
+      font-size: 0.6875rem;
       line-height: 1.3;
-      padding: 0.5rem 0.75rem;
-      border: 1px solid var(--border);
-      border-radius: 3px;
-      color: var(--text-secondary);
+      padding: 0.25rem 0.45rem;
+      border: 1px solid var(--term-border-dim);
+      color: var(--term-text-dim);
       text-decoration: none;
-      transition: border-color 0.15s, color 0.15s;
+      transition: border-color 0.12s, color 0.12s;
+
+      &::before {
+        content: './';
+        opacity: 0.45;
+      }
 
       &:hover {
-        border-color: var(--section-accent, #ffb86b);
-        color: var(--section-accent, #ffb86b);
+        border-color: var(--term-phosphor);
+        color: var(--term-phosphor);
+      }
+    }
+
+    &--vertical {
+      .service-nav__list {
+        flex-direction: column;
+        flex-wrap: nowrap;
+        gap: 0.15rem;
+      }
+
+      .service-nav__link {
+        display: block;
+        padding: 0.2rem 0;
+        border: 0;
+        background: transparent;
+
+        &::before {
+          content: '> ';
+        }
+
+        &:hover {
+          background: color-mix(in srgb, var(--term-phosphor) 6%, transparent);
+        }
       }
     }
   }

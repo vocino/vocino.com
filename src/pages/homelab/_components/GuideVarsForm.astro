@@ -1,0 +1,49 @@
+---
+import { DEFAULT_GUIDE_VARS, GUIDE_VAR_FIELDS } from '../_lib/guide-vars';
+
+const groups = [
+  { id: 'hosts', title: 'hosts' },
+  { id: 'domain', title: 'domain_tunnel' },
+  { id: 'ids', title: 'ids_tz' },
+  { id: 'paths', title: 'paths_nfs' },
+] as const;
+---
+
+<p class="guide-vars__intro">
+  Example defaults below — replace with your stack. Snippets update live; Copy uses your values. Stored in
+  this browser only.
+</p>
+<form id="guide-vars-form" class="guide-vars__form">
+  <div class="guide-vars__groups">
+    {
+      groups.map((group) => (
+        <div class="guide-vars__group">
+          <h3 class="guide-vars__group-title">{group.title}</h3>
+          {GUIDE_VAR_FIELDS.filter((f) => f.group === group.id).map((field) => (
+            <div class="guide-vars__field">
+              <label class="guide-vars__label" for={`guide-var-${field.key}`}>
+                {field.label}
+              </label>
+              <input
+                class="guide-vars__input"
+                type="text"
+                id={`guide-var-${field.key}`}
+                name={field.key}
+                value={DEFAULT_GUIDE_VARS[field.key]}
+                placeholder={field.placeholder}
+                autocomplete="off"
+                spellcheck="false"
+              />
+              {field.hint && <span class="guide-vars__field-hint">{field.hint}</span>}
+            </div>
+          ))}
+        </div>
+      ))
+    }
+  </div>
+  <div class="guide-vars__actions">
+    <button type="reset" class="guide-vars__btn guide-vars__btn--secondary"> reset --defaults </button>
+    <button type="button" class="guide-vars__btn" id="guide-vars-generate-secret"> openssl rand -hex 16 </button>
+  </div>
+  <p class="guide-vars__secret-hint" id="guide-vars-secret-hint" aria-live="polite"></p>
+</form>

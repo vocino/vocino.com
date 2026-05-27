@@ -1,16 +1,53 @@
-// Homelab guide — typography & spacing scale (local to /homelab only)
-:root {
-  --guide-measure: 65ch;
-  --guide-body-size: 1.125rem;
-  --guide-body-leading: 1.75;
-  --guide-heading-leading: 1.25;
-  --guide-space-xs: 0.5rem;
-  --guide-space-sm: 0.875rem;
-  --guide-space-md: 1.375rem;
-  --guide-space-lg: 2.25rem;
-  --guide-space-xl: 3rem;
-  --guide-space-2xl: 4rem;
-  --guide-section-gap: 1.75rem;
-  --guide-chrome-gap: 2rem;
+// Homelab terminal console — local tokens only (/homelab)
+$term-bg: #050807;
+
+// Full-bleed backdrop: .homelab-console is centered with max-width; without this,
+// body --bg (#0F1419) shows in the side gutters.
+body.site-root:has(.homelab-console),
+.hub:has(.homelab-console) {
+  background-color: $term-bg;
+}
+
+.hub:has(.homelab-console) {
+  min-height: 100vh;
+}
+
+// overflow-x: hidden on html/body breaks position: sticky; clip is sticky-safe
+html:has(.homelab-console),
+body.site-root:has(.homelab-console) {
+  overflow-x: clip;
+}
+
+.homelab-console {
+  --term-bg: #{$term-bg};
+  --term-surface: #0a0f0c;
+  --term-surface-2: #0f1612;
+  --term-border: color-mix(in srgb, var(--section-accent, #ffb86b) 22%, #1a2420);
+  --term-border-dim: #1a2420;
+  --term-text: #c8f0d0;
+  --term-text-dim: #6b8f75;
+  --term-text-muted: #4a6352;
+  --term-glow: color-mix(in srgb, var(--section-accent, #ffb86b) 35%, transparent);
+  --term-phosphor: var(--section-accent, #ffb86b);
+  --term-alert: #ff6b6b;
+  --term-prompt: var(--section-accent, #ffb86b);
+
+  --guide-measure: 100%;
+  --guide-body-size: 0.9375rem;
+  --guide-body-leading: 1.65;
+  --guide-table-size: 0.875rem;
+  --guide-space-xs: 0.375rem;
+  --guide-space-sm: 0.625rem;
+  --guide-space-md: 1rem;
+  --guide-space-lg: 1.5rem;
+  --guide-space-xl: 2.25rem;
+  --guide-space-2xl: 3rem;
+  --guide-chrome-gap: 0;
+  --guide-pane-gap: 1px;
   --guide-scroll-offset: 5.5rem;
+  --guide-anchor-offset: 5.5rem;
+  --guide-rail-width: 14rem;
+  --guide-rail-top: 5.25rem;
+  --guide-session-width: min(20rem, 22vw);
+  --guide-input-bg: color-mix(in srgb, var(--term-phosphor) 6%, var(--term-surface-2));
 }

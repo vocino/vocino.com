@@ -1,0 +1,121 @@
+@use 'guide-tokens';
+
+/* Terminal callout — missables, hardlink rule, legal-adjacent warnings */
+.hl-warn {
+  margin: var(--guide-space-md) 0;
+  padding: 0.65rem 0.85rem;
+  max-width: 100%;
+  border: 1px solid color-mix(in srgb, var(--term-alert) 45%, var(--term-border-dim));
+  background: color-mix(in srgb, var(--term-alert) 6%, var(--term-surface));
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--term-text);
+
+  &::before {
+    display: block;
+    margin-bottom: 0.35rem;
+    font-family: 'Source Code Pro', monospace;
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--term-alert);
+    content: '[!] WARN';
+  }
+
+  strong {
+    color: color-mix(in srgb, var(--term-alert) 80%, white);
+  }
+}
+
+/* Phase / chapter divider */
+.hl-phase {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.75rem;
+  margin: var(--guide-space-2xl) 0 var(--guide-space-md);
+  padding: 0.5rem 0;
+  border-bottom: 1px dashed color-mix(in srgb, var(--term-phosphor) 40%, var(--term-border-dim));
+  scroll-margin-top: var(--guide-anchor-offset);
+
+  &__num {
+    font-size: clamp(0.875rem, 2vw, 1rem);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--term-phosphor);
+
+    &::before {
+      content: '>>> ';
+      opacity: 0.65;
+    }
+  }
+
+  &__name {
+    font-size: 0.8125rem;
+    color: var(--term-text-dim);
+  }
+}
+
+/* Collapsible reference drawer */
+.hl-reference {
+  margin: var(--guide-space-md) 0;
+  border: 1px solid var(--term-border-dim);
+  background: var(--term-surface);
+  max-width: 100%;
+
+  &__summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0.55rem 0.75rem;
+    cursor: pointer;
+    list-style: none;
+    font-size: 0.6875rem;
+    letter-spacing: 0.06em;
+    color: var(--term-text-dim);
+    background: var(--term-surface-2);
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    &::after {
+      content: '[expand]';
+      color: var(--term-phosphor);
+      font-size: 0.625rem;
+    }
+  }
+
+  &[open] &__summary::after {
+    content: '[collapse]';
+  }
+
+  &__body {
+    padding: 0.5rem 0.75rem 0.75rem;
+    border-top: 1px solid var(--term-border-dim);
+  }
+}
+
+/* Service quick-ref card */
+.hl-svc {
+  margin: var(--guide-space-md) 0;
+  padding: 0.65rem 0.85rem;
+  max-width: 100%;
+  border-left: 2px solid var(--term-phosphor);
+  background: var(--term-input-bg);
+  font-size: 0.875rem;
+  line-height: 1.5;
+
+  &__name {
+    display: block;
+    margin-bottom: 0.25rem;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--term-phosphor);
+  }
+}
