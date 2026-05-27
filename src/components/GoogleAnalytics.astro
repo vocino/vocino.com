@@ -1,0 +1,42 @@
+---
+/** GA4 measurement id — production pages only (via BaseLayout). */
+export const GA_MEASUREMENT_ID = 'G-56M2CVYY6T';
+
+interface Props {
+  enabled?: boolean;
+}
+
+const { enabled = import.meta.env.PROD } = Astro.props;
+---
+
+{
+  enabled && (
+    <>
+      <script
+        is:inline
+        async
+        src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+      />
+      <script is:inline define:vars={{ GA_MEASUREMENT_ID }}>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+          dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', GA_MEASUREMENT_ID);
+      </script>
+      <script is:inline>
+        document.addEventListener('click', (event) => {
+          const link = event.target.closest('a[data-social-platform]');
+          if (!link || typeof gtag !== 'function') return;
+
+          gtag('event', 'outbound_social', {
+            social_platform: link.getAttribute('data-social-platform'),
+            link_url: link.href,
+            transport_type: 'beacon',
+          });
+        });
+      </script>
+    </>
+  )
+}

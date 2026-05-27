@@ -15,3 +15,5 @@ Scoped pointers into `CLAUDE.md` (only load when matching files are in context):
 Do not duplicate `CLAUDE.md` content in these files — update `CLAUDE.md` instead.
 
 For SEO/metadata, see CLAUDE.md → **SEO and metadata standardization** (`src/data/seo.ts`, `src/data/hubs.ts`, `src/pages/sitemap.xml.ts`).
+
+For GA4 and outbound social link tracking, see CLAUDE.md → **Analytics and outbound social links** (`src/data/social-profiles.ts`, `src/components/GoogleAnalytics.astro`).

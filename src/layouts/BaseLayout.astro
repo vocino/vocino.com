@@ -1,4 +1,5 @@
 ---
+import GoogleAnalytics from '../components/GoogleAnalytics.astro';
 import SEO from '../components/SEO.astro';
 import '../styles/main.scss';
 import type { JsonLdObject, SeoBreadcrumbItem, SeoPageType } from '../data/seo';
@@ -34,6 +35,7 @@ const {
   publishedTime,
   modifiedTime,
 } = Astro.props;
+
 ---
 
 <!DOCTYPE html>
@@ -58,6 +60,8 @@ const {
     publishedTime={publishedTime}
     modifiedTime={modifiedTime}
   />
+
+  <GoogleAnalytics />
 </head>
 <body class="site-root">
   <main class="site-main">

@@ -7,3 +7,5 @@ alwaysApply: false
 # Content hubs
 
 Read **[CLAUDE.md](../../CLAUDE.md) → "Content Hubs"** (including the Hub registry) before editing.
+
+Social or outbound profile links in hub content: **[CLAUDE.md](../../CLAUDE.md) → "Analytics and outbound social links"** (`social-profiles.ts`, `data-social-platform`).

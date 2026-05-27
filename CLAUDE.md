@@ -51,9 +51,12 @@ src/
 │   ├── BrandHome.astro          # SHARED: persistent top-left logo linking to "/" (on every hub)
 │   ├── ComingSoon.astro         # SHARED: placeholder body for not-yet-built hubs
 │   ├── SocialLinks.astro        # External social icons on the landing page
+│   ├── GoogleAnalytics.astro    # GA4 tag + outbound social click tracking (prod only)
 │   └── TwitchStatus.astro       # Live streaming status indicator
 ├── data/
-│   └── home.ts                  # Homepage data (if used)
+│   ├── home.ts                  # Homepage data (if used)
+│   ├── seo.ts                   # Site-wide SEO defaults
+│   └── social-profiles.ts       # Canonical social URLs + analytics platform ids
 ├── layouts/
 │   ├── BaseLayout.astro         # Main HTML layout, imports main.scss (head/SEO/fonts/reset)
 │   └── HubLayout.astro          # SHARED: opt-in hub wrapper (accent + BrandHome corner)
@@ -122,6 +125,22 @@ export const GET: APIRoute = async ({ request, locals }) => {
 - Dynamic sitemap is served by `src/pages/sitemap.xml.ts`; it includes `/` plus hubs marked `indexable: true` in the hub registry.
 - Placeholder/thin hubs must keep `indexable: false` and pass `noindex` until real content is published.
 
+#### Analytics and outbound social links
+- **GA4** loads via `components/GoogleAnalytics.astro` from `BaseLayout` — **production only** (`import.meta.env.PROD`). Measurement ID: `G-56M2CVYY6T`.
+- **Outbound social clicks** are tracked site-wide with a delegated listener on `a[data-social-platform]`. It fires GA4 event `outbound_social` with parameters `social_platform` and `link_url` (beacon transport).
+- **Canonical social profiles** live in `src/data/social-profiles.ts`. Homepage nav uses `SocialLinks.astro` + `TwitchStatus.astro`, which read from that file.
+
+**When adding or changing a social link anywhere** (homepage, a hub like `/bg3`, footer, etc.):
+
+1. **Register the profile** in `src/data/social-profiles.ts` — add an entry with stable `id`, `label`, and `href`. Extend the `SocialProfile['id']` union when the platform is new.
+2. **Use the registered `href`** from that data (import the profile or map over `socialProfiles`) — do not hardcode duplicate URLs.
+3. **Mark the anchor for analytics:** `data-social-platform="{id}"` on the `<a>`, where `{id}` matches the entry in `social-profiles.ts` (e.g. `data-social-platform="instagram"`).
+4. Pages must use **`BaseLayout`** (directly or via `HubLayout`) so `GoogleAnalytics` is present. Custom hub shells that skip `BaseLayout` will not track until they include the same component.
+
+Hub-specific social links (e.g. a community Discord on `/bg3`) still follow steps 1–3 — add a hub-relevant `id` to `social-profiles.ts` even if only one page links to it, so analytics stay consistent.
+
+Optional: if the link is a primary identity profile, also add its URL to `siteSeo.person.sameAs` in `src/data/seo.ts`.
+
 #### Client-Side Interactivity
 - Component-scoped scripts use `<script>` tags in `.astro` files (see TwitchStatus.astro)
 - Larger scripts can live in `public/assets/js/` and be referenced with `<script src="...">`
@@ -159,6 +178,7 @@ Because of this, when working in the codebase:
 - **Do NOT treat one hub's code as a house pattern to copy.** Anything inside `src/pages/bg3/` (styles, components, conventions) is local to BG3 *by design*. It is **not** the site's style and must **not** be propagated to other hubs, to the shared layer, or to the landing page.
 - **Do NOT "harmonize" or "fix" visual differences between hubs.** Divergence is the intended design, not drift.
 - **Scope changes to the hub you're working in.** Only touch the shared layer (listed above) when the change is genuinely meant for *every* hub — and say so explicitly.
+- **Social / outbound profile links in a hub** must follow **Analytics and outbound social links** above (`social-profiles.ts` + `data-social-platform`) — not ad-hoc URLs or untracked anchors.
 - Per-hub specifics (slug, accent color, local conventions) live in the **Hub registry** below. Check it before editing a hub.
 
 ### Hub registry
