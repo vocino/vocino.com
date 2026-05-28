@@ -8,9 +8,9 @@ import { getHomepageHubs } from '../lib/homepage-hubs';
 
 const homepageHubs = await getHomepageHubs();
 
-const homeTitle = 'Travis Vocino (Vocino) — Perfect blend of technology and magic';
+const homeTitle = 'Vocino — Perfect blend of technology and magic';
 const homeDescription =
-  'Travis Vocino — maker, nerd tchotchke collector. Personal site with Baldur\'s Gate 3 Honour Mode and self-hosted homelab guides.';
+  'Travis Vocino — I build stuff at Meta. Nerd tchotchke collector. Chaotic good. Perfect blend of technology and magic.';
 ---
 
 <BaseLayout
@@ -28,28 +28,6 @@ const homeDescription =
       <p class="bio">From the desk of Travis&nbsp;Vocino. Maker. Nerd tchotchke&nbsp;collector. Chaotic&nbsp;good.</p>
 
       <SocialLinks />
-
-      {
-        homepageHubs.length > 0 && (
-          <section class="home-hub-intro" aria-label="Guides and projects">
-            <h2 class="home-hub-intro__heading">Guides</h2>
-            <ul class="home-hub-intro__list">
-              {homepageHubs.map((hub) => (
-                <li class="home-hub-intro__item">
-                  <a
-                    class="home-hub-intro__link"
-                    href={hub.href}
-                    style={`--hub-accent: ${hub.accent}`}
-                  >
-                    {hub.label}
-                  </a>
-                  <span class="home-hub-intro__desc"> — {hub.description}</span>
-                </li>
-              ))}
-            </ul>
-          </section>
-        )
-      }
     </div>
   </div>
 
