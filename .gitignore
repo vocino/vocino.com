@@ -21,6 +21,7 @@ Thumbs.db
 .vscode/
 .idea/
 .claude/
+.cursor/settings.json
 *.swp
 *.swo
 *~
@@ -37,7 +38,8 @@ dist/
 
 # Cloudflare
 .wrangler/
-.dev.vars # Worker local secrets (never commit)
+# Worker local secrets (never commit)
+.dev.vars
 
 # Secrets & local env (keep .env.example committed)
 .env*
