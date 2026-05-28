@@ -6,6 +6,10 @@
     "node": ">=22"
   },
   "scripts": {
+    "og:build": "node scripts/generate-og-images.mjs",
+    "predev": "npm run og:build",
+    "prestart": "npm run og:build",
+    "prebuild": "npm run og:build",
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro check && astro build",
@@ -18,6 +22,7 @@
     "bg3:icons:refresh": "node scripts/download-bg3-icons.mjs && node scripts/verify-bg3-icons.mjs && astro sync"
   },
   "dependencies": {
+    "sharp": "^0.34.3",
     "unist-util-visit": "^5.1.0"
   },
   "devDependencies": {
@@ -29,5 +34,8 @@
     "sass": "^1.80.0",
     "typescript": "^5.0.0",
     "wrangler": "^4.94.0"
+  },
+  "overrides": {
+    "yaml": "2.9.0"
   }
 }

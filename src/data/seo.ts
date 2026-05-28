@@ -14,8 +14,8 @@ export const siteSeo = {
   defaultTitle: 'Travis Vocino (Vocino) — Perfect blend of technology and magic',
   defaultDescription:
     'Travis Vocino — maker, nerd tchotchke collector. Personal site with Baldur\'s Gate 3 and homelab guides.',
-  defaultOgImagePath: '/assets/images/og-image.png',
-  defaultOgImageAlt: 'Vocino site preview image',
+  defaultOgImagePath: '/assets/images/og/home.png',
+  defaultOgImageAlt: 'Vocino homepage preview image',
   twitterHandle: '@vocino',
   person: {
     name: 'Travis Vocino',

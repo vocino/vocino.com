@@ -12,6 +12,10 @@ export interface HubRegistryEntry {
   accent: string;
   indexable: boolean;
   imagePath?: string;
+  /** Optional source hero image used by the OG generator (build-time). */
+  ogHeroPath?: string;
+  /** Optional per-hub OG image alt text. */
+  ogImageAlt?: string;
   /** Collection + entry slug for resolving `updated` from frontmatter. */
   contentCollection?: HubContentCollection;
   contentEntry?: string;
@@ -25,6 +29,9 @@ export const hubRegistry: HubRegistryEntry[] = [
     description: "Baldur's Gate 3 builds, guides, and honour-mode notes by Travis Vocino.",
     accent: '#46E08B',
     indexable: true,
+    imagePath: '/assets/images/og/bg3.png',
+    ogHeroPath: '/assets/images/og-hero/bg3.png',
+    ogImageAlt: "Baldur's Gate 3 hub preview image",
     contentCollection: 'bg3',
     contentEntry: 'honour-mode',
   },
@@ -36,6 +43,9 @@ export const hubRegistry: HubRegistryEntry[] = [
       'Self-hosted media stack — Docker Compose, *arr, Jellyfin, Cloudflare Tunnel, and the traps worth knowing.',
     accent: '#FFB86B',
     indexable: true,
+    imagePath: '/assets/images/og/homelab.png',
+    ogHeroPath: '/assets/images/og-hero/homelab.png',
+    ogImageAlt: 'Home Lab hub preview image',
     contentCollection: 'homelab',
     contentEntry: 'media-stack',
   },
