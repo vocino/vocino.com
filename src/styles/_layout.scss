@@ -159,6 +159,61 @@
   }
 }
 
+// Homepage hub intro — crawlable text links above pills (index only)
+.home-hub-intro {
+  margin-top: $spacing-unit * 5;
+  max-width: 28rem;
+  text-align: left;
+}
+
+.home-hub-intro__heading {
+  font-family: $font-family-mono;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-normal;
+  letter-spacing: $tracking-wider;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0 0 $spacing-unit * 1.5;
+}
+
+.home-hub-intro__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.home-hub-intro__item {
+  font-family: $font-family-sans;
+  font-size: $font-size-sm;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  margin: 0 0 $spacing-unit * 2;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.home-hub-intro__link {
+  color: var(--text-primary);
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--hub-accent, var(--brand)) 35%, transparent);
+
+  &:hover {
+    color: var(--hub-accent, var(--brand));
+    text-decoration: none;
+  }
+
+  &:focus-visible {
+    outline: 1px solid color-mix(in srgb, var(--hub-accent, var(--brand)) 45%, var(--border));
+    outline-offset: 2px;
+  }
+}
+
+.home-hub-intro__desc {
+  color: var(--text-muted);
+}
+
 // Homepage hub pills — fixed-bottom tag nav (index only)
 .home-hub-pills {
   position: fixed;

@@ -20,7 +20,7 @@ export const socialProfiles: SocialProfile[] = [
   {
     id: 'threads',
     label: 'Threads',
-    href: 'https://threads.com/vocino',
+    href: 'https://www.threads.com/@vocino',
   },
   {
     id: 'github',

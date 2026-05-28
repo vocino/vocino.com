@@ -23,12 +23,20 @@ function withLeadingSlash(path: string): string {
 }
 
 export function normalizeCanonicalPath(pathname: string): string {
-  const pathWithLeadingSlash = withLeadingSlash(pathname);
-  if (pathWithLeadingSlash === '/') {
+  let path = withLeadingSlash(pathname);
+
+  // Astro file-build prerender paths (build.format: 'file')
+  if (path === '/index.html' || path === '/index') {
     return '/';
   }
 
-  return pathWithLeadingSlash.replace(/\/+$/, '');
+  path = path.replace(/\.html$/i, '');
+
+  if (path === '' || path === '/') {
+    return '/';
+  }
+
+  return path.replace(/\/+$/, '');
 }
 
 export function toAbsoluteUrl(pathname: string): string {

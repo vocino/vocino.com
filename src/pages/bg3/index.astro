@@ -20,6 +20,7 @@ const wordCount = entry.body?.split(/\s+/).filter(Boolean).length ?? 12000;
 const readingMinutes = Math.max(1, Math.round(wordCount / 220));
 
 const modifiedTime = updated?.toISOString();
+const publishedTime = modifiedTime;
 ---
 
 <HubLayout
@@ -31,6 +32,7 @@ const modifiedTime = updated?.toISOString();
   imagePath={hub.imagePath}
   accent={hub.accent}
   noindex={!hub.indexable}
+  publishedTime={publishedTime}
   modifiedTime={modifiedTime}
 >
   <Bg3GuideShell

@@ -124,6 +124,9 @@ export const GET: APIRoute = async ({ request, locals }) => {
 - Hub defaults (name/slug/description/accent/indexability) live in `src/data/hubs.ts`. Hub pages should consume these defaults rather than duplicating strings.
 - Dynamic sitemap is served by `src/pages/sitemap.xml.ts`; it includes `/` plus hubs marked `indexable: true` in the hub registry.
 - Placeholder/thin hubs must keep `indexable: false` and pass `noindex` until real content is published.
+- **Homepage** must pass `canonicalPath="/"` (file-build prerender can otherwise emit `/index.html`). `normalizeCanonicalPath()` in `src/lib/seo.ts` strips `.html` suffixes so canonicals match sitemap URLs.
+- **Guide hubs** use `HubLayout` with `pageType="article"` (default) for Article JSON-LD + `dateModified` from content frontmatter.
+- **Search Console (manual):** After shipping hub or SEO changes, confirm `https://vocino.com/sitemap.xml` is submitted, inspect indexing for `/bg3` and `/homelab`, and request indexing if URLs are not indexed.
 
 #### Analytics and outbound social links
 - **GA4** loads via `components/GoogleAnalytics.astro` from `BaseLayout` — **production only** (`import.meta.env.PROD`). Measurement ID: `G-56M2CVYY6T`.

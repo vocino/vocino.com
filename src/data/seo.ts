@@ -11,9 +11,9 @@ export const siteSeo = {
   siteName: 'Vocino',
   siteUrl: 'https://vocino.com',
   locale: 'en_US',
-  defaultTitle: 'Vocino — Perfect blend of technology and magic',
+  defaultTitle: 'Travis Vocino (Vocino) — Perfect blend of technology and magic',
   defaultDescription:
-    'Personal website of Travis Vocino — maker, nerd tchotchke collector, and creative technologist.',
+    'Travis Vocino — maker, nerd tchotchke collector. Personal site with Baldur\'s Gate 3 and homelab guides.',
   defaultOgImagePath: '/assets/images/og-image.png',
   defaultOgImageAlt: 'Vocino site preview image',
   twitterHandle: '@vocino',

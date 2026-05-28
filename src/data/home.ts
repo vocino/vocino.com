@@ -63,7 +63,7 @@ export const homeData: HomeData = {
   contact: [
     {
       label: 'Threads',
-      href: 'https://threads.com/vocino',
+      href: 'https://www.threads.com/@vocino',
       channelType: 'social',
       priority: 1,
       handle: '@vocino',

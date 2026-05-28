@@ -5,6 +5,7 @@ export interface HomepageHubLink {
   slug: string;
   href: string;
   label: string;
+  description: string;
   accent: string;
   updated?: Date;
 }
@@ -43,6 +44,7 @@ export async function getHomepageHubs(): Promise<HomepageHubLink[]> {
       slug: hub.slug,
       href: `/${hub.slug}`,
       label: resolveLabel(hub),
+      description: hub.description,
       accent: hub.accent,
       updated: await resolveUpdated(hub),
     })),

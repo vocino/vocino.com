@@ -11,7 +11,7 @@
 // into its own shell.
 import BaseLayout from './BaseLayout.astro';
 import BrandHome from '../components/BrandHome.astro';
-import type { JsonLdObject, SeoBreadcrumbItem } from '../data/seo';
+import type { JsonLdObject, SeoBreadcrumbItem, SeoPageType } from '../data/seo';
 
 interface Props {
   title?: string;
@@ -28,6 +28,8 @@ interface Props {
   nofollow?: boolean;
   publishedTime?: string;
   modifiedTime?: string;
+  /** Guide hubs use `article` for Article JSON-LD; placeholder hubs may use `hub`. */
+  pageType?: SeoPageType;
 }
 
 const {
@@ -44,6 +46,7 @@ const {
   nofollow,
   publishedTime,
   modifiedTime,
+  pageType = 'article',
 } = Astro.props;
 const accentStyle = accent ? `--section-accent: ${accent};` : undefined;
 ---
@@ -51,7 +54,7 @@ const accentStyle = accent ? `--section-accent: ${accent};` : undefined;
 <BaseLayout
   title={title}
   description={description}
-  pageType="hub"
+  pageType={pageType}
   hubName={hubName}
   canonicalPath={canonicalPath}
   imagePath={imagePath}
