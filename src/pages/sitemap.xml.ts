@@ -4,6 +4,7 @@ export const prerender = true;
 import { getHubIndexablePaths } from '../data/hubs';
 import { siteSeo } from '../data/seo';
 import { normalizeCanonicalPath, toAbsoluteUrl } from '../lib/seo';
+import { getPublishedBg3Entries } from './bg3/_lib/bg3-catalogue';
 
 interface SitemapEntry {
   path: string;
@@ -40,17 +41,25 @@ function renderEntry(entry: SitemapEntry): string {
   ].join('\n');
 }
 
-export const GET: APIRoute = () => {
+export const GET: APIRoute = async () => {
   const hubEntries: SitemapEntry[] = getHubIndexablePaths().map((path) => ({
     path,
     changefreq: 'monthly',
     priority: '0.8',
   }));
 
+  // Nested bg3 catalogue pages (builds + playthrough advice).
+  const bg3Pages = await getPublishedBg3Entries();
+  const bg3Entries: SitemapEntry[] = bg3Pages.map((entry) => ({
+    path: `/bg3/${entry.id}`,
+    changefreq: 'monthly',
+    priority: '0.7',
+  }));
+
   const xml = [
     '<?xml version="1.0" encoding="UTF-8"?>',
     '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
-    ...[...baseEntries, ...hubEntries].map(renderEntry),
+    ...[...baseEntries, ...hubEntries, ...bg3Entries].map(renderEntry),
     '</urlset>',
   ].join('\n');
 

@@ -19,6 +19,22 @@ const bg3 = defineCollection({
     updated: z.coerce.date().optional(),
     /** Bumped when bg3 icon assets/paths change — invalidates content cache. */
     iconGeneration: z.number().optional(),
+    /** Catalogue entry type: a per-class build, or general playthrough advice. */
+    kind: z.enum(['build', 'playthrough']).default('build'),
+    /** Display class name, e.g. "Paladin" (for `kind: 'build'`). */
+    className: z.string().optional(),
+    /** Class icon slug, matching the bg3-classes registry, e.g. "paladin". */
+    classSlug: z.string().optional(),
+    /** Subclass label shown on the build, e.g. "Oath of Vengeance". */
+    subclass: z.string().optional(),
+    /** Short role tag for the catalogue card, e.g. "Melee burst". */
+    role: z.string().optional(),
+    /** One-line blurb for the catalogue card (falls back to description). */
+    summary: z.string().optional(),
+    /** Manual ordering within a section (lower sorts first). */
+    order: z.number().optional(),
+    /** Hide from routing + the catalogue (e.g. retired/in-progress entries). */
+    draft: z.boolean().default(false),
   }),
 });
 

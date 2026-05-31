@@ -2,47 +2,60 @@
 export const prerender = true;
 
 import HubLayout from '../../layouts/HubLayout.astro';
-import Bg3GuideShell from './_components/Bg3GuideShell.astro';
+import Bg3Directory from './_components/Bg3Directory.astro';
 import { getHubBreadcrumb, getHubBySlug } from '../../data/hubs';
-import { getEntry, render } from 'astro:content';
+import { toAbsoluteUrl } from '../../lib/seo';
+import {
+  getPublishedBg3Entries,
+  getBg3Builds,
+  getBg3ClassSlots,
+  getBg3Playthroughs,
+  getLatestBg3Update,
+} from './_lib/bg3-catalogue';
 
 const hub = getHubBySlug('bg3');
-const entry = await getEntry('bg3', 'honour-mode');
 
-if (!entry) {
-  throw new Error('BG3 guide entry "honour-mode" not found');
-}
+const entries = await getPublishedBg3Entries();
+const slots = getBg3ClassSlots(entries);
+const builds = getBg3Builds(entries);
+const playthroughs = getBg3Playthroughs(entries);
 
-const { Content, headings } = await render(entry);
-const { title, description, updated } = entry.data;
+const pageTitle = "Baldur's Gate 3 builds";
+const intro =
+  'My personal catalogue of Baldur’s Gate 3 builds — one favorite per class, the way I actually play them — plus the playthrough notes I lean on. Starting points, not gospel; I keep tuning them between runs.';
 
-const wordCount = entry.body?.split(/\s+/).filter(Boolean).length ?? 12000;
-const readingMinutes = Math.max(1, Math.round(wordCount / 220));
+const latestUpdate = getLatestBg3Update(entries);
+const modifiedTime = latestUpdate?.toISOString();
 
-const modifiedTime = updated?.toISOString();
-const publishedTime = modifiedTime;
+// Richer ItemList of the actual published builds (supplements the default hub schema).
+const buildListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: "Travis Vocino's Baldur's Gate 3 builds",
+  url: toAbsoluteUrl(`/${hub.slug}`),
+  numberOfItems: builds.length,
+  itemListElement: builds.map((build, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: build.data.title,
+    url: toAbsoluteUrl(`/${hub.slug}/${build.id}`),
+  })),
+};
 ---
 
 <HubLayout
-  title={title}
+  pageType="hub"
+  title={pageTitle}
   hubName={hub.name}
-  description={description}
+  description={hub.description}
   canonicalPath={`/${hub.slug}`}
   breadcrumb={getHubBreadcrumb(hub)}
   imagePath={hub.imagePath}
   imageAlt={hub.ogImageAlt}
   accent={hub.accent}
   noindex={!hub.indexable}
-  publishedTime={publishedTime}
+  schema={buildListSchema}
   modifiedTime={modifiedTime}
 >
-  <Bg3GuideShell
-    title={title}
-    description={description}
-    updated={updated}
-    readingMinutes={readingMinutes}
-    headings={headings}
-  >
-    <Content />
-  </Bg3GuideShell>
+  <Bg3Directory title={pageTitle} intro={intro} slots={slots} playthroughs={playthroughs} />
 </HubLayout>

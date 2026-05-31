@@ -26,14 +26,15 @@ export const hubRegistry: HubRegistryEntry[] = [
     slug: 'bg3',
     name: "Baldur's Gate 3",
     navLabel: "Baldur's Gate 3",
-    description: "Baldur's Gate 3 builds, guides, and honour-mode notes by Travis Vocino.",
+    description:
+      "My personal Baldur's Gate 3 build catalogue — a favorite build for each class, plus the playthrough advice I actually use.",
     accent: '#46E08B',
     indexable: true,
     imagePath: '/assets/images/og/bg3.png',
     ogHeroPath: '/assets/images/og-hero/bg3.png',
     ogImageAlt: "Baldur's Gate 3 hub preview image",
     contentCollection: 'bg3',
-    contentEntry: 'honour-mode',
+    contentEntry: 'paladin',
   },
   {
     slug: 'homelab',

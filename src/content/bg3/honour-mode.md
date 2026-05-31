@@ -3,6 +3,9 @@ title: Honour Mode — Bardadin run guide
 description: A progression-first Honour Mode playbook for a Half-Orc Oathbreaker Bardadin lead (7/5), dark-synergy party, missable items, and the fights worth skipping.
 updated: 2026-05-27
 iconGeneration: 4
+kind: playthrough
+# Retired for now — kept for reference but unlinked from the catalogue + routing.
+draft: true
 ---
 
 Half-Orc **Oathbreaker Bardadin** lead (7 Paladin / 5 College of Swords Bard), a dark-synergy party that actually likes each other in combat, and a bias toward skipping fights that can delete a 40-hour save. Built for a phone or second screen — follow the sections in order. Spell and item names link to [bg3.wiki](https://bg3.wiki/).
