@@ -15,9 +15,10 @@ interface Props {
   updated?: Date;
   readingMinutes?: number;
   headings: MarkdownHeading[];
+  label?: string;
 }
 
-const { title, description, updated, readingMinutes, headings } = Astro.props;
+const { title, description, updated, readingMinutes, headings, label } = Astro.props;
 ---
 
 <div class="bg3-guide">
@@ -36,6 +37,7 @@ const { title, description, updated, readingMinutes, headings } = Astro.props;
         description={description}
         updated={updated}
         readingMinutes={readingMinutes}
+        label={label}
       />
     </div>
 

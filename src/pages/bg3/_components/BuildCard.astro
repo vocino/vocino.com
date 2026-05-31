@@ -1,0 +1,51 @@
+---
+import { getBg3IconPublicPath } from '../_lib/bg3-icons';
+import type { Bg3ClassSlot } from '../_lib/bg3-catalogue';
+
+interface Props {
+  classSlot: Bg3ClassSlot;
+}
+
+const { classSlot } = Astro.props;
+const { class: cls, build } = classSlot;
+
+const iconSrc = getBg3IconPublicPath(cls.iconSlug);
+const href = build ? `/bg3/${build.id}` : undefined;
+const role = build?.data.role;
+const subclass = build?.data.subclass;
+const blurb = build ? (build.data.summary ?? build.data.description) : undefined;
+
+const Tag = href ? 'a' : 'div';
+---
+
+<Tag
+  class:list={['build-card', { 'build-card--soon': !build }]}
+  href={href}
+  aria-disabled={href ? undefined : 'true'}
+>
+  <span class="build-card__icon">
+    <img src={iconSrc} alt="" width="40" height="40" loading="lazy" decoding="async" />
+  </span>
+
+  <span class="build-card__class">{cls.name}</span>
+
+  {
+    build ? (
+      <>
+        <span class="build-card__title">{build.data.title}</span>
+        {(subclass || role) && (
+          <span class="build-card__tags">
+            {subclass && <span class="build-card__tag">{subclass}</span>}
+            {role && <span class="build-card__tag build-card__tag--role">{role}</span>}
+          </span>
+        )}
+        {blurb && <span class="build-card__blurb">{blurb}</span>}
+      </>
+    ) : (
+      <>
+        <span class="build-card__title build-card__title--soon">Coming soon</span>
+        <span class="build-card__blurb">A build I still need to write up.</span>
+      </>
+    )
+  }
+</Tag>

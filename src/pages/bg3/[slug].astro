@@ -1,0 +1,63 @@
+---
+export const prerender = true;
+
+import type { GetStaticPaths } from 'astro';
+import { render } from 'astro:content';
+import HubLayout from '../../layouts/HubLayout.astro';
+import Bg3GuideShell from './_components/Bg3GuideShell.astro';
+import { getHubBreadcrumb, getHubBySlug } from '../../data/hubs';
+import { getPublishedBg3Entries, getReadingMinutes, type Bg3Entry } from './_lib/bg3-catalogue';
+
+export const getStaticPaths = (async () => {
+  const entries = await getPublishedBg3Entries();
+  return entries.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}) satisfies GetStaticPaths;
+
+interface Props {
+  entry: Bg3Entry;
+}
+
+const hub = getHubBySlug('bg3');
+const { entry } = Astro.props;
+const { Content, headings } = await render(entry);
+const { title, description, updated } = entry.data;
+
+const readingMinutes = getReadingMinutes(entry);
+const modifiedTime = updated?.toISOString();
+const publishedTime = modifiedTime;
+
+const heroLabel =
+  entry.data.kind === 'playthrough'
+    ? 'Playthrough · advice'
+    : `${entry.data.className ?? 'Build'} · my build`;
+
+const breadcrumb = [...getHubBreadcrumb(hub), { name: title, path: `/${hub.slug}/${entry.id}` }];
+---
+
+<HubLayout
+  pageType="article"
+  title={title}
+  hubName={hub.name}
+  description={description}
+  canonicalPath={`/${hub.slug}/${entry.id}`}
+  breadcrumb={breadcrumb}
+  imagePath={hub.imagePath}
+  imageAlt={hub.ogImageAlt}
+  accent={hub.accent}
+  publishedTime={publishedTime}
+  modifiedTime={modifiedTime}
+>
+  <Bg3GuideShell
+    title={title}
+    description={description}
+    updated={updated}
+    readingMinutes={readingMinutes}
+    headings={headings}
+    label={heroLabel}
+  >
+    <Content />
+  </Bg3GuideShell>
+</HubLayout>

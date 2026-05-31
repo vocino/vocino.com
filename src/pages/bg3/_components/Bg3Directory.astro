@@ -1,0 +1,65 @@
+---
+import './../_styles/directory.scss';
+import BuildCard from './BuildCard.astro';
+import GuideAttribution from './GuideAttribution.astro';
+import type { Bg3ClassSlot, Bg3Entry } from '../_lib/bg3-catalogue';
+
+interface Props {
+  title: string;
+  intro: string;
+  slots: Bg3ClassSlot[];
+  playthroughs: Bg3Entry[];
+}
+
+const { title, intro, slots, playthroughs } = Astro.props;
+const builtCount = slots.filter((slot) => slot.build).length;
+---
+
+<div class="bg3-directory">
+  <header class="bg3-directory__hero">
+    <p class="bg3-directory__label label-mono">Baldur&rsquo;s Gate 3 &middot; my builds</p>
+    <h1 class="bg3-directory__title">{title}</h1>
+    <p class="bg3-directory__intro">{intro}</p>
+  </header>
+
+  <section class="bg3-directory__section" aria-labelledby="builds-heading">
+    <div class="bg3-directory__section-head">
+      <h2 id="builds-heading" class="bg3-directory__section-title">Builds by class</h2>
+      <p class="bg3-directory__section-note">
+        {builtCount} of {slots.length} written up &middot; one favorite per class
+      </p>
+    </div>
+
+    <ul class="build-grid" role="list">
+      {slots.map((slot) => (
+        <li class="build-grid__item">
+          <BuildCard classSlot={slot} />
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  {
+    playthroughs.length > 0 && (
+      <section class="bg3-directory__section" aria-labelledby="advice-heading">
+        <div class="bg3-directory__section-head">
+          <h2 id="advice-heading" class="bg3-directory__section-title">Playthrough advice</h2>
+          <p class="bg3-directory__section-note">How I actually run a campaign</p>
+        </div>
+
+        <ul class="advice-list" role="list">
+          {playthroughs.map((entry) => (
+            <li class="advice-list__item">
+              <a class="advice-card" href={`/bg3/${entry.id}`}>
+                <span class="advice-card__title">{entry.data.title}</span>
+                <span class="advice-card__blurb">{entry.data.summary ?? entry.data.description}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+
+  <GuideAttribution />
+</div>

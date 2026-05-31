@@ -14,14 +14,26 @@ const SECTION_ACTS: Record<string, string> = {
 };
 
 export interface TocGroup {
+  /** Act/section label, or '' for flat (non-act-structured) content like build pages. */
   act: string;
   headings: MarkdownHeading[];
 }
 
-/** Top-level headings grouped by act, falling back to "Reference" for appendix sections. */
+/**
+ * Top-level headings grouped by act (for the Act-structured guides). Content that
+ * maps to no act — e.g. the per-class build pages — returns a single flat group
+ * with an empty `act`, so the TOC renders a plain section list.
+ */
 export function getTocGroups(headings: MarkdownHeading[]): TocGroup[] {
+  const topLevel = headings.filter((h) => h.depth === 2);
+  const hasActStructure = topLevel.some((h) => h.slug in SECTION_ACTS);
+
+  if (!hasActStructure) {
+    return topLevel.length > 0 ? [{ act: '', headings: topLevel }] : [];
+  }
+
   const groups: TocGroup[] = [];
-  for (const heading of headings.filter((h) => h.depth === 2)) {
+  for (const heading of topLevel) {
     const act = SECTION_ACTS[heading.slug] ?? 'Reference';
     let group = groups[groups.length - 1];
     if (!group || group.act !== act) {

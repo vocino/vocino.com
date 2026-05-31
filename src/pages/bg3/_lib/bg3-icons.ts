@@ -3,7 +3,7 @@
  * Icons sourced from https://bg3.wiki/ (see guide attribution).
  */
 
-export type Bg3IconCategory = 'spell' | 'item' | 'condition' | 'feat' | 'action';
+export type Bg3IconCategory = 'spell' | 'item' | 'condition' | 'feat' | 'action' | 'class';
 
 export interface Bg3IconEntry {
   slug: string;
@@ -50,10 +50,31 @@ const entries: Bg3IconEntry[] = [
   { slug: 'birthright', label: 'Birthright', category: 'item', file: 'items/birthright.webp', wikiPath: 'Birthright' },
   { slug: 'markoheshkir', label: "Markoheshkir's Staff", category: 'item', file: 'items/markoheshkir.webp', wikiPath: 'Markoheshkir' },
   { slug: 'sussur-bloom', label: 'Sussur Bloom', category: 'item', file: 'items/sussur-bloom.webp', wikiPath: 'Sussur_Bloom' },
+  { slug: 'eldritch-blast', label: 'Eldritch Blast', category: 'spell', file: 'spells/eldritch-blast.webp', wikiPath: 'Eldritch_Blast' },
+  { slug: 'hex', label: 'Hex', category: 'spell', file: 'spells/hex.webp', wikiPath: 'Hex' },
+  { slug: 'hunters-mark', label: "Hunter's Mark", category: 'spell', file: 'spells/hunters-mark.webp', wikiPath: 'Hunter%27s_Mark' },
+  { slug: 'scorching-ray', label: 'Scorching Ray', category: 'spell', file: 'spells/scorching-ray.webp', wikiPath: 'Scorching_Ray' },
+  { slug: 'fireball', label: 'Fireball', category: 'spell', file: 'spells/fireball.png', wikiPath: 'Fireball' },
+  { slug: 'revivify', label: 'Revivify', category: 'spell', file: 'spells/revivify.webp', wikiPath: 'Revivify' },
   { slug: 'sharpshooter', label: 'Sharpshooter', category: 'feat', file: 'feats/sharpshooter.webp', wikiPath: 'Sharpshooter' },
   { slug: 'alert', label: 'Alert', category: 'feat', file: 'feats/alert.webp', wikiPath: 'Alert_(Feat)' },
   { slug: 'savage-attacker', label: 'Savage Attacker', category: 'feat', file: 'feats/savage-attacker.webp', wikiPath: 'Savage_Attacker' },
   { slug: 'tavern-brawler', label: 'Tavern Brawler', category: 'feat', file: 'feats/tavern-brawler.webp', wikiPath: 'Tavern_Brawler' },
+  { slug: 'great-weapon-master', label: 'Great Weapon Master', category: 'feat', file: 'feats/great-weapon-master.webp', wikiPath: 'Great_Weapon_Master' },
+  { slug: 'war-caster', label: 'War Caster', category: 'feat', file: 'feats/war-caster.png', wikiPath: 'War_Caster' },
+  // Class badge icons (catalogue cards + build heroes).
+  { slug: 'barbarian', label: 'Barbarian', category: 'class', file: 'classes/barbarian.webp', wikiPath: 'Barbarian' },
+  { slug: 'bard', label: 'Bard', category: 'class', file: 'classes/bard.webp', wikiPath: 'Bard' },
+  { slug: 'cleric', label: 'Cleric', category: 'class', file: 'classes/cleric.webp', wikiPath: 'Cleric' },
+  { slug: 'druid', label: 'Druid', category: 'class', file: 'classes/druid.webp', wikiPath: 'Druid' },
+  { slug: 'fighter', label: 'Fighter', category: 'class', file: 'classes/fighter.webp', wikiPath: 'Fighter' },
+  { slug: 'monk', label: 'Monk', category: 'class', file: 'classes/monk.webp', wikiPath: 'Monk' },
+  { slug: 'paladin', label: 'Paladin', category: 'class', file: 'classes/paladin.webp', wikiPath: 'Paladin' },
+  { slug: 'ranger', label: 'Ranger', category: 'class', file: 'classes/ranger.webp', wikiPath: 'Ranger' },
+  { slug: 'rogue', label: 'Rogue', category: 'class', file: 'classes/rogue.webp', wikiPath: 'Rogue' },
+  { slug: 'sorcerer', label: 'Sorcerer', category: 'class', file: 'classes/sorcerer.webp', wikiPath: 'Sorcerer' },
+  { slug: 'warlock', label: 'Warlock', category: 'class', file: 'classes/warlock.webp', wikiPath: 'Warlock' },
+  { slug: 'wizard', label: 'Wizard', category: 'class', file: 'classes/wizard.webp', wikiPath: 'Wizard' },
 ];
 
 const bySlug = new Map(entries.map((e) => [e.slug, e]));
@@ -75,4 +96,4 @@ export function slugToDefaultLabel(slug: string): string {
 export const bg3IconEntries = entries;
 
 export const bg3WikiAttribution =
-  'Spell, item, and ability icons are from the Baldur\'s Gate 3 Wiki (bg3.wiki), used for reference.';
+  'Class, spell, item, and ability icons are from the Baldur\'s Gate 3 Wiki (bg3.wiki), used for reference.';
