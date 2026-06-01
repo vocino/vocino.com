@@ -15,6 +15,7 @@ export interface Bg3IconEntry {
 }
 
 const entries: Bg3IconEntry[] = [
+  { slug: 'inflict-wounds', label: 'Inflict Wounds', category: 'spell', file: 'spells/inflict-wounds.webp', wikiPath: 'Inflict_Wounds' },
   { slug: 'hold-person', label: 'Hold Person', category: 'spell', file: 'spells/hold-person.webp', wikiPath: 'Hold_Person' },
   { slug: 'hold-monster', label: 'Hold Monster', category: 'spell', file: 'spells/hold-monster.webp', wikiPath: 'Hold_Monster' },
   { slug: 'hypnotic-pattern', label: 'Hypnotic Pattern', category: 'spell', file: 'spells/hypnotic-pattern.webp', wikiPath: 'Hypnotic_Pattern' },
@@ -27,6 +28,7 @@ const entries: Bg3IconEntry[] = [
   { slug: 'misty-step', label: 'Misty Step', category: 'spell', file: 'spells/misty-step.webp', wikiPath: 'Misty_Step' },
   { slug: 'ray-of-frost', label: 'Ray of Frost', category: 'spell', file: 'spells/ray-of-frost.webp', wikiPath: 'Ray_of_Frost' },
   { slug: 'spirit-guardians', label: 'Spirit Guardians', category: 'spell', file: 'spells/spirit-guardians.webp', wikiPath: 'Spirit_Guardians' },
+  { slug: 'glyph-of-warding', label: 'Glyph of Warding', category: 'spell', file: 'spells/glyph-of-warding.webp', wikiPath: 'Glyph_of_Warding' },
   { slug: 'magic-missile', label: 'Magic Missile', category: 'spell', file: 'spells/magic-missile.webp', wikiPath: 'Magic_Missile' },
   { slug: 'counterspell', label: 'Counterspell', category: 'spell', file: 'spells/counterspell.webp', wikiPath: 'Counterspell' },
   { slug: 'command', label: 'Command', category: 'spell', file: 'spells/command.webp', wikiPath: 'Command' },
@@ -42,6 +44,9 @@ const entries: Bg3IconEntry[] = [
   { slug: 'cloud-of-daggers', label: 'Cloud of Daggers', category: 'spell', file: 'spells/cloud-of-daggers.webp', wikiPath: 'Cloud_of_Daggers' },
   { slug: 'sleet-storm', label: 'Sleet Storm', category: 'spell', file: 'spells/sleet-storm.webp', wikiPath: 'Sleet_Storm' },
   { slug: 'aid', label: 'Aid', category: 'spell', file: 'spells/aid.webp', wikiPath: 'Aid' },
+  { slug: 'insect-plague', label: 'Insect Plague', category: 'spell', file: 'spells/insect-plague.webp', wikiPath: 'Insect_Plague' },
+  { slug: 'heroes-feast', label: "Heroes' Feast", category: 'spell', file: 'spells/heroes-feast.webp', wikiPath: 'Heroes%27_Feast' },
+  { slug: 'heal', label: 'Heal', category: 'spell', file: 'spells/heal.webp', wikiPath: 'Heal' },
   { slug: 'protection-from-evil-and-good', label: 'Protection from Evil and Good', category: 'spell', file: 'spells/protection-from-evil-and-good.webp', wikiPath: 'Protection_from_Evil_and_Good' },
   { slug: 'arcane-lock', label: 'Arcane Lock', category: 'spell', file: 'spells/arcane-lock.webp', wikiPath: 'Arcane_Lock' },
   { slug: 'phalar-aluve', label: 'Phalar Aluve', category: 'item', file: 'items/phalar-aluve.webp', wikiPath: 'Phalar_Aluve' },

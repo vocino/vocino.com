@@ -1,44 +1,45 @@
 ---
-title: Light Cleric control-caster
-description: My Light Domain Cleric — a heavy-armor control-caster who leads with Spirit Guardians, blinds packs with Radiance of the Dawn, and keeps Bless up all fight.
-updated: 2026-05-28
+title: Death Cleric raise-dead control
+description: My Death Domain Cleric — medium-armor control with a shield, Inflict Wounds burst, Spirit Guardians midgame, and DC-stacked Hold Person later.
+updated: 2026-05-31
 kind: build
 className: Cleric
 classSlug: cleric
-subclass: Light Domain
+subclass: Death Domain
 role: Support / control
-summary: 'Heavy-armor control-caster: Spirit Guardians, blinding bursts, perma-Bless.'
+summary: 'Medium-armor Death Cleric: Inflict Wounds burst, daily Aid, Spirit Guardians, DC-stacked holds.'
 order: 4
 iconGeneration: 1
 ---
 
-> **Starter notes.** My personal Cleric default, written as a jumping-off point. Domain and spell picks are flexible — make it yours.
+> **Starter notes.** This is the Cleric I like when I want my support slot to also *end* fights. It’s mostly “good habits + reliable spells” — the death-flavor just makes the spikes nastier.
 
-A **Light Domain** Cleric who is tankier than the party expects and quietly runs every fight. I walk in wearing heavy armor with [[bg3:spirit-guardians]] up, blind clustered enemies with Radiance of the Dawn, and keep [[bg3:bless]] running the whole time.
+A **Death Domain** Cleric built around **reliable spell turns**: I carry a shield in medium armor, keep the party’s HP floor up with an upcast [[bg3:aid]], and delete priority targets with upcast [[bg3:inflict-wounds]]. Midgame I graduate into [[bg3:spirit-guardians]] and [[bg3:glyph-of-warding]], and late game I start landing “this fight is over” control like [[bg3:hold-person]] once my spell DC gear is online.
 
 ## Why I run it
 
-- **Spirit Guardians** is the best damage-per-effort spell a support has.
-- **Warding Flare + Radiance of the Dawn** blunt whole packs of enemies.
-- Heavy armor means I can stand in the front line and still cast freely.
+- **It’s a support that can spike.** When something has to die right now, [[bg3:inflict-wounds]] answers.
+- **Daily durability is real power.** Upcast [[bg3:aid]] after every long rest and you feel it in every messy fight.
+- **It scales into control.** Once you start stacking spell DC, [[bg3:hold-person]] stops being a coin flip and starts being a plan.
 
 ## At a glance
 
 | | |
 | --- | --- |
-| Race | Any with heavy-armor support, or take it from the domain |
-| Subclass | Light Domain |
+| Race | Anything you like; I value movement + perception, or any defensive package |
+| Subclass | Death Domain |
 | Key ability | Wisdom |
-| Role | Support, control, off-tank |
-| Pairs with | Anyone — this build makes the rest of the party better |
+| Armor | Medium + shield (DEX 14 and stop) |
+| Role | Support, control, burst |
+| Pairs with | Crit builds and any martial that loves held targets |
 
 ## Ability scores
 
 | Stat | Value | Why |
 | --- | --- | --- |
 | STR | 10 | Carry weight only |
-| DEX | 12 | Minor AC |
-| CON | 14 | Concentration |
+| DEX | **14** | The medium-armor breakpoint |
+| CON | 14 | Concentration + not dying |
 | INT | 8 | Dump |
 | WIS | **17** | Spell DCs and healing |
 | CHA | 10 | A few checks |
@@ -47,34 +48,46 @@ A **Light Domain** Cleric who is tankier than the party expects and quietly runs
 
 | Level | Pick | Why |
 | --- | --- | --- |
-| 1 | Cleric (Light) | Warding Flare + domain spells |
-| 3 | 2nd-level slots | [[bg3:spirit-guardians]] soon |
-| 4 | Feat — Ability Improvement (WIS) | Toward 18 |
-| 5 | [[bg3:spirit-guardians]] + Radiance of the Dawn | The control core |
-| 6 | Improved Warding Flare | More party-wide misses |
+| 1 | Cleric (Death) | Reaper + early necrotic pressure |
+| 3 | 2nd-level slots | Start the “daily [[bg3:aid]]” habit |
+| 4 | Feat — Ability Improvement (WIS) | Hit 18 WIS, stop missing |
+| 5 | [[bg3:spirit-guardians]] + [[bg3:glyph-of-warding]] | Midgame: you become a real caster |
+| 6 | Inescapable Destruction | Necrotic plans stop bouncing |
+| 9 | [[bg3:insect-plague]] | Big AoE that controls space |
+| 11 | [[bg3:heroes-feast]] *or* [[bg3:heal]] | Feast if no one else has it; Heal if you need a panic button |
+| 12 | Feat — [[bg3:war-caster]] (War Caster) *or* Spell Sniper | War Caster if you live on concentration; Sniper if you fish crits on attack-roll spells |
 
 ## Feats I take
 
-- Ability Improvement (Wisdom) — DCs and heals scale together.
-- [[bg3:war-caster|War Caster]] — keep [[bg3:spirit-guardians]] up when hit.
+- Ability Improvement (Wisdom) — every good Cleric turn is a save/DC question.
+- [[bg3:war-caster|War Caster]] — if you’re running [[bg3:spirit-guardians]] or holds, this is basically insurance.
 
 ## Spells & actions
 
-- [[bg3:spirit-guardians|Spirit Guardians]] — turn it on and walk at people.
-- [[bg3:bless|Bless]] — buff three allies for the whole fight.
-- [[bg3:sanctuary|Sanctuary]] — protect a downed ally or a fragile caster.
-- [[bg3:aid|Aid]] — pre-fight HP for the whole party.
+- [[bg3:inflict-wounds|Inflict Wounds]] — the “delete this target” button, and it scales hard when upcast.
+- [[bg3:aid|Aid]] — cast it after every long rest; upcast as your slots grow.
+- [[bg3:spirit-guardians|Spirit Guardians]] — midgame power spike; cast and bully the map.
+- [[bg3:glyph-of-warding|Glyph of Warding]] — flexible AoE when you can’t (or shouldn’t) walk in.
+- [[bg3:hold-person|Hold Person]] — late game, with DC gear, this becomes a setup spell for the whole party.
 
 ## Gear by act
 
-- **Act 1:** [[bg3:phalar-aluve|Phalar Aluve]] on a martial ally pairs with your radiant theme.
-- **Act 2:** Anything that boosts radiant damage — it stacks with everything you do.
-- **Act 3:** Gear that adds spell save DC or extra healing.
+- **Act 1:** Defensive staples and “free value” utility — Cloak of Protection, Pearl of Power, and any shield that gives you more casts.
+- **Act 2:** Adamantine Scale Mail if you’re sick of random crits; Eversight Ring if blind is ruining your day; Ritual Dagger of Shar is a neat necrotic-flavored mainhand.
+- **Act 3:** Commit to **spell reliability**: Hood/Cloak of the Weave, a Spell Save DC ring, and a “casters should not miss” weapon like Rhapsody. If you’re tired of dying, Amulet of Greater Health turns CON into a solved problem.
+
+(If you don’t have the exact pieces, don’t sweat it — the *theme* is DC/attack-roll boosts + survivability so your concentration sticks.)
 
 ## How I play it
 
-Pre-buff with [[bg3:aid]], open combat with [[bg3:bless]], then cast [[bg3:spirit-guardians]] and physically walk into the enemy formation. Radiance of the Dawn cleans up clustered low-HP enemies and applies blind. I keep [[bg3:sanctuary]] in my pocket to save whoever the AI decides to focus.
+After every long rest I cast an upcast [[bg3:aid]]. In fights I decide what kind of turn it is:
+
+- **Burst turn:** walk up and upcast [[bg3:inflict-wounds]] into the priority target.
+- **Control turn:** if my DC is good and the target is humanoid, [[bg3:hold-person]] and let the martials do the rest.
+- **Map control turn:** [[bg3:spirit-guardians]] when I can safely be central, or [[bg3:glyph-of-warding]] when I can’t.
+
+I also treat my Death stuff like a real part of the kit: set your reactions so Touch of Death actually triggers, and don’t forget that Inescapable Destruction changes which enemies you can bully with necrotic plans.
 
 ## Make it yours
 
-Prefer healing to control? **Life Domain** is the strongest pure healer. Want to nuke? **Tempest** maximizes lightning and thunder. The heavy-armor, Wisdom-forward chassis carries any of them.
+If you want to be more “classic Cleric,” swap the burst slots into more buffs and you’re still fine. If you want to be more “death,” lean harder into necrotic/undead choices and keep stacking spell DC so your control isn’t a gamble.

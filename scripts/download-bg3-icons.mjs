@@ -16,6 +16,7 @@ const UA = 'vocino.com-bg3-guide/1.0 (personal guide; icon cache)';
 
 /** wiki page title -> output path relative to bg3/ */
 const downloads = [
+  ['Inflict_Wounds', 'spells/inflict-wounds.webp'],
   ['Hold_Person', 'spells/hold-person.webp'],
   ['Hold_Monster', 'spells/hold-monster.webp'],
   ['Hypnotic_Pattern', 'spells/hypnotic-pattern.webp'],
@@ -28,6 +29,7 @@ const downloads = [
   ['Misty_Step', 'spells/misty-step.webp'],
   ['Ray_of_Frost', 'spells/ray-of-frost.webp'],
   ['Spirit_Guardians', 'spells/spirit-guardians.webp'],
+  ['Glyph_of_Warding', 'spells/glyph-of-warding.webp'],
   ['Magic_Missile', 'spells/magic-missile.webp'],
   ['Counterspell', 'spells/counterspell.webp'],
   ['Command', 'spells/command.webp'],
@@ -43,6 +45,9 @@ const downloads = [
   ['Cloud_of_Daggers', 'spells/cloud-of-daggers.webp'],
   ['Sleet_Storm', 'spells/sleet-storm.webp'],
   ['Aid', 'spells/aid.webp'],
+  ['Insect_Plague', 'spells/insect-plague.webp'],
+  ["Heroes'_Feast", 'spells/heroes-feast.webp'],
+  ['Heal', 'spells/heal.webp'],
   ['Protection_from_Evil_and_Good', 'spells/protection-from-evil-and-good.webp'],
   ['Arcane_Lock', 'spells/arcane-lock.webp'],
   ['Phalar_Aluve', 'items/phalar-aluve.webp'],
@@ -62,6 +67,7 @@ const DIRECT_ICON = {
   'Shield_(spell)': '/w/images/c/cf/Shield_spell_Icon.webp',
   Command: '/w/images/7/7f/Command_Halt_Icon.webp',
   Armor_of_Agathys: '/w/images/7/77/Armour_of_Agathys_Icon.webp',
+  "Heroes'_Feast": '/w/images/a/a0/Heroes%27_Feast_Icon.webp',
   Titanstring_Bow: '/w/images/4/45/Titanstring_Bow_ingame.png',
   Drakethroat_Glaive: '/w/images/1/15/Glaive_PlusTwo_Icon.png',
   Birthright: '/w/images/1/1b/Birthright_Icon.png',

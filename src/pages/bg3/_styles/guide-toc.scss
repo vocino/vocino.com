@@ -1,6 +1,46 @@
 @use 'guide-tokens';
 
 .guide-toc {
+  &__back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin: 0 0 0.85rem;
+    padding: 0.35rem 0.5rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: color-mix(in srgb, var(--section-accent, #46e08b) 6%, var(--surface-1));
+    color: var(--section-accent, #46e08b);
+    text-decoration: none;
+    font-family: 'Source Code Pro', monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition:
+      background-color 0.15s ease,
+      border-color 0.15s ease,
+      color 0.15s ease,
+      transform 0.15s ease;
+
+    &:hover,
+    &:focus {
+      color: var(--section-accent, #46e08b);
+      text-decoration: none;
+      border-color: color-mix(in srgb, var(--section-accent, #46e08b) 55%, var(--border));
+      background: color-mix(in srgb, var(--section-accent, #46e08b) 10%, var(--surface-1));
+      outline: none;
+    }
+
+    &:active {
+      transform: translateY(1px);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--section-accent, #46e08b);
+      outline-offset: 2px;
+    }
+  }
+
   &__label {
     margin: 0 0 0.75rem;
     font-size: 0.6875rem;

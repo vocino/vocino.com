@@ -13,6 +13,10 @@ const tocGroups = getTocGroups(headings);
 {
   tocGroups.length > 0 && (
     <nav class="guide-toc" aria-label="Table of contents">
+      <a class="guide-toc__back" href="/bg3">
+        <span aria-hidden="true">←</span>
+        <span>Back to builds</span>
+      </a>
       <p class="guide-toc__label label-mono">Contents</p>
       {tocGroups.map((group) => (
         <div class="guide-toc__group">

@@ -118,10 +118,13 @@
     transform 0.2s ease;
 
   &:hover,
+  &:focus,
   &:focus-visible {
     border-color: color-mix(in srgb, var(--dir-accent) 55%, var(--border));
     background: color-mix(in srgb, var(--dir-accent) 6%, var(--surface-1));
     transform: translateY(-2px);
+    color: inherit;
+    text-decoration: none;
     outline: none;
   }
 
@@ -244,9 +247,12 @@
     background-color 0.2s ease;
 
   &:hover,
+  &:focus,
   &:focus-visible {
     background: color-mix(in srgb, var(--dir-accent) 6%, var(--surface-1));
     border-left-color: var(--dir-accent);
+    color: inherit;
+    text-decoration: none;
     outline: none;
   }
 
