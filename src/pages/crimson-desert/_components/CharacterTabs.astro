@@ -28,7 +28,6 @@ const showDamianeToc = damianeHeadings.length > 0;
 ---
 
 <div class="cd-tabs" data-cd-tabs>
-  <div class="cd-tabs__scroll-veil" aria-hidden="true"></div>
   <div role="tablist" aria-label="Character builds" class="cd-tabs__bar">
     <ul class="cd-tabs__list">
       {
@@ -68,6 +67,7 @@ const showDamianeToc = damianeHeadings.length > 0;
       )
     }
     <div class="cd-hub__workspace-main">
+      <div class="cd-scroll-fade" aria-hidden="true"></div>
       {showKliffToc && (
         <GuideTocDrawer headings={kliffHeadings} panelId="kliff" idPrefix="kliff" />
       )}
@@ -95,6 +95,7 @@ const showDamianeToc = damianeHeadings.length > 0;
       )
     }
     <div class="cd-hub__workspace-main">
+      <div class="cd-scroll-fade" aria-hidden="true"></div>
       {showDamianeToc && (
         <GuideTocDrawer headings={damianeHeadings} panelId="damiane" idPrefix="damiane" />
       )}

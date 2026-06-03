@@ -55,7 +55,8 @@ body.site-root:has(.cd-hub) main.site-main {
   --cd-chrome-top: 5rem;
   --cd-tab-bar-height: 3rem;
   --cd-toc-top: calc(var(--cd-chrome-top) + var(--cd-tab-bar-height) + 0.625rem);
-  --cd-scroll-veil-height: 8rem;
+  /* Viewport band above the sticky tab bar (logo chrome → tabs) */
+  --cd-scroll-fade-band: var(--cd-chrome-top);
 }
 
 @media (min-width: 640px) {

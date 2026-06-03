@@ -3,9 +3,21 @@
 const VALID_IDS = new Set(['kliff', 'damiane', 'oongka']);
 const DEFAULT_ID = 'kliff';
 
+/** Tab id from `#kliff`, `#damiane`, or a section hash like `#damiane-equipment`. */
+function characterIdFromHash(hash: string): string {
+  const raw = hash.replace(/^#/, '').toLowerCase();
+  if (!raw) return DEFAULT_ID;
+  if (VALID_IDS.has(raw)) return raw;
+
+  for (const id of VALID_IDS) {
+    if (raw.startsWith(`${id}-`)) return id;
+  }
+
+  return DEFAULT_ID;
+}
+
 function normalizeHash(): string {
-  const raw = window.location.hash.replace(/^#/, '').toLowerCase();
-  return VALID_IDS.has(raw) ? raw : DEFAULT_ID;
+  return characterIdFromHash(window.location.hash);
 }
 
 function selectTab(root: HTMLElement, id: string, updateHash: boolean): void {
