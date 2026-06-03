@@ -1,0 +1,15 @@
+---
+import type { CdCharacter } from '../_lib/cd-characters';
+
+interface Props {
+  character: CdCharacter;
+}
+
+const { character } = Astro.props;
+---
+
+<div class="cd-character-soon">
+  <h2 class="cd-character-soon__name">{character.label}</h2>
+  <p class="cd-character-soon__tagline">{character.tagline ?? 'Build notes in progress.'}</p>
+  <p class="cd-character-soon__note">Haven't finished this one yet. Kliff is the only complete build for now.</p>
+</div>

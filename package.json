@@ -19,7 +19,10 @@
     "astro": "astro",
     "bg3:icons": "node scripts/download-bg3-icons.mjs",
     "bg3:icons:verify": "node scripts/verify-bg3-icons.mjs",
-    "bg3:icons:refresh": "node scripts/download-bg3-icons.mjs && node scripts/verify-bg3-icons.mjs && astro sync"
+    "bg3:icons:refresh": "node scripts/download-bg3-icons.mjs && node scripts/verify-bg3-icons.mjs && astro sync",
+    "cd:icons": "node scripts/download-cd-icons.mjs",
+    "cd:icons:verify": "node scripts/verify-cd-icons.mjs",
+    "cd:icons:refresh": "node scripts/download-cd-icons.mjs && node scripts/verify-cd-icons.mjs && astro sync"
   },
   "dependencies": {
     "sharp": "^0.34.3",

@@ -38,4 +38,17 @@ const bg3 = defineCollection({
   }),
 });
 
-export const collections = { homelab, bg3 };
+const crimsonDesert = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/crimson-desert' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    updated: z.coerce.date().optional(),
+    character: z.enum(['kliff', 'damiane', 'oongka']),
+    status: z.enum(['published', 'coming-soon']).default('published'),
+    phase: z.string().optional(),
+    iconGeneration: z.number().optional(),
+  }),
+});
+
+export const collections = { homelab, bg3, 'crimson-desert': crimsonDesert };

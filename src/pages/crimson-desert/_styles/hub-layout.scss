@@ -1,0 +1,77 @@
+.cd-hub {
+  position: relative;
+  min-height: 100vh;
+  color: var(--cd-text);
+}
+
+.cd-hub__grain {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.35;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, color-mix(in srgb, var(--section-accent) 8%, transparent), transparent 70%),
+    linear-gradient(165deg, #1a120e 0%, #120e0c 45%, #0e0a08 100%);
+}
+
+.cd-hub__inner {
+  position: relative;
+  z-index: 1;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 5.5rem 1.25rem 4rem;
+}
+
+@media (min-width: 768px) {
+  .cd-hub__inner {
+    padding: 6rem 2rem 5rem;
+  }
+}
+
+/* Tab workspace: TOC rail + main column (Kliff) or solo column (coming soon). */
+.cd-hub__workspace {
+  min-width: 0;
+}
+
+@media (min-width: 1024px) {
+  .cd-hub__workspace:not(.cd-hub__workspace--solo) {
+    display: grid;
+    grid-template-columns: var(--guide-rail-width) minmax(0, 1fr);
+    gap: 2.5rem;
+    align-items: start;
+  }
+}
+
+.cd-hub__workspace--solo {
+  max-width: 36rem;
+  margin: 0 auto;
+  padding-top: var(--guide-space-md);
+}
+
+/* Sticky TOC rail — in grid flow below tabs, sticks under the tab bar while scrolling. */
+.cd-hub__toc-rail {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .cd-hub__toc-rail {
+    display: block;
+    position: sticky;
+    top: var(--cd-toc-top);
+    align-self: start;
+    max-height: calc(100vh - var(--cd-toc-top) - 1.25rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    z-index: 20;
+  }
+}
+
+.cd-hub__workspace-main {
+  min-width: 0;
+}
+
+.cd-hub__panel[hidden] {
+  display: none !important;
+}

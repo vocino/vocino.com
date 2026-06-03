@@ -9,6 +9,7 @@ const SITE_NAME = 'Vocino';
 const HUBS = [
   { slug: 'bg3', name: "Baldur's Gate 3", accent: '#46E08B', ogHeroPath: '/assets/images/og-hero/bg3.png' },
   { slug: 'homelab', name: 'Home Lab', accent: '#FFB86B', ogHeroPath: '/assets/images/og-hero/homelab.png' },
+  { slug: 'crimson-desert', name: 'Crimson Desert', accent: '#D44D37', ogHeroPath: '/assets/images/og-hero/crimson-desert.png' },
 ];
 
 const ROOT = path.resolve(process.cwd());

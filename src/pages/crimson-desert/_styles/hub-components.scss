@@ -1,0 +1,132 @@
+.cd-hero {
+  display: grid;
+  gap: var(--guide-space-lg);
+  margin-bottom: var(--guide-space-xl);
+  max-width: 52rem;
+}
+
+@media (min-width: 640px) {
+  .cd-hero {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+    gap: var(--guide-space-xl);
+    max-width: none;
+  }
+}
+
+.cd-hero__copy {
+  min-width: 0;
+}
+
+.cd-hero__cover {
+  margin: 0;
+  justify-self: center;
+}
+
+@media (min-width: 640px) {
+  .cd-hero__cover {
+    justify-self: end;
+    margin-bottom: 0.125rem;
+  }
+}
+
+.cd-hero__cover-img {
+  display: block;
+  width: clamp(8.5rem, 24vw, 12rem);
+  height: auto;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border: 1px solid var(--cd-border);
+  border-radius: 3px;
+  box-shadow:
+    0 16px 40px rgb(0 0 0 / 0.45),
+    0 0 32px color-mix(in srgb, var(--section-accent, #d44d37) 18%, transparent),
+    inset 0 1px 0 rgb(255 255 255 / 0.06);
+}
+
+.cd-hero__label {
+  color: var(--cd-gold-dim);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  margin: 0 0 0.5rem;
+  text-transform: uppercase;
+}
+
+.cd-hero__label::before {
+  content: '// ';
+  color: var(--section-accent, #d44d37);
+}
+
+.cd-hero__title {
+  color: var(--cd-text);
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin: 0 0 0.75rem;
+}
+
+.cd-hero__desc {
+  color: var(--cd-text-dim);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  margin: 0 0 1rem;
+}
+
+.cd-hero__meta {
+  color: var(--cd-text-muted);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.03em;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cd-hero__meta li::before {
+  color: var(--section-accent, #d44d37);
+  content: '·';
+  margin-right: 0.5rem;
+}
+
+.cd-hero__meta li:first-child::before {
+  content: none;
+  margin: 0;
+}
+
+.cd-character-soon {
+  border: 1px dashed var(--cd-border);
+  padding: var(--guide-space-xl) var(--guide-space-lg);
+  text-align: center;
+}
+
+.cd-character-soon__name {
+  color: var(--cd-text);
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  margin: 0 0 0.5rem;
+}
+
+.cd-character-soon__tagline {
+  color: var(--cd-text-dim);
+  font-size: 1rem;
+  margin: 0 0 1.25rem;
+}
+
+.cd-character-soon__note {
+  color: var(--cd-text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  letter-spacing: 0.03em;
+  margin: 0;
+}
+
+.cd-character-soon__note::before {
+  color: var(--section-accent, #d44d37);
+  content: '// ';
+}

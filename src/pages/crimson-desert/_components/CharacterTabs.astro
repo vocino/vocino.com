@@ -1,0 +1,94 @@
+---
+import { cdCharacters, DEFAULT_CHARACTER_ID } from '../_lib/cd-characters';
+import CdCharacterSoon from './CdCharacterSoon.astro';
+import GuideToc from './GuideToc.astro';
+import GuideTocDrawer from './GuideTocDrawer.astro';
+import GuideAttribution from './GuideAttribution.astro';
+import type { MarkdownHeading } from 'astro';
+
+interface Props {
+  kliffHeadings: MarkdownHeading[];
+}
+
+const { kliffHeadings } = Astro.props;
+
+const damiane = cdCharacters.find((c) => c.id === 'damiane')!;
+const oongka = cdCharacters.find((c) => c.id === 'oongka')!;
+const showKliffToc = kliffHeadings.length > 0;
+---
+
+<div class="cd-tabs" data-cd-tabs>
+  <div class="cd-tabs__scroll-veil" aria-hidden="true"></div>
+  <div role="tablist" aria-label="Character builds" class="cd-tabs__bar">
+    <ul class="cd-tabs__list">
+      {
+        cdCharacters.map((character) => (
+          <li>
+            <button
+              type="button"
+              role="tab"
+              class:list={['cd-tabs__tab', character.status === 'soon' && 'cd-tabs__tab--soon']}
+              id={`cd-tab-${character.id}`}
+              aria-controls={`cd-panel-${character.id}`}
+              aria-selected={character.id === DEFAULT_CHARACTER_ID ? 'true' : 'false'}
+              tabindex={character.id === DEFAULT_CHARACTER_ID ? 0 : -1}
+              data-cd-tab={character.id}
+            >
+              {character.label}
+              {character.status === 'soon' && <span class="cd-tabs__soon-chip">soon</span>}
+            </button>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+
+  <div
+    role="tabpanel"
+    class="cd-tabs__panel cd-hub__workspace"
+    id="cd-panel-kliff"
+    aria-labelledby="cd-tab-kliff"
+    data-cd-panel="kliff"
+  >
+    {
+      showKliffToc && (
+        <aside class="cd-hub__toc-rail" aria-label="Table of contents">
+          <GuideToc headings={kliffHeadings} />
+        </aside>
+      )
+    }
+    <div class="cd-hub__workspace-main">
+      {showKliffToc && <GuideTocDrawer headings={kliffHeadings} />}
+      <article class="guide-prose">
+        <slot name="kliff" />
+      </article>
+      <GuideAttribution />
+    </div>
+  </div>
+
+  <div
+    role="tabpanel"
+    class="cd-tabs__panel cd-hub__workspace cd-hub__workspace--solo"
+    id="cd-panel-damiane"
+    aria-labelledby="cd-tab-damiane"
+    hidden
+    data-cd-panel="damiane"
+  >
+    <CdCharacterSoon character={damiane} />
+  </div>
+
+  <div
+    role="tabpanel"
+    class="cd-tabs__panel cd-hub__workspace cd-hub__workspace--solo"
+    id="cd-panel-oongka"
+    aria-labelledby="cd-tab-oongka"
+    hidden
+    data-cd-panel="oongka"
+  >
+    <CdCharacterSoon character={oongka} />
+  </div>
+</div>
+
+<script>
+  import '../_lib/character-tabs.client.ts';
+</script>

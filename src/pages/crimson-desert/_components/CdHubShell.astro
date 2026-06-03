@@ -1,0 +1,47 @@
+---
+import '../_styles/hub-tokens.scss';
+import '../_styles/hub-layout.scss';
+import '../_styles/hub-tabs.scss';
+import '../_styles/hub-components.scss';
+import '../_styles/guide-toc.scss';
+import '../_styles/guide-prose.scss';
+import '../_styles/guide-tables.scss';
+import '../_styles/skill-ladder.scss';
+import CdHero from './CdHero.astro';
+import CharacterTabs from './CharacterTabs.astro';
+import type { MarkdownHeading } from 'astro';
+
+interface Props {
+  hubTitle: string;
+  hubDescription: string;
+  kliffHeadings: MarkdownHeading[];
+  kliffUpdated?: Date;
+  kliffReadingMinutes?: number;
+  boxArtUrl: string;
+}
+
+const { hubTitle, hubDescription, kliffHeadings, kliffUpdated, kliffReadingMinutes, boxArtUrl } =
+  Astro.props;
+---
+
+<div class="cd-hub">
+  <div class="cd-hub__grain" aria-hidden="true"></div>
+  <div class="cd-hub__inner">
+    <CdHero
+      label="Crimson Desert"
+      title={hubTitle}
+      description={hubDescription}
+      updated={kliffUpdated}
+      readingMinutes={kliffReadingMinutes}
+      boxArtUrl={boxArtUrl}
+    />
+
+    <CharacterTabs kliffHeadings={kliffHeadings}>
+      <slot name="kliff" slot="kliff" />
+    </CharacterTabs>
+  </div>
+</div>
+
+<script>
+  import '../_lib/guide-progress.client.ts';
+</script>

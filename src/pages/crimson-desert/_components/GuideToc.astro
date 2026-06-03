@@ -1,0 +1,28 @@
+---
+import { getTocHeadings } from '../_lib/guide-toc';
+import type { MarkdownHeading } from 'astro';
+
+interface Props {
+  headings: MarkdownHeading[];
+}
+
+const { headings } = Astro.props;
+const tocHeadings = getTocHeadings(headings);
+---
+
+{
+  tocHeadings.length > 0 && (
+    <nav class="guide-toc">
+      <p class="guide-toc__label">Contents</p>
+      <ol class="guide-toc__list">
+        {tocHeadings.map((heading) => (
+          <li>
+            <a href={`#${heading.slug}`} data-toc-slug={heading.slug} class="guide-toc__link">
+              {heading.text}
+            </a>
+          </li>
+        ))}
+      </ol>
+    </nav>
+  )
+}

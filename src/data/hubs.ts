@@ -1,7 +1,7 @@
 import type { SeoBreadcrumbItem } from './seo';
 
 /** Content collection keys used for hub freshness on the homepage nav. */
-export type HubContentCollection = 'bg3' | 'homelab';
+export type HubContentCollection = 'bg3' | 'homelab' | 'crimson-desert';
 
 export interface HubRegistryEntry {
   slug: string;
@@ -49,6 +49,20 @@ export const hubRegistry: HubRegistryEntry[] = [
     ogImageAlt: 'Home Lab hub preview image',
     contentCollection: 'homelab',
     contentEntry: 'media-stack',
+  },
+  {
+    slug: 'crimson-desert',
+    name: 'Crimson Desert',
+    navLabel: 'Crimson Desert',
+    description:
+      'Build notes for Kliff, Damiane, and Oongka — where I put skill points and what gear I grabbed first around Hernand.',
+    accent: '#D44D37',
+    indexable: true,
+    imagePath: '/assets/images/og/crimson-desert.png',
+    ogHeroPath: '/assets/images/og-hero/crimson-desert.png',
+    ogImageAlt: 'Crimson Desert hub preview image',
+    contentCollection: 'crimson-desert',
+    contentEntry: 'kliff',
   },
 ];
 

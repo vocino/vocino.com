@@ -1,0 +1,70 @@
+---
+export const prerender = true;
+
+import HubLayout from '../../layouts/HubLayout.astro';
+import CdHubShell from './_components/CdHubShell.astro';
+import { getHubBreadcrumb, getHubBySlug } from '../../data/hubs';
+import { toAbsoluteUrl } from '../../lib/seo';
+import { cdCharacters } from './_lib/cd-characters';
+import { getCrimsonDesertBoxArtUrl } from './_lib/cd-game-art';
+import { getEntry, render } from 'astro:content';
+
+const hub = getHubBySlug('crimson-desert');
+const boxArtUrl = await getCrimsonDesertBoxArtUrl();
+
+const kliffEntry = await getEntry('crimson-desert', 'kliff');
+if (!kliffEntry) {
+  throw new Error('Crimson Desert guide entry "kliff" not found');
+}
+
+const { Content, headings } = await render(kliffEntry);
+const { updated } = kliffEntry.data;
+
+const pageTitle = 'Crimson Desert builds';
+const intro =
+  'Build notes for Kliff, Damiane, and Oongka. Kliff\'s Hernand starter is written; the other two are still half-baked.';
+
+const wordCount = kliffEntry.body?.split(/\s+/).filter(Boolean).length ?? 1200;
+const readingMinutes = Math.max(1, Math.round(wordCount / 220));
+const modifiedTime = updated?.toISOString();
+
+const characterListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: "Travis Vocino's Crimson Desert builds",
+  url: toAbsoluteUrl(`/${hub.slug}`),
+  numberOfItems: cdCharacters.length,
+  itemListElement: cdCharacters.map((character, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: character.status === 'live' ? `${character.label} build` : `${character.label} (coming soon)`,
+    url: toAbsoluteUrl(`/${hub.slug}#${character.id}`),
+  })),
+};
+---
+
+<HubLayout
+  pageType="hub"
+  title={pageTitle}
+  hubName={hub.name}
+  description={hub.description}
+  canonicalPath={`/${hub.slug}`}
+  breadcrumb={getHubBreadcrumb(hub)}
+  imagePath={hub.imagePath}
+  imageAlt={hub.ogImageAlt}
+  accent={hub.accent}
+  noindex={!hub.indexable}
+  schema={characterListSchema}
+  modifiedTime={modifiedTime}
+>
+  <CdHubShell
+    hubTitle={pageTitle}
+    hubDescription={intro}
+    kliffHeadings={headings}
+    kliffUpdated={updated}
+    kliffReadingMinutes={readingMinutes}
+    boxArtUrl={boxArtUrl}
+  >
+    <Content slot="kliff" />
+  </CdHubShell>
+</HubLayout>

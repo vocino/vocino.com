@@ -66,6 +66,7 @@ src/
 │   ├── index.astro              # Landing page
 │   ├── bg3.astro                # HUB: Baldur's Gate 3 (nested pages go in bg3/)
 │   ├── homelab/                 # HUB: Home Lab (index + nested pages)
+│   ├── crimson-desert/          # HUB: Crimson Desert (tabbed character builds)
 │   └── api/                     # Astro API routes (Cloudflare runtime)
 │       ├── twitch-status.ts
 │       └── instagram-stickers.ts
@@ -191,6 +192,7 @@ The authoritative list of hubs and their fixed properties. Update this when addi
 | --- | --- | --- | --- | --- |
 | Baldur's Gate 3 | `/bg3` | `#46E08B` (green) | Live (`indexable`) | Honour Mode progression guide at `/bg3`. Pages nest as `/bg3/<guide-slug>`. |
 | Home Lab | `/homelab` | `#FFB86B` (amber) | Live (`indexable`) | Self-hosted media stack guide (Docker Compose, *arr, Jellyfin). Interactive stack diagram + personalized copy-paste vars. Pages nest as `/homelab/<page-slug>`. |
+| Crimson Desert | `/crimson-desert` | `#D44D37` (ember) | Live (`indexable`) | Early-game build notes for Kliff, Damiane, and Oongka on one tabbed page. Kliff beginner build live; other characters coming soon. Icons from crimsondesert.fandom.com. |
 
 ### Adding a new hub
 1. Create `src/pages/<slug>/index.astro`.

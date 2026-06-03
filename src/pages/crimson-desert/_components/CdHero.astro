@@ -1,0 +1,56 @@
+---
+import { CRIMSON_DESERT_BOX_ART_SIZE } from '../_lib/cd-game-art';
+
+interface Props {
+  label?: string;
+  title: string;
+  description: string;
+  updated?: Date;
+  readingMinutes?: number;
+  boxArtUrl: string;
+  boxArtAlt?: string;
+}
+
+const {
+  label = 'Crimson Desert',
+  title,
+  description,
+  updated,
+  readingMinutes,
+  boxArtUrl,
+  boxArtAlt = 'Crimson Desert box art',
+} = Astro.props;
+
+const { width, height } = CRIMSON_DESERT_BOX_ART_SIZE;
+
+const updatedLabel = updated
+  ? updated.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
+  : undefined;
+---
+
+<header class="cd-hero">
+  <div class="cd-hero__copy">
+    <p class="cd-hero__label">{label}</p>
+    <h1 class="cd-hero__title">{title}</h1>
+    <p class="cd-hero__desc">{description}</p>
+    {
+      (updatedLabel || readingMinutes) && (
+        <ul class="cd-hero__meta">
+          {readingMinutes && <li>{readingMinutes} min read</li>}
+          {updatedLabel && <li>Updated {updatedLabel}</li>}
+        </ul>
+      )
+    }
+  </div>
+  <figure class="cd-hero__cover">
+    <img
+      class="cd-hero__cover-img"
+      src={boxArtUrl}
+      alt={boxArtAlt}
+      width={width}
+      height={height}
+      loading="eager"
+      decoding="async"
+    />
+  </figure>
+</header>

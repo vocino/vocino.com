@@ -1,0 +1,135 @@
+.cd-hub .guide-prose {
+  color: var(--cd-text);
+  font-size: var(--guide-body-size);
+  line-height: var(--guide-body-leading);
+  max-width: var(--guide-measure);
+}
+
+.cd-hub .guide-prose > :first-child {
+  margin-top: 0;
+}
+
+.cd-hub .guide-prose h2 {
+  border-top: 1px solid var(--cd-border-dim);
+  color: var(--cd-text);
+  font-family: var(--font-display);
+  font-size: 1.375rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: var(--guide-space-2xl) 0 var(--guide-space-md);
+  padding-top: var(--guide-space-lg);
+  scroll-margin-top: var(--guide-anchor-offset);
+}
+
+.cd-hub .guide-prose h2:first-of-type {
+  border-top: none;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.cd-hub .guide-prose h3 {
+  color: var(--cd-text);
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: var(--guide-space-lg) 0 var(--guide-space-sm);
+}
+
+.cd-hub .guide-prose p,
+.cd-hub .guide-prose li {
+  color: var(--cd-text-dim);
+}
+
+.cd-hub .guide-prose strong {
+  color: var(--cd-text);
+  font-weight: 600;
+}
+
+.cd-hub .guide-prose a {
+  color: color-mix(in srgb, var(--section-accent) 85%, #fff);
+  text-decoration-color: color-mix(in srgb, var(--section-accent) 40%, transparent);
+}
+
+.cd-hub .guide-prose a:hover {
+  text-decoration-color: var(--section-accent);
+}
+
+.cd-hub .guide-prose ul,
+.cd-hub .guide-prose ol {
+  margin: 0 0 var(--guide-space-md);
+  padding-left: 1.25rem;
+}
+
+.cd-hub .guide-prose li {
+  margin-bottom: 0.375rem;
+}
+
+.cd-hub .guide-prose li::marker {
+  color: var(--section-accent, #d44d37);
+}
+
+.cd-hub .guide-prose blockquote {
+  border-left: 3px solid var(--section-accent, #d44d37);
+  color: var(--cd-text-dim);
+  margin: var(--guide-space-md) 0;
+  padding: 0.25rem 0 0.25rem 1rem;
+}
+
+.cd-hub .guide-prose .cd-term {
+  display: inline;
+  white-space: nowrap;
+}
+
+.cd-hub .guide-prose .cd-term__icon {
+  background: var(--cd-surface-2);
+  border: 1px solid var(--cd-border-dim);
+  border-radius: 3px;
+  display: inline-block;
+  height: 1.125em;
+  margin-right: 0.2em;
+  object-fit: contain;
+  vertical-align: -0.15em;
+  width: 1.125em;
+}
+
+.cd-hub .guide-prose .cd-term__label {
+  color: var(--cd-text);
+  font-weight: 500;
+}
+
+.cd-hub .cd-callout {
+  background: color-mix(in srgb, var(--section-accent) 6%, var(--cd-surface));
+  border: 1px solid var(--cd-border);
+  border-left: 3px solid var(--section-accent, #d44d37);
+  margin: var(--guide-space-md) 0;
+  padding: var(--guide-space-sm) var(--guide-space-md);
+}
+
+.cd-hub .cd-callout p {
+  margin: 0;
+}
+
+.cd-hub .cd-mistakes {
+  counter-reset: cd-mistake;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cd-hub .cd-mistakes li {
+  counter-increment: cd-mistake;
+  margin-bottom: var(--guide-space-sm);
+  padding-left: 2rem;
+  position: relative;
+}
+
+.cd-hub .cd-mistakes li::before {
+  color: var(--section-accent, #d44d37);
+  content: counter(cd-mistake);
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  left: 0;
+  position: absolute;
+  top: 0.1em;
+}

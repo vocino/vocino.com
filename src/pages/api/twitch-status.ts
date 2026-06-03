@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import { getWorkerEnvVar } from '../../lib/cloudflare-env';
+import { getTwitchAppAccessToken } from '../../lib/twitch-api';
 
 export const prerender = false;
 
@@ -37,23 +38,7 @@ export const GET: APIRoute = async ({ request, locals }) => {
       }
     }
 
-    const tokenResponse = await fetch('https://id.twitch.tv/oauth2/token', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams({
-        client_id: clientId,
-        client_secret: clientSecret,
-        grant_type: 'client_credentials',
-      }),
-    });
-
-    if (!tokenResponse.ok) {
-      const errorText = await tokenResponse.text();
-      throw new Error(`Failed to get OAuth token: ${tokenResponse.status} ${errorText}`);
-    }
-
-    const tokenData = (await tokenResponse.json()) as { access_token: string };
-    const accessToken = tokenData.access_token;
+    const accessToken = await getTwitchAppAccessToken(clientId, clientSecret);
 
     const userResponse = await fetch(`https://api.twitch.tv/helix/users?login=${username}`, {
       headers: {

@@ -1,0 +1,135 @@
+.cd-tabs {
+  margin-top: var(--guide-space-md);
+}
+
+// Fixed veil — soft 0→100% fade so content dissolves upward into the page bg.
+.cd-tabs__scroll-veil {
+  display: none;
+  pointer-events: none;
+}
+
+@media (min-width: 640px) {
+  .cd-tabs__scroll-veil {
+    display: block;
+    position: fixed;
+    top: calc(var(--cd-chrome-top) + var(--cd-tab-bar-height));
+    left: 0;
+    right: 0;
+    height: var(--cd-scroll-veil-height);
+    z-index: 34;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    background: linear-gradient(to bottom, var(--cd-bg) 0%, transparent 100%);
+  }
+}
+
+.cd-tabs__bar {
+  position: sticky;
+  top: var(--cd-chrome-top);
+  z-index: 35;
+  margin-bottom: var(--guide-space-lg);
+  padding-top: 0.25rem;
+  padding-bottom: 0.375rem;
+  background: color-mix(in srgb, var(--cd-bg) 88%, transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: background 0.25s ease;
+}
+
+.cd-tabs__list {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid var(--cd-border-dim);
+}
+
+@supports (animation-timeline: scroll()) {
+  .cd-tabs__scroll-veil {
+    transition: none;
+    animation: cd-scroll-chrome-fade linear both;
+    animation-timeline: scroll();
+    animation-range: 12rem 20rem;
+  }
+}
+
+@keyframes cd-scroll-chrome-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.cd-tabs--stuck .cd-tabs__scroll-veil {
+  opacity: 1;
+}
+
+.cd-tabs--stuck .cd-tabs__bar {
+  background: color-mix(in srgb, var(--cd-bg) 94%, transparent);
+}
+
+.cd-tabs__tab {
+  appearance: none;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--cd-text-dim);
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  letter-spacing: 0.04em;
+  margin-bottom: -1px;
+  padding: 0.75rem 1rem 0.625rem;
+  text-transform: uppercase;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease,
+    text-shadow 0.15s ease;
+}
+
+.cd-tabs__tab:hover {
+  color: var(--cd-text);
+}
+
+.cd-tabs__tab[aria-selected='true'] {
+  border-bottom-color: var(--section-accent, #d44d37);
+  color: var(--cd-text);
+  text-shadow: 0 0 20px var(--cd-glow);
+}
+
+.cd-tabs__tab--soon {
+  opacity: 0.72;
+}
+
+.cd-tabs__soon-chip {
+  display: inline-block;
+  font-size: 0.625rem;
+  letter-spacing: 0.08em;
+  margin-left: 0.375rem;
+  padding: 0.125rem 0.375rem;
+  vertical-align: middle;
+  background: color-mix(in srgb, var(--cd-gold) 18%, transparent);
+  border: 1px solid color-mix(in srgb, var(--cd-gold) 35%, transparent);
+  color: var(--cd-gold-dim);
+}
+
+.cd-tabs__panel {
+  position: relative;
+  z-index: 1;
+  animation: cd-fade-in 0.2s ease;
+}
+
+@keyframes cd-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

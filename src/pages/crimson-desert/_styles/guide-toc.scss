@@ -1,0 +1,102 @@
+.cd-hub .guide-toc {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+}
+
+.cd-hub .guide-toc__label {
+  color: var(--cd-gold-dim);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  margin: 0 0 0.75rem;
+  text-transform: uppercase;
+}
+
+.cd-hub .guide-toc__label::before {
+  color: var(--section-accent, #d44d37);
+  content: '// ';
+}
+
+.cd-hub .guide-toc__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cd-hub .guide-toc__list li {
+  margin-bottom: 0.25rem;
+}
+
+.cd-hub .guide-toc__link {
+  border-left: 2px solid transparent;
+  color: var(--cd-text-muted);
+  display: block;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+  padding: 0.25rem 0 0.25rem 0.625rem;
+  text-decoration: none;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.cd-hub .guide-toc__link:hover,
+.cd-hub .guide-toc__link.is-active {
+  border-left-color: var(--section-accent, #d44d37);
+  color: var(--cd-text);
+}
+
+.cd-hub .guide-toc-drawer {
+  margin-bottom: var(--guide-space-md);
+}
+
+@media (min-width: 1024px) {
+  .cd-hub .guide-toc-drawer {
+    display: none;
+  }
+}
+
+.cd-hub .guide-toc-drawer summary {
+  background: var(--cd-surface);
+  border: 1px solid var(--cd-border);
+  color: var(--cd-text-dim);
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  letter-spacing: 0.04em;
+  list-style: none;
+  padding: 0.625rem 0.875rem;
+  text-transform: uppercase;
+}
+
+.cd-hub .guide-toc-drawer summary::-webkit-details-marker {
+  display: none;
+}
+
+.cd-hub .guide-toc-drawer[open] summary {
+  border-bottom: none;
+}
+
+.cd-hub .guide-toc-drawer .guide-toc {
+  background: var(--cd-surface);
+  border: 1px solid var(--cd-border);
+  border-top: none;
+  padding: 0.75rem 0.875rem 1rem;
+}
+
+.cd-hub .cd-guide-attribution {
+  border-top: 1px solid var(--cd-border-dim);
+  color: var(--cd-text-muted);
+  font-size: 0.8125rem;
+  line-height: 1.55;
+  margin-top: var(--guide-space-2xl);
+  max-width: var(--guide-measure);
+  padding-top: var(--guide-space-lg);
+}
+
+.cd-hub .cd-guide-attribution p {
+  margin: 0 0 0.5rem;
+}
+
+.cd-hub .cd-guide-attribution a {
+  color: color-mix(in srgb, var(--section-accent) 85%, #fff);
+}

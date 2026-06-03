@@ -1,0 +1,71 @@
+// Crimson Desert hub — ember desert warrior tokens (local to /crimson-desert only)
+$cd-bg: #120e0c;
+$cd-gold: #c9a227;
+
+body.site-root:has(.cd-hub),
+.hub:has(.cd-hub) {
+  background-color: $cd-bg;
+}
+
+.hub:has(.cd-hub) {
+  min-height: 100vh;
+}
+
+html:has(.cd-hub),
+body.site-root:has(.cd-hub) {
+  overflow-x: clip;
+}
+
+// Global `main { overflow-x: hidden }` breaks position: sticky — clip is sticky-safe (see homelab).
+body.site-root:has(.cd-hub) .site-main,
+body.site-root:has(.cd-hub) main.site-main {
+  overflow-x: clip;
+}
+
+.cd-hub {
+  --cd-bg: #{$cd-bg};
+  --cd-surface: #1a1410;
+  --cd-surface-2: #221a15;
+  --cd-border: color-mix(in srgb, var(--section-accent, #d44d37) 24%, #3a2a22);
+  --cd-border-dim: #2e221c;
+  --cd-gold: #{$cd-gold};
+  --cd-gold-dim: color-mix(in srgb, #{$cd-gold} 55%, #6b5a3a);
+  --cd-text: #f0e6dc;
+  --cd-text-dim: #b8a898;
+  --cd-text-muted: #7a6b5e;
+  --cd-tree-blue: #5b8fd9;
+  --cd-tree-red: #d64545;
+  --cd-tree-green: #6baf6b;
+  --cd-glow: color-mix(in srgb, var(--section-accent, #d44d37) 30%, transparent);
+
+  --guide-measure: 65ch;
+  --guide-body-size: 1.0625rem;
+  --guide-body-leading: 1.65;
+  --guide-table-size: 0.9375rem;
+  --guide-space-xs: 0.5rem;
+  --guide-space-sm: 0.875rem;
+  --guide-space-md: 1.25rem;
+  --guide-space-lg: 1.75rem;
+  --guide-space-xl: 2.5rem;
+  --guide-space-2xl: 3.25rem;
+  --guide-chrome-gap: 0.875rem;
+  --guide-scroll-offset: 5.5rem;
+  --guide-anchor-offset: 5.5rem;
+  --guide-rail-width: 14rem;
+  --cd-chrome-top: 5rem;
+  --cd-tab-bar-height: 3rem;
+  --cd-toc-top: calc(var(--cd-chrome-top) + var(--cd-tab-bar-height) + 0.625rem);
+  --cd-scroll-veil-height: 8rem;
+}
+
+@media (min-width: 640px) {
+  .cd-hub {
+    --guide-body-size: 1.125rem;
+    --guide-body-leading: 1.7;
+    --guide-chrome-gap: 1.125rem;
+    --guide-space-md: 1.375rem;
+    --guide-space-lg: 2.25rem;
+    --guide-space-xl: 3rem;
+    --guide-space-2xl: 4rem;
+  }
+}

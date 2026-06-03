@@ -1,0 +1,8 @@
+---
+import { getCdIconPublicPath } from '../_lib/cd-icons';
+import { renderCdSkillLadderHtml } from '../_lib/kliff-skills';
+
+const html = renderCdSkillLadderHtml(getCdIconPublicPath);
+---
+
+<div set:html={html} />
