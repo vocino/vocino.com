@@ -12,13 +12,13 @@ iconGeneration: 1
 
 Chapter 3 **Damiane** with [[cd:spencer-pistol|Spencer Pistol]] and [[cd:bekker-musket|Bekker Musket]]. She hits lighter per swing than Kliff but moves twice as much — which is the whole point. I'm trying not to stand still long enough to die.
 
-## Why I run it
+## Why I run it {#damiane-why-i-run-it}
 
 - **Pistol marks, musket deletes.** [[cd:focused-shot|Focused Shot]] turns the Spencer into burst damage; the musket opens fights from range.
 - **Mobility is the armor.** Quick-step, [[cd:evasive-shot|Evasive Shot]], propeller height — if I'm standing still I'm doing it wrong.
 - **Support melee exists.** [[cd:white-wind-rapier|White Wind Rapier]] and shield when I'm out of stamina or someone closes distance.
 
-## At a glance
+## At a glance {#damiane-at-a-glance}
 
 | | |
 | --- | --- |
@@ -27,7 +27,7 @@ Chapter 3 **Damiane** with [[cd:spencer-pistol|Spencer Pistol]] and [[cd:bekker-
 | Skill order | Spirit → Stamina → Health |
 | Refinement target | Weapons L4, Demenissian uniform L4 |
 
-## Main weapon — Pistol
+## Main weapon — Pistol {#damiane-main-weapon-pistol}
 
 The [[cd:spencer-pistol]] is the workhorse. Higher ATK than my starter rapier and fast enough to weave between melee strings.
 
@@ -46,7 +46,7 @@ The [[cd:spencer-pistol]] is the workhorse. Higher ATK than my starter rapier an
 
 Don't treat it like a plink gun. The marks are the damage — skipping the release is just making noise.
 
-## Main weapon — Musket
+## Main weapon — Musket {#damiane-main-weapon-musket}
 
 The [[cd:bekker-musket]] is the opener, not the rotation. Charge time means you need space and a breath before the pack reaches you.
 
@@ -63,7 +63,7 @@ The [[cd:bekker-musket]] is the opener, not the rotation. Charge time means you 
 - [[cd:focused-charged-shot|Focused Charged Shot]] at L3 slows time while aiming — worth the Spirit investment.
 - Swap to pistol or rapier once they're on top of me. Musket mid-scrum is how I die.
 
-## Support weapons
+## Support weapons {#damiane-support-weapons}
 
 When guns aren't the answer:
 
@@ -75,7 +75,7 @@ When guns aren't the answer:
 
 I keep rapier + shield on the bar even on a gunslinger run. Pistol-only works until it very much doesn't.
 
-## Equipment
+## Equipment {#damiane-equipment}
 
 Damiane wears leather — move speed over plate bulk. I refine the Chapter 3 uniform set before chasing rare drops.
 
@@ -95,7 +95,7 @@ Gloves and boots on this set still add ATK on top of DEF. Boots ship with **Hast
 
 Socket **Swift** and **Destruction** Abyss cores on weapons when Sylvia has slots open. Defense cores are a band-aid for bad dodging.
 
-## Consumables
+## Consumables {#damiane-consumables}
 
 Same as Kliff: cooked meat piles, no recipe spreadsheet.
 
@@ -103,13 +103,13 @@ Same as Kliff: cooked meat piles, no recipe spreadsheet.
 2. Eat during boss attempts — she has less margin for error.
 3. Keep food on the bar before musket openers. Charging while hurt is a bad habit.
 
-## Skill priorities
+## Skill priorities {#damiane-skill-priorities}
 
 Spirit tree first — that's the gunslinger kit. Respec with Faded Abyss Artifacts if you hate the order; nothing here is permanent.
 
 [[cd:damiane-skill-ladder]]
 
-## Combos
+## Combos {#damiane-combos}
 
 My gunslinger loop for most Chapter 3 fights:
 
@@ -120,7 +120,7 @@ My gunslinger loop for most Chapter 3 fights:
 
 Izuna Drop is a **finisher**, not an opener. Weaken first, then the pile-driver.
 
-## Stamina & mobility
+## Stamina & mobility {#damiane-stamina-mobility}
 
 [[cd:flight|Flight]] on the propeller is not just exploration fluff — height fixes musket sight lines and drops aerial hits on groups below.
 
@@ -128,7 +128,7 @@ Quick-step recovers faster than Kliff's roll. Chain dodges, shoot on the way out
 
 If the bar empties mid-fight, I'm a sitting duck. [[cd:stamina|Stamina]] in the blue tree and pacing dodges matter more here than on Kliff.
 
-## Mistakes I keep making
+## Mistakes I keep making {#damiane-mistakes-i-keep-making}
 
 <ol class="cd-mistakes">
 <li>Musket in melee. Charge needs space — I still panic-shoot at arm's length.</li>

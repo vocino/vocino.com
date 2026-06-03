@@ -1,0 +1,15 @@
+---
+interface Props {
+  label: string;
+  title: string;
+  phase?: string;
+}
+
+const { label, title, phase } = Astro.props;
+---
+
+<header class="cd-guide-header">
+  <p class="cd-guide-header__label">{label}</p>
+  <h1 class="cd-guide-header__title">{title}</h1>
+  {phase && <p class="cd-guide-header__phase">{phase}</p>}
+</header>

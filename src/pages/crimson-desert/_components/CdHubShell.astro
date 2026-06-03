@@ -8,7 +8,7 @@ import '../_styles/guide-prose.scss';
 import '../_styles/guide-tables.scss';
 import '../_styles/skill-ladder.scss';
 import CdHero from './CdHero.astro';
-import CharacterTabs from './CharacterTabs.astro';
+import CharacterTabs, { type CharacterGuideMeta } from './CharacterTabs.astro';
 import type { MarkdownHeading } from 'astro';
 
 interface Props {
@@ -16,6 +16,8 @@ interface Props {
   hubDescription: string;
   kliffHeadings: MarkdownHeading[];
   damianeHeadings: MarkdownHeading[];
+  kliffMeta: CharacterGuideMeta;
+  damianeMeta: CharacterGuideMeta;
   kliffUpdated?: Date;
   kliffReadingMinutes?: number;
   boxArtUrl: string;
@@ -26,6 +28,8 @@ const {
   hubDescription,
   kliffHeadings,
   damianeHeadings,
+  kliffMeta,
+  damianeMeta,
   kliffUpdated,
   kliffReadingMinutes,
   boxArtUrl,
@@ -44,7 +48,12 @@ const {
       boxArtUrl={boxArtUrl}
     />
 
-    <CharacterTabs kliffHeadings={kliffHeadings} damianeHeadings={damianeHeadings}>
+    <CharacterTabs
+      kliffHeadings={kliffHeadings}
+      damianeHeadings={damianeHeadings}
+      kliffMeta={kliffMeta}
+      damianeMeta={damianeMeta}
+    >
       <slot name="kliff" slot="kliff" />
       <slot name="damiane" slot="damiane" />
     </CharacterTabs>

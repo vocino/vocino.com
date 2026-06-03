@@ -25,8 +25,11 @@ if (!damianeEntry) {
 const { Content: KliffContent, headings: kliffHeadings } = await render(kliffEntry);
 const { Content: DamianeContent, headings: damianeHeadings } = await render(damianeEntry);
 
-const { updated: kliffUpdated } = kliffEntry.data;
-const { updated: damianeUpdated } = damianeEntry.data;
+const { updated: kliffUpdated, title: kliffTitle, phase: kliffPhase } = kliffEntry.data;
+const { updated: damianeUpdated, title: damianeTitle, phase: damianePhase } = damianeEntry.data;
+
+const kliffMeta = { label: 'Kliff', title: kliffTitle, phase: kliffPhase };
+const damianeMeta = { label: 'Damiane', title: damianeTitle, phase: damianePhase };
 
 const pageTitle = 'Crimson Desert builds';
 const intro =
@@ -75,6 +78,8 @@ const characterListSchema = {
     hubDescription={intro}
     kliffHeadings={kliffHeadings}
     damianeHeadings={damianeHeadings}
+    kliffMeta={kliffMeta}
+    damianeMeta={damianeMeta}
     kliffUpdated={kliffUpdated}
     kliffReadingMinutes={readingMinutes}
     boxArtUrl={boxArtUrl}

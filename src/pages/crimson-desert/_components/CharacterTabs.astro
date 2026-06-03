@@ -1,17 +1,26 @@
 ---
 import { cdCharacters, DEFAULT_CHARACTER_ID } from '../_lib/cd-characters';
 import CdCharacterSoon from './CdCharacterSoon.astro';
+import GuideCharacterHeader from './GuideCharacterHeader.astro';
 import GuideToc from './GuideToc.astro';
 import GuideTocDrawer from './GuideTocDrawer.astro';
 import GuideAttribution from './GuideAttribution.astro';
 import type { MarkdownHeading } from 'astro';
 
+export interface CharacterGuideMeta {
+  label: string;
+  title: string;
+  phase?: string;
+}
+
 interface Props {
   kliffHeadings: MarkdownHeading[];
   damianeHeadings: MarkdownHeading[];
+  kliffMeta: CharacterGuideMeta;
+  damianeMeta: CharacterGuideMeta;
 }
 
-const { kliffHeadings, damianeHeadings } = Astro.props;
+const { kliffHeadings, damianeHeadings, kliffMeta, damianeMeta } = Astro.props;
 
 const oongka = cdCharacters.find((c) => c.id === 'oongka')!;
 const showKliffToc = kliffHeadings.length > 0;
@@ -54,12 +63,15 @@ const showDamianeToc = damianeHeadings.length > 0;
     {
       showKliffToc && (
         <aside class="cd-hub__toc-rail" aria-label="Table of contents">
-          <GuideToc headings={kliffHeadings} />
+          <GuideToc headings={kliffHeadings} idPrefix="kliff" />
         </aside>
       )
     }
     <div class="cd-hub__workspace-main">
-      {showKliffToc && <GuideTocDrawer headings={kliffHeadings} panelId="kliff" />}
+      {showKliffToc && (
+        <GuideTocDrawer headings={kliffHeadings} panelId="kliff" idPrefix="kliff" />
+      )}
+      <GuideCharacterHeader label={kliffMeta.label} title={kliffMeta.title} phase={kliffMeta.phase} />
       <article class="guide-prose">
         <slot name="kliff" />
       </article>
@@ -78,12 +90,15 @@ const showDamianeToc = damianeHeadings.length > 0;
     {
       showDamianeToc && (
         <aside class="cd-hub__toc-rail" aria-label="Table of contents">
-          <GuideToc headings={damianeHeadings} />
+          <GuideToc headings={damianeHeadings} idPrefix="damiane" />
         </aside>
       )
     }
     <div class="cd-hub__workspace-main">
-      {showDamianeToc && <GuideTocDrawer headings={damianeHeadings} panelId="damiane" />}
+      {showDamianeToc && (
+        <GuideTocDrawer headings={damianeHeadings} panelId="damiane" idPrefix="damiane" />
+      )}
+      <GuideCharacterHeader label={damianeMeta.label} title={damianeMeta.title} phase={damianeMeta.phase} />
       <article class="guide-prose">
         <slot name="damiane" />
       </article>

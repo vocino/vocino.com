@@ -27,7 +27,7 @@ function selectTab(root: HTMLElement, id: string, updateHash: boolean): void {
   if (updateHash) {
     const next = `#${id}`;
     if (window.location.hash !== next) {
-      history.replaceState(null, '', next);
+      window.location.hash = id;
     }
   }
 

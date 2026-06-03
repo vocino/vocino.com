@@ -12,13 +12,13 @@ iconGeneration: 1
 
 Early Hernand **Kliff** with [[cd:shield-of-conviction|Shield of Conviction]] and [[cd:canta-plate-armor|Canta Plate]]. Most of it unlocks after Matthias or a short detour. I'm mostly trying to stop dying to trash packs while I learn how stamina actually works.
 
-## Why I run it
+## Why I run it {#kliff-why-i-run-it}
 
 - **Most of it is close.** Beat the first boss, poke around Hernand, and you're mostly dressed.
 - **The big shield buys time.** Boss swings are blockable once you stop panic-blocking everything.
 - **Skill order stays simple.** Blue for stamina and grapple, a little red for climbing, green so I quit killing my horse.
 
-## At a glance
+## At a glance {#kliff-at-a-glance}
 
 | | |
 | --- | --- |
@@ -27,7 +27,7 @@ Early Hernand **Kliff** with [[cd:shield-of-conviction|Shield of Conviction]] an
 | Skill order | Blue → Red → Green |
 | Refinement target | Armor L4, accessories L2, weapons L4 |
 
-## Equipment
+## Equipment {#kliff-equipment}
 
 Base stats on armor barely move the needle early. Refinement and Abyss sockets do. I take the full Canta Plate set to **L4** before I bother shopping for replacements.
 
@@ -53,7 +53,7 @@ Base stats on armor barely move the needle early. Refinement and Abyss sockets d
 - **Tarnished Ring** — Bleed Bandits in early Hernand. Low drop rate; I kept farming until one fell.
 - **Worn Ring** — huts around Hernand. I found two spots; either works.
 
-## Weapons
+## Weapons {#kliff-weapons}
 
 The name on the weapon matters less than refinement here. If I'm actually using it, it's **L4**.
 
@@ -76,7 +76,7 @@ The name on the weapon matters less than refinement here. If I'm actually using 
 
 </div>
 
-## Abyss gear (optional)
+## Abyss gear (optional) {#kliff-abyss-gear-optional}
 
 You can ignore this and still clear early Hernand. But extraction is free power sitting on junk you were going to sell anyway.
 
@@ -85,13 +85,13 @@ You can ignore this and still clear early Hernand. But extraction is free power 
 - **Extract** from gear you're replacing. Free. Do it every time.
 - **Embed** on what you're wearing. Also free, but opening sockets costs silver, and each slot on an item gets more expensive.
 
-## Skill priorities
+## Skill priorities {#kliff-skill-priorities}
 
 Points are tight. I go **Blue → Red → Green**. Watch tooltips too: some skills copy from enemies mid-fight without costing a point.
 
 [[cd:skill-ladder]]
 
-## Combos
+## Combos {#kliff-combos}
 
 No combo guide here. Just what I actually do.
 
@@ -99,7 +99,7 @@ No combo guide here. Just what I actually do.
 - [[cd:grapple|Grapple]] off a cliff still deletes tough targets embarrassingly often.
 - Boss with no food on the bar is a self-inflicted problem.
 
-## Food
+## Food {#kliff-food}
 
 Any cooked meat pile works. I don't optimize recipes.
 
@@ -109,17 +109,17 @@ Any cooked meat pile works. I don't optimize recipes.
 
 Walking into a boss with an empty food bag is how I lose twenty minutes.
 
-## Stamina
+## Stamina {#kliff-stamina}
 
 Sprinting, attacking, blocking: all of it spends stamina. Heavy hits will break your guard if the bar empties. Standing still refills fastest. Walking or blocking refills, but slowly.
 
 [[cd:stamina|Stamina]] in the blue tree is how I push toward **200+**. Below that I run out mid-fight constantly.
 
-## Power scaling
+## Power scaling {#kliff-power-scaling}
 
 If damage feels low, refine gear and socket Abyss gems before you respec skills. Skills open options. Refinement moves the numbers.
 
-## Mistakes I keep making
+## Mistakes I keep making {#kliff-mistakes-i-keep-making}
 
 <ol class="cd-mistakes">
 <li>Not refining. Base stats plateau fast.</li>
