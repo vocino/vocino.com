@@ -2,7 +2,12 @@
 import './../_styles/directory.scss';
 import BuildCard from './BuildCard.astro';
 import GuideAttribution from './GuideAttribution.astro';
-import { BG3_BOX_ART_SIZE, getBg3BoxArtUrl } from '../_lib/bg3-game-art';
+import {
+  BG3_BOX_ART_SIZE,
+  getBg3BoxArtUrl,
+  getBg3HeroBackgroundUrls,
+  getBg3HeroBackgroundAttribution,
+} from '../_lib/bg3-game-art';
 import type { Bg3ClassSlot, Bg3Entry } from '../_lib/bg3-catalogue';
 
 interface Props {
@@ -16,9 +21,32 @@ const { title, intro, slots, playthroughs } = Astro.props;
 const builtCount = slots.filter((slot) => slot.build).length;
 const boxArtUrl = getBg3BoxArtUrl();
 const { width: boxArtWidth, height: boxArtHeight } = BG3_BOX_ART_SIZE;
+const heroBackground = getBg3HeroBackgroundUrls();
+const heroAttribution = getBg3HeroBackgroundAttribution();
 ---
 
-<div class="bg3-directory">
+<div class="bg3-directory-page">
+  <div class="bg3-directory-page__ambient" aria-hidden="true">
+    <picture class="bg3-directory-page__ambient-picture">
+      <source
+        srcset={heroBackground.animated}
+        type="image/webp"
+        media="(prefers-reduced-motion: no-preference)"
+      />
+      <img
+        class="bg3-directory-page__ambient-img"
+        src={heroBackground.static}
+        alt=""
+        width={960}
+        height={310}
+        decoding="async"
+        loading="lazy"
+      />
+    </picture>
+    <div class="bg3-directory-page__ambient-scrim"></div>
+  </div>
+
+  <div class="bg3-directory">
   <header class="bg3-directory__hero">
     <div class="bg3-directory__hero-copy">
       <p class="bg3-directory__label label-mono">Baldur&rsquo;s Gate 3 &middot; my builds</p>
@@ -77,5 +105,6 @@ const { width: boxArtWidth, height: boxArtHeight } = BG3_BOX_ART_SIZE;
     )
   }
 
-  <GuideAttribution />
+  <GuideAttribution heroBackgroundAttribution={heroAttribution} />
+  </div>
 </div>

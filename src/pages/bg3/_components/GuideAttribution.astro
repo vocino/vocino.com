@@ -1,5 +1,14 @@
 ---
 import { bg3WikiAttribution } from '../_lib/bg3-icons';
+
+interface Props {
+  heroBackgroundAttribution?: {
+    author: string;
+    url: string;
+  };
+}
+
+const { heroBackgroundAttribution } = Astro.props;
 ---
 
 <footer class="bg3-guide-attribution">
@@ -8,4 +17,15 @@ import { bg3WikiAttribution } from '../_lib/bg3-icons';
     <a href="https://bg3.wiki/" rel="noopener noreferrer" target="_blank">bg3.wiki</a>
     is the reference I used for class, spell, and item icons. Game content belongs to Larian Studios.
   </p>
+  {
+    heroBackgroundAttribution && (
+      <p>
+        Hero background via{' '}
+        <a href={heroBackgroundAttribution.url} rel="noopener noreferrer" target="_blank">
+          SteamGridDB
+        </a>{' '}
+        by {heroBackgroundAttribution.author}.
+      </p>
+    )
+  }
 </footer>

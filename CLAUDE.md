@@ -31,6 +31,9 @@ astro check
 
 # Twitch game box art — see "Twitch integrations" below
 npm run twitch:boxart:refresh
+
+# SteamGridDB hero backgrounds — see "SteamGrid assets" below
+npm run steamgrid:assets:refresh
 ```
 
 ## Architecture
@@ -90,6 +93,7 @@ public/
 └── assets/
     └── images/
         ├── twitch-boxart/       # Committed Twitch IGDB box art (npm run twitch:boxart:refresh)
+        ├── steamgrid-hero/      # Committed SteamGridDB hero assets (npm run steamgrid:assets:refresh)
         ├── og-hero/             # Per-hub OG background sources (generate-og-images.mjs)
         └── og/                  # Generated social preview PNGs (npm run og:build)
 ```
@@ -144,7 +148,9 @@ Shared Helix helpers live in [`src/lib/twitch-api.ts`](src/lib/twitch-api.ts) (u
 - Import `getTwitchBoxArtPublicPath('crimson-desert')` from the registry, or a thin hub helper that re-exports it (e.g. [`cd-game-art.ts`](src/pages/crimson-desert/_lib/cd-game-art.ts) → `getCrimsonDesertBoxArtUrl()`).
 - Use `TWITCH_BOX_ART_DISPLAY_SIZE` for `<img width>` / `height` (288×384).
 
-**Not the same as OG hero images:** [`hubs.ts`](src/data/hubs.ts) `ogHeroPath` (e.g. `public/assets/images/og-hero/bg3.png`) feeds [`generate-og-images.mjs`](scripts/generate-og-images.mjs) for social previews. That pipeline is separate unless you deliberately wire it to `twitch-boxart/`. `bg3.webp` is on disk for future hub/OG use; the BG3 hub does not display it yet.
+**Not the same as OG hero images:** [`hubs.ts`](src/data/hubs.ts) `ogHeroPath` (e.g. `public/assets/images/og-hero/bg3.png`) feeds [`generate-og-images.mjs`](scripts/generate-og-images.mjs) for social previews. That pipeline is separate unless you deliberately wire it to `twitch-boxart/`.
+
+**Not the same as SteamGrid heroes:** wide ambient backgrounds (often animated) come from [`steamgrid-assets.ts`](src/data/steamgrid-assets.ts) — see **SteamGrid assets** below.
 
 **Do not:**
 
@@ -153,6 +159,29 @@ Shared Helix helpers live in [`src/lib/twitch-api.ts`](src/lib/twitch-api.ts) (u
 - Reintroduce per-hub OAuth/box-art fetch logic (removed from Crimson Desert intentionally).
 
 **Adding a new game:** (1) entry in `twitch-game-boxart.ts`, (2) `npm run twitch:boxart:refresh`, (3) commit the new `.webp`, (4) hub imports `getTwitchBoxArtPublicPath(key)` (optional thin wrapper in that hub’s `_lib/`).
+
+#### SteamGrid assets (build-time hero backgrounds)
+
+**Goal:** Optional wide hero/banner art (including animated WebP) as committed files — no SteamGridDB API calls when Astro prerenders hub pages. Complements Twitch box art (3:4 covers); does not replace it.
+
+- **Registry (single source of truth):** [`src/data/steamgrid-assets.ts`](src/data/steamgrid-assets.ts) — pinned `steamGridAssetId` per entry (permalink from `steamgriddb.com/hero/{id}`). **Add new assets here only**; do not copy ids into hub `_lib` files.
+- **On disk:** `public/assets/images/steamgrid-hero/{key}.webp` (animated, resized on refresh) + `{key}.png` (first-frame static fallback for `prefers-reduced-motion`).
+- **npm scripts:** `steamgrid:assets` (download), `steamgrid:assets:verify`, `steamgrid:assets:refresh`. `predev` / `prestart` / `prebuild` run **verify only** (no API key required).
+- **Refresh:** `npm run steamgrid:assets:refresh`. Uses the public asset endpoint `GET /api/public/asset/hero/{id}` (no auth). The download script resizes to max width 960px and extracts a real PNG static frame (SteamGrid `fake_png` is often animated WebP).
+- **Discovery (optional):** v2 API `https://www.steamgriddb.com/api/v2` with `Authorization: Bearer <token>` from [SteamGridDB preferences](https://www.steamgriddb.com/profile/preferences) — use only to browse candidates; **pin a specific asset id** for production.
+
+**Hub consumption (no runtime fetch):**
+
+- Import `getSteamGridHeroBackgroundPaths(key)` from the registry, or a thin hub helper (e.g. [`bg3-game-art.ts`](src/pages/bg3/_lib/bg3-game-art.ts) → `getBg3HeroBackgroundUrls()`).
+- Credit authors via registry `creditAuthor` / `creditUrl` when displaying community art.
+
+**Do not:**
+
+- Hotlink `cdn2.steamgriddb.com` in production `<img src>`.
+- Fetch SteamGridDB from Astro pages at prerender.
+- Conflate with Twitch box art or OG hero pipelines.
+
+**Adding a new hero:** (1) entry in `steamgrid-assets.ts`, (2) `npm run steamgrid:assets:refresh`, (3) commit `.webp` + `.png`, (4) wire hub UI + attribution.
 
 #### Styling
 - Import SCSS in Astro layouts (NOT via link tags): `import '../styles/main.scss'`
@@ -234,7 +263,7 @@ The authoritative list of hubs and their fixed properties. Update this when addi
 
 | Hub | Slug | Accent | Status | Notes |
 | --- | --- | --- | --- | --- |
-| Baldur's Gate 3 | `/bg3` | `#46E08B` (green) | Live (`indexable`) | Build catalogue at `/bg3`. OG hero: manual `og-hero/bg3.png`. Twitch box art: `twitch-boxart/bg3.webp` (committed; hub UI not wired yet — see **Twitch integrations**). |
+| Baldur's Gate 3 | `/bg3` | `#46E08B` (green) | Live (`indexable`) | Build catalogue at `/bg3`. Directory: Twitch cover + SteamGrid animated hero bg (asset 85263 — **SteamGrid assets**). OG: `og-hero/bg3.png`. |
 | Home Lab | `/homelab` | `#FFB86B` (amber) | Live (`indexable`) | Self-hosted media stack guide (Docker Compose, *arr, Jellyfin). Interactive stack diagram + personalized copy-paste vars. Pages nest as `/homelab/<page-slug>`. |
 | Crimson Desert | `/crimson-desert` | `#D44D37` (ember) | Live (`indexable`) | Tabbed build notes (Kliff live). Guide icons: `npm run cd:icons:refresh`. Hero cover: static `twitch-boxart/crimson-desert.webp` via `cd-game-art.ts` — **Twitch integrations** (not runtime API). |
 
