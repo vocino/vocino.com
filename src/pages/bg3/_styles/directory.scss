@@ -6,7 +6,43 @@
   padding: clamp(4.5rem, 9vw, 6rem) clamp(1rem, 4vw, 2.5rem) clamp(3rem, 6vw, 4.5rem);
 
   &__hero {
+    display: grid;
+    gap: clamp(1.25rem, 4vw, 2rem);
     margin-bottom: clamp(2rem, 5vw, 3rem);
+
+    @media (min-width: 640px) {
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: end;
+      gap: clamp(1.5rem, 4vw, 2.5rem);
+    }
+  }
+
+  &__hero-copy {
+    min-width: 0;
+  }
+
+  &__hero-cover {
+    margin: 0;
+    justify-self: center;
+
+    @media (min-width: 640px) {
+      justify-self: end;
+      margin-bottom: 0.125rem;
+    }
+  }
+
+  &__hero-cover-img {
+    display: block;
+    width: clamp(8.5rem, 24vw, 12rem);
+    height: auto;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    box-shadow:
+      0 16px 40px rgb(0 0 0 / 0.35),
+      0 0 28px color-mix(in srgb, var(--dir-accent) 22%, transparent),
+      inset 0 1px 0 rgb(255 255 255 / 0.06);
   }
 
   &__label {

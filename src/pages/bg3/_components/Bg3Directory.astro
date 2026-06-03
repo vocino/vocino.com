@@ -2,6 +2,7 @@
 import './../_styles/directory.scss';
 import BuildCard from './BuildCard.astro';
 import GuideAttribution from './GuideAttribution.astro';
+import { BG3_BOX_ART_SIZE, getBg3BoxArtUrl } from '../_lib/bg3-game-art';
 import type { Bg3ClassSlot, Bg3Entry } from '../_lib/bg3-catalogue';
 
 interface Props {
@@ -13,13 +14,28 @@ interface Props {
 
 const { title, intro, slots, playthroughs } = Astro.props;
 const builtCount = slots.filter((slot) => slot.build).length;
+const boxArtUrl = getBg3BoxArtUrl();
+const { width: boxArtWidth, height: boxArtHeight } = BG3_BOX_ART_SIZE;
 ---
 
 <div class="bg3-directory">
   <header class="bg3-directory__hero">
-    <p class="bg3-directory__label label-mono">Baldur&rsquo;s Gate 3 &middot; my builds</p>
-    <h1 class="bg3-directory__title">{title}</h1>
-    <p class="bg3-directory__intro">{intro}</p>
+    <div class="bg3-directory__hero-copy">
+      <p class="bg3-directory__label label-mono">Baldur&rsquo;s Gate 3 &middot; my builds</p>
+      <h1 class="bg3-directory__title">{title}</h1>
+      <p class="bg3-directory__intro">{intro}</p>
+    </div>
+    <figure class="bg3-directory__hero-cover">
+      <img
+        class="bg3-directory__hero-cover-img"
+        src={boxArtUrl}
+        alt="Baldur's Gate 3 box art"
+        width={boxArtWidth}
+        height={boxArtHeight}
+        loading="eager"
+        decoding="async"
+      />
+    </figure>
   </header>
 
   <section class="bg3-directory__section" aria-labelledby="builds-heading">

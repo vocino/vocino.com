@@ -23,7 +23,8 @@ export const TWITCH_BOX_ART_DISPLAY_SIZE = { width: 288, height: 384 } as const;
 export const twitchGameBoxArtRegistry: TwitchGameBoxArtEntry[] = [
   {
     key: 'bg3',
-    twitchGameId: '512953',
+    /** Twitch directory slug: baldurs-gate-3 */
+    twitchGameId: '512923',
     twitchGameName: "Baldur's Gate 3",
     publicPath: '/assets/images/twitch-boxart/bg3.webp',
   },
