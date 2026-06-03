@@ -11,8 +11,10 @@ import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
 import { steamGridAssetRegistry } from '../src/data/steamgrid-assets.ts';
 
-/** Max width for committed hero assets (ambient backgrounds). */
-const HERO_MAX_WIDTH = 960;
+/** Max width for static PNG (sharp on large viewports). */
+const HERO_STATIC_MAX_WIDTH = 1920;
+/** Animated WebP — smaller cap keeps repo size reasonable. */
+const HERO_ANIMATED_MAX_WIDTH = 1280;
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const apiBase = 'https://www.steamgriddb.com/api/public/asset';
@@ -42,18 +44,28 @@ async function downloadBuffer(remoteUrl) {
  * SteamGrid fake_png is often animated WebP; extract frame 0 as a real PNG.
  * Resize animated source for committed ambient WebP (smaller than CDN originals).
  */
-async function saveOptimizedHeroAssets(sourceBuf, animatedDest, staticDest) {
+async function saveOptimizedHeroAssets(sourceBuf, animatedDest, staticDest, isAnimated) {
   await mkdir(dirname(animatedDest), { recursive: true });
 
-  await sharp(sourceBuf, { animated: true, limitInputPixels: false })
-    .resize(HERO_MAX_WIDTH, null, { fit: 'inside' })
-    .webp({ quality: 65, effort: 4 })
-    .toFile(animatedDest);
+  if (isAnimated) {
+    await sharp(sourceBuf, { animated: true, limitInputPixels: false })
+      .resize(HERO_ANIMATED_MAX_WIDTH, null, { fit: 'inside' })
+      .webp({ quality: 65, effort: 4 })
+      .toFile(animatedDest);
 
-  await sharp(sourceBuf, { animated: false, page: 0, limitInputPixels: false })
-    .resize(HERO_MAX_WIDTH, null, { fit: 'inside' })
-    .png({ compressionLevel: 9 })
-    .toFile(staticDest);
+    await sharp(sourceBuf, { animated: false, page: 0, limitInputPixels: false })
+      .resize(HERO_STATIC_MAX_WIDTH, null, { fit: 'inside' })
+      .png({ compressionLevel: 9 })
+      .toFile(staticDest);
+    return;
+  }
+
+  const resized = sharp(sourceBuf, { limitInputPixels: false }).resize(HERO_STATIC_MAX_WIDTH, null, {
+    fit: 'inside',
+  });
+
+  await resized.clone().webp({ quality: 80, effort: 4 }).toFile(animatedDest);
+  await resized.clone().png({ compressionLevel: 9 }).toFile(staticDest);
 }
 
 async function main() {
@@ -73,7 +85,7 @@ async function main() {
 
       const sourceBuf = await downloadBuffer(animatedUrl);
       await writeFile(tempPath, sourceBuf);
-      await saveOptimizedHeroAssets(sourceBuf, animatedDest, staticDest);
+      await saveOptimizedHeroAssets(sourceBuf, animatedDest, staticDest, Boolean(asset.is_animated));
       await unlink(tempPath).catch(() => {});
 
       const author = asset.author?.name ?? entry.creditAuthor ?? 'unknown';

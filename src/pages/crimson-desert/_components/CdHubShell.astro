@@ -9,7 +9,10 @@ import '../_styles/guide-tables.scss';
 import '../_styles/skill-ladder.scss';
 import CdHero from './CdHero.astro';
 import CharacterTabs, { type CharacterGuideMeta } from './CharacterTabs.astro';
+import { getCrimsonDesertHeroBackgroundUrls } from '../_lib/cd-game-art';
 import type { MarkdownHeading } from 'astro';
+
+const heroBackground = getCrimsonDesertHeroBackgroundUrls();
 
 interface Props {
   hubTitle: string;
@@ -38,6 +41,25 @@ const {
 
 <div class="cd-hub">
   <div class="cd-hub__grain" aria-hidden="true"></div>
+  <div class="cd-hub__ambient" aria-hidden="true">
+    <picture class="cd-hub__ambient-picture">
+      <source
+        srcset={heroBackground.animated}
+        type="image/webp"
+        media="(prefers-reduced-motion: no-preference)"
+      />
+      <img
+        class="cd-hub__ambient-img"
+        src={heroBackground.static}
+        alt=""
+        width={1920}
+        height={620}
+        decoding="async"
+        loading="lazy"
+      />
+    </picture>
+    <div class="cd-hub__ambient-scrim"></div>
+  </div>
   <div class="cd-hub__inner">
     <CdHero
       label="Crimson Desert"

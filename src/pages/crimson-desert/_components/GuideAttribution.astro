@@ -1,5 +1,8 @@
 ---
 import { cdWikiAttribution } from '../_lib/cd-icons';
+import { getCrimsonDesertHeroBackgroundAttribution } from '../_lib/cd-game-art';
+
+const heroBackgroundAttribution = getCrimsonDesertHeroBackgroundAttribution();
 ---
 
 <footer class="cd-guide-attribution">
@@ -10,4 +13,15 @@ import { cdWikiAttribution } from '../_lib/cd-icons';
     >
     is the reference for skill and equipment icons. Game content belongs to Pearl Abyss.
   </p>
+  {
+    heroBackgroundAttribution && (
+      <p>
+        Hero background via{' '}
+        <a href={heroBackgroundAttribution.url} rel="noopener noreferrer" target="_blank">
+          SteamGridDB
+        </a>{' '}
+        by {heroBackgroundAttribution.author}.
+      </p>
+    )
+  }
 </footer>

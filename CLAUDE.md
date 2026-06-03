@@ -265,7 +265,7 @@ The authoritative list of hubs and their fixed properties. Update this when addi
 | --- | --- | --- | --- | --- |
 | Baldur's Gate 3 | `/bg3` | `#46E08B` (green) | Live (`indexable`) | Build catalogue at `/bg3`. Directory: Twitch cover + SteamGrid animated hero bg (asset 85263 — **SteamGrid assets**). OG: `og-hero/bg3.png`. |
 | Home Lab | `/homelab` | `#FFB86B` (amber) | Live (`indexable`) | Self-hosted media stack guide (Docker Compose, *arr, Jellyfin). Interactive stack diagram + personalized copy-paste vars. Pages nest as `/homelab/<page-slug>`. |
-| Crimson Desert | `/crimson-desert` | `#D44D37` (ember) | Live (`indexable`) | Tabbed build notes (Kliff live). Guide icons: `npm run cd:icons:refresh`. Hero cover: static `twitch-boxart/crimson-desert.webp` via `cd-game-art.ts` — **Twitch integrations** (not runtime API). |
+| Crimson Desert | `/crimson-desert` | `#D44D37` (ember) | Live (`indexable`) | Tabbed build notes (Kliff live). Guide icons: `npm run cd:icons:refresh`. Hero cover: Twitch box art; ambient hero bg (asset 168164 — **SteamGrid assets**). |
 
 ### Adding a new hub
 1. Create `src/pages/<slug>/index.astro`.
