@@ -17,3 +17,5 @@ Do not duplicate `CLAUDE.md` content in these files — update `CLAUDE.md` inste
 For SEO/metadata, see CLAUDE.md → **SEO and metadata standardization** (`src/data/seo.ts`, `src/data/hubs.ts`, `src/pages/sitemap.xml.ts`).
 
 For GA4 and outbound social link tracking, see CLAUDE.md → **Analytics and outbound social links** (`src/data/social-profiles.ts`, `src/components/GoogleAnalytics.astro`).
+
+For Twitch: live stream status vs build-time game box art are separate systems — see CLAUDE.md → **Twitch integrations** (`src/data/twitch-game-boxart.ts`, `npm run twitch:boxart:refresh`). Do not fetch box art at hub prerender time.

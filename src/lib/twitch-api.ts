@@ -1,3 +1,4 @@
+/** Helix helpers for scripts/API routes — not for hub prerender box art (see CLAUDE.md → Twitch integrations). */
 export interface TwitchGame {
   id: string;
   name: string;

@@ -28,6 +28,9 @@ npm run cf:types
 
 # Type checking only
 astro check
+
+# Twitch game box art — see "Twitch integrations" below
+npm run twitch:boxart:refresh
 ```
 
 ## Architecture
@@ -55,13 +58,16 @@ src/
 │   └── TwitchStatus.astro       # Live streaming status indicator
 ├── data/
 │   ├── home.ts                  # Homepage data (if used)
+│   ├── hubs.ts                  # Hub registry (slug, accent, ogHeroPath — not Twitch box art)
 │   ├── seo.ts                   # Site-wide SEO defaults
-│   └── social-profiles.ts       # Canonical social URLs + analytics platform ids
+│   ├── social-profiles.ts       # Canonical social URLs + analytics platform ids
+│   └── twitch-game-boxart.ts    # Twitch game ids + static box art paths (see Twitch integrations)
 ├── layouts/
 │   ├── BaseLayout.astro         # Main HTML layout, imports main.scss (head/SEO/fonts/reset)
 │   └── HubLayout.astro          # SHARED: opt-in hub wrapper (accent + BrandHome corner)
 ├── lib/
-│   └── formatIsoDate.ts
+│   ├── formatIsoDate.ts
+│   └── twitch-api.ts            # Helix helpers (box art download script + twitch-status API)
 ├── pages/
 │   ├── index.astro              # Landing page
 │   ├── bg3.astro                # HUB: Baldur's Gate 3 (nested pages go in bg3/)
@@ -82,7 +88,10 @@ src/
 public/
 ├── sitemap.xml                  # Static sitemap (hand-maintained; list only indexable pages)
 └── assets/
-    └── images/                  # Static images
+    └── images/
+        ├── twitch-boxart/       # Committed Twitch IGDB box art (npm run twitch:boxart:refresh)
+        ├── og-hero/             # Per-hub OG background sources (generate-og-images.mjs)
+        └── og/                  # Generated social preview PNGs (npm run og:build)
 ```
 
 ### Key Architectural Patterns
@@ -109,6 +118,41 @@ export const GET: APIRoute = async ({ request, locals }) => {
   }
 }
 ```
+
+#### Twitch integrations (two systems — do not conflate)
+
+Twitch touches this repo in **two unrelated ways**. Pick the right one before changing code.
+
+| System | Purpose | When it runs | Key files |
+| --- | --- | --- | --- |
+| **Live stream status** | Homepage live dot + stream title/game | **Runtime** on each `/api/twitch-status` request | [`twitch-status.ts`](src/pages/api/twitch-status.ts), [`TwitchStatus.astro`](src/components/TwitchStatus.astro), `getWorkerEnvVar('TWITCH_*')` |
+| **Game box art** | Static cover images for game hubs | **Build time** only; committed files served from `public/` | [`twitch-game-boxart.ts`](src/data/twitch-game-boxart.ts), [`download-twitch-boxart.mjs`](scripts/download-twitch-boxart.mjs), [`verify-twitch-boxart.mjs`](scripts/verify-twitch-boxart.mjs) |
+
+Shared Helix helpers live in [`src/lib/twitch-api.ts`](src/lib/twitch-api.ts) (used by the download script and optionally by the status route — not by prerendered hub pages for box art).
+
+##### Game box art (build-time static assets)
+
+**Goal:** High-quality IGDB box art as committed WebP files — no Twitch API calls when Astro prerenders hub pages.
+
+- **Registry (single source of truth):** [`src/data/twitch-game-boxart.ts`](src/data/twitch-game-boxart.ts) — Twitch game ids, expected game names, and `publicPath` for each entry (`bg3`, `crimson-desert`). **Add new games here only**; do not copy ids into hub `_lib` files.
+- **On disk:** `public/assets/images/twitch-boxart/{key}.webp` (600×800 source, committed to git).
+- **npm scripts:** `twitch:boxart` (download), `twitch:boxart:verify` (assert files exist), `twitch:boxart:refresh` (download + verify). `predev` / `prestart` / `prebuild` run **verify only** so CI passes without Twitch secrets.
+- **Refresh:** `npm run twitch:boxart:refresh`. Uses `.dev.vars` / env `TWITCH_CLIENT_ID` + `TWITCH_CLIENT_SECRET` when present (Helix validates ids + names); without creds, downloads from the IGDB CDN URL pattern (`…/ttv-boxart/{id}_IGDB-600x800.jpg`) — still works in CI.
+
+**Hub consumption (no runtime fetch):**
+
+- Import `getTwitchBoxArtPublicPath('crimson-desert')` from the registry, or a thin hub helper that re-exports it (e.g. [`cd-game-art.ts`](src/pages/crimson-desert/_lib/cd-game-art.ts) → `getCrimsonDesertBoxArtUrl()`).
+- Use `TWITCH_BOX_ART_DISPLAY_SIZE` for `<img width>` / `height` (288×384).
+
+**Not the same as OG hero images:** [`hubs.ts`](src/data/hubs.ts) `ogHeroPath` (e.g. `public/assets/images/og-hero/bg3.png`) feeds [`generate-og-images.mjs`](scripts/generate-og-images.mjs) for social previews. That pipeline is separate unless you deliberately wire it to `twitch-boxart/`. `bg3.webp` is on disk for future hub/OG use; the BG3 hub does not display it yet.
+
+**Do not:**
+
+- Call `fetchTwitchGames` / `getTwitchAppAccessToken` from Astro pages to resolve box art URLs at prerender.
+- Hardcode Twitch game ids or `static-cdn.jtvnw.net` URLs outside the registry + download script.
+- Reintroduce per-hub OAuth/box-art fetch logic (removed from Crimson Desert intentionally).
+
+**Adding a new game:** (1) entry in `twitch-game-boxart.ts`, (2) `npm run twitch:boxart:refresh`, (3) commit the new `.webp`, (4) hub imports `getTwitchBoxArtPublicPath(key)` (optional thin wrapper in that hub’s `_lib/`).
 
 #### Styling
 - Import SCSS in Astro layouts (NOT via link tags): `import '../styles/main.scss'`
@@ -190,9 +234,9 @@ The authoritative list of hubs and their fixed properties. Update this when addi
 
 | Hub | Slug | Accent | Status | Notes |
 | --- | --- | --- | --- | --- |
-| Baldur's Gate 3 | `/bg3` | `#46E08B` (green) | Live (`indexable`) | Honour Mode progression guide at `/bg3`. Pages nest as `/bg3/<guide-slug>`. |
+| Baldur's Gate 3 | `/bg3` | `#46E08B` (green) | Live (`indexable`) | Build catalogue at `/bg3`. OG hero: manual `og-hero/bg3.png`. Twitch box art: `twitch-boxart/bg3.webp` (committed; hub UI not wired yet — see **Twitch integrations**). |
 | Home Lab | `/homelab` | `#FFB86B` (amber) | Live (`indexable`) | Self-hosted media stack guide (Docker Compose, *arr, Jellyfin). Interactive stack diagram + personalized copy-paste vars. Pages nest as `/homelab/<page-slug>`. |
-| Crimson Desert | `/crimson-desert` | `#D44D37` (ember) | Live (`indexable`) | Early-game build notes for Kliff, Damiane, and Oongka on one tabbed page. Kliff beginner build live; other characters coming soon. Icons from crimsondesert.fandom.com. |
+| Crimson Desert | `/crimson-desert` | `#D44D37` (ember) | Live (`indexable`) | Tabbed build notes (Kliff live). Guide icons: `npm run cd:icons:refresh`. Hero cover: static `twitch-boxart/crimson-desert.webp` via `cd-game-art.ts` — **Twitch integrations** (not runtime API). |
 
 ### Adding a new hub
 1. Create `src/pages/<slug>/index.astro`.
@@ -203,10 +247,12 @@ The authoritative list of hubs and their fixed properties. Update this when addi
 
 ## Environment Variables
 
-Required for Twitch integration (Wrangler secrets / dashboard vars):
+**Twitch live status (required in production for `/api/twitch-status`):**
 - `TWITCH_CLIENT_ID`
 - `TWITCH_CLIENT_SECRET`
 - `TWITCH_USERNAME` (defaults to "vocino" if not set)
+
+**Twitch game box art (optional):** same `TWITCH_CLIENT_ID` / `TWITCH_CLIENT_SECRET` in `.dev.vars` only when running `npm run twitch:boxart:refresh` locally to validate ids via Helix. Builds and prerendered hubs do not need these for box art — committed WebP files are enough. See **Twitch integrations**.
 
 ## Deployment
 
