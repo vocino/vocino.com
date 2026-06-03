@@ -10,6 +10,8 @@ Read **[CLAUDE.md](../../CLAUDE.md) → "Content Hubs"** (including the Hub regi
 
 Social or outbound profile links in hub content: **[CLAUDE.md](../../CLAUDE.md) → "Analytics and outbound social links"** (`social-profiles.ts`, `data-social-platform`).
 
-Game hub cover art (Twitch box art): **[CLAUDE.md](../../CLAUDE.md) → "Twitch integrations"** — use `src/data/twitch-game-boxart.ts` + committed WebP; never fetch at prerender.
+Game hub URL slugs: match the Twitch directory category slug (`twitch.tv/directory/category/{slug}`) — see CLAUDE.md → **Content Hubs** → URL & hierarchy.
+
+Game hub cover art (Twitch box art): **[CLAUDE.md](../../CLAUDE.md) → "Twitch integrations"** — registry `key` = that slug; committed WebP; never fetch at prerender.
 
 SteamGridDB hero backgrounds: **[CLAUDE.md](../../CLAUDE.md) → "SteamGrid assets"** — use `src/data/steamgrid-assets.ts` + committed files; never fetch at prerender.

@@ -1,5 +1,6 @@
 ---
 import { getBg3IconPublicPath } from '../_lib/bg3-icons';
+import { baldursGate3GuidePath } from '../_lib/bg3-hub-path';
 import type { Bg3ClassSlot } from '../_lib/bg3-catalogue';
 
 interface Props {
@@ -10,7 +11,7 @@ const { classSlot } = Astro.props;
 const { class: cls, build } = classSlot;
 
 const iconSrc = getBg3IconPublicPath(cls.iconSlug);
-const href = build ? `/bg3/${build.id}` : undefined;
+const href = build ? baldursGate3GuidePath(build.id) : undefined;
 const role = build?.data.role;
 const subclass = build?.data.subclass;
 const blurb = build ? (build.data.summary ?? build.data.description) : undefined;

@@ -1,6 +1,6 @@
 /**
  * The 12 Baldur's Gate 3 base classes, in the catalogue's display order.
- * Drives the build grid on /bg3 (including "coming soon" placeholders) and the
+ * Drives the build grid on /baldurs-gate-3 (including "coming soon" placeholders) and the
  * class badge shown on each build. `iconSlug` matches a `category: 'class'`
  * entry in `bg3-icons.ts`.
  */

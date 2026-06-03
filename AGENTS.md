@@ -18,6 +18,6 @@ For SEO/metadata, see CLAUDE.md → **SEO and metadata standardization** (`src/d
 
 For GA4 and outbound social link tracking, see CLAUDE.md → **Analytics and outbound social links** (`src/data/social-profiles.ts`, `src/components/GoogleAnalytics.astro`).
 
-For Twitch: live stream status vs build-time game box art are separate systems — see CLAUDE.md → **Twitch integrations** (`src/data/twitch-game-boxart.ts`, `npm run twitch:boxart:refresh`). Do not fetch box art at hub prerender time.
+For Twitch: live stream status vs build-time game box art are separate systems — see CLAUDE.md → **Twitch integrations** (`src/data/twitch-game-boxart.ts`, `npm run twitch:boxart:refresh`). Do not fetch box art at hub prerender time. **Game hub URL slugs** must match the Twitch directory category slug (`twitch.tv/directory/category/{slug}`) — see CLAUDE.md → **Content Hubs** → URL & hierarchy.
 
 For SteamGridDB hero backgrounds: see CLAUDE.md → **SteamGrid assets** (`src/data/steamgrid-assets.ts`, `npm run steamgrid:assets:refresh`). Separate from Twitch box art; do not fetch at prerender.

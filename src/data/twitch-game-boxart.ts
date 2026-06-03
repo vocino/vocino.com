@@ -2,10 +2,14 @@
  * Build-time Twitch game box art registry.
  * See CLAUDE.md → "Twitch integrations" → "Game box art".
  * Download: npm run twitch:boxart:refresh — do not add game ids elsewhere.
+ *
+ * `key` must match the Twitch directory category slug (and the hub slug in hubs.ts):
+ * https://www.twitch.tv/directory/category/{key}
  */
-export type TwitchGameBoxArtKey = 'bg3' | 'crimson-desert';
+export type TwitchGameBoxArtKey = 'baldurs-gate-3' | 'crimson-desert';
 
 export interface TwitchGameBoxArtEntry {
+  /** Twitch directory category slug — same as hub `slug` in hubs.ts. */
   key: TwitchGameBoxArtKey;
   twitchGameId: string;
   /** Expected Helix game name — logged on refresh for sanity checks. */
@@ -22,11 +26,10 @@ export const TWITCH_BOX_ART_DISPLAY_SIZE = { width: 288, height: 384 } as const;
 
 export const twitchGameBoxArtRegistry: TwitchGameBoxArtEntry[] = [
   {
-    key: 'bg3',
-    /** Twitch directory slug: baldurs-gate-3 */
+    key: 'baldurs-gate-3',
     twitchGameId: '512923',
     twitchGameName: "Baldur's Gate 3",
-    publicPath: '/assets/images/twitch-boxart/bg3.webp',
+    publicPath: '/assets/images/twitch-boxart/baldurs-gate-3.webp',
   },
   {
     key: 'crimson-desert',

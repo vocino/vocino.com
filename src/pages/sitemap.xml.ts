@@ -4,7 +4,8 @@ export const prerender = true;
 import { getHubIndexablePaths } from '../data/hubs';
 import { siteSeo } from '../data/seo';
 import { normalizeCanonicalPath, toAbsoluteUrl } from '../lib/seo';
-import { getPublishedBg3Entries } from './bg3/_lib/bg3-catalogue';
+import { getHubBySlug } from '../data/hubs';
+import { getPublishedBg3Entries } from './baldurs-gate-3/_lib/bg3-catalogue';
 
 interface SitemapEntry {
   path: string;
@@ -49,9 +50,10 @@ export const GET: APIRoute = async () => {
   }));
 
   // Nested bg3 catalogue pages (builds + playthrough advice).
+  const bg3Hub = getHubBySlug('baldurs-gate-3');
   const bg3Pages = await getPublishedBg3Entries();
   const bg3Entries: SitemapEntry[] = bg3Pages.map((entry) => ({
-    path: `/bg3/${entry.id}`,
+    path: `/${bg3Hub.slug}/${entry.id}`,
     changefreq: 'monthly',
     priority: '0.7',
   }));

@@ -1,0 +1,3 @@
+# Legacy BG3 hub URLs (301). Do not add trailing-slash rules here — see CLAUDE.md.
+/bg3 /baldurs-gate-3 301
+/bg3/* /baldurs-gate-3/:splat 301

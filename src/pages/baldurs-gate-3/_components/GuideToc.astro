@@ -1,4 +1,5 @@
 ---
+import { baldursGate3HubPath } from '../_lib/bg3-hub-path';
 import { getTocGroups } from '../_lib/guide-acts';
 import type { MarkdownHeading } from 'astro';
 
@@ -13,7 +14,7 @@ const tocGroups = getTocGroups(headings);
 {
   tocGroups.length > 0 && (
     <nav class="guide-toc" aria-label="Table of contents">
-      <a class="guide-toc__back" href="/bg3">
+      <a class="guide-toc__back" href={baldursGate3HubPath}>
         <span aria-hidden="true">←</span>
         <span>Back to builds</span>
       </a>

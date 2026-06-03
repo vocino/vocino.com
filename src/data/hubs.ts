@@ -23,14 +23,14 @@ export interface HubRegistryEntry {
 
 export const hubRegistry: HubRegistryEntry[] = [
   {
-    slug: 'bg3',
+    slug: 'baldurs-gate-3',
     name: "Baldur's Gate 3",
     navLabel: "Baldur's Gate 3",
     description:
       "My personal Baldur's Gate 3 build catalogue — a favorite build for each class, plus the playthrough advice I actually use.",
     accent: '#46E08B',
     indexable: true,
-    imagePath: '/assets/images/og/bg3.png',
+    imagePath: '/assets/images/og/baldurs-gate-3.png',
     ogHeroPath: '/assets/images/og-hero/bg3.png',
     ogImageAlt: "Baldur's Gate 3 hub preview image",
     contentCollection: 'bg3',

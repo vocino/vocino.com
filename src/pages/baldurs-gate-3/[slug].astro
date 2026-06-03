@@ -20,7 +20,7 @@ interface Props {
   entry: Bg3Entry;
 }
 
-const hub = getHubBySlug('bg3');
+const hub = getHubBySlug('baldurs-gate-3');
 const { entry } = Astro.props;
 const { Content, headings } = await render(entry);
 const { title, description, updated } = entry.data;

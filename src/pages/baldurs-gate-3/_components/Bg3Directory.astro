@@ -8,6 +8,7 @@ import {
   getBg3HeroBackgroundUrls,
   getBg3HeroBackgroundAttribution,
 } from '../_lib/bg3-game-art';
+import { baldursGate3GuidePath } from '../_lib/bg3-hub-path';
 import type { Bg3ClassSlot, Bg3Entry } from '../_lib/bg3-catalogue';
 
 interface Props {
@@ -94,7 +95,7 @@ const heroAttribution = getBg3HeroBackgroundAttribution();
         <ul class="advice-list" role="list">
           {playthroughs.map((entry) => (
             <li class="advice-list__item">
-              <a class="advice-card" href={`/bg3/${entry.id}`}>
+              <a class="advice-card" href={baldursGate3GuidePath(entry.id)}>
                 <span class="advice-card__title">{entry.data.title}</span>
                 <span class="advice-card__blurb">{entry.data.summary ?? entry.data.description}</span>
               </a>

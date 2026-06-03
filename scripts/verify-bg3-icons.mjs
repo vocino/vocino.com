@@ -3,7 +3,7 @@
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { bg3IconEntries } from '../src/pages/bg3/_lib/bg3-icons.ts';
+import { bg3IconEntries } from '../src/pages/baldurs-gate-3/_lib/bg3-icons.ts';
 
 const root = join(fileURLToPath(new URL('..', import.meta.url)), 'public/assets/images/bg3');
 const missing = bg3IconEntries.filter((e) => !existsSync(join(root, e.file)));

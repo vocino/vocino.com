@@ -1,6 +1,6 @@
 import type { Root, Text, Parent } from 'mdast';
 import { visit } from 'unist-util-visit';
-import { getBg3IconPublicPath, slugToDefaultLabel } from '../pages/bg3/_lib/bg3-icons';
+import { getBg3IconPublicPath, slugToDefaultLabel } from '../pages/baldurs-gate-3/_lib/bg3-icons';
 
 function resolveIconSrc(slug: string): string {
   return getBg3IconPublicPath(slug);

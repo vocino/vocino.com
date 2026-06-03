@@ -3,8 +3,8 @@ import cloudflare from '@astrojs/cloudflare';
 import { remarkBg3Icons } from './src/lib/remark-bg3-icons.ts';
 import { remarkCdIcons } from './src/lib/remark-cd-icons.ts';
 import { remarkCustomHeadingId } from './src/lib/remark-custom-heading-id.ts';
-import { remarkGuideTables } from './src/pages/bg3/_lib/remark-guide-tables.ts';
-import { rehypeWrapGuideTables } from './src/pages/bg3/_lib/rehype-wrap-guide-tables.ts';
+import { remarkGuideTables } from './src/pages/baldurs-gate-3/_lib/remark-guide-tables.ts';
+import { rehypeWrapGuideTables } from './src/pages/baldurs-gate-3/_lib/rehype-wrap-guide-tables.ts';
 
 export default defineConfig({
   output: 'server',

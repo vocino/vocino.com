@@ -13,7 +13,7 @@ export const BG3_BOX_ART_SIZE = TWITCH_BOX_ART_DISPLAY_SIZE;
 const BG3_HERO_BG_KEY = 'bg3-hero-bg' as const;
 
 export function getBg3BoxArtUrl(): string {
-  return getTwitchBoxArtPublicPath('bg3');
+  return getTwitchBoxArtPublicPath('baldurs-gate-3');
 }
 
 export function getBg3HeroBackgroundUrls(): {
