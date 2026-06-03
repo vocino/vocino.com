@@ -8,13 +8,14 @@ import type { MarkdownHeading } from 'astro';
 
 interface Props {
   kliffHeadings: MarkdownHeading[];
+  damianeHeadings: MarkdownHeading[];
 }
 
-const { kliffHeadings } = Astro.props;
+const { kliffHeadings, damianeHeadings } = Astro.props;
 
-const damiane = cdCharacters.find((c) => c.id === 'damiane')!;
 const oongka = cdCharacters.find((c) => c.id === 'oongka')!;
 const showKliffToc = kliffHeadings.length > 0;
+const showDamianeToc = damianeHeadings.length > 0;
 ---
 
 <div class="cd-tabs" data-cd-tabs>
@@ -58,7 +59,7 @@ const showKliffToc = kliffHeadings.length > 0;
       )
     }
     <div class="cd-hub__workspace-main">
-      {showKliffToc && <GuideTocDrawer headings={kliffHeadings} />}
+      {showKliffToc && <GuideTocDrawer headings={kliffHeadings} panelId="kliff" />}
       <article class="guide-prose">
         <slot name="kliff" />
       </article>
@@ -68,13 +69,26 @@ const showKliffToc = kliffHeadings.length > 0;
 
   <div
     role="tabpanel"
-    class="cd-tabs__panel cd-hub__workspace cd-hub__workspace--solo"
+    class="cd-tabs__panel cd-hub__workspace"
     id="cd-panel-damiane"
     aria-labelledby="cd-tab-damiane"
     hidden
     data-cd-panel="damiane"
   >
-    <CdCharacterSoon character={damiane} />
+    {
+      showDamianeToc && (
+        <aside class="cd-hub__toc-rail" aria-label="Table of contents">
+          <GuideToc headings={damianeHeadings} />
+        </aside>
+      )
+    }
+    <div class="cd-hub__workspace-main">
+      {showDamianeToc && <GuideTocDrawer headings={damianeHeadings} panelId="damiane" />}
+      <article class="guide-prose">
+        <slot name="damiane" />
+      </article>
+      <GuideAttribution />
+    </div>
   </div>
 
   <div

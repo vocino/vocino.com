@@ -1,7 +1,9 @@
 import type { Root, Text, Parent } from 'mdast';
 import { visit } from 'unist-util-visit';
 import { getCdIconPublicPath, slugToDefaultLabel } from '../pages/crimson-desert/_lib/cd-icons';
-import { renderCdSkillLadderHtml } from '../pages/crimson-desert/_lib/kliff-skills';
+import { damianeSkillPriorities } from '../pages/crimson-desert/_lib/damiane-skills';
+import { kliffSkillPriorities } from '../pages/crimson-desert/_lib/kliff-skills';
+import { renderCdSkillLadderHtml } from '../pages/crimson-desert/_lib/skill-ladder';
 
 const CD_TOKEN_RE = /\[\[cd:([a-z0-9-]+)(?:\|([^\]]+))?\]\]/gi;
 
@@ -32,7 +34,9 @@ function splitTextNode(value: string): Array<Text | { type: 'html'; value: strin
     }
     const slug = match[1].toLowerCase();
     if (slug === 'skill-ladder') {
-      parts.push({ type: 'html', value: renderCdSkillLadderHtml(getCdIconPublicPath) });
+      parts.push({ type: 'html', value: renderCdSkillLadderHtml(kliffSkillPriorities, getCdIconPublicPath) });
+    } else if (slug === 'damiane-skill-ladder') {
+      parts.push({ type: 'html', value: renderCdSkillLadderHtml(damianeSkillPriorities, getCdIconPublicPath) });
     } else {
       const label = match[2]?.trim() || slugToDefaultLabel(slug);
       parts.push({ type: 'html', value: iconHtml(slug, label) });

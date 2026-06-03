@@ -15,13 +15,21 @@ interface Props {
   hubTitle: string;
   hubDescription: string;
   kliffHeadings: MarkdownHeading[];
+  damianeHeadings: MarkdownHeading[];
   kliffUpdated?: Date;
   kliffReadingMinutes?: number;
   boxArtUrl: string;
 }
 
-const { hubTitle, hubDescription, kliffHeadings, kliffUpdated, kliffReadingMinutes, boxArtUrl } =
-  Astro.props;
+const {
+  hubTitle,
+  hubDescription,
+  kliffHeadings,
+  damianeHeadings,
+  kliffUpdated,
+  kliffReadingMinutes,
+  boxArtUrl,
+} = Astro.props;
 ---
 
 <div class="cd-hub">
@@ -36,8 +44,9 @@ const { hubTitle, hubDescription, kliffHeadings, kliffUpdated, kliffReadingMinut
       boxArtUrl={boxArtUrl}
     />
 
-    <CharacterTabs kliffHeadings={kliffHeadings}>
+    <CharacterTabs kliffHeadings={kliffHeadings} damianeHeadings={damianeHeadings}>
       <slot name="kliff" slot="kliff" />
+      <slot name="damiane" slot="damiane" />
     </CharacterTabs>
   </div>
 </div>

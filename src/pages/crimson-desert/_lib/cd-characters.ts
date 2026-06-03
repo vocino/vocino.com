@@ -19,8 +19,8 @@ export const cdCharacters: CdCharacter[] = [
   {
     id: 'damiane',
     label: 'Damiane',
-    status: 'soon',
-    tagline: 'Not written yet',
+    status: 'live',
+    tagline: 'Pistol and musket — stay moving',
   },
   {
     id: 'oongka',

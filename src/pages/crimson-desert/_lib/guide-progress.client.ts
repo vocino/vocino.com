@@ -1,4 +1,4 @@
-/** TOC scroll-spy and mobile drawer — scoped to visible Kliff panel. */
+/** TOC scroll-spy and mobile drawer — scoped to the visible character panel. */
 
 function setActiveTocSlug(slug: string | null): void {
   document.querySelectorAll<HTMLAnchorElement>('.cd-hub .guide-toc__link[data-toc-slug]').forEach((link) => {
@@ -6,10 +6,9 @@ function setActiveTocSlug(slug: string | null): void {
   });
 }
 
-function getVisibleKliffPanel(): HTMLElement | null {
-  const panel = document.querySelector<HTMLElement>('[data-cd-panel="kliff"]');
-  if (!panel || panel.hasAttribute('hidden')) return null;
-  return panel;
+function getVisibleGuidePanel(): HTMLElement | null {
+  const panel = document.querySelector<HTMLElement>('.cd-tabs__panel[data-cd-panel]:not([hidden])');
+  return panel ?? null;
 }
 
 function initTocActive(): void {
@@ -17,7 +16,7 @@ function initTocActive(): void {
 
   const bind = (): void => {
     observer?.disconnect();
-    const panel = getVisibleKliffPanel();
+    const panel = getVisibleGuidePanel();
     if (!panel) {
       setActiveTocSlug(null);
       return;
@@ -55,11 +54,11 @@ function initTocActive(): void {
 }
 
 function initDrawerClose(): void {
-  const panel = document.getElementById('cd-toc-panel') as HTMLDetailsElement | null;
-  if (!panel) return;
-  panel.querySelectorAll<HTMLAnchorElement>('.guide-toc__link').forEach((link) => {
-    link.addEventListener('click', () => {
-      panel.open = false;
+  document.querySelectorAll<HTMLDetailsElement>('.guide-toc-drawer[id^="cd-toc-panel-"]').forEach((panel) => {
+    panel.querySelectorAll<HTMLAnchorElement>('.guide-toc__link').forEach((link) => {
+      link.addEventListener('click', () => {
+        panel.open = false;
+      });
     });
   });
 }

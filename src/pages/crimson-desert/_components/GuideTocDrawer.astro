@@ -4,15 +4,16 @@ import type { MarkdownHeading } from 'astro';
 
 interface Props {
   headings: MarkdownHeading[];
+  panelId: string;
 }
 
-const { headings } = Astro.props;
+const { headings, panelId } = Astro.props;
 const tocHeadings = getTocHeadings(headings);
 ---
 
 {
   tocHeadings.length > 0 && (
-    <details class="guide-toc-drawer" id="cd-toc-panel">
+    <details class="guide-toc-drawer" id={`cd-toc-panel-${panelId}`}>
       <summary>Contents</summary>
       <nav class="guide-toc" aria-label="Table of contents">
         <ol class="guide-toc__list">
