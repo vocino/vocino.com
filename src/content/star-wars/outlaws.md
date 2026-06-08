@@ -1,5 +1,5 @@
 ---
-title: Star Wars Outlaws — scoundrel notes
+title: Outlaws — scoundrel notes
 description: Playthrough notes from the Outer Rim — how I run Kay and Nix, syndicate reputation, and the tips I wish I had on day one.
 updated: 2026-06-08
 section: outlaws

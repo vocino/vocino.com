@@ -2,6 +2,12 @@
  * Star Wars hub section registry — single source of truth for the landing cards.
  * Local to /star-wars only (mirrors the role of cd-characters.ts for Crimson Desert).
  *
+ * Naming convention (see CLAUDE.md → Content Hubs → URL & hierarchy):
+ * nested slugs AND labels drop the redundant "Star Wars" prefix — the hub already
+ * supplies that context. So `id`/`href` is `outlaws` (→ /star-wars/outlaws), not
+ * `star-wars-outlaws`, and `label` is "Outlaws", not "Star Wars Outlaws". The full
+ * "Star Wars" still lands in the page <title> via the hubName in buildSeoTitle().
+ *
  * Per-section accents drive the landing card tints and each section page's
  * `--section-accent`. The hub baseline accent (opening-crawl yellow) lives in
  * src/data/hubs.ts.
@@ -28,7 +34,7 @@ export interface SwSection {
 export const swSections: SwSection[] = [
   {
     id: 'outlaws',
-    label: 'Star Wars Outlaws',
+    label: 'Outlaws',
     kicker: 'Now playing',
     tagline: 'Playthrough notes from the Outer Rim — scoundrel runs, syndicates, and tips.',
     href: '/star-wars/outlaws',
@@ -37,7 +43,7 @@ export const swSections: SwSection[] = [
   },
   {
     id: 'legion',
-    label: 'Star Wars: Legion',
+    label: 'Legion',
     kicker: 'Tabletop',
     tagline: 'My Legion army list — units, points, and the lists I actually field.',
     href: '/star-wars/legion',
@@ -55,7 +61,7 @@ export const swSections: SwSection[] = [
   },
   {
     id: 'zero-company',
-    label: 'Star Wars Zero Company',
+    label: 'Zero Company',
     kicker: 'Upcoming',
     tagline: 'Notes and anticipation for the upcoming tactical Star Wars game.',
     href: '/star-wars/zero-company',
