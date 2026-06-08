@@ -1,0 +1,96 @@
+// Star Wars hub — markdown prose typography for section pages (local to /star-wars only).
+.sw-prose {
+  max-width: var(--sw-measure);
+  font-size: var(--sw-body-size);
+  line-height: var(--sw-body-leading);
+  color: var(--sw-text);
+}
+
+.sw-prose > * + * {
+  margin-top: var(--sw-space-md);
+}
+
+.sw-prose h2 {
+  margin: var(--sw-space-xl) 0 var(--sw-space-sm);
+  font-family: 'Source Serif 4', serif;
+  font-size: 1.625rem;
+  font-weight: 600;
+  line-height: 1.2;
+  color: #fff;
+  scroll-margin-top: var(--sw-chrome-top);
+}
+
+.sw-prose h2::before {
+  content: '// ';
+  font-family: 'Source Code Pro', monospace;
+  font-size: 0.75em;
+  font-weight: 600;
+  color: var(--sw-accent);
+}
+
+.sw-prose h3 {
+  margin: var(--sw-space-lg) 0 var(--sw-space-sm);
+  font-family: 'Source Serif 4', serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--sw-text);
+  scroll-margin-top: var(--sw-chrome-top);
+}
+
+.sw-prose p {
+  margin: 0;
+  color: var(--sw-text-dim);
+}
+
+.sw-prose a {
+  color: var(--sw-yellow);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.sw-prose a:hover,
+.sw-prose a:focus-visible {
+  color: #fff;
+}
+
+.sw-prose strong {
+  color: var(--sw-text);
+  font-weight: 600;
+}
+
+.sw-prose ul,
+.sw-prose ol {
+  margin: 0;
+  padding-left: 1.4rem;
+  color: var(--sw-text-dim);
+}
+
+.sw-prose li + li {
+  margin-top: 0.4rem;
+}
+
+.sw-prose blockquote {
+  margin: var(--sw-space-md) 0;
+  padding: 0.75rem 1.1rem;
+  border-left: 3px solid var(--sw-accent);
+  background: color-mix(in srgb, var(--sw-accent) 7%, var(--sw-surface));
+  border-radius: 0 0.4rem 0.4rem 0;
+  color: var(--sw-text-dim);
+  font-style: italic;
+}
+
+.sw-prose code {
+  font-family: 'Source Code Pro', monospace;
+  font-size: 0.9em;
+  padding: 0.1rem 0.35rem;
+  border-radius: 0.3rem;
+  background: var(--sw-surface-2);
+  color: var(--sw-yellow);
+}
+
+.sw-prose hr {
+  margin: var(--sw-space-xl) 0;
+  border: 0;
+  border-top: 1px solid var(--sw-border-dim);
+}

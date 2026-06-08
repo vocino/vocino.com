@@ -1,0 +1,56 @@
+---
+export const prerender = true;
+
+import HubLayout from '../../layouts/HubLayout.astro';
+import SwGameGuideShell from './_components/SwGameGuideShell.astro';
+import { getHubBreadcrumb, getHubBySlug } from '../../data/hubs';
+import { getSwSection } from './_lib/sw-sections';
+import { getEntry, render } from 'astro:content';
+
+const hub = getHubBySlug('star-wars');
+const section = getSwSection('outlaws')!;
+
+const entry = await getEntry('star-wars', 'outlaws');
+if (!entry) {
+  throw new Error('Star Wars guide entry "outlaws" not found');
+}
+
+const { Content } = await render(entry);
+const { title, description, updated } = entry.data;
+
+const wordCount = entry.body?.split(/\s+/).filter(Boolean).length ?? 0;
+const readingMinutes = Math.max(1, Math.round(wordCount / 220));
+
+const modifiedTime = updated?.toISOString();
+const publishedTime = modifiedTime;
+
+const breadcrumb = [
+  ...getHubBreadcrumb(hub),
+  { name: section.label, path: section.href },
+];
+---
+
+<HubLayout
+  pageType="article"
+  title={title}
+  hubName={hub.name}
+  description={description}
+  canonicalPath={section.href}
+  breadcrumb={breadcrumb}
+  imagePath={hub.imagePath}
+  imageAlt={hub.ogImageAlt}
+  accent={section.accent}
+  noindex={!hub.indexable}
+  publishedTime={publishedTime}
+  modifiedTime={modifiedTime}
+>
+  <SwGameGuideShell
+    kicker={section.kicker}
+    title={title}
+    description={description}
+    updated={updated}
+    readingMinutes={readingMinutes}
+  >
+    <Content />
+  </SwGameGuideShell>
+</HubLayout>

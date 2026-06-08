@@ -58,10 +58,20 @@ export const GET: APIRoute = async () => {
     priority: '0.7',
   }));
 
+  // Nested Star Wars pages (live game/topic sections).
+  const starWarsHub = getHubBySlug('star-wars');
+  const starWarsEntries: SitemapEntry[] = [
+    {
+      path: `/${starWarsHub.slug}/outlaws`,
+      changefreq: 'monthly',
+      priority: '0.7',
+    },
+  ];
+
   const xml = [
     '<?xml version="1.0" encoding="UTF-8"?>',
     '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
-    ...[...baseEntries, ...hubEntries, ...bg3Entries].map(renderEntry),
+    ...[...baseEntries, ...hubEntries, ...bg3Entries, ...starWarsEntries].map(renderEntry),
     '</urlset>',
   ].join('\n');
 

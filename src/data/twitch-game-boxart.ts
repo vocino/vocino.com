@@ -6,7 +6,7 @@
  * `key` must match the Twitch directory category slug (and the hub slug in hubs.ts):
  * https://www.twitch.tv/directory/category/{key}
  */
-export type TwitchGameBoxArtKey = 'baldurs-gate-3' | 'crimson-desert';
+export type TwitchGameBoxArtKey = 'baldurs-gate-3' | 'crimson-desert' | 'star-wars-outlaws';
 
 export interface TwitchGameBoxArtEntry {
   /** Twitch directory category slug — same as hub `slug` in hubs.ts. */
@@ -36,6 +36,12 @@ export const twitchGameBoxArtRegistry: TwitchGameBoxArtEntry[] = [
     twitchGameId: '515186',
     twitchGameName: 'Crimson Desert',
     publicPath: '/assets/images/twitch-boxart/crimson-desert.webp',
+  },
+  {
+    key: 'star-wars-outlaws',
+    twitchGameId: '780037970',
+    twitchGameName: 'Star Wars Outlaws',
+    publicPath: '/assets/images/twitch-boxart/star-wars-outlaws.webp',
   },
 ];
 

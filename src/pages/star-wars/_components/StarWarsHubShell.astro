@@ -1,0 +1,31 @@
+---
+import '../_styles/hub-tokens.scss';
+import '../_styles/hub-layout.scss';
+import '../_styles/hub-components.scss';
+import SwSectionCard from './SwSectionCard.astro';
+import { swSections } from '../_lib/sw-sections';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<div class="sw-hub">
+  <div class="sw-hub__starfield" aria-hidden="true"></div>
+  <div class="sw-hub__inner">
+    <header class="sw-hero">
+      <p class="sw-kicker">A long time ago&hellip;</p>
+      <h1 class="sw-hero__title">
+        <span class="sw-hero__title-accent">Star Wars</span>
+      </h1>
+      <p class="sw-hero__desc">{description}</p>
+    </header>
+
+    <section class="sw-sections" aria-label={title}>
+      {swSections.map((section) => <SwSectionCard section={section} />)}
+    </section>
+  </div>
+</div>

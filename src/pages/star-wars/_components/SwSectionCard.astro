@@ -1,0 +1,29 @@
+---
+import type { SwSection } from '../_lib/sw-sections';
+
+interface Props {
+  section: SwSection;
+}
+
+const { section } = Astro.props;
+const isLive = section.status === 'live';
+const Tag = isLive ? 'a' : 'div';
+const cardStyle = `--sw-card-accent: ${section.accent};`;
+---
+
+<Tag
+  class:list={['sw-card', !isLive && 'sw-card--soon']}
+  style={cardStyle}
+  {...isLive ? { href: section.href } : {}}
+>
+  <span class="sw-card__kicker">{section.kicker}</span>
+  <h2 class="sw-card__title">{section.label}</h2>
+  <p class="sw-card__tagline">{section.tagline}</p>
+  {
+    isLive ? (
+      <span class="sw-card__cta">Enter &rarr;</span>
+    ) : (
+      <span class="sw-card__badge">Coming soon</span>
+    )
+  }
+</Tag>

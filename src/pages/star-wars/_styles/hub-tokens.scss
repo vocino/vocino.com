@@ -1,0 +1,56 @@
+// Star Wars hub tokens — cinematic deep-space palette (local to /star-wars only).
+// Baseline accent is opening-crawl yellow; section pages override --section-accent.
+$sw-bg: #05070d;
+
+body.site-root:has(.sw-hub),
+.hub:has(.sw-hub) {
+  background-color: $sw-bg;
+}
+
+.hub:has(.sw-hub) {
+  min-height: 100vh;
+}
+
+html:has(.sw-hub),
+body.site-root:has(.sw-hub) {
+  overflow-x: clip;
+}
+
+// Global `main { overflow-x: hidden }` breaks position: sticky — clip is sticky-safe.
+body.site-root:has(.sw-hub) .site-main,
+body.site-root:has(.sw-hub) main.site-main {
+  overflow-x: clip;
+}
+
+.sw-hub {
+  --sw-bg: #{$sw-bg};
+  --sw-surface: #0b0f1a;
+  --sw-surface-2: #111726;
+  --sw-border: color-mix(in srgb, var(--section-accent, #ffe81f) 22%, #1d2740);
+  --sw-border-dim: #1a2236;
+  --sw-yellow: #ffe81f;
+  --sw-text: #e8ecf5;
+  --sw-text-dim: #aab4c6;
+  --sw-text-muted: #6b7588;
+  --sw-glow: color-mix(in srgb, var(--section-accent, #ffe81f) 32%, transparent);
+  --sw-accent: var(--section-accent, #ffe81f);
+
+  --sw-measure: 66ch;
+  --sw-body-size: 1.0625rem;
+  --sw-body-leading: 1.7;
+  --sw-space-sm: 0.875rem;
+  --sw-space-md: 1.25rem;
+  --sw-space-lg: 1.75rem;
+  --sw-space-xl: 2.5rem;
+  --sw-space-2xl: 3.5rem;
+  --sw-chrome-top: 5.5rem;
+}
+
+@media (min-width: 640px) {
+  .sw-hub {
+    --sw-body-size: 1.125rem;
+    --sw-space-lg: 2.25rem;
+    --sw-space-xl: 3rem;
+    --sw-space-2xl: 4.5rem;
+  }
+}

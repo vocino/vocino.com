@@ -15,6 +15,7 @@ const HUBS = [
   },
   { slug: 'homelab', name: 'Home Lab', accent: '#FFB86B', ogHeroPath: '/assets/images/og-hero/homelab.png' },
   { slug: 'crimson-desert', name: 'Crimson Desert', accent: '#D44D37', ogHeroPath: '/assets/images/og-hero/crimson-desert.png' },
+  { slug: 'star-wars', name: 'Star Wars', accent: '#FFE81F', ogHeroPath: '/assets/images/og-hero/star-wars.png' },
 ];
 
 const ROOT = path.resolve(process.cwd());

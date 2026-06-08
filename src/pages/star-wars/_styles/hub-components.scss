@@ -1,0 +1,254 @@
+// Star Wars hub components — hero, section cards, game hero, attribution.
+// Local to /star-wars only.
+
+// ---- Shared kicker/label ----
+.sw-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 0.75rem;
+  font-family: 'Source Code Pro', monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--sw-accent);
+}
+
+.sw-kicker::before {
+  content: '';
+  width: 1.5rem;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.7;
+}
+
+// ---- Landing hero ----
+.sw-hero {
+  max-width: 44rem;
+  margin-bottom: var(--sw-space-2xl);
+}
+
+.sw-hero__title {
+  margin: 0 0 var(--sw-space-md);
+  font-family: 'Source Serif 4', serif;
+  font-weight: 700;
+  font-size: clamp(2.5rem, 7vw, 4.25rem);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  color: #fff;
+  text-shadow: 0 0 40px color-mix(in srgb, var(--sw-yellow) 25%, transparent);
+}
+
+.sw-hero__title .sw-hero__title-accent {
+  color: var(--sw-yellow);
+}
+
+.sw-hero__desc {
+  margin: 0;
+  max-width: 38rem;
+  font-size: 1.1875rem;
+  line-height: 1.6;
+  color: var(--sw-text-dim);
+}
+
+// ---- Section cards grid ----
+.sw-sections {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .sw-sections {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+.sw-card {
+  --sw-card-accent: var(--sw-yellow);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  padding: 1.5rem;
+  border: 1px solid var(--sw-border-dim);
+  border-radius: 0.75rem;
+  background:
+    linear-gradient(
+      160deg,
+      color-mix(in srgb, var(--sw-card-accent) 8%, var(--sw-surface)) 0%,
+      var(--sw-surface) 55%
+    );
+  color: inherit;
+  text-decoration: none;
+  overflow: hidden;
+  transition:
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+// Accent rail down the left edge.
+.sw-card::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: var(--sw-card-accent);
+  opacity: 0.85;
+}
+
+a.sw-card:hover,
+a.sw-card:focus-visible {
+  border-color: color-mix(in srgb, var(--sw-card-accent) 60%, var(--sw-border-dim));
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px -18px color-mix(in srgb, var(--sw-card-accent) 70%, transparent);
+  outline: none;
+}
+
+.sw-card__kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Source Code Pro', monospace;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--sw-card-accent);
+}
+
+.sw-card__title {
+  margin: 0;
+  font-family: 'Source Serif 4', serif;
+  font-size: 1.375rem;
+  font-weight: 600;
+  line-height: 1.2;
+  color: #fff;
+}
+
+.sw-card__tagline {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--sw-text-dim);
+}
+
+.sw-card__cta {
+  margin-top: 0.25rem;
+  font-family: 'Source Code Pro', monospace;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--sw-card-accent);
+}
+
+.sw-card--soon {
+  cursor: default;
+}
+
+.sw-card--soon .sw-card__title,
+.sw-card--soon .sw-card__tagline {
+  color: var(--sw-text-muted);
+}
+
+.sw-card__badge {
+  align-self: flex-start;
+  margin-top: 0.25rem;
+  padding: 0.2rem 0.55rem;
+  border: 1px solid var(--sw-border-dim);
+  border-radius: 999px;
+  font-family: 'Source Code Pro', monospace;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--sw-text-muted);
+}
+
+// ---- Game guide hero (Outlaws page) ----
+.sw-guide-hero {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--sw-space-lg);
+  margin-bottom: var(--sw-space-xl);
+}
+
+@media (min-width: 720px) {
+  .sw-guide-hero {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+    gap: 2.5rem;
+  }
+}
+
+.sw-guide-hero__title {
+  margin: 0 0 var(--sw-space-sm);
+  font-family: 'Source Serif 4', serif;
+  font-weight: 700;
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1.05;
+  color: #fff;
+}
+
+.sw-guide-hero__desc {
+  margin: 0;
+  max-width: var(--sw-measure);
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: var(--sw-text-dim);
+}
+
+.sw-guide-hero__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  margin: var(--sw-space-md) 0 0;
+  padding: 0;
+  list-style: none;
+  font-family: 'Source Code Pro', monospace;
+  font-size: 0.8125rem;
+  letter-spacing: 0.04em;
+  color: var(--sw-text-muted);
+}
+
+.sw-guide-hero__cover {
+  margin: 0;
+  line-height: 0;
+}
+
+.sw-guide-hero__cover-img {
+  display: block;
+  width: 168px;
+  height: auto;
+  border-radius: 0.5rem;
+  border: 1px solid var(--sw-border);
+  box-shadow: 0 18px 40px -20px var(--sw-glow);
+}
+
+// ---- Attribution ----
+.sw-attribution {
+  margin-top: var(--sw-space-2xl);
+  padding-top: var(--sw-space-lg);
+  border-top: 1px solid var(--sw-border-dim);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--sw-text-muted);
+}
+
+.sw-attribution p {
+  margin: 0 0 0.5rem;
+}
+
+.sw-attribution a {
+  color: var(--sw-text-dim);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.sw-attribution a:hover,
+.sw-attribution a:focus-visible {
+  color: var(--sw-yellow);
+}

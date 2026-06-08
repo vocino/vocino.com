@@ -1,7 +1,7 @@
 import type { SeoBreadcrumbItem } from './seo';
 
 /** Content collection keys used for hub freshness on the homepage nav. */
-export type HubContentCollection = 'bg3' | 'homelab' | 'crimson-desert';
+export type HubContentCollection = 'bg3' | 'homelab' | 'crimson-desert' | 'star-wars';
 
 export interface HubRegistryEntry {
   slug: string;
@@ -63,6 +63,20 @@ export const hubRegistry: HubRegistryEntry[] = [
     ogImageAlt: 'Crimson Desert hub preview image',
     contentCollection: 'crimson-desert',
     contentEntry: 'kliff',
+  },
+  {
+    slug: 'star-wars',
+    name: 'Star Wars',
+    navLabel: 'Star Wars',
+    description:
+      'My Star Wars corner — Outlaws playthrough notes, a Legion army list, and plans for Star Wars Celebration 2027.',
+    accent: '#FFE81F',
+    indexable: true,
+    imagePath: '/assets/images/og/star-wars.png',
+    ogHeroPath: '/assets/images/og-hero/star-wars.png',
+    ogImageAlt: 'Star Wars hub preview image',
+    contentCollection: 'star-wars',
+    contentEntry: 'outlaws',
   },
 ];
 
