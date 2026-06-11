@@ -1,0 +1,32 @@
+---
+import { getOutlawsHeroBackgroundAttribution } from '../_lib/sw-game-art';
+
+interface Props {
+  /** Show the SteamGrid hero credit (only relevant on pages using the hero band). */
+  showHeroCredit?: boolean;
+}
+
+const { showHeroCredit = true } = Astro.props;
+const heroAttribution = showHeroCredit ? getOutlawsHeroBackgroundAttribution() : undefined;
+---
+
+<footer class="sw-attribution">
+  <p>
+    Reference and lore links go to{' '}
+    <a href="https://starwars.fandom.com/wiki/Main_Page" rel="noopener noreferrer" target="_blank"
+      >Wookieepedia</a
+    >, the official-community Star Wars wiki. Star Wars, its characters, and game content belong to
+    Lucasfilm and the respective publishers.
+  </p>
+  {
+    heroAttribution && (
+      <p>
+        Hero background via{' '}
+        <a href={heroAttribution.url} rel="noopener noreferrer" target="_blank">
+          SteamGridDB
+        </a>{' '}
+        by {heroAttribution.author}.
+      </p>
+    )
+  }
+</footer>

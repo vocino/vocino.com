@@ -51,4 +51,21 @@ const crimsonDesert = defineCollection({
   }),
 });
 
-export const collections = { homelab, bg3, 'crimson-desert': crimsonDesert };
+const starWars = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/star-wars' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    updated: z.coerce.date().optional(),
+    /** Which hub section this entry belongs to (matches sw-sections.ts ids). */
+    section: z.enum(['outlaws', 'legion', 'celebration-2027', 'zero-company']),
+    status: z.enum(['published', 'coming-soon']).default('published'),
+  }),
+});
+
+export const collections = {
+  homelab,
+  bg3,
+  'crimson-desert': crimsonDesert,
+  'star-wars': starWars,
+};

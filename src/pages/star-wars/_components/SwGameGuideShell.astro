@@ -1,0 +1,96 @@
+---
+import '../_styles/hub-tokens.scss';
+import '../_styles/hub-layout.scss';
+import '../_styles/hub-components.scss';
+import '../_styles/guide-prose.scss';
+import SwAttribution from './SwAttribution.astro';
+import {
+  OUTLAWS_BOX_ART_SIZE,
+  getOutlawsBoxArtUrl,
+  getOutlawsHeroBackgroundUrls,
+} from '../_lib/sw-game-art';
+
+interface Props {
+  kicker: string;
+  title: string;
+  description: string;
+  updated?: Date;
+  readingMinutes?: number;
+  boxArtAlt?: string;
+}
+
+const {
+  kicker,
+  title,
+  description,
+  updated,
+  readingMinutes,
+  boxArtAlt = 'Star Wars Outlaws box art',
+} = Astro.props;
+
+const heroBackground = getOutlawsHeroBackgroundUrls();
+const boxArtUrl = getOutlawsBoxArtUrl();
+const { width, height } = OUTLAWS_BOX_ART_SIZE;
+
+const updatedLabel = updated
+  ? updated.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
+  : undefined;
+---
+
+<div class="sw-hub">
+  <div class="sw-hub__starfield" aria-hidden="true"></div>
+  <div class="sw-hub__ambient" aria-hidden="true">
+    <picture class="sw-hub__ambient-picture">
+      <source
+        srcset={heroBackground.animated}
+        type="image/webp"
+        media="(prefers-reduced-motion: no-preference)"
+      />
+      <img
+        class="sw-hub__ambient-img"
+        src={heroBackground.static}
+        alt=""
+        width={1920}
+        height={620}
+        decoding="async"
+        loading="lazy"
+      />
+    </picture>
+    <div class="sw-hub__ambient-scrim"></div>
+  </div>
+
+  <div class="sw-hub__inner sw-hub__inner--guide">
+    <header class="sw-guide-hero">
+      <div class="sw-guide-hero__copy">
+        <p class="sw-kicker">{kicker}</p>
+        <h1 class="sw-guide-hero__title">{title}</h1>
+        <p class="sw-guide-hero__desc">{description}</p>
+        {
+          (updatedLabel || readingMinutes) && (
+            <ul class="sw-guide-hero__meta">
+              {readingMinutes && <li>{readingMinutes} min read</li>}
+              {updatedLabel && <li>Updated {updatedLabel}</li>}
+            </ul>
+          )
+        }
+      </div>
+      <figure class="sw-guide-hero__cover">
+        <img
+          class="sw-guide-hero__cover-img"
+          src={boxArtUrl}
+          alt={boxArtAlt}
+          width={width}
+          height={height}
+          loading="eager"
+          decoding="async"
+        />
+      </figure>
+    </header>
+
+    <article class="sw-prose">
+      <slot />
+    </article>
+
+    <SwAttribution />
+  </div>
+</div>

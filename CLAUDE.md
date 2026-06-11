@@ -231,6 +231,7 @@ The site is a minimal landing page plus a growing set of **hubs** — self-conta
 - **Game hubs:** the `slug` in [`hubs.ts`](src/data/hubs.ts) must match the **Twitch directory category slug** (the last path segment of `https://www.twitch.tv/directory/category/{slug}`). Example: Baldur's Gate 3 → `baldurs-gate-3`, Crimson Desert → `crimson-desert`. The same string is the `key` in [`twitch-game-boxart.ts`](src/data/twitch-game-boxart.ts). Do not use abbreviations (`bg3`) or invent a different slug.
 - **Non-game hubs** (e.g. homelab): pick a clear kebab-case slug; no Twitch category applies.
 - Pages *within* a hub nest under it: `/baldurs-gate-3/<guide-slug>`.
+- **Drop the redundant hub prefix on nested slugs (and their visible titles).** The hub path already supplies the brand/topic context, so a nested page repeats only what's *new*: `/star-wars/outlaws` and `/star-wars/zero-company` — never `/star-wars/star-wars-outlaws`. Match the page title/label to that short slug ("Outlaws", "Zero Company"), not the full "Star Wars Outlaws". The full name still reaches the `<title>` tag via `hubName` in `buildSeoTitle()` (`{title} | {hubName} | {siteName}`), so SEO keeps "Star Wars" without the UI repeating it.
 - `src/pages/<slug>/` must match the hub `slug`.
 - Grouping (e.g. "all my gaming stuff") is a **curated view** — a future `/directory`-style page that *links* to hubs — never a URL parent. Adding a grouping page must never move a hub's slug.
 
@@ -269,6 +270,7 @@ The authoritative list of hubs and their fixed properties. Update this when addi
 | Baldur's Gate 3 | `/baldurs-gate-3` | `#46E08B` (green) | Live (`indexable`) | Twitch category `baldurs-gate-3`. Legacy `/bg3` 301s here. Build catalogue + SteamGrid hero (85263). OG: `og-hero/bg3.png`. |
 | Home Lab | `/homelab` | `#FFB86B` (amber) | Live (`indexable`) | Not a Twitch category. Self-hosted media stack (Docker Compose, *arr, Jellyfin). Pages nest as `/homelab/<page-slug>`. |
 | Crimson Desert | `/crimson-desert` | `#D44D37` (ember) | Live (`indexable`) | Twitch category `crimson-desert`. Tabbed build notes (Kliff live). Guide icons: `npm run cd:icons:refresh`. SteamGrid hero (168164). |
+| Star Wars | `/star-wars` | `#FFE81F` (crawl yellow) | Live (`indexable`) | **Franchise/topic hub, not a Twitch category.** Landing + nested per-section pages with **per-section accents** (registry: [`sw-sections.ts`](src/pages/star-wars/_lib/sw-sections.ts)). Nested slugs/labels drop the "Star Wars" prefix (`/star-wars/outlaws`, not `star-wars-outlaws`). Outlaws live (amber `#E8A33D`); Legion / Celebration 2027 / Zero Company are coming-soon cards. Games key their box art/hero to the game's Twitch slug — Outlaws box art (Twitch `780037970`) + SteamGrid hero (155977). Wookieepedia for reference links. |
 
 ### Adding a new hub
 1. **Game hub:** set `slug` to the Twitch directory category slug (`twitch.tv/directory/category/{slug}`). **Other hubs:** choose a descriptive kebab-case slug.

@@ -3,7 +3,7 @@
  * See CLAUDE.md → "SteamGrid assets".
  * Download: npm run steamgrid:assets:refresh — do not add asset ids elsewhere.
  */
-export type SteamGridAssetKey = 'bg3-hero-bg' | 'crimson-desert-hero-bg';
+export type SteamGridAssetKey = 'bg3-hero-bg' | 'crimson-desert-hero-bg' | 'star-wars-outlaws-hero-bg';
 
 export type SteamGridAssetType = 'hero';
 
@@ -40,6 +40,15 @@ export const steamGridAssetRegistry: SteamGridAssetEntry[] = [
     staticPublicPath: '/assets/images/steamgrid-hero/crimson-desert-hero-bg.png',
     creditAuthor: 'Zea',
     creditUrl: 'https://www.steamgriddb.com/hero/168164',
+  },
+  {
+    key: 'star-wars-outlaws-hero-bg',
+    assetType: 'hero',
+    steamGridAssetId: 155977,
+    animatedPublicPath: '/assets/images/steamgrid-hero/star-wars-outlaws-hero-bg.webp',
+    staticPublicPath: '/assets/images/steamgrid-hero/star-wars-outlaws-hero-bg.png',
+    creditAuthor: 'apfelspeier',
+    creditUrl: 'https://www.steamgriddb.com/hero/155977',
   },
 ];
 

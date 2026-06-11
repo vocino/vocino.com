@@ -1,0 +1,48 @@
+---
+export const prerender = true;
+
+import HubLayout from '../../layouts/HubLayout.astro';
+import StarWarsHubShell from './_components/StarWarsHubShell.astro';
+import { getHubBreadcrumb, getHubBySlug } from '../../data/hubs';
+import { toAbsoluteUrl } from '../../lib/seo';
+import { swSections } from './_lib/sw-sections';
+
+const hub = getHubBySlug('star-wars');
+
+const pageTitle = 'Star Wars';
+const intro =
+  "My Star Wars corner of the site — playthrough notes for the games I'm in (Outlaws now, Zero Company soon), my Legion army list, and plans for Star Wars Celebration 2027.";
+
+const sectionListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: "Travis Vocino's Star Wars hub",
+  url: toAbsoluteUrl(`/${hub.slug}`),
+  numberOfItems: swSections.length,
+  itemListElement: swSections.map((section, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: section.status === 'live' ? section.label : `${section.label} (coming soon)`,
+    url:
+      section.status === 'live'
+        ? toAbsoluteUrl(section.href)
+        : toAbsoluteUrl(`/${hub.slug}`),
+  })),
+};
+---
+
+<HubLayout
+  pageType="hub"
+  title={pageTitle}
+  hubName={hub.name}
+  description={hub.description}
+  canonicalPath={`/${hub.slug}`}
+  breadcrumb={getHubBreadcrumb(hub)}
+  imagePath={hub.imagePath}
+  imageAlt={hub.ogImageAlt}
+  accent={hub.accent}
+  noindex={!hub.indexable}
+  schema={sectionListSchema}
+>
+  <StarWarsHubShell title={pageTitle} description={intro} />
+</HubLayout>
