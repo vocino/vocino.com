@@ -60,13 +60,11 @@ export const GET: APIRoute = async () => {
 
   // Nested Star Wars pages (live game/topic sections).
   const starWarsHub = getHubBySlug('star-wars');
-  const starWarsEntries: SitemapEntry[] = [
-    {
-      path: `/${starWarsHub.slug}/outlaws`,
-      changefreq: 'monthly',
-      priority: '0.7',
-    },
-  ];
+  const starWarsEntries: SitemapEntry[] = ['outlaws', 'battlefront-2'].map((slug) => ({
+    path: `/${starWarsHub.slug}/${slug}`,
+    changefreq: 'monthly',
+    priority: '0.7',
+  }));
 
   const xml = [
     '<?xml version="1.0" encoding="UTF-8"?>',

@@ -12,7 +12,12 @@
  * `--section-accent`. The hub baseline accent (opening-crawl yellow) lives in
  * src/data/hubs.ts.
  */
-export type SwSectionId = 'outlaws' | 'legion' | 'celebration-2027' | 'zero-company';
+export type SwSectionId =
+  | 'outlaws'
+  | 'battlefront-2'
+  | 'legion'
+  | 'celebration-2027'
+  | 'zero-company';
 
 export type SwSectionStatus = 'live' | 'soon';
 
@@ -39,6 +44,15 @@ export const swSections: SwSection[] = [
     tagline: 'Playthrough notes from the Outer Rim — scoundrel runs, syndicates, and tips.',
     href: '/star-wars/outlaws',
     accent: '#E8A33D',
+    status: 'live',
+  },
+  {
+    id: 'battlefront-2',
+    label: 'Battlefront II',
+    kicker: 'Multiplayer',
+    tagline: 'Every class, hero, and reinforcement with one best Star Card loadout each.',
+    href: '/star-wars/battlefront-2',
+    accent: '#5B8FD9',
     status: 'live',
   },
   {

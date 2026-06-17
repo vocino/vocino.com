@@ -58,7 +58,7 @@ const starWars = defineCollection({
     description: z.string(),
     updated: z.coerce.date().optional(),
     /** Which hub section this entry belongs to (matches sw-sections.ts ids). */
-    section: z.enum(['outlaws', 'legion', 'celebration-2027', 'zero-company']),
+    section: z.enum(['outlaws', 'battlefront-2', 'legion', 'celebration-2027', 'zero-company']),
     status: z.enum(['published', 'coming-soon']).default('published'),
   }),
 });
