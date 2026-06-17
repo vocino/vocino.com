@@ -1,0 +1,53 @@
+---
+export const prerender = true;
+
+import HubLayout from '../../layouts/HubLayout.astro';
+import Bf2GuideShell from './_components/Bf2GuideShell.astro';
+import { getHubBreadcrumb, getHubBySlug } from '../../data/hubs';
+import { getSwSection } from './_lib/sw-sections';
+import { toAbsoluteUrl } from '../../lib/seo';
+import { bf2Sections, BF2_UPDATED, BF2_UNIT_COUNT } from './_lib/bf2-units';
+
+const hub = getHubBySlug('star-wars');
+const section = getSwSection('battlefront-2')!;
+
+const title = 'Battlefront II — best loadouts';
+const description =
+  'Every Star Wars Battlefront II class, hero, villain, and reinforcement with the single best Star Card loadout I run on each.';
+
+const modifiedTime = BF2_UPDATED.toISOString();
+
+const breadcrumb = [...getHubBreadcrumb(hub), { name: section.label, path: section.href }];
+
+const allUnits = bf2Sections.flatMap((s) => s.units);
+const loadoutSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Star Wars Battlefront II — best Star Card loadouts',
+  url: toAbsoluteUrl(section.href),
+  numberOfItems: BF2_UNIT_COUNT,
+  itemListElement: allUnits.map((unit, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: `${unit.name}: ${unit.cards.join(', ')}`,
+  })),
+};
+---
+
+<HubLayout
+  pageType="article"
+  title={title}
+  hubName={hub.name}
+  description={description}
+  canonicalPath={section.href}
+  breadcrumb={breadcrumb}
+  imagePath={hub.imagePath}
+  imageAlt={hub.ogImageAlt}
+  accent={section.accent}
+  noindex={!hub.indexable}
+  publishedTime={modifiedTime}
+  modifiedTime={modifiedTime}
+  schema={loadoutSchema}
+>
+  <Bf2GuideShell kicker={section.kicker} title={title} description={description} updated={BF2_UPDATED} />
+</HubLayout>

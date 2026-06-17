@@ -3,7 +3,11 @@
  * See CLAUDE.md → "SteamGrid assets".
  * Download: npm run steamgrid:assets:refresh — do not add asset ids elsewhere.
  */
-export type SteamGridAssetKey = 'bg3-hero-bg' | 'crimson-desert-hero-bg' | 'star-wars-outlaws-hero-bg';
+export type SteamGridAssetKey =
+  | 'bg3-hero-bg'
+  | 'crimson-desert-hero-bg'
+  | 'star-wars-outlaws-hero-bg'
+  | 'star-wars-battlefront-2-hero-bg';
 
 export type SteamGridAssetType = 'hero';
 
@@ -49,6 +53,15 @@ export const steamGridAssetRegistry: SteamGridAssetEntry[] = [
     staticPublicPath: '/assets/images/steamgrid-hero/star-wars-outlaws-hero-bg.png',
     creditAuthor: 'apfelspeier',
     creditUrl: 'https://www.steamgriddb.com/hero/155977',
+  },
+  {
+    key: 'star-wars-battlefront-2-hero-bg',
+    assetType: 'hero',
+    steamGridAssetId: 118978,
+    animatedPublicPath: '/assets/images/steamgrid-hero/star-wars-battlefront-2-hero-bg.webp',
+    staticPublicPath: '/assets/images/steamgrid-hero/star-wars-battlefront-2-hero-bg.png',
+    creditAuthor: 'JohnLogostini',
+    creditUrl: 'https://www.steamgriddb.com/hero/118978',
   },
 ];
 

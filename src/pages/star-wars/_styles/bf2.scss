@@ -1,0 +1,188 @@
+// Star Wars Battlefront II catalogue — designed faction cards (local to /star-wars only).
+
+.sw-hub__inner--catalogue {
+  max-width: 80rem;
+}
+
+// ---- Jump nav ----
+.bf2-jump {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: var(--sw-space-2xl);
+  padding-bottom: var(--sw-space-md);
+  border-bottom: 1px solid var(--sw-border-dim);
+}
+
+.bf2-jump a {
+  padding: 0.35rem 0.75rem;
+  border: 1px solid var(--sw-border-dim);
+  border-radius: 999px;
+  font-family: 'Source Code Pro', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: var(--sw-text-dim);
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.bf2-jump a:hover,
+.bf2-jump a:focus-visible {
+  border-color: var(--sw-accent);
+  color: var(--sw-text);
+  outline: none;
+}
+
+// ---- Section ----
+.bf2-section {
+  margin-bottom: var(--sw-space-2xl);
+  scroll-margin-top: var(--sw-chrome-top);
+}
+
+.bf2-section__head {
+  margin-bottom: var(--sw-space-lg);
+}
+
+.bf2-section__title {
+  margin: 0 0 0.35rem;
+  font-family: 'Source Serif 4', serif;
+  font-size: 1.625rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.bf2-section__title::before {
+  content: '// ';
+  font-family: 'Source Code Pro', monospace;
+  font-size: 0.7em;
+  font-weight: 600;
+  color: var(--sw-accent);
+}
+
+.bf2-section__blurb {
+  margin: 0;
+  max-width: 60ch;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--sw-text-dim);
+}
+
+// ---- Card grid ----
+.bf2-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 560px) {
+  .bf2-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 960px) {
+  .bf2-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+// ---- Unit card ----
+.bf2-card {
+  --bf2-card-accent: #e8c84d;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.1rem 1.1rem 1.2rem 1.35rem;
+  border: 1px solid var(--sw-border-dim);
+  border-radius: 0.6rem;
+  background:
+    linear-gradient(
+      160deg,
+      color-mix(in srgb, var(--bf2-card-accent) 9%, var(--sw-surface)) 0%,
+      var(--sw-surface) 60%
+    );
+  overflow: hidden;
+}
+
+.bf2-card--light {
+  --bf2-card-accent: #5b9be0;
+}
+
+.bf2-card--dark {
+  --bf2-card-accent: #d8504c;
+}
+
+.bf2-card--neutral {
+  --bf2-card-accent: #e8c84d;
+}
+
+.bf2-card::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: var(--bf2-card-accent);
+}
+
+.bf2-card__head {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.bf2-card__kicker {
+  font-family: 'Source Code Pro', monospace;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--bf2-card-accent);
+}
+
+.bf2-card__name {
+  margin: 0;
+  font-family: 'Source Serif 4', serif;
+  font-size: 1.1875rem;
+  font-weight: 600;
+  line-height: 1.15;
+  color: #fff;
+}
+
+.bf2-card__cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.bf2-card__star {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.3rem;
+  padding: 0.25rem 0.55rem;
+  border: 1px solid color-mix(in srgb, var(--bf2-card-accent) 30%, var(--sw-border-dim));
+  border-radius: 0.4rem;
+  background: color-mix(in srgb, var(--bf2-card-accent) 7%, transparent);
+  font-size: 0.8125rem;
+  line-height: 1.2;
+  color: var(--sw-text);
+}
+
+.bf2-card__star::before {
+  content: '❖';
+  font-size: 0.7em;
+  color: var(--bf2-card-accent);
+}
+
+.bf2-card__note {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--sw-text-dim);
+}

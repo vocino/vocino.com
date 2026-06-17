@@ -1,0 +1,21 @@
+---
+import type { Bf2Unit } from '../_lib/bf2-units';
+
+interface Props {
+  unit: Bf2Unit;
+}
+
+const { unit } = Astro.props;
+const kicker = [unit.role, unit.meta].filter(Boolean).join(' · ');
+---
+
+<article class:list={['bf2-card', `bf2-card--${unit.allegiance}`]}>
+  <header class="bf2-card__head">
+    <span class="bf2-card__kicker">{kicker}</span>
+    <h3 class="bf2-card__name">{unit.name}</h3>
+  </header>
+  <ul class="bf2-card__cards">
+    {unit.cards.map((card) => <li class="bf2-card__star">{card}</li>)}
+  </ul>
+  <p class="bf2-card__note">{unit.note}</p>
+</article>

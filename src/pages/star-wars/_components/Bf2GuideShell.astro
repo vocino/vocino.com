@@ -1,0 +1,124 @@
+---
+import '../_styles/hub-tokens.scss';
+import '../_styles/hub-layout.scss';
+import '../_styles/hub-components.scss';
+import '../_styles/bf2.scss';
+import Bf2UnitCard from './Bf2UnitCard.astro';
+import { bf2Sections, BF2_UNIT_COUNT } from '../_lib/bf2-units';
+import {
+  BF2_BOX_ART_SIZE,
+  getBf2BoxArtUrl,
+  getBf2HeroBackgroundUrls,
+  getBf2HeroBackgroundAttribution,
+} from '../_lib/bf2-game-art';
+
+interface Props {
+  kicker: string;
+  title: string;
+  description: string;
+  updated?: Date;
+}
+
+const { kicker, title, description, updated } = Astro.props;
+
+const heroBackground = getBf2HeroBackgroundUrls();
+const heroAttribution = getBf2HeroBackgroundAttribution();
+const boxArtUrl = getBf2BoxArtUrl();
+const { width, height } = BF2_BOX_ART_SIZE;
+
+const updatedLabel = updated
+  ? updated.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
+  : undefined;
+---
+
+<div class="sw-hub">
+  <div class="sw-hub__starfield" aria-hidden="true"></div>
+  <div class="sw-hub__ambient" aria-hidden="true">
+    <picture class="sw-hub__ambient-picture">
+      <source
+        srcset={heroBackground.animated}
+        type="image/webp"
+        media="(prefers-reduced-motion: no-preference)"
+      />
+      <img
+        class="sw-hub__ambient-img"
+        src={heroBackground.static}
+        alt=""
+        width={1920}
+        height={620}
+        decoding="async"
+        loading="lazy"
+      />
+    </picture>
+    <div class="sw-hub__ambient-scrim"></div>
+  </div>
+
+  <div class="sw-hub__inner sw-hub__inner--catalogue">
+    <header class="sw-guide-hero">
+      <div class="sw-guide-hero__copy">
+        <p class="sw-kicker">{kicker}</p>
+        <h1 class="sw-guide-hero__title">{title}</h1>
+        <p class="sw-guide-hero__desc">{description}</p>
+        <ul class="sw-guide-hero__meta">
+          <li>{BF2_UNIT_COUNT} loadouts</li>
+          {updatedLabel && <li>Updated {updatedLabel}</li>}
+        </ul>
+      </div>
+      <figure class="sw-guide-hero__cover">
+        <img
+          class="sw-guide-hero__cover-img"
+          src={boxArtUrl}
+          alt="Star Wars Battlefront II box art"
+          width={width}
+          height={height}
+          loading="eager"
+          decoding="async"
+        />
+      </figure>
+    </header>
+
+    <nav class="bf2-jump" aria-label="Jump to section">
+      {bf2Sections.map((section) => <a href={`#${section.id}`}>{section.label}</a>)}
+    </nav>
+
+    {
+      bf2Sections.map((section) => (
+        <section class="bf2-section" id={section.id}>
+          <div class="bf2-section__head">
+            <h2 class="bf2-section__title">{section.label}</h2>
+            <p class="bf2-section__blurb">{section.blurb}</p>
+          </div>
+          <div class="bf2-grid">
+            {section.units.map((unit) => (
+              <Bf2UnitCard unit={unit} />
+            ))}
+          </div>
+        </section>
+      ))
+    }
+
+    <footer class="sw-attribution">
+      <p>
+        Loadouts are my own picks, cross-checked against the{' '}
+        <a
+          href="https://battlefront.fandom.com/wiki/Reinforcement"
+          rel="noopener noreferrer"
+          target="_blank">Star Wars Battlefront Wiki</a
+        >{' '}
+        and community loadout guides. Star Wars Battlefront II and its content belong to EA, DICE,
+        and Lucasfilm.
+      </p>
+      {
+        heroAttribution && (
+          <p>
+            Hero background via{' '}
+            <a href={heroAttribution.url} rel="noopener noreferrer" target="_blank">
+              SteamGridDB
+            </a>{' '}
+            by {heroAttribution.author}.
+          </p>
+        )
+      }
+    </footer>
+  </div>
+</div>
