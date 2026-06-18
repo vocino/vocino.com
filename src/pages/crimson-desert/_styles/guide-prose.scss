@@ -98,9 +98,8 @@
 }
 
 .cd-hub .cd-callout {
-  background: color-mix(in srgb, var(--section-accent) 6%, var(--cd-surface));
-  border: 1px solid var(--cd-border);
-  border-left: 3px solid var(--section-accent, #d44d37);
+  background: color-mix(in srgb, var(--section-accent) 8%, var(--cd-surface));
+  border: 1px solid color-mix(in srgb, var(--section-accent, #d44d37) 32%, var(--cd-border));
   margin: var(--guide-space-md) 0;
   padding: var(--guide-space-sm) var(--guide-space-md);
 }

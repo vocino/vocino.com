@@ -47,14 +47,11 @@
   align-items: start;
   padding: 0.7rem 0.85rem;
   border: 1px solid var(--border);
-  border-left: 3px solid color-mix(in srgb, var(--section-accent, #46e08b) 55%, var(--border));
   border-radius: 8px;
   background: var(--surface-1);
 
   &--milestone {
-    border-left-width: 3px;
-    border-color: color-mix(in srgb, var(--section-accent, #46e08b) 32%, var(--border));
-    border-left-color: var(--section-accent, #46e08b);
+    border-color: color-mix(in srgb, var(--section-accent, #46e08b) 45%, var(--border));
     background: color-mix(in srgb, var(--section-accent, #46e08b) 7%, var(--surface-1));
   }
 

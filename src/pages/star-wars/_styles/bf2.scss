@@ -120,14 +120,6 @@
   --bf2-card-accent: #e8c84d;
 }
 
-.bf2-card::before {
-  content: '';
-  position: absolute;
-  inset: 0 auto 0 0;
-  width: 3px;
-  background: var(--bf2-card-accent);
-}
-
 .bf2-card__head {
   display: flex;
   flex-direction: column;

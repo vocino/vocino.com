@@ -333,7 +333,6 @@
   padding: 1rem 1.1rem;
   background: var(--surface-1);
   border: 1px solid var(--border);
-  border-left: 3px solid color-mix(in srgb, var(--dir-accent) 60%, var(--border));
   border-radius: 8px;
   text-decoration: none;
   transition:
@@ -344,7 +343,7 @@
   &:focus,
   &:focus-visible {
     background: color-mix(in srgb, var(--dir-accent) 6%, var(--surface-1));
-    border-left-color: var(--dir-accent);
+    border-color: var(--dir-accent);
     color: inherit;
     text-decoration: none;
     outline: none;

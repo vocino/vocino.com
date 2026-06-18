@@ -90,16 +90,6 @@
     box-shadow 0.2s ease;
 }
 
-// Accent rail down the left edge.
-.sw-card::before {
-  content: '';
-  position: absolute;
-  inset: 0 auto 0 0;
-  width: 3px;
-  background: var(--sw-card-accent);
-  opacity: 0.85;
-}
-
 a.sw-card:hover,
 a.sw-card:focus-visible {
   border-color: color-mix(in srgb, var(--sw-card-accent) 60%, var(--sw-border-dim));

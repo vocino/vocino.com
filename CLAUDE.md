@@ -191,6 +191,13 @@ Shared Helix helpers live in [`src/lib/twitch-api.ts`](src/lib/twitch-api.ts) (u
 - Reusable HUD utilities are in `_hacker.scss`: `.label-mono`, `.heading-bracket`, `.hud-corners`, `.telemetry-rail`, `.accent-block`, `.terminal-prefix`, `.cursor-blink`, `.status-block`.
 - `BaseLayout` provides the shared foundation — design tokens, fonts, reset, and the base background — and is where global styling applies. **Prefer `BaseLayout` over a custom `<html>/<body>` shell** for anything that should live inside the site's design system. (Exception: a hub that intentionally diverges may build its own shell — see "Content Hubs" below.)
 
+#### Design anti-patterns — no "AI-slop" tells
+Some visual patterns read as generic AI-generated output. **Do not use them anywhere** — not in the shared layer, a hub, or the landing page. This rule is cross-cutting and overrides "hub independence": when removing one of these, fix it in every hub using that hub's own tokens (don't homogenize the look — just drop the banned pattern).
+
+- **Bordered box + accent edge bar (the big one).** A panel with a thin 1px border on *all* sides **plus** a thick contrasting color bar down one edge — a left "rail", whether done as `border-left: 3px` or an absolutely-positioned `::before`. Banned on cards, callouts, and list rows. **Instead:** let the accent live in the content — an accent-colored kicker/label, the heading, a hover/focus border tint, or a subtle accent-tinted background. Pick *one* coherent treatment; never outline a box and then strap a colored bar onto it.
+- A classic blockquote/callout with a single left rule and **no** surrounding border is fine — that's typography, not the tell. The banned thing is specifically the *full outline + contrasting edge bar* combination.
+- Add new tells here as we spot them (e.g. emoji-prefixed headings, three-equal-feature grids with centered icon + bold word + gray sentence, gratuitous gradient text).
+
 #### SEO and metadata standardization
 - Site-wide SEO defaults live in `src/data/seo.ts` and helper logic in `src/lib/seo.ts`.
 - `BaseLayout` routes all metadata through `components/SEO.astro`; do not hand-roll per-page head tags unless there is a clear exception.
