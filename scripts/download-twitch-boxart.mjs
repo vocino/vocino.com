@@ -22,7 +22,6 @@ import {
 } from '../src/lib/twitch-api.ts';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
-const outDir = join(root, 'public/assets/images/twitch-boxart');
 const { width, height } = TWITCH_BOX_ART_SOURCE_SIZE;
 
 async function loadDevVars() {
