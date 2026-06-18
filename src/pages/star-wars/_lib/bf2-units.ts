@@ -15,7 +15,7 @@
  */
 
 /** Last reviewed/updated. */
-export const BF2_UPDATED = new Date('2026-06-17');
+export const BF2_UPDATED = new Date('2026-06-18');
 
 export type Bf2Allegiance = 'light' | 'dark' | 'neutral';
 
@@ -87,8 +87,8 @@ const classes: Bf2Unit[] = [
     allegiance: 'neutral',
     role: 'Sniper',
     meta: 'NT-242',
-    cards: ['Personal Shield', 'Marksman', 'Stealth'],
-    note: 'Hold an angle, one-shot with the NT-242, and Stealth out before they trace you.',
+    cards: ['Marksman', 'Survivalist', 'Personal Shield'],
+    note: 'Hold an angle, one-shot with the NT-242, then lean on Personal Shield + Survivalist to ride out any return fire.',
   },
 ];
 
@@ -99,7 +99,7 @@ const lightHeroes: Bf2Unit[] = [
     group: 'light-hero',
     allegiance: 'light',
     role: 'Aggressive duelist',
-    cards: ['Epicenter', 'Intensify', 'Jedi Reflexes'],
+    cards: ['Epicenter', 'Intensify', 'Stronger Push'],
     note: 'Rush a crowd, Repulse for the burst, then Push-dash out before they collapse on you.',
   },
   {
@@ -117,7 +117,7 @@ const lightHeroes: Bf2Unit[] = [
     group: 'light-hero',
     allegiance: 'light',
     role: 'Ranged support',
-    cards: ['Rebel Heart', 'Laser Brain', 'High Spirit'],
+    cards: ['Relentless Firing', 'Rebel Heart', 'High Spirit'],
     note: 'Mid-range queen — suppress with the defender pistol and anchor the team behind her shield.',
   },
   {
@@ -126,7 +126,7 @@ const lightHeroes: Bf2Unit[] = [
     group: 'light-hero',
     allegiance: 'light',
     role: 'Heavy bruiser',
-    cards: ['Impervious', 'Charging Frenzy', 'Extended Shock'],
+    cards: ['Extended Shock', 'Bonus Health', 'Impervious'],
     note: 'Soak the point; Shock Grenade plus bowcaster slam control any doorway.',
   },
   {
@@ -153,7 +153,7 @@ const lightHeroes: Bf2Unit[] = [
     group: 'light-hero',
     allegiance: 'light',
     role: 'Frontline support',
-    cards: ['Raised to Do One Thing', 'Beacon of Hope', 'No More Running'],
+    cards: ['No More Running', 'In Charge', 'Raised to Do One Thing'],
     note: 'Big Deal melts up close; Undercover Team heals the whole push.',
   },
   {
@@ -162,7 +162,7 @@ const lightHeroes: Bf2Unit[] = [
     group: 'light-hero',
     allegiance: 'light',
     role: 'Mobile support',
-    cards: ['Whirlwind', 'Spinner', 'Self Repairs'],
+    cards: ['Self Repairs', 'Whirlwind', 'Spared Batteries'],
     note: 'Roll in, Rolling Charge stuns the group, Shock to peel — slippery and annoying.',
   },
   {
@@ -180,7 +180,7 @@ const lightHeroes: Bf2Unit[] = [
     group: 'light-hero',
     allegiance: 'light',
     role: 'Defensive anchor',
-    cards: ['Jedi Resilience', 'Forward!', 'Perfect Defense'],
+    cards: ['Jedi Resilience', 'Safeguard', 'Perfect Defense'],
     note: 'All-Out Push to tank; Defensive Rush soaks saber and blaster fire on the objective.',
   },
   {
@@ -264,7 +264,7 @@ const darkHeroes: Bf2Unit[] = [
     group: 'dark-hero',
     allegiance: 'dark',
     role: 'Disruptor',
-    cards: ['Full Reconstruction', 'Linked Systems', 'Faster Faster'],
+    cards: ['Full Reconstruction', 'Linked Systems', 'Faster, Faster!'],
     note: 'Shock + Distraction to peel for the dark squad — pure annoyance support.',
   },
   {
@@ -282,7 +282,7 @@ const darkHeroes: Bf2Unit[] = [
     group: 'dark-hero',
     allegiance: 'dark',
     role: 'Duelist',
-    cards: ['Balanced Duelist', 'Masterful Duelist', 'Last Seconds'],
+    cards: ['Sith Control', 'Balanced Duelist', 'Masterful Duelist'],
     note: 'Out-duel saber users; Lightning Stun the runners and punish every whiff.',
   },
   {
@@ -291,7 +291,7 @@ const darkHeroes: Bf2Unit[] = [
     group: 'dark-hero',
     allegiance: 'dark',
     role: 'Pressure bruiser',
-    cards: ['Flesh is Weak', 'Line Up Weaklings', 'Jedi Killer'],
+    cards: ['Line Up, Weaklings', 'Flesh is Weak', 'Beating Heart'],
     note: 'Thrust Surge in, Unrelenting Advance to grind a group down — relentless tempo.',
   },
 ];
